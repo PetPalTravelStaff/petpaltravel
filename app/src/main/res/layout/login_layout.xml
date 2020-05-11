@@ -97,7 +97,7 @@
         android:layout_marginLeft="140dp"
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/colorDarkGrey"
-        android:text="Recuerdame la contraseña"
+        android:text="Recuérdame la contraseña"
         android:textAllCaps="false"
         android:textColor="@color/cardview_light_background"
         android:textSize="15sp" />

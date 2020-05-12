@@ -18,8 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
-
-        //TEST
+        
 
         /*final EditText etFechadisponible = (EditText) findViewById(R.id.etFechadisponible);
         etFechadisponible.setOnClickListener((View.OnClickListener) this);

@@ -9,16 +9,17 @@
         android:id="@+id/etNombreProtectora"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
+        android:layout_marginStart="180dp"
         android:layout_marginEnd="10dp"
         android:background="@android:drawable/editbox_background"
-        android:hint="Hola Protectora Kitty!" />
+        android:hint="Hola Protectora Kitty!"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tvPideCompany"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="5dp"
         android:text="Pide Acompañante"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
@@ -33,7 +34,7 @@
             android:id="@+id/tvNombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="24dp"
             android:text="Nombre:"
             android:textColor="@android:color/background_dark"
@@ -43,12 +44,12 @@
             android:id="@+id/etNombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:ems="10"
             android:background="@android:drawable/editbox_background"
-            android:hint="Tu nombre" />
+            android:hint="Nombre de la mascota" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,7 +61,7 @@
             android:id="@+id/tvDisponible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginStart="24dp"
             android:text="Disponible desde:"
             android:textColor="@android:color/background_dark"
@@ -71,7 +72,7 @@
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="24dp"
             android:background="@android:drawable/editbox_background"
             android:ems="10"
@@ -80,5 +81,179 @@
             android:clickable="true"
             android:maxLines="1" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvFechaLimite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="24dp"
+            android:text="Fecha límite:"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/etFechaLimite"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="24dp"
+            android:background="@android:drawable/editbox_background"
+            android:ems="10"
+            android:maxLines="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvCiudadOrigen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="24dp"
+            android:text="Ciudad origen:"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/etCiudadOrigen"
+            android:layout_width="168dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="24dp"
+            android:background="@android:drawable/editbox_background"
+            android:ems="10"
+            android:hint="Ciudad de origen" />
+
+    </LinearLayout>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tvCiudadDestino"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="24dp"
+        android:text="Ciudad destino:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/etCiudadDestino"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="24dp"
+        android:background="@android:drawable/editbox_background"
+        android:ems="10"
+        android:hint="Ciudad de destino" />
+
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvTipoMascota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginTop="5dp"
+            android:text="Tipo:"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/rdGato"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Gato" />
+
+        <RadioButton
+            android:id="@+id/rdPerro"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Perro" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButton5"
+            android:layout_width="74dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="163dp"
+            android:text="Otro" />
+
+        <EditText
+            android:id="@+id/etOtro"
+            android:layout_width="95dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:background="@android:drawable/editbox_background"
+            android:ems="10" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvComentarios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="1dp"
+        android:text="Comentarios"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:background="@android:drawable/editbox_background"
+        android:ems="200"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btPublicar"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="80dp"
+        android:background="@android:drawable/toast_frame"
+        android:backgroundTint="@color/holoGreenDark"
+        android:text="Publicar"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
 
 </LinearLayout>

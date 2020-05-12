@@ -48,4 +48,5 @@ public class LoginActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu1, menu);
         return true;
     }
+
 }

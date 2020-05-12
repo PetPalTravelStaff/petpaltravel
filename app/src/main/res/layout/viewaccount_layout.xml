@@ -6,72 +6,104 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tvTituloAlta"
+        android:id="@+id/tvAlta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Alta"
+        android:text="Mis datos"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tvNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:text="Nombre:" />
 
     <EditText
         android:id="@+id/etNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
         android:ems="10"
         android:hint="tu nombre" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:text="E-mail:" />
 
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
         android:ems="10"
         android:hint="tu e-mail"
         android:inputType="textEmailAddress" />
 
+    <TextView
+        android:id="@+id/tvTelefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:text="Teléfono:" />
+
+
     <EditText
-        android:id="@+id/etPassword1"
+        android:id="@+id/etTelefono"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
         android:ems="10"
-        android:hint="tu contraseña"
-        android:inputType="textPassword" />
+        android:hint="tu teléfono"
+        android:inputType="phone" />
 
-    <EditText
-        android:id="@+id/etpassword2"
+    <TextView
+        android:id="@+id/tvPerfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="20dp"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:text="Perfil:" />
+
+    <EditText
+        android:id="@+id/etPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
         android:ems="10"
-        android:hint="tu contraseña"
-        android:inputType="textPassword" />
-
-    <CheckBox
-        android:id="@+id/cbSoyProtectora"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="10dp"
-        android:text="Soy una protectora" />
+        android:hint="tu perfil (Protectora/Padrin@)" />
 
     <Button
-        android:id="@+id/btDameAlta"
+        android:id="@+id/btModificarDatos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -79,7 +111,7 @@
         android:layout_marginRight="30dp"
         android:background="@android:drawable/toast_frame"
         android:backgroundTint="@color/holoGreenDark"
-        android:text="¡Dame de alta!"
+        android:text="Modificar datos"
         android:textAllCaps="false"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />

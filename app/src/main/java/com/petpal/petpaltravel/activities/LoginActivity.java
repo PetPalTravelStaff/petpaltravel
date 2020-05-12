@@ -13,7 +13,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.account_layout);
+        setContentView(R.layout.viewaccount_layout);
     }
 
     // Método para mostrar y ocultar el menú

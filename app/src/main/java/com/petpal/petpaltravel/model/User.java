@@ -5,7 +5,7 @@ import java.util.List;
 public abstract class User {
 
     //Attributes
-    private int id;
+    private String id;
     private String name;
     private String email;
     private String password;
@@ -16,7 +16,7 @@ public abstract class User {
     private List<CompanionForPet> listOfDemands;
 
     //Constructors
-    public User(int id, String name, String email, String password, int phone, boolean isShelter, int ranking) {
+    public User(String id, String name, String email, String password, int phone, boolean isShelter, int ranking) {
         this.id = id;
         this.name = name;
         this.email = email;

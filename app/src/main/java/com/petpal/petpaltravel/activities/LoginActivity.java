@@ -113,8 +113,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void openSendPassActivity() {
-        Intent intent  = new Intent(LoginActivity.this, ForgotPassActivity.class);
-        startActivity(intent);
+        //Intent intent  = new Intent(LoginActivity.this, ForgotPassActivity.class);
+        //startActivity(intent);
     }
 
     private void openRegisterActivity() {
@@ -126,9 +126,9 @@ public class LoginActivity extends AppCompatActivity {
     private void saveSharedPref() {
         //Get params form
         String userName= client.getName();
+        int idUser= client.getId();
         Boolean isShelter= client.isShelter();
         Boolean rememberCheck = rememberMe.isChecked();
-
 
         //Create shared prefereces object
         SharedPreferences shared = getSharedPreferences("dades", MODE_PRIVATE);
@@ -140,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
         myEditor.putString("userName", userName);
         myEditor.putBoolean("isShelter", isShelter);
         myEditor.putBoolean("rememberMe", rememberCheck);
+        myEditor.putInt("id", idUser);
 
         //Push the editor to write them
         myEditor.commit();

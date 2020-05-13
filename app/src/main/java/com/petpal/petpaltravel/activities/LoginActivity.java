@@ -17,31 +17,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_layout);
-        
+        setContentView(R.layout.viewdetailsdemand_layout);
 
-        /*final EditText etFechadisponible = (EditText) findViewById(R.id.etFechadisponible);
-        etFechadisponible.setOnClickListener((View.OnClickListener) this);
-
-        etFechadisponible.setOnClickListener(new View.OnClickListener() { 
-            public void onClick(View view) {
-                showDatePickerDialog();
-            }
-
-            // Método para la fecha disponible del layout shelterdemand
-            private void showDatePickerDialog() {
-                DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        // +1 because January is zero
-                        final String selectedDate = day + " / " + (month+1) + " / " + year;
-                        etFechadisponible.setText(selectedDate);
-                    }
-                });
-
-                newFragment.show(getSupportFragmentManager(), "datePicker");
-            }
-        });*/
     }
 
     // Método para mostrar y ocultar el menú

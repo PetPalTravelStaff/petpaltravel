@@ -2,21 +2,21 @@ package com.petpal.petpaltravel.model;
 
 import java.util.List;
 
-public abstract class User {
+public class User {
 
     //Attributes
-    private String id;
+    private int id;
     private String name;
     private String email;
     private String password;
-    private int phone;
+    private String phone;
     private boolean isShelter;
     private int ranking;
     private List<CompanionOfPet> listOfOfferings;
     private List<CompanionForPet> listOfDemands;
 
     //Constructors
-    public User(String id, String name, String email, String password, int phone, boolean isShelter, int ranking) {
+    public User(int id, String name, String email, String password, String phone, boolean isShelter, int ranking) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -64,11 +64,11 @@ public abstract class User {
         this.password = password;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

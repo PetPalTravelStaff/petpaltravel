@@ -23,7 +23,8 @@ import com.petpal.petpaltravel.model.User;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText nameBox, passBox;
+    EditText mailBox, passBox;
+    String mailSaved;
     Button login, register, sendPass;
     CheckBox rememberMe;
     View.OnClickListener listener;
@@ -35,7 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
-        //myModel= new PPTModel();
+        myModel= PPTModel.getInstance();
+        recoverSharedPref();
         //Create view elements in activity
         initElements();
         //create a listener
@@ -62,8 +64,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initElements() {
-        nameBox= (EditText) findViewById(R.id.etUsuario) ;
+        mailBox= (EditText) findViewById(R.id.etUsuario) ;
         passBox= (EditText) findViewById(R.id.etPassword);
+        if (mailSaved!=null) {
+            mailBox.setText(mailSaved);
+        }
         login= (Button) findViewById(R.id.btEntrar);
         register= (Button) findViewById(R.id.btAlta);
         sendPass= (Button) findViewById(R.id.btRecuerdaPassword);
@@ -76,14 +81,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (view.getId() == R.id.btEntrar) {
                     //recover data from EditText
-                    String userMail= nameBox.getText().toString();
+                    String userMail= mailBox.getText().toString();
                     String userPass= passBox.getText().toString();
                     //recover User from servlet
                     client= myModel.validatePassword(userMail, userPass);
                     //if a user is recovered
                     if (client!=null){
-                        nameBox.setBackgroundColor(Color.BLACK);
-                        passBox.setBackgroundColor(Color.BLACK);
                         //save interesting data
                         saveSharedPref();
                         //if is shelter, show search offers
@@ -97,8 +100,9 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         //if not recovered an user
                     } else {
-                        nameBox.setBackgroundColor(Color.RED);
-                        passBox.setBackgroundColor(Color.RED);
+                        passBox.setHintTextColor(Color.RED);
+                        passBox.setHint("Password incorrecto");
+                        passBox.setText(null);
                     }
                 } else if (view.getId() == R.id.btAlta) {
                     openRegisterActivity();
@@ -147,6 +151,15 @@ public class LoginActivity extends AppCompatActivity {
 
         //Push the editor to write them
         myEditor.commit();
+    }
+
+    private void recoverSharedPref() {
+        //Create shared prefereces object
+        SharedPreferences shared = getSharedPreferences("dades", MODE_PRIVATE);
+        if (shared!=null) {
+            //Use the editor to catch the couples of dates
+            mailSaved = shared.getString("userMail", null);
+        }
     }
 
 }

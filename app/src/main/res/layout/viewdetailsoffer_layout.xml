@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tvTituloDescripcionDemanda"
+        android:id="@+id/tvTituloDescripcionOferta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -16,26 +16,17 @@
         android:textColor="@android:color/background_dark"
         android:textSize="24sp" />
 
-    <ImageView
-        android:id="@+id/ivFotoMascota"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="150dp"
-        app:srcCompat="@drawable/logo" />
-
     <TextView
-        android:id="@+id/tvNombreMascota"
+        android:id="@+id/tvAcompanyoA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginStart="24dp"
-        android:text="Nombre de la mascota:"
+        android:text="Acompaño a:"
         android:textColor="@android:color/background_dark" />
 
     <EditText
-        android:id="@+id/etNombreMascota"
+        android:id="@+id/etTipoMascota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -43,19 +34,19 @@
         android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
         android:ems="10"
-        android:hint="Nombre de la mascota" />
+        android:hint="Tipo de mascota" />
 
     <TextView
-        android:id="@+id/tvViajaDesde"
+        android:id="@+id/tvViajoDesde"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginStart="24dp"
-        android:text="Viaja desde:"
+        android:text="Viajo desde:"
         android:textColor="@android:color/background_dark" />
 
     <EditText
-        android:id="@+id/etCiudadOrigenMascota"
+        android:id="@+id/etCiudadOrigenpersona"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -75,7 +66,7 @@
         android:textColor="@android:color/background_dark" />
 
     <EditText
-        android:id="@+id/etCiudadDestinoMascota"
+        android:id="@+id/etCiudadDestinoPersona"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -84,6 +75,26 @@
         android:background="@android:drawable/editbox_background"
         android:ems="10"
         android:hint="Ciudad de destino" />
+
+    <TextView
+        android:id="@+id/tvMeTrasladoEn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="24dp"
+        android:text="Me traslado en:"
+        android:textColor="@android:color/background_dark" />
+
+    <EditText
+        android:id="@+id/etTransporte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="24dp"
+        android:background="@android:drawable/editbox_background"
+        android:ems="10"
+        android:hint="Transporte" />
 
     <TextView
         android:id="@+id/tvComentarios"
@@ -116,7 +127,7 @@
         android:layout_marginRight="30dp"
         android:background="@android:drawable/toast_frame"
         android:backgroundTint="@color/holoGreenDark"
-        android:text="¡Quiero ser su padrin@ de viaje!"
+        android:text="¡Quiero que me acompañes!"
         android:textAllCaps="false"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />

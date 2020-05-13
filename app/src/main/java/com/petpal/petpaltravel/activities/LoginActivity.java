@@ -43,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         //add elements to listener
         addElementsToListener();
 
+
+
         // Método para mostrar y ocultar el menú
     }
 
@@ -120,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
     private void openRegisterActivity() {
         Intent intent  = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
+
     }
 
 

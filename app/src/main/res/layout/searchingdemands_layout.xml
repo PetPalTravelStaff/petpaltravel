@@ -20,7 +20,7 @@
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/etNombreProtectora"
+            android:id="@+id/etNombrePersona"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvuser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text= "Persona"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvdesde"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text= "Persona"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/tvhasta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text= "Persona"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tvfechaOf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text= "Fecha"
+            android:background="@drawable/borde_edittext"/>
+    </LinearLayout>
+</LinearLayout>

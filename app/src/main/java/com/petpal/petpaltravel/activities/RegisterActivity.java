@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_layout);
-        myModel= PPTModel.getInstance();
+        myModel= new PPTModel();
         //Create view elements in activity
         initElements();
         //create a listener

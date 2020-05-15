@@ -21,10 +21,4 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    // Método para mostrar y ocultar el menú
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu1, menu);
-        return true;
-    }
-
 }

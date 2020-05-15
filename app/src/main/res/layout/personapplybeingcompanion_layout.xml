@@ -34,7 +34,7 @@
         android:text="Nombre:"
         android:textColor="@android:color/background_dark" />
 
-    <EditText
+    <TextView
         android:id="@+id/etNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,8 +42,9 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
-        android:ems="10"
-        android:hint="Tu nombre" />
+        android:ems="10" />
+
+
 
     <TextView
         android:id="@+id/tvViajoEn"
@@ -54,7 +55,7 @@
         android:text="Viajo en:"
         android:textColor="@android:color/background_dark" />
 
-    <EditText
+    <TextView
         android:id="@+id/etCiudadOrigenMascota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,8 +63,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
-        android:ems="10"
-        android:hint="Tipo de transporte" />
+        android:ems="10" />
 
     <TextView
         android:id="@+id/tvMiEmail"
@@ -74,7 +74,7 @@
         android:text="E-mail:"
         android:textColor="@android:color/background_dark" />
 
-    <EditText
+    <TextView
         android:id="@+id/etMiEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -82,8 +82,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
-        android:ems="10"
-        android:hint="Tu e-mail" />
+        android:ems="10" />
 
     <TextView
         android:id="@+id/tvMiTelefono"
@@ -94,7 +93,7 @@
         android:text="Teléfono:"
         android:textColor="@android:color/background_dark" />
 
-    <EditText
+    <TextView
         android:id="@+id/etMiTelefono"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -102,8 +101,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
-        android:ems="10"
-        android:hint="Tu teléfono (obligatorio)" />
+        android:ems="10" />
 
     <TextView
         android:id="@+id/tvComentarios"
@@ -127,32 +125,38 @@
         android:inputType="textMultiLine"
         android:textSize="14sp" />
 
-    <Button
-        android:id="@+id/btOfrecete"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
-        android:background="@android:drawable/toast_frame"
-        android:backgroundTint="@color/holoGreenDark"
-        android:text="Ofrécete"
-        android:textAllCaps="false"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btCancelar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
-        android:background="@android:drawable/toast_frame"
-        android:backgroundTint="@color/holoGreenDark"
-        android:text="Cancelar"
-        android:textAllCaps="false"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp" />
+        <Button
+            android:id="@+id/btOfrecete"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="30dp"
+            android:background="@android:drawable/toast_frame"
+            android:backgroundTint="@color/holoGreenDark"
+            android:text="Ofrécete"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btCancelar"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="30dp"
+            android:background="@android:drawable/toast_frame"
+            android:backgroundTint="@color/holoGreenDark"
+            android:text="Cancelar"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 </LinearLayout>

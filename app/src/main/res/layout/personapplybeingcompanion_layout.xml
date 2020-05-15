@@ -133,7 +133,7 @@
         <Button
             android:id="@+id/btOfrecete"
             android:layout_width="130dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="30dp"
@@ -147,8 +147,8 @@
         <Button
             android:id="@+id/btCancelar"
             android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="30dp"
             android:background="@android:drawable/toast_frame"

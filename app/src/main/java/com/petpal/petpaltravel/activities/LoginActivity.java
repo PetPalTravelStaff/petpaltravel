@@ -45,8 +45,6 @@ public class LoginActivity extends AppCompatActivity {
         addElementsToListener();
 
 
-
-
         // Método para mostrar y ocultar el menú
     }
 
@@ -138,7 +136,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
-
 
     private void saveSharedPref() {
         //Get params form

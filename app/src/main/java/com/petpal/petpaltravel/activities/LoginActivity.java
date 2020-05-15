@@ -177,5 +177,5 @@ public class LoginActivity extends AppCompatActivity {
             rememberCheked= shared.getBoolean("rememberMe", false);
         }
     }
-    
+
 }

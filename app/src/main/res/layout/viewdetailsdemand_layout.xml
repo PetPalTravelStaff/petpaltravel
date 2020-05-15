@@ -6,11 +6,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvHola"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="250dp"
+            android:text="Hola"
+            android:textColor="@android:color/background_dark"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/etNombrePersona"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="24dp"
+            android:hint="Pepe"
+            android:textSize="14sp"  />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/tvTituloDescripcionDemanda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="Descripción"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
@@ -19,9 +42,8 @@
     <ImageView
         android:id="@+id/ivFotoMascota"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:layout_marginStart="150dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="150dp"
         app:srcCompat="@drawable/logo" />
 
@@ -29,90 +51,130 @@
         android:id="@+id/tvNombreMascota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="24dp"
         android:text="Nombre de la mascota:"
         android:textColor="@android:color/background_dark" />
 
-    <EditText
-        android:id="@+id/etNombreMascota"
+    <TextView
+    android:id="@+id/etNombreMascota"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="24dp"
+    android:background="@android:drawable/editbox_background"
+    android:ems="10" />
+
+    <TextView
+        android:id="@+id/tvTipoMascota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="5dp"
+        android:text="Tipo de mascota:"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/etTipoMascota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
-        android:ems="10"
-        android:hint="Nombre de la mascota" />
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/tvDisponibleDesde"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Disponible desde:"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/etDisponibleDesde"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@android:drawable/editbox_background"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/tvDisponibleHasta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Disponible hasta:"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/etDisponibleHasta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@android:drawable/editbox_background"
+        android:ems="10" />
 
     <TextView
         android:id="@+id/tvViajaDesde"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="24dp"
         android:text="Viaja desde:"
         android:textColor="@android:color/background_dark" />
 
-    <EditText
+    <TextView
         android:id="@+id/etCiudadOrigenMascota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
-        android:ems="10"
-        android:hint="Ciudad de origen" />
+        android:ems="10" />
 
     <TextView
         android:id="@+id/tvViajeDestino"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="24dp"
         android:text="Con destino a:"
         android:textColor="@android:color/background_dark" />
 
-    <EditText
+    <TextView
         android:id="@+id/etCiudadDestinoMascota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
-        android:ems="10"
-        android:hint="Ciudad de destino" />
+        android:ems="10" />
 
     <TextView
         android:id="@+id/tvComentarios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="5dp"
         android:text="Comentarios"
         android:textColor="@android:color/background_dark"
         android:textSize="14sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/etComentarios"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:background="@android:drawable/editbox_background"
         android:ems="200"
         android:gravity="start|top"
-        android:inputType="textMultiLine"
         android:textSize="14sp" />
 
     <Button
         android:id="@+id/btApadrinarMascota"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
         android:background="@android:drawable/toast_frame"
         android:backgroundTint="@color/holoGreenDark"

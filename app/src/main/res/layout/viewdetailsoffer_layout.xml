@@ -136,7 +136,7 @@
         android:textColor="@android:color/background_dark"
         android:textSize="14sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/etComentarios"
         android:layout_width="match_parent"
         android:layout_height="65dp"

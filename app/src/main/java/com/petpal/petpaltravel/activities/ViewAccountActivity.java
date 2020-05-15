@@ -8,9 +8,11 @@ import com.petpal.petpaltravel.R;
 
 public class ViewAccountActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewaccount_layout);
+
     }
 }

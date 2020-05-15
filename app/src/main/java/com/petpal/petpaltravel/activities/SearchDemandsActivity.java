@@ -27,7 +27,7 @@ import java.util.List;
 
 public class SearchDemandsActivity extends AppCompatActivity {
 
-    View.OnClickListener listener2;
+
     PPTModel myModel;
     ListView myListView;
     TextView nameLabel;
@@ -59,7 +59,6 @@ public class SearchDemandsActivity extends AppCompatActivity {
             nameUser = shared.getString("userName", "");
             isShelter = shared.getBoolean("isShelter", false);
         }
-
     }
 
     private void initElements () {
@@ -74,7 +73,6 @@ public class SearchDemandsActivity extends AppCompatActivity {
             //se sobreescribe este método
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                //llamamos a un método para que nos abra la siguiente activity con los datos del personaje en cuestión
                 showDemandsDetails(listOfDemands.get(position));
             }
         };
@@ -84,22 +82,8 @@ public class SearchDemandsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ShowDemandActivity.class);
         Bundle bundle = new Bundle();
 
-        bundle.putInt("id", demand.getId());
-        bundle.putInt("idShelter", demand.getIdeUserShelterOffering());
-        bundle.putString("namePet", demand.getNamePet());
+        bundle.putInt("idDemand", demand.getId());
 
-        bundle.putString("dateAv", new SimpleDateFormat("dd-MM-yyyy").format(demand.getAvailableFrom().getTime()));
-        String dateEnd;
-        if(demand.getDeadline()!=null) {
-            dateEnd = new SimpleDateFormat("dd-MM-yyyy").format(demand.getDeadline().getTime());
-        }else {
-            dateEnd = "sin fecha límite";
-        }
-        bundle.putString("dateEnd", dateEnd);
-        bundle.putString("cityOr", demand.getOriginCity());
-        bundle.putString("cityDes", demand.getDestinyCity());
-        bundle.putString("typepet", demand.getTypePet());
-        bundle.putString("comments", demand.getComments());
         intent.putExtras(bundle);
         startActivity(intent);
         }

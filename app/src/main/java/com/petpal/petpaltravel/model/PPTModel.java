@@ -39,4 +39,16 @@ public class PPTModel {
         result= myDAO.recoverAllDemands();
         return result;
     }
+
+    public CompanionForPet recoverDemandById(int idDemand) {
+        CompanionForPet result= null;
+        result= myDAO.searchDemandById(idDemand);
+        return result;
+    }
+
+    public Boolean addPersonToDemand(int userId, String nameUser, int demandId) {
+        Boolean result= false;
+        result= myDAO.addPersonToDemand(userId, nameUser, demandId);
+        return result;
+    }
 }

@@ -148,6 +148,7 @@ public class LoginActivity extends AppCompatActivity {
         Boolean rememberCheck = rememberMe.isChecked();
         String userMail= client.getEmail();
         String userPass= client.getPassword();
+        String userPhone= client.getPhone();
 
         //Create shared prefereces object
         SharedPreferences shared = getSharedPreferences("dades", MODE_PRIVATE);
@@ -161,6 +162,7 @@ public class LoginActivity extends AppCompatActivity {
         myEditor.putString("userMail", userMail);
         myEditor.putString("userPass", userPass);
         myEditor.putBoolean("rememberMe", rememberCheck);
+        myEditor.putString("userPhone", userPhone);
         myEditor.putInt("id", idUser);
 
         //Push the editor to write them

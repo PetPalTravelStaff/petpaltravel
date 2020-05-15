@@ -7,11 +7,11 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tvTituloDescripcionDemanda"
+        android:id="@+id/tvTituloIntroduceDatos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Descripción"
+        android:text="¿Quién eres?"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="24sp" />
@@ -26,16 +26,16 @@
         app:srcCompat="@drawable/logo" />
 
     <TextView
-        android:id="@+id/tvNombreMascota"
+        android:id="@+id/tvNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginStart="24dp"
-        android:text="Nombre de la mascota:"
+        android:text="Nombre:"
         android:textColor="@android:color/background_dark" />
 
     <EditText
-        android:id="@+id/etNombreMascota"
+        android:id="@+id/etNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -43,15 +43,15 @@
         android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
         android:ems="10"
-        android:hint="Nombre de la mascota" />
+        android:hint="Tu nombre" />
 
     <TextView
-        android:id="@+id/tvViajaDesde"
+        android:id="@+id/tvViajoEn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginStart="24dp"
-        android:text="Viaja desde:"
+        android:text="Viajo en:"
         android:textColor="@android:color/background_dark" />
 
     <EditText
@@ -63,19 +63,19 @@
         android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
         android:ems="10"
-        android:hint="Ciudad de origen" />
+        android:hint="Tipo de transporte" />
 
     <TextView
-        android:id="@+id/tvViajeDestino"
+        android:id="@+id/tvMiEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginStart="24dp"
-        android:text="Con destino a:"
+        android:text="E-mail:"
         android:textColor="@android:color/background_dark" />
 
     <EditText
-        android:id="@+id/etCiudadDestinoMascota"
+        android:id="@+id/etMiEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -83,7 +83,27 @@
         android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
         android:ems="10"
-        android:hint="Ciudad de destino" />
+        android:hint="Tu e-mail" />
+
+    <TextView
+        android:id="@+id/tvMiTelefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="24dp"
+        android:text="Teléfono:"
+        android:textColor="@android:color/background_dark" />
+
+    <EditText
+        android:id="@+id/etMiTelefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="24dp"
+        android:background="@android:drawable/editbox_background"
+        android:ems="10"
+        android:hint="Tu teléfono (obligatorio)" />
 
     <TextView
         android:id="@+id/tvComentarios"
@@ -108,7 +128,7 @@
         android:textSize="14sp" />
 
     <Button
-        android:id="@+id/btApadrinarMascota"
+        android:id="@+id/btOfrecete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -116,7 +136,21 @@
         android:layout_marginRight="30dp"
         android:background="@android:drawable/toast_frame"
         android:backgroundTint="@color/holoGreenDark"
-        android:text="¡Quiero acompañarle!"
+        android:text="Ofrécete"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btCancelar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:background="@android:drawable/toast_frame"
+        android:backgroundTint="@color/holoGreenDark"
+        android:text="Cancelar"
         android:textAllCaps="false"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />

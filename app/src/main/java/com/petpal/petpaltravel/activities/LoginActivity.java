@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         // Método para mostrar y ocultar el menú
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);

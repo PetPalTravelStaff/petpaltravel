@@ -14,18 +14,20 @@
             android:id="@+id/tvHola"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
+            android:layout_marginStart="200dp"
             android:text="Hola"
             android:textColor="@android:color/background_dark"
             android:textSize="14sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/etNombreProtectora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:layout_marginEnd="24dp"
             android:hint="Protectora Kitty"
             android:textSize="14sp"  />
+        
     </LinearLayout>
 
     <TextView
@@ -78,6 +80,12 @@
     <ListView
         android:id="@+id/lvLista"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="225dp" />
+
+    <TextView
+        android:id="@+id/tverroroff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center" />
 
 </LinearLayout>

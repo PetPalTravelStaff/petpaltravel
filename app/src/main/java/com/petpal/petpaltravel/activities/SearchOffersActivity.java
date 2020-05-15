@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.petpal.petpaltravel.R;
 import com.petpal.petpaltravel.helpers.OfferAdapter;
@@ -25,7 +26,7 @@ public class SearchOffersActivity extends AppCompatActivity {
     View.OnClickListener listener2;
     PPTModel myModel;
     ListView myListView;
-    EditText nameLabel;
+    TextView nameLabel;
     ArrayList<CompanionOfPet> listOfOffers;
     AdapterView.OnItemClickListener listener;
     String nameUser;
@@ -59,7 +60,7 @@ public class SearchOffersActivity extends AppCompatActivity {
 
     private void initElements () {
         myListView = (ListView) findViewById(R.id.lvLista);
-        nameLabel= (EditText) findViewById(R.id.etNombreProtectora);
+        nameLabel= (TextView) findViewById(R.id.etNombreProtectora);
 
 
     }

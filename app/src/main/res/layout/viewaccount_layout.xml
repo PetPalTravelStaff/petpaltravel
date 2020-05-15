@@ -9,7 +9,7 @@
         android:id="@+id/tvAlta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="Mis datos"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
@@ -20,49 +20,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="24dp"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:text="Nombre:" />
 
-    <EditText
+    <TextView
         android:id="@+id/etNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:background="@android:drawable/editbox_background"
-        android:ems="10"
-        android:hint="tu nombre" />
+        android:background="@android:drawable/editbox_background" />
 
     <TextView
         android:id="@+id/tvEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:text="E-mail:" />
 
-    <EditText
+    <TextView
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:background="@android:drawable/editbox_background"
-        android:ems="10"
-        android:hint="tu e-mail"
-        android:inputType="textEmailAddress" />
+        android:background="@android:drawable/editbox_background" />
 
     <TextView
         android:id="@+id/tvTelefono"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:textColor="@android:color/background_dark"
@@ -70,44 +63,72 @@
         android:text="Teléfono:" />
 
 
-    <EditText
+    <TextView
         android:id="@+id/etTelefono"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:background="@android:drawable/editbox_background"
-        android:ems="10"
-        android:hint="tu teléfono"
-        android:inputType="phone" />
+        android:background="@android:drawable/editbox_background" />
 
     <TextView
-        android:id="@+id/tvPerfil"
+        android:id="@+id/tvPassword1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginTop="20dp"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        android:text="Perfil:" />
+        android:text="Introducir nueva contraseña:" />
 
     <EditText
-        android:id="@+id/etPerfil"
+        android:id="@+id/etPassword1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
         android:ems="10"
-        android:hint="tu perfil (Protectora/Padrin@)" />
+        android:hint="En blanco para no modificar la contraseña"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvPassword2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:text="Repetir nueva contraseña:" />
+
+    <EditText
+        android:id="@+id/etPassword2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@android:drawable/editbox_background"
+        android:ems="10"
+        android:hint="En blanco para no modificar la contraseña"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:id="@+id/cbSoyProtectora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="100dp"
+        android:text="Soy una protectora" />
 
     <Button
         android:id="@+id/btModificarDatos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
         android:background="@android:drawable/toast_frame"
         android:backgroundTint="@color/holoGreenDark"

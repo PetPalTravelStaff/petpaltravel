@@ -43,10 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         createListener();
         //add elements to listener
         addElementsToListener();
-
-
-
-
+        
         // Método para mostrar y ocultar el menú
     }
 
@@ -139,7 +136,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
     private void saveSharedPref() {
         //Get params form
         String userName= client.getName();
@@ -177,5 +173,4 @@ public class LoginActivity extends AppCompatActivity {
             rememberCheked= shared.getBoolean("rememberMe", false);
         }
     }
-
 }

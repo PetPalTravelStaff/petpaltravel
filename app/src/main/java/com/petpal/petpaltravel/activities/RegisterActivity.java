@@ -31,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.account_layout);
+        setContentView(R.layout.register_layout);
         myModel= new PPTModel();
         //Create view elements in activity
         initElements();

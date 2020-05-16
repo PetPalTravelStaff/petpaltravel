@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         createListener();
         //add elements to listener
         addElementsToListener();
-        
+
         // Método para mostrar y ocultar el menú
     }
 

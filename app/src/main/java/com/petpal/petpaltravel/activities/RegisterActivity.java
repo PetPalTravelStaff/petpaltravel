@@ -21,7 +21,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
-    //Atributes
+
     private EditText nameBox, mailBox, passBox, repePassBox;
     private CheckBox cbIsShelter;
     private Button btSave;
@@ -32,7 +32,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_layout);
-        //instantiate model
         myModel= new PPTModel();
         //Create view elements in activity
         initElements();
@@ -40,11 +39,10 @@ public class RegisterActivity extends AppCompatActivity {
         createListener();
         //add elements to listener
         addElementsToListener();
-    }
+ }
 
-    /**
-     *  Method for creating elements of activity
-     */
+
+
     private void initElements() {
         nameBox = (EditText) findViewById(R.id.etNombre);
         mailBox = (EditText) findViewById(R.id.etEmail);
@@ -54,47 +52,40 @@ public class RegisterActivity extends AppCompatActivity {
         cbIsShelter = (CheckBox) findViewById(R.id.cbSoyProtectora);
     }
 
-    /**
-     * Method for create a listener
-     */
     private void createListener() {
         listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //If register button is clicked
                 if (view.getId() == R.id.btDameAlta) {
                     //recover data from EditText
+                    int result=0;
+                    User provUser= new User();
                     String userName = nameBox.getText().toString();
                     String userMail = mailBox.getText().toString();
                     String userPass = passBox.getText().toString();
                     String userPass2 = repePassBox.getText().toString();
                     Boolean userShelter = cbIsShelter.isChecked();
-                    //Create an user
-                    User provUser= new User();
-                    //Verify each field, if its right add to the user, and if doesn't notify user
-                    if (!"".equals(userName)) {//not empty
+                    if (!"".equals(userName)) {
                         nameBox.setBackgroundColor(Color.TRANSPARENT);
                         provUser.setName(userName);
-                        if (!"".equals(userMail)) {//not empty
-                            if(validaMail(userMail)) {//valid mail format
+                        if (!"".equals(userMail)) {
+                            if(validaMail(userMail)) {
                                 mailBox.setBackgroundColor(Color.TRANSPARENT);
                                 provUser.setEmail(userMail);
-                                if (!"".equals(userPass)) {//not empty
+                                if (!"".equals(userPass)) {
                                     passBox.setBackgroundColor(Color.TRANSPARENT);
-                                    if (!"".equals(userPass2)) {//not empty
-                                        if (userPass.equals(userPass2)) { //pass and repeat pass matches
+                                    if (!"".equals(userPass2)) {
+                                        if (userPass.equals(userPass2)) {
                                             repePassBox.setBackgroundColor(Color.TRANSPARENT);
                                             provUser.setPassword(userPass);
                                             provUser.setShelter(userShelter);
-                                            int result=0;
-                                            //try to add User to BBDD
+                                            //recover User from servlet
                                             result = myModel.insertUser(provUser);
-                                            //if everything goes right, back to login, saving mail
+                                            //if a user is recovered
                                             if (result==1) {
                                                 saveOnShared();
                                                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                                 startActivity(intent);
-                                             //if there is a problem (email already in DB), notify
                                             } else if (result==0){
                                                 mailBox.setText(null);
                                                 mailBox.setHintTextColor(Color.RED);
@@ -133,9 +124,6 @@ public class RegisterActivity extends AppCompatActivity {
         };
     }
 
-    /**
-     * Method for saving interesting data by Shared Preferences
-     */
     private void saveOnShared() {
         //Get params form
         String userMail= mailBox.getText().toString();
@@ -153,11 +141,6 @@ public class RegisterActivity extends AppCompatActivity {
         myEditor.commit();
     }
 
-    /**
-     * Method for verifying than a mail is well created
-     * @param userMail to verify
-     * @return true if it is, false, otherwise
-     */
     private boolean validaMail(String userMail) {
         Boolean result = false;
         Pattern pattern = Pattern
@@ -168,9 +151,6 @@ public class RegisterActivity extends AppCompatActivity {
         return  result;
     }
 
-    /**
-     * Method for adding a listener to the elements
-     */
     private void addElementsToListener() {
         btSave.setOnClickListener(listener);
         cbIsShelter.setOnClickListener(listener);

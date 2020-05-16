@@ -165,6 +165,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     /**
      * Method for saving interesting data by shared preferences
      */
@@ -211,5 +212,4 @@ public class LoginActivity extends AppCompatActivity {
             rememberCheked= shared.getBoolean("rememberMe", false);
         }
     }
-
 }

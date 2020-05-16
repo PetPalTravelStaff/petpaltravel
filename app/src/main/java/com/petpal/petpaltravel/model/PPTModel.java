@@ -51,4 +51,16 @@ public class PPTModel {
         result= myDAO.addPersonToDemand(userId, nameUser, demandId);
         return result;
     }
+
+    public CompanionOfPet recoverOfferById(int idOffer) {
+        CompanionOfPet result= null;
+        result= myDAO.searchOfferById(idOffer);
+        return result;
+    }
+
+    public Boolean addShelterToOffer(int userId, String nameUser, int idOffer) {
+        Boolean result= false;
+        result= myDAO.addShelterToOffer(userId, nameUser, idOffer);
+        return result;
+    }
 }

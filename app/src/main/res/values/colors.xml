@@ -6,4 +6,5 @@
     <color name="colorGreenLight">#99cc00</color>
     <color name="holoGreenDark">#669900</color>
     <color name="colorDarkGrey">#808080</color>
+    <color name="colorRedError">#F63F3F</color>
 </resources>

@@ -19,7 +19,7 @@ import com.petpal.petpaltravel.model.PPTModel;
 import com.petpal.petpaltravel.model.User;
 
 public class LoginActivity extends AppCompatActivity {
-
+    //Atributes
     EditText mailBox, passBox;
     String mailSaved;
     Button login, register, sendPass;
@@ -34,8 +34,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
+        //instanciate model and user
         myModel= new PPTModel();
         client= new User();
+        //recover Shared Preferences
         recoverSharedPref();
         //Create view elements in activity
         initElements();
@@ -44,10 +46,13 @@ public class LoginActivity extends AppCompatActivity {
         //add elements to listener
         addElementsToListener();
 
-        // Método para mostrar y ocultar el menú
     }
 
-
+    /**
+     * Method for creating menu options
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -55,17 +60,27 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Method for indicate what to do when item of menu is selected
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         finish();
         return true;
     }
 
+    /**
+     * Method for init elements of activity (and values, if needed)
+     */
     private void initElements() {
         rememberMe= (CheckBox) findViewById(R.id.cbRecuerdame);
+        //In case user ask to remember her/his data
         if (rememberCheked) {
             rememberMe.setChecked(true);
         } else {
+            //else set empty values
             mailSaved=null;
             passSaved=null;
         }
@@ -82,15 +97,19 @@ public class LoginActivity extends AppCompatActivity {
         sendPass= (Button) findViewById(R.id.btRecuerdaPassword);
     }
 
+    /**
+     * Method for create a listener for de buttons of the activity
+     */
     private void createListener() {
         listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //if press button login
                 if (view.getId() == R.id.btEntrar) {
                     //recover data from EditText
                         String userMail = mailBox.getText().toString();
                         String userPass = passBox.getText().toString();
-                        //recover User from servlet
+                        //try to recover User from servlet with this data
                         client = myModel.validatePassword(userMail, userPass);
                     //if a user is recovered
                     if (client!=null){
@@ -100,42 +119,57 @@ public class LoginActivity extends AppCompatActivity {
                         if (client.isShelter()){
                             Intent intent  = new Intent(LoginActivity.this, SearchOffersActivity.class);
                             startActivity(intent);
-                            //if is person, show search demands
+                        //if is person, show search demands
                         } else  {
                             Intent intent  = new Intent(LoginActivity.this, SearchDemandsActivity.class);
                             startActivity(intent);
                         }
-                        //if not recovered an user
+                        //if not recovered an user, notify
                     } else {
                         passBox.setHintTextColor(Color.RED);
                         passBox.setHint("Password incorrecto");
                         passBox.setText(null);
                     }
+                //if button register is pressed
                 } else if (view.getId() == R.id.btAlta) {
                     openRegisterActivity();
+                //if button remember me passowrd is pressed
                 } else if (view.getId() == R.id.btRecuerdaPassword) {
                     openSendPassActivity();
                 }
             }
         };
     }
+
+    /**
+     * Method for adding listeners to elements
+     */
     private void addElementsToListener() {
         login.setOnClickListener (listener);
         register.setOnClickListener(listener);
         sendPass.setOnClickListener(listener);
     }
 
+    /**
+     * Method for opening remember password activity
+     */
     private void openSendPassActivity() {
         //Intent intent  = new Intent(LoginActivity.this, ForgotPassActivity.class);
         //startActivity(intent);
     }
 
+    /**
+     * Method for opening register activity
+     */
     private void openRegisterActivity() {
         Intent intent  = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
-
     }
 
+
+    /**
+     * Method for saving interesting data by shared preferences
+     */
     private void saveSharedPref() {
         //Get params form
         String userName= client.getName();
@@ -144,6 +178,7 @@ public class LoginActivity extends AppCompatActivity {
         Boolean rememberCheck = rememberMe.isChecked();
         String userMail= client.getEmail();
         String userPass= client.getPassword();
+        String userPhone= client.getPhone();
 
         //Create shared prefereces object
         SharedPreferences shared = getSharedPreferences("dades", MODE_PRIVATE);
@@ -157,15 +192,20 @@ public class LoginActivity extends AppCompatActivity {
         myEditor.putString("userMail", userMail);
         myEditor.putString("userPass", userPass);
         myEditor.putBoolean("rememberMe", rememberCheck);
+        myEditor.putString("userPhone", userPhone);
         myEditor.putInt("id", idUser);
 
         //Push the editor to write them
         myEditor.commit();
     }
 
+    /**
+     * Method for recovergin interesting data by shared preferences
+     */
     private void recoverSharedPref() {
-        //Create shared prefereces object
+        //Create shared prefereces object of a Shared preferences created
         SharedPreferences shared = getSharedPreferences("dades", MODE_PRIVATE);
+        //if exist
         if (shared!=null) {
             //Use the editor to catch the couples of dates
             mailSaved = shared.getString("userMail", null);

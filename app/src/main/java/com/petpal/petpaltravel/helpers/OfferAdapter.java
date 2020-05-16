@@ -42,14 +42,11 @@ public class OfferAdapter extends ArrayAdapter<CompanionOfPet> {
         TextView originCity= (TextView) convertView.findViewById(R.id.tvdesde);
         TextView destination= (TextView) convertView.findViewById(R.id.tvhasta);
 
-
         StringBuilder sb2= new StringBuilder();
         sb2.append(getItem(position).getNamePerson()); sb2.append(" acompaña a ");
         sb2.append(getItem(position).getPetType());
         userName.setText(sb2.toString());
-
         fecha.setText(new SimpleDateFormat("dd-MM-yyyy").format(getItem(position).getDateTravel().getTime()));
-
         originCity.setText("Va desde: " + getItem(position).getOriginCity());
         destination.setText("hasta : " + getItem(position).getDestinyCity());
 

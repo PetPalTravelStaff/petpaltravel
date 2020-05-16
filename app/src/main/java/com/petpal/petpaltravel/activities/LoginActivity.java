@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         createListener();
         //add elements to listener
         addElementsToListener();
+
     }
 
     /**

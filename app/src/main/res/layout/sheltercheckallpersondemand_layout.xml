@@ -15,44 +15,38 @@
             android:id="@+id/tvHola"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="250dp"
+            android:layout_marginStart="200dp"
             android:text="Hola"
             android:textColor="@android:color/background_dark"
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/etNombrePersona"
+            android:id="@+id/etNombreProtectora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="24dp"
-            android:hint="Pepe"
-            android:textSize="14sp" />
+            android:hint="Protectora Kitty"
+            android:textSize="14sp"  />
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvTituloDescripcionDemanda"
+        android:id="@+id/tvTituloDescripcionOferta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Descripción"
+        android:layout_marginTop="10dp"
+        android:text="Datos de la mascota"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="24sp" />
 
-    <ImageView
-        android:id="@+id/ivFotoMascota"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginStart="150dp"
-        android:layout_marginEnd="150dp"
-        app:srcCompat="@drawable/logo" />
-
     <TextView
-        android:id="@+id/tvNombreMascota"
+        android:id="@+id/tvNombreMascotam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_marginStart="24dp"
-        android:text="Nombre de la mascota:"
+        android:text="Nombre:"
         android:textColor="@android:color/background_dark" />
 
     <TextView
@@ -82,15 +76,15 @@
         android:ems="10" />
 
     <TextView
-        android:id="@+id/tvDisponibleDesde"
+        android:id="@+id/tvViajaDesdeDia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="Disponible desde:"
+        android:text="Viaja desde el día:"
         android:textColor="@android:color/background_dark" />
 
     <TextView
-        android:id="@+id/etDisponibleDesde"
+        android:id="@+id/etViajaDesdeDia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -99,15 +93,15 @@
         android:ems="10" />
 
     <TextView
-        android:id="@+id/tvDisponibleHasta"
+        android:id="@+id/tvViajaHastaDia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="Disponible hasta:"
+        android:text="Hasta el día:"
         android:textColor="@android:color/background_dark" />
 
     <TextView
-        android:id="@+id/etDisponibleHasta"
+        android:id="@+id/etViajaHastaDia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -116,15 +110,15 @@
         android:ems="10" />
 
     <TextView
-        android:id="@+id/tvViajaDesde"
+        android:id="@+id/tvDesdeLugar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="Viaja desde:"
+        android:text="Desde el lugar:"
         android:textColor="@android:color/background_dark" />
 
     <TextView
-        android:id="@+id/etCiudadOrigenMascota"
+        android:id="@+id/etDesdeLugar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -133,7 +127,7 @@
         android:ems="10" />
 
     <TextView
-        android:id="@+id/tvViajeDestino"
+        android:id="@+id/tvDestinoA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -141,7 +135,7 @@
         android:textColor="@android:color/background_dark" />
 
     <TextView
-        android:id="@+id/etCiudadDestinoMascota"
+        android:id="@+id/etDestinoA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -150,37 +144,35 @@
         android:ems="10" />
 
     <TextView
-        android:id="@+id/tvComentarios"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvTipoTransporte"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="Comentarios"
-        android:textColor="@android:color/background_dark"
-        android:textSize="14sp" />
+        android:text="Tipo de transporte:"
+        android:textColor="@android:color/background_dark" />
 
     <TextView
-        android:id="@+id/etComentarios"
+        android:id="@+id/etTipoTransporte"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
-        android:ems="200"
-        android:gravity="start|top"
-        android:textSize="14sp" />
+        android:ems="10" />
 
     <Button
-        android:id="@+id/btApadrinarMascota"
+        android:id="@+id/btVerOfrecimientos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
         android:background="@android:drawable/toast_frame"
         android:backgroundTint="@color/holoGreenDark"
-        android:text="¡Quiero acompañarle!"
+        android:text="Ver ofrecimientos"
         android:textAllCaps="false"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />
+
 
 </LinearLayout>

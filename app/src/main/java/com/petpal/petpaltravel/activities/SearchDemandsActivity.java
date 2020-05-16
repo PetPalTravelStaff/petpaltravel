@@ -113,16 +113,20 @@ public class SearchDemandsActivity extends AppCompatActivity {
      * Method fot loading data in the list view, using a personal apapter
      */
     private void loadData () {
-        //if there is demands to show
-        if (listOfDemands != null) {
-            //create adapter
-             myadapter= new DemandAdapter(this, R.layout.demanditem_layout, listOfDemands);
-             //set adapter to the listview
-             myListView.setAdapter(myadapter);
-             //set listener to the listview
-             myListView.setOnItemClickListener(listener);
-        } else {
+        //if there no list
+        if (listOfDemands == null) {
+            notification.setText("Problemas al cargar los datos.\n\t Intentalo más tarde");
+        //if list is empty
+        } else if (listOfDemands.size()==0){
             notification.setText("No se han encontrado peticiones de acompañamiento... aún.");
+        //if list has lines
+        } else {
+            //create adapter
+            myadapter= new DemandAdapter(this, R.layout.demanditem_layout, listOfDemands);
+            //set adapter to the listview
+            myListView.setAdapter(myadapter);
+            //set listener to the listview
+            myListView.setOnItemClickListener(listener);
         }
     }
 
@@ -166,6 +170,4 @@ public class SearchDemandsActivity extends AppCompatActivity {
         }
         return true;
     }
-
-
 }

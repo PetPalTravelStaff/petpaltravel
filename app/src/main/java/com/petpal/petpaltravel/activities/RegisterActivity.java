@@ -51,6 +51,9 @@ public class RegisterActivity extends AppCompatActivity {
         passBox = (EditText) findViewById(R.id.etPassword1);
         repePassBox = (EditText) findViewById(R.id.etpassword2);
         btSave = (Button) findViewById(R.id.btDameAlta);
+        btSave.setText(null);
+        btSave.setTextColor(Color.BLACK);
+        btSave.setEnabled(true);
         cbIsShelter = (CheckBox) findViewById(R.id.cbSoyProtectora);
     }
 
@@ -99,7 +102,12 @@ public class RegisterActivity extends AppCompatActivity {
                                                 mailBox.setText(null);
                                                 mailBox.setHintTextColor(Color.RED);
                                                 mailBox.setHint("Este mail ya tiene una cuenta");
+                                            } else {
+                                                btSave.setText("Prueba más tarde");
+                                                btSave.setTextColor(Color.RED);
+                                                btSave.setEnabled(false);
                                             }
+
                                         } else {
                                             repePassBox.setText(null);
                                             repePassBox.setHint("Passwords no coinciden");

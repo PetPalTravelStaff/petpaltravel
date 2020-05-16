@@ -101,7 +101,7 @@ public class SearchOffersActivity extends AppCompatActivity {
         //Create a bundle object
         Bundle bundle = new Bundle();
         //set interesting data
-        bundle.putInt("id", offer.getId());
+        bundle.putInt("idOffer", offer.getId());
         intent.putExtras(bundle);
         //open new activity
         startActivity(intent);
@@ -111,16 +111,20 @@ public class SearchOffersActivity extends AppCompatActivity {
      * Method fot loading data in the list view, using a personal apapter
      */
     private void loadData () {
-        //if there is offers to show
-        if (listOfOffers != null) {
+        //if list of Offers is null
+        if (listOfOffers == null) {
+            notification.setText("Problemas al cargar los datos.\n\t Intentalo más tarde");
+        //if list of offers is empty
+        } else if (listOfOffers.size()==0) {
+            notification.setText("No se han encontrado ofertas de acompañamiento... aún.");
+        //if list of Offers has lines
+        } else {
             //create adapter
             myadapter= new OfferAdapter(this, R.layout.offeritem_layout,listOfOffers);
             //set adapter to the listview
             myListView.setAdapter(myadapter);
             //set listener to the listview
             myListView.setOnItemClickListener(listener);
-        } else {
-            notification.setText("No se han encontrado ofertas de acompañamiento... aún.");
         }
     }
 

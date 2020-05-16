@@ -23,10 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchOffersActivity extends AppCompatActivity {
-    View.OnClickListener listener2;
+    //Attributes
     PPTModel myModel;
     ListView myListView;
-    TextView nameLabel;
+    TextView nameLabel, notification;
     ArrayList<CompanionOfPet> listOfOffers;
     AdapterView.OnItemClickListener listener;
     String nameUser;
@@ -37,70 +37,98 @@ public class SearchOffersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchingoffers_layout);
+        //instantiate model
         myModel = new PPTModel();
+        //recover list of all offers from model
         listOfOffers= (ArrayList<CompanionOfPet>) myModel.getAllOffers();
         //Create view elements in activity
         initElements();
+        //recover interesting data by Shared Preferences
         recoverShared();
+        //Set the name of the user in the view
         nameLabel.setText(nameUser);
+        //create a listener
         createListener();
+        //load data in view
         loadData();
     }
 
+    /**
+     * Method for recovering interesting data by Shared Preferences
+     */
     private void recoverShared() {
-        //Creem un objecte amb el shared preferences que li pasem per paràmetre
+        //Create shared prefereces object of a Shared preferences created
         SharedPreferences shared = getSharedPreferences("dades", MODE_PRIVATE);
+        //if exist
         if (shared!=null) {
-            //comencem a llegir
+            //Use the editor to catch the couples of dates
             nameUser = shared.getString("userName", "");
             isShelter = shared.getBoolean("isShelter", false);
         }
     }
 
-
+    /**
+     * Method for creating the elements of the activity
+     */
     private void initElements () {
         myListView = (ListView) findViewById(R.id.lvLista);
         nameLabel= (TextView) findViewById(R.id.etNombreProtectora);
-
-
+        notification= (TextView) findViewById(R.id.tverroroff);
     }
 
+    /**
+     * Method for creating a listener and identify what to do
+     */
     private void createListener() {
         listener = new AdapterView.OnItemClickListener() {
             //se sobreescribe este método
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                //llamamos a un método para que nos abra la siguiente activity con los datos del personaje en cuestión
+                //save details of the offer touched of the list and open new activity
                 showOfferDetails(listOfOffers.get(position));
             }
         };
     }
 
+    /**
+     * Method for saving offer details by bundle
+     * and open a new activity
+     * @param offer with will be showed in new activity
+     */
     public void showOfferDetails(CompanionOfPet offer) {
+        //set with new activity will be opened
         Intent intent = new Intent(this, ShowOfferActivity.class);
+        //Create a bundle object
         Bundle bundle = new Bundle();
-
+        //set interesting data
         bundle.putInt("id", offer.getId());
-        bundle.putInt("idPerson", offer.getIdeUserPersonOffering());
-        bundle.putString("dateTrav", new SimpleDateFormat("dd-MM-yyyy").format(offer.getDateTravel().getTime()));
-        bundle.putString("cityOr", offer.getOriginCity());
-        bundle.putString("cityDes", offer.getDestinyCity());
-        bundle.putString("transport", offer.getTransport());
-        bundle.putString("typepet", offer.getPetType());
-        bundle.putString("comments", offer.getComments());
         intent.putExtras(bundle);
+        //open new activity
         startActivity(intent);
     }
 
-
+    /**
+     * Method fot loading data in the list view, using a personal apapter
+     */
     private void loadData () {
+        //if there is offers to show
         if (listOfOffers != null) {
+            //create adapter
             myadapter= new OfferAdapter(this, R.layout.offeritem_layout,listOfOffers);
+            //set adapter to the listview
             myListView.setAdapter(myadapter);
+            //set listener to the listview
             myListView.setOnItemClickListener(listener);
+        } else {
+            notification.setText("No se han encontrado ofertas de acompañamiento... aún.");
         }
     }
 
+    /**
+     * Method for creating items of menu
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -116,17 +144,17 @@ public class SearchOffersActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case 1:
-                //To main_Activity
+                //Go to view account activity
                 Intent intent1 = new Intent(SearchOffersActivity.this, ViewAccountActivity.class);
                 startActivity(intent1);
                 break;
             case 2:
-                //To game_Activity
+                //Go to show my demands  activity
                 Intent intent2 = new Intent(SearchOffersActivity.this, ShowMyDemandsActivity.class);
                 startActivity(intent2);
                 break;
             case 3:
-                //To config_Activity
+                //Go to add a demand activity
                 Intent intent3 = new Intent(SearchOffersActivity.this, AddDemandActivity.class);
                 startActivity(intent3);
                 break;
@@ -136,6 +164,4 @@ public class SearchOffersActivity extends AppCompatActivity {
         }
         return true;
     }
-
-
 }

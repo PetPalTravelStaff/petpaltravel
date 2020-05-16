@@ -40,13 +40,11 @@ public class DemandAdapter extends ArrayAdapter<CompanionForPet> {
         TextView petType= (TextView) convertView.findViewById(R.id.tvtipopet);
         TextView fecha= (TextView) convertView.findViewById(R.id.tvfechaDem);
 
-
         sheltName.setText(getItem(position).getNameShelter());
         petName.setText("Nombre: "+ getItem(position).getNamePet());
         petType.setText("Tipo: "+ getItem(position).getTypePet());
         fecha.setText((new SimpleDateFormat("dd-MM-yyyy").format(getItem(position).getAvailableFrom().getTime())));
 
         return convertView;
-
     }
 }

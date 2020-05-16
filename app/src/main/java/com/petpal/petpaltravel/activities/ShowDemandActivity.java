@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class ShowDemandActivity extends AppCompatActivity {
-
+    //Atributes
     TextView namePet, OriginCity, Destination, typePet, dateFrom, dateUntill, comments, nameLabel;
     String nameUser;
     String phoneUser;
@@ -38,10 +38,13 @@ public class ShowDemandActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewdetailsdemand_layout);
+        //instantiate model
         myModel = new PPTModel();
+        //recover needed data
         recoverDemandId();
         myDemand= myModel.recoverDemandById(idDemand);
         recoverShared();
+        //set situation flag depending on the case
         if (myDemand.getIdUserPersonInterested1()==userId | myDemand.getIdUserPersonInterested2()==userId |
                 myDemand.getIdUserPersonInterested2()==userId){
             situationFlag=-2;
@@ -51,10 +54,13 @@ public class ShowDemandActivity extends AppCompatActivity {
         } else if (phoneUser==null) {
             situationFlag=-1;
         }
-
+        //Create view elements in activity
         initElements();
+        //create a listener
         createListener();
+
         loadData();
+
         addElementsToListener();
     }
 

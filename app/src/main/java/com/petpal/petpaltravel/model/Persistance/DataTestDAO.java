@@ -137,4 +137,34 @@ public class DataTestDAO {
     public List<CompanionForPet> recoverAllDemands() {
         return demandsFOR;
     }
+
+    public CompanionForPet searchDemandById(int idDemand) {
+        CompanionForPet result= null;
+        for (CompanionForPet demand : demandsFOR) {
+            if (idDemand==demand.getId()){
+                result= demand;
+            }
+        }
+        return result;
+    }
+
+    public Boolean addPersonToDemand(int userId, String nameUser, int demandId) {
+        Boolean result= false;
+        CompanionForPet prov= searchDemandById(demandId);
+        if (prov.getIdUserPersonInterested1()==0){
+            prov.setIdUserPersonInterested1(userId);
+            prov.setNamePInterested1(nameUser);
+            result= true;
+        } else if ((prov.getIdUserPersonInterested2()==0)){
+            prov.setIdUserPersonInterested2(userId);
+            prov.setNamePInterested2(nameUser);
+            result= true;
+        }else if ((prov.getIdUserPersonInterested3()==0)){
+            prov.setIdUserPersonInterested3(userId);
+            prov.setNamePInterested3(nameUser);
+            result= true;
+        }
+        return result;
+
+    }
 }

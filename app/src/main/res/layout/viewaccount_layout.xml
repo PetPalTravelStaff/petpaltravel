@@ -26,12 +26,13 @@
         android:textSize="18sp"
         android:text="Nombre:" />
 
-    <TextView
+    <EditText
         android:id="@+id/etNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:hint="Tu nombre"
         android:background="@android:drawable/editbox_background" />
 
     <TextView
@@ -44,12 +45,13 @@
         android:textSize="18sp"
         android:text="E-mail:" />
 
-    <TextView
+    <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:hint="Tu e-mail"
         android:background="@android:drawable/editbox_background" />
 
     <TextView
@@ -63,12 +65,13 @@
         android:text="Teléfono:" />
 
 
-    <TextView
+    <EditText
         android:id="@+id/etTelefono"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:hint="Tu teléfono"
         android:background="@android:drawable/editbox_background" />
 
     <TextView

@@ -170,6 +170,4 @@ public class SearchDemandsActivity extends AppCompatActivity {
         }
         return true;
     }
-
-
 }

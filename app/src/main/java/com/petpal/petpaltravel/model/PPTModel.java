@@ -63,4 +63,19 @@ public class PPTModel {
         result= myDAO.addShelterToOffer(userId, nameUser, idOffer);
         return result;
     }
+
+    public User searchUserById(int idUser) {
+        User result= null;
+        result= myDAO.recoverUserById(idUser);
+        return result;
+    }
+
+    //return 0 if new email already exist
+    //return 1 if updated
+    //return -1 other problem
+    public int updateUser(User newDataUser) {
+        int result= 0;
+        result= myDAO.updateUser(newDataUser);
+        return result;
+    }
 }

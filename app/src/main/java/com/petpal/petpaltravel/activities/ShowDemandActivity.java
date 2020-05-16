@@ -274,7 +274,6 @@ public class ShowDemandActivity extends AppCompatActivity {
             menu.add(0, 3, 2, "Publicar oferta");
             menu.add(0, 4, 3, "Salir");
         }
-
         return true;
     }
 

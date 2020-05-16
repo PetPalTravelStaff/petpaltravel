@@ -113,11 +113,13 @@ public class DataTestDAO {
         int result= 0;
         Boolean control= false;
         Boolean control2= false;
+        //verify first if this mail is already un BBDD
         for (User u: myUsers) {
             if(provUser.getEmail().equals(u.getEmail())){
                 control= true;
             }
         }
+        //if not, try to add
         if (!control) {
             control2= myUsers.add(provUser);
             if (control2) {
@@ -198,6 +200,70 @@ public class DataTestDAO {
                 }
             }
         }
+        return result;
+    }
+
+    public User recoverUserById(int idUser) {
+        User result= null;
+        for (User u: myUsers) {
+            if(idUser==u.getId()) {
+                result= u;
+            }
+        }
+        return result;
+    }
+
+
+    //return 0 if email already exist in other user
+    //return 1 if user updated
+    //return -1 other problem
+    public int updateUser(User newDataUser) {
+        int result= 0;
+        Boolean control= false;
+        Boolean control2= false;
+        for (User u: myUsers) {
+            //verify first if this mail exist in data base
+            if(newDataUser.getEmail().equals(u.getEmail())) {
+                //if is of the user, everything is ok, so set false
+                if (newDataUser.getId() == u.getId()) {
+                    control = false;
+                    //if it is of other user, can not change so set true;
+                } else {
+                    control = true;
+                }
+            }
+        }
+        //If no other has this mail...
+        if (!control) {
+            for (User us : myUsers) {
+                //when find this user
+                if (newDataUser.getId() == us.getId()) {
+                    us.setName(newDataUser.getName());
+                    us.setEmail(newDataUser.getEmail());
+                    us.setPhone(newDataUser.getPhone());
+                    if (null!=newDataUser.getPassword()){
+                        us.setPassword(newDataUser.getPassword());
+                    }
+                }
+            }
+        }
+        //If all data is now eaual in newDataUser and data of user in BBDD result 1, otherwise -1
+        if (recoverUserById(newDataUser.getId()).getName().equals(newDataUser.getName()) &
+                recoverUserById(newDataUser.getId()).getEmail().equals(newDataUser.getEmail()) &
+                recoverUserById(newDataUser.getId()).getPhone().equals(newDataUser.getPhone())){
+                if (null!= newDataUser.getPassword()) {
+                    if (recoverUserById(newDataUser.getId()).getPassword().equals(newDataUser.getPassword())) {
+                        result=1;
+                    } else {
+                        result=-1;
+                    }
+                } else {
+                    result=1;
+                }
+        } else {
+            result=-1;
+        }
+
         return result;
     }
 }

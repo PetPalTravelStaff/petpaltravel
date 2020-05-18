@@ -24,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
+            android:hint="Pepe"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -105,16 +106,12 @@
             android:textColor="@android:color/background_dark"
             android:textSize="18sp" />
 
-        <EditText
-            android:id="@+id/etCiudadOrigen"
-            android:layout_width="168dp"
+        <Spinner
+            android:id="@+id/spCiudadOrigen"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="24dp"
-            android:background="@android:drawable/editbox_background"
-            android:ems="10"
-            android:hint="Ciudad de origen" />
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="5dp" />
 
     </LinearLayout>
 
@@ -133,16 +130,12 @@
             android:textColor="@android:color/background_dark"
             android:textSize="18sp" />
 
-        <EditText
-            android:id="@+id/etCiudadDestino"
-            android:layout_width="170dp"
+        <Spinner
+            android:id="@+id/spCiudadDestino"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="24dp"
-            android:background="@android:drawable/editbox_background"
-            android:ems="10"
-            android:hint="Ciudad de destino" />
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="5dp" />
 
     </LinearLayout>
 

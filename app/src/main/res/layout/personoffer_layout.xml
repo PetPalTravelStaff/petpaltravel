@@ -19,13 +19,12 @@
             android:textColor="@android:color/background_dark"
             android:textSize="14sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/etNombrePersona"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:hint="Pepe"
-            android:textSize="14sp"  />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <TextView
@@ -44,28 +43,51 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tvFechaViajePersona"
+            android:id="@+id/tvMiNombreEs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginStart="24dp"
-            android:text="Fecha:"
+            android:text="Mi nombre es:"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/etMiNombreEs"
+            android:layout_width="168dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="24dp"
+            android:background="@android:drawable/editbox_background"
+            android:hint="Nombre y apellido" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvFechaViajePersona"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="24dp"
+            android:text="Viajo el día:"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp" />
 
         <EditText
             android:id="@+id/etFechaViajePersona"
-            android:layout_width="166dp"
+            android:layout_width="165dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="85dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="24dp"
             android:background="@android:drawable/editbox_background"
-            android:ems="10"
-            android:inputType="date"
-            android:focusable="false"
-            android:clickable="true"
-            android:maxLines="1" />
+            android:hint="dd-mm-aaaa"
+            android:maxLength="10" />
     </LinearLayout>
 
     <LinearLayout
@@ -174,56 +196,22 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tvTipoTransporte"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="67dp"
-        android:layout_marginTop="5dp"
-        android:text="Viajo en:"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp" />
-
-    <RadioButton
-        android:id="@+id/rdTren"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="Tren" />
-
-    <RadioButton
-        android:id="@+id/rdAvion"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="5dp"
-        android:text="Avión" />
-
-</LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/rdCoche"
-            android:layout_width="80dp"
+        <TextView
+            android:id="@+id/tvTipoTransporte"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="158dp"
-            android:layout_marginTop="5dp"
-            android:text="Coche" />
+            android:layout_marginStart="24dp"
+            android:text="Viajaré en:"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp" />
 
-        <RadioButton
-            android:id="@+id/rdBarco"
-            android:layout_width="82dp"
+        <Spinner
+            android:id="@+id/spViajareEn"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="5dp"
-            android:text="Barco" />
-
+            android:layout_marginStart="52dp"
+            android:layout_marginEnd="100dp"
+            android:textColor="@android:color/background_dark" />
 
     </LinearLayout>
 
@@ -237,7 +225,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="10dp"
         android:text="Comentarios"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp" />
@@ -246,6 +234,7 @@
         android:id="@+id/etComentarios"
         android:layout_width="match_parent"
         android:layout_height="65dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="28dp"
         android:layout_marginRight="28dp"
         android:background="@android:drawable/editbox_background"
@@ -259,7 +248,7 @@
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_marginLeft="80dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="80dp"
         android:background="@android:drawable/toast_frame"
         android:backgroundTint="@color/holoGreenDark"

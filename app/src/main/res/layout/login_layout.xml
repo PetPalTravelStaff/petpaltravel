@@ -61,8 +61,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
-        android:ems="10"
-        android:hint="contraseña"
+        android:maxLength="10"
+        android:hint="contraseña (máximo 10 caracteres)"
         android:inputType="textPassword" />
 
     <LinearLayout

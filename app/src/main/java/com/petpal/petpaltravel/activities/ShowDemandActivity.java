@@ -1,13 +1,10 @@
 package com.petpal.petpaltravel.activities;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +17,6 @@ import com.petpal.petpaltravel.model.CompanionForPet;
 import com.petpal.petpaltravel.model.PPTModel;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
 public class ShowDemandActivity extends AppCompatActivity {
     //Atributes
@@ -40,7 +36,7 @@ public class ShowDemandActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.viewdetailsdemand_layout);
+        setContentView(R.layout.viewdemandasshelter_layout);
         //instantiate model
         myModel = new PPTModel();
         //recover needed data

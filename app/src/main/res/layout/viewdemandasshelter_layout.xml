@@ -184,6 +184,20 @@
         android:textSize="18sp" />
 
     <Button
+        android:id="@+id/btPersonasInteresadas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="30dp"
+        android:background="@android:drawable/toast_frame"
+        android:backgroundTint="@color/holoGreenDark"
+        android:text="Personas interesadas"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+    <Button
         android:id="@+id/btCancelarPeticion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

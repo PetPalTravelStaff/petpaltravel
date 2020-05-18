@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,9 +17,7 @@ import com.petpal.petpaltravel.helpers.OfferAdapter;
 import com.petpal.petpaltravel.model.CompanionOfPet;
 import com.petpal.petpaltravel.model.PPTModel;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 public class SearchOffersActivity extends AppCompatActivity {
     //Attributes
@@ -154,12 +151,12 @@ public class SearchOffersActivity extends AppCompatActivity {
                 break;
             case 2:
                 //Go to show my demands  activity
-                Intent intent2 = new Intent(SearchOffersActivity.this, ShowMyDemandsActivity.class);
+                Intent intent2 = new Intent(SearchOffersActivity.this, SearchDemandsActivity.class);
                 startActivity(intent2);
                 break;
             case 3:
                 //Go to add a demand activity
-                Intent intent3 = new Intent(SearchOffersActivity.this, AddDemandActivity.class);
+                Intent intent3 = new Intent(SearchOffersActivity.this, ManageDemandActivity.class);
                 startActivity(intent3);
                 break;
             case 4://Exit

@@ -1,5 +1,7 @@
 package com.petpal.petpaltravel.model;
 
+import android.widget.ArrayAdapter;
+
 import com.petpal.petpaltravel.model.Persistance.DataTestDAO;
 
 import java.util.ArrayList;
@@ -8,6 +10,8 @@ import java.util.List;
 
 public class PPTModel {
     DataTestDAO myDAO;
+    final String[] transport= {"Avión", "Barco", "Coche", "Tren"};
+    final String[] typePets= {"Gato/a", "Perro/a", "Otros tipos"};
 
     public PPTModel() {
         myDAO= DataTestDAO.getInstance();
@@ -17,6 +21,14 @@ public class PPTModel {
         User result= null;
         result= myDAO.validatePassword(userMail, userPass);
         return result;
+    }
+
+    public String[] getTransport() {
+        return transport;
+    }
+
+    public String[] getTypePets() {
+        return typePets;
     }
 
     //return 0 if email already exist
@@ -79,3 +91,4 @@ public class PPTModel {
         return result;
     }
 }
+

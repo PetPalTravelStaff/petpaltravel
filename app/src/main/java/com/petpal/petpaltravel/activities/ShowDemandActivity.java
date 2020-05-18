@@ -1,13 +1,10 @@
 package com.petpal.petpaltravel.activities;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +17,6 @@ import com.petpal.petpaltravel.model.CompanionForPet;
 import com.petpal.petpaltravel.model.PPTModel;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
 public class ShowDemandActivity extends AppCompatActivity {
     //Atributes
@@ -117,9 +113,9 @@ public class ShowDemandActivity extends AppCompatActivity {
                     offerMe.setTextColor(Color.RED);
                     break;
                 case -2: //person has applied already
-                    offerMe.setText("Ya no quiero acompañarle");
+                    offerMe.setText("Ya te has ofrecido");
                     offerMe.setEnabled(true);
-                    offerMe.setTextColor(Color.RED);
+                    offerMe.setTextColor(Color.WHITE);
                     break;
                 case -3: //no more application accepted
                     offerMe.setText("Estamos a tope de personas voluntarias");
@@ -159,38 +155,24 @@ public class ShowDemandActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //if we are the shelter that post this demand, open modify demand activity
                 if (isShelter & userId!=0 & userId==myDemand.getIdeUserShelterOffering()){
-                    //Intent intent  = new Intent(ShowMyDemandsActivity.this, MODIFICAR_DEMANDA.class);
+                    //Intent intent  = new Intent(ShowDemandActivity.this, MODIFICAR_DEMANDA.class);
                     //startActivity(intent);
                 //if not...
                 } else {
                     switch (situationFlag) {
-                        case 0: //normal case: person apply to the demand
-                            Boolean control= offerPersonToDemand();
-                            if (control){
-                                //if can apply suscessfully
-                                situationFlag=-2;
-                            } else {
-                                //if not
-                                situationFlag=-4;
-                            }
-                            //set text to offerme button
-                            setButtonOfferMe();
+                        case 0: //normal case: person wants to apply to the demand
+                        case -2: //person has applied already: person wants to un-apply the demand
+                            Intent intent1  = new Intent(ShowDemandActivity.this, ApplyForDemand.class);
+                            //Create a bundle object
+                            Bundle bundle = new Bundle();
+                            //set interesting data
+                            bundle.putInt("idDemand", idDemand);
+                            intent1.putExtras(bundle);
+                            startActivity(intent1);
                             break;
                         case -1: // missing phone: open activity to go to change account details
                             Intent intent  = new Intent(ShowDemandActivity.this, ViewAccountActivity.class);
                             startActivity(intent);
-                            break;
-                        case -2: //person has applied already: person un-apply the demand
-                            Boolean control2= unOfferPersonToDemand();
-                            if (control2){
-                                //if unapply suscesfully
-                                situationFlag=0;
-                            } else {
-                                //if not
-                                situationFlag=-4;
-                            }
-                            //set text to offerme button
-                            setButtonOfferMe();
                             break;
                     }
                 }
@@ -205,24 +187,7 @@ public class ShowDemandActivity extends AppCompatActivity {
         offerMe.setOnClickListener (listener);
     }
 
-    /**
-     * Method for apply for a demand
-     * @return true if applied is done, false otherwise
-     */
-    private Boolean offerPersonToDemand() {
-        Boolean result= false;
-        result= myModel.addPersonToDemand(userId, nameUser, myDemand.getId());
-        return result;
 
-    }
-
-    /**
-     * Method for un-apply for a demand
-     * @return true if un-applied is done, false otherwise
-     */
-    private Boolean unOfferPersonToDemand() {
-        return false;
-    }
 
     /**
      * Method for loading demand data in the view
@@ -289,22 +254,22 @@ public class ShowDemandActivity extends AppCompatActivity {
                 case 2:
                     //If is Shelter, go to show my demands activity
                     if(isShelter) {
-                        Intent intent2 = new Intent(ShowDemandActivity.this, ShowMyDemandsActivity.class);
+                        Intent intent2 = new Intent(ShowDemandActivity.this, SearchDemandsActivity.class);
                         startActivity(intent2);
                     //if is person, go to show my details activity
                     } else {
-                        Intent intent2 = new Intent(ShowDemandActivity.this, ShowMyOffersActivity.class);
+                        Intent intent2 = new Intent(ShowDemandActivity.this, SearchOffersActivity.class);
                         startActivity(intent2);
                     }
                     break;
                 case 3:
                     //If is Shelter, go to add a demands activity
                     if (isShelter) {
-                        Intent intent3 = new Intent(ShowDemandActivity.this, AddDemandActivity.class);
+                        Intent intent3 = new Intent(ShowDemandActivity.this, ManageDemandActivity.class);
                         startActivity(intent3);
                     //if is person, go to add an offer activity
                     } else {
-                        Intent intent3 = new Intent(ShowDemandActivity.this, AddOfferActivity.class);
+                        Intent intent3 = new Intent(ShowDemandActivity.this, ManageOfferActivity.class);
                         startActivity(intent3);
                     }
                     break;

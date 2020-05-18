@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.petpal.petpaltravel.R;
 
-public class AddDemandActivity extends AppCompatActivity {
+public class ManageDemandActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

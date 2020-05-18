@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.petpal.petpaltravel.R;
 import com.petpal.petpaltravel.model.PPTModel;
@@ -303,22 +302,22 @@ public class ViewAccountActivity extends AppCompatActivity {
             case 2:
                 //If is Shelter, go to show my demands activity
                 if(myUser.isShelter()) {
-                    Intent intent2 = new Intent(ViewAccountActivity.this, ShowMyDemandsActivity.class);
+                    Intent intent2 = new Intent(ViewAccountActivity.this, SearchDemandsActivity.class);
                     startActivity(intent2);
                     //if is person, go to show my offers activity
                 } else {
-                    Intent intent2 = new Intent(ViewAccountActivity.this, ShowMyOffersActivity.class);
+                    Intent intent2 = new Intent(ViewAccountActivity.this, SearchOffersActivity.class);
                     startActivity(intent2);
                 }
                 break;
             case 3:
                 //If is Shelter, go to add a demands activity
                 if (myUser.isShelter()) {
-                    Intent intent3 = new Intent(ViewAccountActivity.this, AddDemandActivity.class);
+                    Intent intent3 = new Intent(ViewAccountActivity.this, ManageDemandActivity.class);
                     startActivity(intent3);
                     //if is person, go to add an offer activity
                 } else {
-                    Intent intent3 = new Intent(ViewAccountActivity.this, AddOfferActivity.class);
+                    Intent intent3 = new Intent(ViewAccountActivity.this, ManageOfferActivity.class);
                     startActivity(intent3);
                 }
                 break;

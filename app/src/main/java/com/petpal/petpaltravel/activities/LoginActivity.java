@@ -154,6 +154,7 @@ public class LoginActivity extends AppCompatActivity {
      * Method for opening remember password activity
      */
     private void openSendPassActivity() {
+        sendPass.setText ("Temporalmente fuera de servicio");
         //Intent intent  = new Intent(LoginActivity.this, ForgotPassActivity.class);
         //startActivity(intent);
     }

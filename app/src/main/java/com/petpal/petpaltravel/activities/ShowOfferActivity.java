@@ -35,7 +35,7 @@ public class ShowOfferActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.viewdetailsoffer_layout);
+        setContentView(R.layout.viewofferasshelter_layout);
         //instantiate model
         myModel = new PPTModel();
         //recover needed data

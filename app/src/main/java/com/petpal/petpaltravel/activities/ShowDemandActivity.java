@@ -35,7 +35,7 @@ public class ShowDemandActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.viewdetailsdemand_layout);
+        setContentView(R.layout.viewdemandasshelter_layout);
         //instantiate model
         myModel = new PPTModel();
         //recover needed data

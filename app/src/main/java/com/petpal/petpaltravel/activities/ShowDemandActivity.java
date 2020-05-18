@@ -32,7 +32,6 @@ public class ShowDemandActivity extends AppCompatActivity {
     View.OnClickListener listener;
     int situationFlag=0; // 0= normal, -1= missing phone, -2= applied -3=no more application accepted
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

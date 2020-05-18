@@ -34,7 +34,6 @@
         android:text="Nombre:"
         android:textColor="@android:color/background_dark" />
 
-
     <TextView
         android:id="@+id/etNombre"
         android:layout_width="match_parent"
@@ -45,6 +44,8 @@
         android:background="@android:drawable/editbox_background"
         android:ems="10" />
 
+
+
     <TextView
         android:id="@+id/tvViajoEn"
         android:layout_width="match_parent"
@@ -54,16 +55,15 @@
         android:text="Viajo en:"
         android:textColor="@android:color/background_dark" />
 
-    <Spinner
+    <TextView
         android:id="@+id/etCiudadOrigenMascota"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="24dp"/>
-<!--        android:background="@android:drawable/editbox_background"-->
-<!--        android:ems="10" />-->
-
+        android:layout_marginEnd="24dp"
+        android:background="@android:drawable/editbox_background"
+        android:ems="10" />
 
     <TextView
         android:id="@+id/tvMiEmail"
@@ -157,7 +157,6 @@
             android:textAllCaps="false"
             android:textColor="@android:color/background_light"
             android:textSize="18sp" />
-
     </LinearLayout>
 
 </LinearLayout>

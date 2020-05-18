@@ -31,6 +31,7 @@ public class ShowOfferActivity extends AppCompatActivity {
     int userId;
     View.OnClickListener listener;
     int situationFlag=0; // 0= normal, -1= missing phone, -2= applied -3=no more application accepted
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +114,7 @@ public class ShowOfferActivity extends AppCompatActivity {
                     acceptOffer.setTextColor(Color.RED);
                     break;
                 case -2: //person has applied already
-                    acceptOffer.setText("Ya no quiero que acompañe");
+                    acceptOffer.setText("Ya lo has solicitado");
                     acceptOffer.setEnabled(true);
                     acceptOffer.setTextColor(Color.RED);
                     break;
@@ -161,6 +162,7 @@ public class ShowOfferActivity extends AppCompatActivity {
                 } else {
                     switch (situationFlag) {
                         case 0: //normal case: shelter apply to the offer
+                        case -2: //shelter has applied already: shelter un-apply the offer
                             //Open applicationActivity
                             Intent intent1  = new Intent(ShowOfferActivity.this, ApplyForOffer.class);
                             //Create a bundle object
@@ -175,18 +177,6 @@ public class ShowOfferActivity extends AppCompatActivity {
                             Intent intent  = new Intent(ShowOfferActivity.this, ViewAccountActivity.class);
                             startActivity(intent);
                             break;
-                        case -2: //shelter has applied already: shelter un-apply the offer
-                            Boolean control2= unApplyShelterToOffer();
-                            if (control2){
-                                //if unapply suscesfully
-                                situationFlag=0;
-                            } else {
-                                //if not
-                                situationFlag=-4;
-                            }
-                            //set text to accept offer button
-                            setButtonAcceptOffer();
-                            break;
                     }
                 }
             }
@@ -200,24 +190,6 @@ public class ShowOfferActivity extends AppCompatActivity {
         acceptOffer.setOnClickListener (listener);
     }
 
-    /**
-     * Method for apply for an offer
-     * @return true if applied is done, false otherwise
-     */
-    private Boolean shelterApplyForOffer() {
-        Boolean result= false;
-        result= myModel.addShelterToOffer(userId, nameUser, myOffer.getId());
-        return result;
-
-    }
-
-    /**
-     * Method for un-apply for a offer
-     * @return true if un-applied is done, false otherwise
-     */
-    private Boolean unApplyShelterToOffer() {
-        return false;
-    }
 
     /**
      * Method for loading offer data in the view

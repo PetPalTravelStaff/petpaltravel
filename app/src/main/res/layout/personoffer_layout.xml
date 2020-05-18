@@ -14,7 +14,7 @@
             android:id="@+id/tvHola"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="200dp"
+            android:layout_marginStart="250dp"
             android:text="Hola"
             android:textColor="@android:color/background_dark"
             android:textSize="14sp" />
@@ -23,6 +23,7 @@
             android:id="@+id/etNombrePersona"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:layout_marginEnd="24dp"
             android:hint="Pepe"
             android:textSize="14sp" />
@@ -108,9 +109,9 @@
 
         <Spinner
             android:id="@+id/spCiudadOrigen"
-            android:layout_width="150dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="5dp" />
 
     </LinearLayout>
@@ -124,7 +125,7 @@
             android:id="@+id/tvCiudadDestino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="24dp"
             android:text="Ciudad destino:"
             android:textColor="@android:color/background_dark"
@@ -132,9 +133,9 @@
 
         <Spinner
             android:id="@+id/spCiudadDestino"
-            android:layout_width="150dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="22dp"
             android:layout_marginTop="5dp" />
 
     </LinearLayout>
@@ -202,7 +203,7 @@
             android:id="@+id/spViajareEn"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
+            android:layout_marginStart="60dp"
             android:layout_marginEnd="100dp"
             android:textColor="@android:color/background_dark" />
 

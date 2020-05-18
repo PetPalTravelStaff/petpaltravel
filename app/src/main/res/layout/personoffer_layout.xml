@@ -232,7 +232,7 @@
         android:layout_marginLeft="28dp"
         android:layout_marginRight="28dp"
         android:background="@android:drawable/editbox_background"
-        android:ems="200"
+        android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:textSize="14sp" />

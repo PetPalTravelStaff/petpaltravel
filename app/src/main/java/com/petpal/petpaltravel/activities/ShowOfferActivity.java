@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 
 public class ShowOfferActivity extends AppCompatActivity {
     //Atributes
-    TextView namePerson, OriginCity, Destination, typePet, date, transport, comments, nameLabel;
+    TextView namePerson, OriginCity, Destination, typePet, date, transport, comments, userLabel;
     String nameUser;
     String phoneUser;
     Button acceptOffer;
@@ -31,10 +31,17 @@ public class ShowOfferActivity extends AppCompatActivity {
     int userId;
     View.OnClickListener listener;
     int situationFlag=0; // 0= normal, -1= missing phone, -2= applied -3=no more application accepted
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.viewofferasshelter_layout);
+        //recover urgent data
+        recoverShared();
+        if (isShelter){
+            setContentView(R.layout.viewofferasshelter_layout);
+        } else {
+            setContentView(R.layout.viewofferasperson_layout);
+        }
         //instantiate model
         myModel = new PPTModel();
         //recover needed data
@@ -65,16 +72,16 @@ public class ShowOfferActivity extends AppCompatActivity {
      * Method for create elements of activity
      */
     private void initElements() {
-        //namePerson= (TextView) findViewById(R.id.);
+        namePerson= (TextView) findViewById(R.id.etNombrePersona);
         OriginCity= (TextView) findViewById(R.id.etCiudadOrigenpersona);
         Destination= (TextView) findViewById(R.id.etCiudadDestinoPersona);
         typePet= (TextView) findViewById(R.id.etTipoMascota);
         date= (TextView) findViewById(R.id.etDiaViaje);
         transport= (TextView) findViewById(R.id.etTransporte);
         comments= (TextView) findViewById(R.id.etComentarios);
-        nameLabel= (TextView) findViewById(R.id.etNombreProtectora);
+        userLabel= (TextView) findViewById(R.id.etNombreProtectora);
         //set value to name of the user field
-        nameLabel.setText(nameUser);
+        userLabel.setText(nameUser);
         acceptOffer= (Button) findViewById(R.id.btApadrinarMascota);
         //set situation flag depending on the case
         if (myOffer.getIdUserShelterInterested1()==userId | myOffer.getIdUserShelterInterested2()==userId |
@@ -113,7 +120,7 @@ public class ShowOfferActivity extends AppCompatActivity {
                     acceptOffer.setTextColor(Color.RED);
                     break;
                 case -2: //person has applied already
-                    acceptOffer.setText("Ya no quiero que acompañe");
+                    acceptOffer.setText("Ya lo has solicitado");
                     acceptOffer.setEnabled(true);
                     acceptOffer.setTextColor(Color.RED);
                     break;
@@ -161,32 +168,20 @@ public class ShowOfferActivity extends AppCompatActivity {
                 } else {
                     switch (situationFlag) {
                         case 0: //normal case: shelter apply to the offer
-                            Boolean control= shelterApplyForOffer();
-                            if (control){
-                                //if can apply suscessfully
-                                situationFlag=-2;
-                            } else {
-                                //if not
-                                situationFlag=-4;
-                            }
-                            //set text to accept offer button
-                            setButtonAcceptOffer();
+                        case -2: //shelter has applied already: shelter un-apply the offer
+                            //Open applicationActivity
+                            Intent intent1  = new Intent(ShowOfferActivity.this, ApplyForOffer.class);
+                            //Create a bundle object
+                            Bundle bundle = new Bundle();
+                            //set interesting data
+                            bundle.putInt("idOffer", idOffer);
+                            intent1.putExtras(bundle);
+                            startActivity(intent1);
+
                             break;
                         case -1: // missing phone: open activity to go to change account details
                             Intent intent  = new Intent(ShowOfferActivity.this, ViewAccountActivity.class);
                             startActivity(intent);
-                            break;
-                        case -2: //shelter has applied already: shelter un-apply the offer
-                            Boolean control2= unApplyShelterToOffer();
-                            if (control2){
-                                //if unapply suscesfully
-                                situationFlag=0;
-                            } else {
-                                //if not
-                                situationFlag=-4;
-                            }
-                            //set text to accept offer button
-                            setButtonAcceptOffer();
                             break;
                     }
                 }
@@ -201,24 +196,6 @@ public class ShowOfferActivity extends AppCompatActivity {
         acceptOffer.setOnClickListener (listener);
     }
 
-    /**
-     * Method for apply for an offer
-     * @return true if applied is done, false otherwise
-     */
-    private Boolean shelterApplyForOffer() {
-        Boolean result= false;
-        result= myModel.addShelterToOffer(userId, nameUser, myOffer.getId());
-        return result;
-
-    }
-
-    /**
-     * Method for un-apply for a offer
-     * @return true if un-applied is done, false otherwise
-     */
-    private Boolean unApplyShelterToOffer() {
-        return false;
-    }
 
     /**
      * Method for loading offer data in the view
@@ -282,11 +259,11 @@ public class ShowOfferActivity extends AppCompatActivity {
             case 2:
                 //If is Shelter, go to show my demands activity
                 if(isShelter) {
-                    Intent intent2 = new Intent(ShowOfferActivity.this, ShowMyDemandsActivity.class);
+                    Intent intent2 = new Intent(ShowOfferActivity.this, SearchDemandsActivity.class);
                     startActivity(intent2);
                 //if is person, go to show my offers activity
                 } else {
-                    Intent intent2 = new Intent(ShowOfferActivity.this, ShowMyOffersActivity.class);
+                    Intent intent2 = new Intent(ShowOfferActivity.this, SearchOffersActivity.class);
                     startActivity(intent2);
                 }
                 break;

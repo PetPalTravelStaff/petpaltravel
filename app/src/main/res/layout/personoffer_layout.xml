@@ -54,7 +54,7 @@
             android:textColor="@android:color/background_dark"
             android:textSize="18sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/etMiNombreEs"
             android:layout_width="168dp"
             android:layout_height="wrap_content"
@@ -240,7 +240,7 @@
     <Button
         android:id="@+id/btPublicar"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="80dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="80dp"

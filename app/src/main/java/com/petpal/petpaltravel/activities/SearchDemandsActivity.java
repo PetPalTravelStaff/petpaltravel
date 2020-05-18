@@ -9,21 +9,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.petpal.petpaltravel.R;
 import com.petpal.petpaltravel.helpers.DemandAdapter;
-import com.petpal.petpaltravel.helpers.OfferAdapter;
 import com.petpal.petpaltravel.model.CompanionForPet;
 import com.petpal.petpaltravel.model.PPTModel;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
 
 public class SearchDemandsActivity extends AppCompatActivity {
     //Attributes
@@ -156,7 +150,7 @@ public class SearchDemandsActivity extends AppCompatActivity {
                 break;
             case 2:
                 //Go to show my offers  activity
-                Intent intent2 = new Intent(SearchDemandsActivity.this, ShowMyOffersActivity.class);
+                Intent intent2 = new Intent(SearchDemandsActivity.this, SearchOffersActivity.class);
                 startActivity(intent2);
                 break;
             case 3:

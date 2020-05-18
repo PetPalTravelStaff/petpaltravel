@@ -136,19 +136,26 @@ public class ApplyForOffer extends AppCompatActivity {
             case 0: //normal can update data
                 modify.setText("Actualizar solicitud");
                 modify.setEnabled(true);
+                modify.setTextColor(Color.WHITE);
+                modify.setVisibility(View.VISIBLE);
                 break;
             case 1: //shelter has updated data
                 modify.setText("Solicitud actualizada");
                 modify.setEnabled(false);
+                modify.setTextColor(Color.WHITE);
+                modify.setVisibility(View.VISIBLE);
                 break;
             case -1: //shelter can not update data
-                modify.setText("-");
+                modify.setText("");
                 modify.setEnabled(false);
+                modify.setTextColor(Color.WHITE);
+                modify.setVisibility(View.GONE);
                 break;
             case -2: //there is some trouble
                 modify.setText("Prueba más tarde");
                 modify.setTextColor(Color.RED);
                 modify.setEnabled(false);
+                modify.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -292,11 +299,11 @@ public class ApplyForOffer extends AppCompatActivity {
             case 3:
                 //If is Shelter, go to add a demands activity
                 if (isShelter) {
-                    Intent intent3 = new Intent(ApplyForOffer.this, ManageDemandActivity.class);
+                    Intent intent3 = new Intent(ApplyForOffer.this, AddDemandActivity.class);
                     startActivity(intent3);
                     //if is person, go to add an offer activity
                 } else {
-                    Intent intent3 = new Intent(ApplyForOffer.this, ManageOfferActivity.class);
+                    Intent intent3 = new Intent(ApplyForOffer.this, AddOfferActivity.class);
                     startActivity(intent3);
                 }
                 break;

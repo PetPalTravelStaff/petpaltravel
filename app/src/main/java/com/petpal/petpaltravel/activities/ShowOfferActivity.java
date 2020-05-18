@@ -35,7 +35,13 @@ public class ShowOfferActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.viewofferasshelter_layout);
+        //recover urgent data
+        recoverShared();
+        if (isShelter){
+            setContentView(R.layout.viewofferasshelter_layout);
+        } else {
+            setContentView(R.layout.viewofferasperson_layout);
+        }
         //instantiate model
         myModel = new PPTModel();
         //recover needed data
@@ -66,7 +72,7 @@ public class ShowOfferActivity extends AppCompatActivity {
      * Method for create elements of activity
      */
     private void initElements() {
-        //namePerson= (TextView) findViewById(R.id.);
+        namePerson= (TextView) findViewById(R.id.etNombrePersona);
         OriginCity= (TextView) findViewById(R.id.etCiudadOrigenpersona);
         Destination= (TextView) findViewById(R.id.etCiudadDestinoPersona);
         typePet= (TextView) findViewById(R.id.etTipoMascota);
@@ -264,11 +270,11 @@ public class ShowOfferActivity extends AppCompatActivity {
             case 3:
                 //If is Shelter, go to add a demands activity
                 if (isShelter) {
-                    Intent intent3 = new Intent(ShowOfferActivity.this, ManageDemandActivity.class);
+                    Intent intent3 = new Intent(ShowOfferActivity.this, AddDemandActivity.class);
                     startActivity(intent3);
                     //if is person, go to add an offer activity
                 } else {
-                    Intent intent3 = new Intent(ShowOfferActivity.this, ManageOfferActivity.class);
+                    Intent intent3 = new Intent(ShowOfferActivity.this, AddOfferActivity.class);
                     startActivity(intent3);
                 }
                 break;

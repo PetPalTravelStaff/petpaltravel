@@ -47,6 +47,8 @@ public class CompanionOfPet {
         this.nameSInterested3 = nameSInterested3;
     }
 
+    public CompanionOfPet() {
+    }
 
     public int getId() {
         return id;

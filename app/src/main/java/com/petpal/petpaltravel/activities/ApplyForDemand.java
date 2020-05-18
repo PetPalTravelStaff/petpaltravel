@@ -84,7 +84,7 @@ public class ApplyForDemand extends AppCompatActivity {
     }
 
     private void initElements() {
-        mySpinner = (Spinner)findViewById(R.id.etCiudadOrigenMascota);
+        mySpinner = (Spinner)findViewById(R.id.spinner);
         ArrayAdapter<String> questionsAdapter = new ArrayAdapter<String>(ApplyForDemand.this,android.R.layout.simple_spinner_item, transport);
         questionsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(questionsAdapter);
@@ -116,13 +116,12 @@ public class ApplyForDemand extends AppCompatActivity {
     private void setButtonsValues() {
         switch (situationFlag) {
             case 0: //normal case
-                apply.setText("Me ofrezco");
+                apply.setText("Ofrécete");
                 apply.setEnabled(true);
                 apply.setTextColor(Color.WHITE);
-                modify.setText("Actualizar");
                 break;
             case 1: //person has applied already
-                apply.setText("No quiero");
+                apply.setText("Ya no quiero");
                 apply.setEnabled(true);
                 apply.setTextColor(Color.RED);
                 break;
@@ -134,21 +133,28 @@ public class ApplyForDemand extends AppCompatActivity {
         }
         switch (situationUpdateFlag){
             case 0: //normal can update data
-                modify.setText("Actualizar propuesta");
+                modify.setText("Guarda cambios");
                 modify.setEnabled(true);
+                modify.setTextColor(Color.WHITE);
+                modify.setVisibility(View.VISIBLE);
                 break;
             case 1: //person has updated data
                 modify.setText("Propuesta actualizada");
                 modify.setEnabled(false);
+                modify.setTextColor(Color.WHITE);
+                modify.setVisibility(View.VISIBLE);
                 break;
             case -1: //person can not update data
-                modify.setText("-");
+                modify.setText("");
                 modify.setEnabled(false);
+                modify.setTextColor(Color.WHITE);
+                modify.setVisibility(View.GONE);
                 break;
             case -2: //there is some trouble
                 modify.setText("Prueba más tarde");
                 modify.setTextColor(Color.RED);
                 modify.setEnabled(false);
+                modify.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -289,11 +295,11 @@ public class ApplyForDemand extends AppCompatActivity {
             case 3:
                 //If is Shelter, go to add a demands activity
                 if (isShelter) {
-                    Intent intent3 = new Intent(ApplyForDemand.this, ManageDemandActivity.class);
+                    Intent intent3 = new Intent(ApplyForDemand.this, AddDemandActivity.class);
                     startActivity(intent3);
                     //if is person, go to add an offer activity
                 } else {
-                    Intent intent3 = new Intent(ApplyForDemand.this, ManageOfferActivity.class);
+                    Intent intent3 = new Intent(ApplyForDemand.this, AddOfferActivity.class);
                     startActivity(intent3);
                 }
                 break;

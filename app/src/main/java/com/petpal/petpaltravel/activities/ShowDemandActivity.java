@@ -35,13 +35,18 @@ public class ShowDemandActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.viewdemandasshelter_layout);
+        //recover urgent data
+        recoverShared();
+        if (isShelter){
+            setContentView(R.layout.viewdemandasshelter_layout);
+        } else {
+            setContentView(R.layout.viewdemandasperson_layout);
+        }
         //instantiate model
         myModel = new PPTModel();
         //recover needed data
         recoverDemandId();
         myDemand= myModel.recoverDemandById(idDemand);
-        recoverShared();
         //Create view elements in activity
         initElements();
         //create a listener
@@ -264,11 +269,11 @@ public class ShowDemandActivity extends AppCompatActivity {
                 case 3:
                     //If is Shelter, go to add a demands activity
                     if (isShelter) {
-                        Intent intent3 = new Intent(ShowDemandActivity.this, ManageDemandActivity.class);
+                        Intent intent3 = new Intent(ShowDemandActivity.this, AddDemandActivity.class);
                         startActivity(intent3);
                     //if is person, go to add an offer activity
                     } else {
-                        Intent intent3 = new Intent(ShowDemandActivity.this, ManageOfferActivity.class);
+                        Intent intent3 = new Intent(ShowDemandActivity.this, AddOfferActivity.class);
                         startActivity(intent3);
                     }
                     break;

@@ -12,7 +12,7 @@ import java.util.List;
 public class DataTestDAO {
     List<CompanionForPet> demandsFOR= new ArrayList<CompanionForPet>();
     List<CompanionOfPet> offeringsOF = new ArrayList<CompanionOfPet>();
-    List<Location> mylocations = new ArrayList<Location>();;
+    List<Location> myLocations = new ArrayList<Location>();;
     List<User> myUsers=  new ArrayList<User>();
     User myUser;
     static DataTestDAO instanceDAO= null;
@@ -56,10 +56,10 @@ public class DataTestDAO {
     }
 
     private void addLocationTest() {
-        mylocations.add(new Location(1, "08907", "Hospitalet de Llobregat", "Barcelona"));
-        mylocations.add(new Location(2, "28001", "Madrid", "Madrid"));
-        mylocations.add(new Location(3, "07800", "Ibiza", "Illes Balears"));
-        mylocations.add(new Location(4, "38001", "Sta. Cruz de Tenerife", "Sta. Cruz de Tenerife"));
+        myLocations.add(new Location(1, "08907", "Hospitalet de Llobregat", "Barcelona"));
+        myLocations.add(new Location(2, "28001", "Madrid", "Madrid"));
+        myLocations.add(new Location(3, "07800", "Ibiza", "Illes Balears"));
+        myLocations.add(new Location(4, "38001", "Sta. Cruz de Tenerife", "Sta. Cruz de Tenerife"));
     }
 
     private void addUsersTest() {
@@ -265,5 +265,24 @@ public class DataTestDAO {
         }
 
         return result;
+    }
+
+    public String[] recoverCities() {
+        String[] result=new String[myLocations.size()];
+        for (int i=0; i<myLocations.size();i++) {
+            result[i]= myLocations.get(i).getCity();
+            }
+        return result;
+    }
+
+    //return 0 if not added
+    //return 1 if added
+    public int addOffer(CompanionOfPet myOffer) {
+        int result= 0;
+        myOffer.setId(0);
+        int lastID= offeringsOF.get(offeringsOF.size()-1).getId();
+        myOffer.setId(lastID+1);
+        offeringsOF.add(myOffer);
+        return offeringsOF.get(offeringsOF.size()-1).getId();
     }
 }

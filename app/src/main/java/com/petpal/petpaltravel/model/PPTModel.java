@@ -90,5 +90,19 @@ public class PPTModel {
         result= myDAO.updateUser(newDataUser);
         return result;
     }
+
+    public String[] getCities() {
+        String[] result= null;
+        result= myDAO.recoverCities();
+        return result;
+    }
+
+    //return 0 if not added
+    //return 1 if added
+    public int addOfferToBD(CompanionOfPet myOffer) {
+        int result= 0;
+        result= myDAO.addOffer(myOffer);
+        return result;
+    }
 }
 

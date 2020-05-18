@@ -156,7 +156,7 @@ public class SearchOffersActivity extends AppCompatActivity {
                 break;
             case 3:
                 //Go to add a demand activity
-                Intent intent3 = new Intent(SearchOffersActivity.this, ManageDemandActivity.class);
+                Intent intent3 = new Intent(SearchOffersActivity.this, AddDemandActivity.class);
                 startActivity(intent3);
                 break;
             case 4://Exit

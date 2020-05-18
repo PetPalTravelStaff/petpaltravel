@@ -13,8 +13,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activities.ApplyForDemand"></activity>
         <activity android:name=".activities.ApplyForOffer" />
-        <activity android:name=".activities.ManageOfferActivity" />
-        <activity android:name=".activities.ManageDemandActivity" />
+        <activity android:name=".activities.AddOfferActivity" />
+        <activity android:name=".activities.AddDemandActivity" />
         <activity android:name=".activities.ViewAccountActivity" />
         <activity android:name=".activities.ShowOfferActivity" />
         <activity android:name=".activities.ShowDemandActivity" />

@@ -49,7 +49,7 @@
         android:text="Acompaño a:"
         android:textColor="@android:color/background_dark" />
 
-    <TextView
+    <EditText
         android:id="@+id/etTipoMascota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
         android:text="El día:"
         android:textColor="@android:color/background_dark" />
 
-    <TextView
+    <EditText
         android:id="@+id/etDiaViaje"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
         android:text="Desde:"
         android:textColor="@android:color/background_dark" />
 
-    <TextView
+    <EditText
         android:id="@+id/etCiudadOrigenpersona"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
         android:text="Con destino a:"
         android:textColor="@android:color/background_dark" />
 
-    <TextView
+    <EditText
         android:id="@+id/etCiudadDestinoPersona"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
         android:text="Me traslado en:"
         android:textColor="@android:color/background_dark" />
 
-    <TextView
+    <EditText
         android:id="@+id/etTransporte"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
         android:textColor="@android:color/background_dark"
         android:textSize="14sp" />
 
-    <TextView
+    <EditText
         android:id="@+id/etComentarios"
         android:layout_width="match_parent"
         android:layout_height="65dp"
@@ -163,9 +163,17 @@
         android:textSize="18sp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btCancelarOferta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cancelar oferta" />
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="30dp"
+        android:background="@android:drawable/toast_frame"
+        android:backgroundTint="@color/holoGreenDark"
+        android:text="Cancelar oferta"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
 
 </LinearLayout>

@@ -55,7 +55,7 @@
         android:text="Nombre de la mascota:"
         android:textColor="@android:color/background_dark" />
 
-    <TextView
+    <EditText
         android:id="@+id/etNombreMascota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
         android:text="Tipo de mascota:"
         android:textColor="@android:color/background_dark" />
 
-    <TextView
+    <EditText
         android:id="@+id/etTipoMascota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
         android:text="Disponible desde:"
         android:textColor="@android:color/background_dark" />
 
-    <TextView
+    <EditText
         android:id="@+id/etDisponibleDesde"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
         android:text="Disponible hasta:"
         android:textColor="@android:color/background_dark" />
 
-    <TextView
+    <EditText
         android:id="@+id/etDisponibleHasta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -123,7 +123,7 @@
         android:text="Viaja desde:"
         android:textColor="@android:color/background_dark" />
 
-    <TextView
+    <EditText
         android:id="@+id/etCiudadOrigenMascota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
         android:text="Con destino a:"
         android:textColor="@android:color/background_dark" />
 
-    <TextView
+    <EditText
         android:id="@+id/etCiudadDestinoMascota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -165,7 +165,7 @@
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:background="@android:drawable/editbox_background"
-        android:ems="200"
+        android:ems="10"
         android:gravity="start|top"
         android:textSize="14sp" />
 
@@ -184,9 +184,17 @@
         android:textSize="18sp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btCancelarPeticion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cancelar petición" />
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="30dp"
+        android:background="@android:drawable/toast_frame"
+        android:backgroundTint="@color/holoGreenDark"
+        android:text="Cancelar petición"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
 
 </LinearLayout>

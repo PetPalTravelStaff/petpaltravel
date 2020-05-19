@@ -16,12 +16,8 @@ public class CompanionOfPet {
     private String comments;
     private int idUserShelterSeleted;
     private String nameSSelected;
-    private int idUserShelterInterested1;
-    private String nameSInterested1;
-    private int idUserShelterInterested2;
-    private String nameSInterested2;
-    private int idUserShelterInterested3;
-    private String nameSInterested3;
+    private int[] idShelterInterested={0,0,0};
+    private String[] namesShelterInterested={null,null,null};
 
     public CompanionOfPet(int id, int ideUserPersonOffering, String namePerson, Calendar dateTravel,
                           String originCity, String destinyCity, String transport, String petType,
@@ -39,12 +35,7 @@ public class CompanionOfPet {
         this.comments = comments;
         this.idUserShelterSeleted = idUserShelterSeleted;
         this.nameSSelected = nameSSelected;
-        this.idUserShelterInterested1 = idUserShelterInterested1;
-        this.nameSInterested1 = nameSInterested1;
-        this.idUserShelterInterested2 = idUserShelterInterested2;
-        this.nameSInterested2 = nameSInterested2;
-        this.idUserShelterInterested3 = idUserShelterInterested3;
-        this.nameSInterested3 = nameSInterested3;
+
     }
 
     public CompanionOfPet() {
@@ -78,7 +69,7 @@ public class CompanionOfPet {
         return dateTravel;
     }
 
-    public void setDateTravel(GregorianCalendar dateTravel) {
+    public void setDateTravel(Calendar dateTravel) {
         this.dateTravel = dateTravel;
     }
 
@@ -138,51 +129,34 @@ public class CompanionOfPet {
         this.nameSSelected = nameSSelected;
     }
 
-    public int getIdUserShelterInterested1() {
-        return idUserShelterInterested1;
+    public int[] getIdShelterInterested() {
+        return idShelterInterested;
     }
 
-    public void setIdUserShelterInterested1(int idUserShelterInterested1) {
-        this.idUserShelterInterested1 = idUserShelterInterested1;
+    public void setIdShelterInterested(int[] idShelterInterested) {
+        this.idShelterInterested = idShelterInterested;
     }
 
-    public String getNameSInterested1() {
-        return nameSInterested1;
+    public String[] getNamesShelterInterested() {
+        return namesShelterInterested;
     }
 
-    public void setNameSInterested1(String nameSInterested1) {
-        this.nameSInterested1 = nameSInterested1;
+    public void setNamesShelterInterested(String[] namesShelterInterested) {
+        this.namesShelterInterested = namesShelterInterested;
     }
 
-    public int getIdUserShelterInterested2() {
-        return idUserShelterInterested2;
+    public void setIdShelterIntPosition(int idShelterInterested, int position) {
+        this.idShelterInterested[position] = idShelterInterested;
     }
 
-    public void setIdUserShelterInterested2(int idUserShelterInterested2) {
-        this.idUserShelterInterested2 = idUserShelterInterested2;
+    public void setNamesShelterIntPosition(String nameShelterInterested, int position) {
+        this.namesShelterInterested[position] = nameShelterInterested;
     }
 
-    public String getNameSInterested2() {
-        return nameSInterested2;
+    public int getIdShelterIntPosition(int position) {
+        return idShelterInterested[position];
     }
-
-    public void setNameSInterested2(String nameSInterested2) {
-        this.nameSInterested2 = nameSInterested2;
-    }
-
-    public int getIdUserShelterInterested3() {
-        return idUserShelterInterested3;
-    }
-
-    public void setIdUserShelterInterested3(int idUserShelterInterested3) {
-        this.idUserShelterInterested3 = idUserShelterInterested3;
-    }
-
-    public String getNameSInterested3() {
-        return nameSInterested3;
-    }
-
-    public void setNameSInterested3(String nameSInterested3) {
-        this.nameSInterested3 = nameSInterested3;
+    public String getNamesShelterIntPosition(int position) {
+        return namesShelterInterested[position];
     }
 }

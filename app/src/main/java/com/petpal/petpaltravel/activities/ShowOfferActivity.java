@@ -84,11 +84,11 @@ public class ShowOfferActivity extends AppCompatActivity {
         userLabel.setText(nameUser);
         acceptOffer= (Button) findViewById(R.id.btApadrinarMascota);
         //set situation flag depending on the case
-        if (myOffer.getIdUserShelterInterested1()==userId | myOffer.getIdUserShelterInterested2()==userId |
-                myOffer.getIdUserShelterInterested3()==userId){
+        if (myOffer.getIdShelterIntPosition(0)==userId | myOffer.getIdShelterIntPosition(1)==userId |
+                myOffer.getIdShelterIntPosition(2)==userId){
             situationFlag=-2;
-        } else if (myOffer.getIdUserShelterInterested1()!=0 & myOffer.getIdUserShelterInterested2()!=0 &
-                myOffer.getIdUserShelterInterested3()!=0){
+        } else if (myOffer.getIdShelterIntPosition(0)!=0 & myOffer.getIdShelterIntPosition(1)!=0 &
+                myOffer.getIdShelterIntPosition(2)!=0){
             situationFlag=-3;
         } else if (phoneUser==null) {
             situationFlag=-1;

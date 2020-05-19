@@ -81,11 +81,11 @@ public class ShowDemandActivity extends AppCompatActivity {
         nameLabel.setText(nameUser);
         offerMe= (Button) findViewById(R.id.btApadrinarMascota);
         //set situation flag depending on the case
-        if (myDemand.getIdUserPersonInterested1()==userId | myDemand.getIdUserPersonInterested2()==userId |
-                myDemand.getIdUserPersonInterested3()==userId){
+        if (myDemand.getIdPersonInterestePosition(0)==userId | myDemand.getIdPersonInterestePosition(1)==userId |
+                myDemand.getIdPersonInterestePosition(2)==userId){
             situationFlag=-2;
-        } else if (myDemand.getIdUserPersonInterested1()!=0 & myDemand.getIdUserPersonInterested2()!=0 &
-                myDemand.getIdUserPersonInterested3()!=0){
+        } else if (myDemand.getIdPersonInterestePosition(0)!=0 & myDemand.getIdPersonInterestePosition(1)!=0 &
+                myDemand.getIdPersonInterestePosition(2)!=0){
             situationFlag=-3;
         } else if (phoneUser==null) {
             situationFlag=-1;

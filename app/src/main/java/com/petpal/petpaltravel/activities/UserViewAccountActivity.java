@@ -313,11 +313,11 @@ public class UserViewAccountActivity extends AppCompatActivity {
             case 3:
                 //If is Shelter, go to add a demands activity
                 if (myUser.isShelter()) {
-                    Intent intent3 = new Intent(UserViewAccountActivity.this, ShelterAddDemandActivity.class);
+                    Intent intent3 = new Intent(UserViewAccountActivity.this, ShelterPostDemandActivity.class);
                     startActivity(intent3);
                     //if is person, go to add an offer activity
                 } else {
-                    Intent intent3 = new Intent(UserViewAccountActivity.this, PersonAddOfferActivity.class);
+                    Intent intent3 = new Intent(UserViewAccountActivity.this, PersonPostOfferActivity.class);
                     startActivity(intent3);
                 }
                 break;

@@ -23,11 +23,12 @@ public class UserSearchDemandsActivity extends AppCompatActivity {
     //Attributes
     PPTModel myModel;
     ListView myListView;
-    TextView nameLabel, notification;
+    TextView nameLabel, notification, titulo;
     ArrayList<CompanionForPet> listOfDemands;
     AdapterView.OnItemClickListener listener;
     String nameUser;
     Boolean isShelter;
+    int idUser;
     DemandAdapter myadapter;
 
     @Override
@@ -36,12 +37,17 @@ public class UserSearchDemandsActivity extends AppCompatActivity {
         setContentView(R.layout.usersearchdemands_layout);
         //instantiate model
         myModel = new PPTModel();
-        //recover list of all demands from model
-        listOfDemands= (ArrayList<CompanionForPet>) myModel.getAllDemands();
-        //Create view elements in activity
-        initElements();
         //recover interesting data by Shared Preferences
         recoverShared();
+        //recover list of all demands from model
+        if (!isShelter) {
+            listOfDemands= (ArrayList<CompanionForPet>) myModel.getAllDemands();
+        } else {
+            listOfDemands= (ArrayList<CompanionForPet>) myModel.getDemandsPostedByShelter(idUser);
+        }
+        //Create view elements in activity
+        initElements();
+
         //Set the name of the user in the view
         nameLabel.setText(nameUser);
         //create a listener
@@ -60,6 +66,7 @@ public class UserSearchDemandsActivity extends AppCompatActivity {
         if (shared!=null) {
             //Use the editor to catch the couples of dates
             nameUser = shared.getString("userName", "");
+            idUser= shared.getInt("id", 0);
             isShelter = shared.getBoolean("isShelter", false);
         }
     }
@@ -71,6 +78,10 @@ public class UserSearchDemandsActivity extends AppCompatActivity {
         myListView = (ListView) findViewById(R.id.lvLista);
         nameLabel= (TextView) findViewById(R.id.etNombrePersona);
         notification= (TextView) findViewById(R.id.tverrordem);
+        titulo= (TextView) findViewById(R.id.tvVerDemandas);
+        if (isShelter) {
+            titulo.setText("Estas son tus peticiones publicadas");
+        }
     }
 
     /**
@@ -93,7 +104,7 @@ public class UserSearchDemandsActivity extends AppCompatActivity {
      */
     public void showDemandsDetails(CompanionForPet demand) {
         //set with new activity will be opened
-        Intent intent = new Intent(this, UserManageDemandActivity.class);
+        Intent intent = new Intent(this, PersonManageDemandActivity.class);
         //Create a bundle object
         Bundle bundle = new Bundle();
         //set interesting data
@@ -131,11 +142,21 @@ public class UserSearchDemandsActivity extends AppCompatActivity {
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        menu.add(0, 1, 0, "Mi perfil");
-        menu.add(0, 2, 1, "Ver mis ofertas");
-        menu.add(0, 3, 2, "Publicar oferta");
-        menu.add(0, 4, 3, "Salir");
+        if (isShelter) {
+            super.onCreateOptionsMenu(menu);
+            menu.add(0, 1, 0, "Mi perfil");
+            //menu.add(0, 2, 1, "Ver mis peticiones");
+            menu.add(0, 3, 2, "Publicar petición");
+            menu.add(0, 4, 3, "Buscar ofertas");
+            menu.add(0, 5, 4, "Salir");
+        } else {
+            menu.add(0, 1, 0, "Mi perfil");
+            menu.add(0, 2, 1, "Ver mis ofertas");
+            menu.add(0, 3, 2, "Publicar oferta");
+            //menu.add(0, 4, 3, "Buscar peticiones");
+            menu.add(0, 5, 4, "Salir");
+        }
+
         return true;
     }
 
@@ -149,16 +170,23 @@ public class UserSearchDemandsActivity extends AppCompatActivity {
                 startActivity(intent1);
                 break;
             case 2:
-                //Go to show my offers  activity
-                Intent intent2 = new Intent(UserSearchDemandsActivity.this, UserSearchOffersActivity.class);
-                startActivity(intent2);
+                    Intent intent2 = new Intent(UserSearchDemandsActivity.this, UserSearchOffersActivity.class);
+                    startActivity(intent2);
                 break;
             case 3:
-                //Go to add an offer activity
-                Intent intent3 = new Intent(UserSearchDemandsActivity.this, PersonAddOfferActivity.class);
-                startActivity(intent3);
+               if (isShelter) {//Go to add an offer activity
+                   Intent intent3 = new Intent(UserSearchDemandsActivity.this, ShelterPostDemandActivity.class);
+                   startActivity(intent3);
+               } else {//Go to add an offer activity
+                   Intent intent3 = new Intent(UserSearchDemandsActivity.this, PersonPostOfferActivity.class);
+                   startActivity(intent3);
+               }
                 break;
-            case 4://Exit
+            case 4:
+                    Intent intent4 = new Intent(UserSearchDemandsActivity.this, UserSearchOffersActivity.class);
+                    startActivity(intent4);
+                break;
+            case 5://Exit
                 finish();
                 break;
         }

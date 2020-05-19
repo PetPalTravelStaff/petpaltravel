@@ -270,11 +270,11 @@ public class UserManageOfferActivity extends AppCompatActivity {
             case 3:
                 //If is Shelter, go to add a demands activity
                 if (isShelter) {
-                    Intent intent3 = new Intent(UserManageOfferActivity.this, ShelterAddDemandActivity.class);
+                    Intent intent3 = new Intent(UserManageOfferActivity.this, ShelterPostDemandActivity.class);
                     startActivity(intent3);
                     //if is person, go to add an offer activity
                 } else {
-                    Intent intent3 = new Intent(UserManageOfferActivity.this, PersonAddOfferActivity.class);
+                    Intent intent3 = new Intent(UserManageOfferActivity.this, PersonPostOfferActivity.class);
                     startActivity(intent3);
                 }
                 break;

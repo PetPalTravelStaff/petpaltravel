@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Tengo una mascota interesada"
+        android:text="Hay una mascota interesada"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="24sp" />
@@ -25,24 +25,7 @@
         android:layout_marginEnd="150dp"
         app:srcCompat="@drawable/logo" />
 
-    <TextView
-        android:id="@+id/tvNombre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="24dp"
-        android:text="Nombre de la protectora:"
-        android:textColor="@android:color/background_dark" />
 
-    <TextView
-        android:id="@+id/etNombre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="24dp"
-        android:background="@android:drawable/editbox_background"
-        android:ems="10" />
 
     <TextView
         android:id="@+id/tvNombreMascota"
@@ -60,72 +43,73 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="24dp"
+        android:hint="Nombre mascota"
         android:background="@android:drawable/editbox_background"
         android:ems="10" />
 
-    <RadioGroup
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tvTipoMascota"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tvTipoMascota"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="100dp"
-                android:text="Tipo:"
-                android:textColor="@android:color/background_dark" />
-
-            <RadioButton
-                android:id="@+id/rdGato"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Gato" />
-
-            <RadioButton
-                android:id="@+id/rdPerro"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Perro" />
-
-
-        </LinearLayout>
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="Tipo:"
+            android:textColor="@android:color/background_dark" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/radioButton5"
-                android:layout_width="74dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="163dp"
-                android:text="Otro:" />
+            <RadioGroup
+                android:id="@+id/radioTipo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/etOtro"
-                android:layout_width="95dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:background="@android:drawable/editbox_background"
-                android:ems="10" />
+                <RadioButton
+                    android:id="@+id/rdGato"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gato" />
+
+                <RadioButton
+                    android:id="@+id/rdPerro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Perro" />
+
+                <RadioButton
+                    android:id="@+id/radioOtro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Otro:" />
+
+            </RadioGroup>
         </LinearLayout>
-    </RadioGroup>
+
+        <EditText
+            android:id="@+id/etOtro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="5dp"
+            android:hint="¿Cuál?"
+            android:layout_marginEnd="24dp"
+            android:background="@android:drawable/editbox_background"
+            android:ems="10" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvMiEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="24dp"
         android:text="E-mail:"
         android:textColor="@android:color/background_dark" />
@@ -196,7 +180,7 @@
             android:layout_marginRight="30dp"
             android:background="@android:drawable/toast_frame"
             android:backgroundTint="@color/holoGreenDark"
-            android:text="¡Solicítalo!"
+            android:text="¡Nos interesa!"
             android:textAllCaps="false"
             android:textColor="@android:color/background_light"
             android:textSize="18sp" />

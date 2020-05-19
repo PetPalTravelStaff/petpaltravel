@@ -13,11 +13,11 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activities.PersonApplyForDemand"></activity>
         <activity android:name=".activities.ShelterApplyForOffer" />
-        <activity android:name=".activities.PersonAddOfferActivity" />
-        <activity android:name=".activities.ShelterAddDemandActivity" />
+        <activity android:name=".activities.PersonPostOfferActivity" />
+        <activity android:name=".activities.ShelterPostDemandActivity" />
         <activity android:name=".activities.UserViewAccountActivity" />
         <activity android:name=".activities.UserManageOfferActivity" />
-        <activity android:name=".activities.UserManageDemandActivity" />
+        <activity android:name=".activities.PersonManageDemandActivity" />
         <activity android:name=".activities.UserSearchOffersActivity" />
         <activity android:name=".activities.UserSearchDemandsActivity" />
         <activity android:name=".activities.UserRegisterActivity" />

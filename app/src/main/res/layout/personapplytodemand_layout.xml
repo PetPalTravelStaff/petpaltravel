@@ -138,7 +138,7 @@
             android:layout_marginRight="30dp"
             android:background="@android:drawable/toast_frame"
             android:backgroundTint="@color/holoGreenDark"
-            android:text="Ofrécete"
+            android:text="¡Me ofrezco!"
             android:textAllCaps="false"
             android:textColor="@android:color/background_light"
             android:textSize="18sp" />

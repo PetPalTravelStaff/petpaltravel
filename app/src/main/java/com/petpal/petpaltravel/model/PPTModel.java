@@ -1,17 +1,13 @@
 package com.petpal.petpaltravel.model;
 
-import android.widget.ArrayAdapter;
-
 import com.petpal.petpaltravel.model.Persistance.DataTestDAO;
 
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class PPTModel {
     DataTestDAO myDAO;
     final String[] transport= {"Avión", "Barco", "Coche", "Tren"};
-    final String[] typePets= {"Gato/a", "Perro/a", "Otros tipos"};
+    //final String[] typePets= {"Gato/a", "Perro/a", "Otros tipos"};
 
     public PPTModel() {
         myDAO= DataTestDAO.getInstance();
@@ -27,9 +23,9 @@ public class PPTModel {
         return transport;
     }
 
-    public String[] getTypePets() {
-        return typePets;
-    }
+//    public String[] getTypePets() {
+//        return typePets;
+//    }
 
     //return 0 if email already exist
     //return 1 if added
@@ -52,15 +48,27 @@ public class PPTModel {
         return result;
     }
 
+    public List<CompanionOfPet> getOffersPostedByPerson(int iduser){
+        List<CompanionOfPet> result= null;
+        result= myDAO.recoverOffersOfPerson(iduser);
+        return result;
+    }
+
+    public List<CompanionForPet> getDemandsPostedByShelter(int iduser) {
+        List<CompanionForPet> result= null;
+        result= myDAO.recoverOffersOfShelter(iduser);
+        return result;
+    }
+
     public CompanionForPet recoverDemandById(int idDemand) {
         CompanionForPet result= null;
         result= myDAO.searchDemandById(idDemand);
         return result;
     }
 
-    public Boolean addPersonToDemand(int userId, String nameUser, int demandId) {
+    public Boolean addPersonToDemand(ApplicationForDemand myApplication) {
         Boolean result= false;
-        result= myDAO.addPersonToDemand(userId, nameUser, demandId);
+        result= myDAO.addPersonToDemand(myApplication);
         return result;
     }
 
@@ -70,9 +78,9 @@ public class PPTModel {
         return result;
     }
 
-    public Boolean addShelterToOffer(int userId, String nameUser, int idOffer) {
+    public Boolean addShelterToOffer(ApplicationForOffer myApplication) {
         Boolean result= false;
-        result= myDAO.addShelterToOffer(userId, nameUser, idOffer);
+        result= myDAO.addShelterToOffer(myApplication);
         return result;
     }
 
@@ -110,6 +118,18 @@ public class PPTModel {
     public int addDemandToBD(CompanionForPet myDemand) {
         int result= 0;
         result= myDAO.addDemand(myDemand);
+        return result;
+    }
+
+    public ApplicationForOffer searchApplicationForOffer(int offerId, int idUser) {
+        ApplicationForOffer result= null;
+        result= myDAO.recoverApplicationForOffer(offerId, idUser);
+        return result;
+    }
+
+    public ApplicationForDemand searchApplicationForDemand(int demandId, int idUser) {
+        ApplicationForDemand result= null;
+        result= myDAO.recoverApplicationForDemand(demandId, idUser);
         return result;
     }
 }

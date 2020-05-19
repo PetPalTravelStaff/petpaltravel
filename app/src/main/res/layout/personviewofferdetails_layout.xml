@@ -159,7 +159,7 @@
         android:textSize="14sp" />
 
     <Button
-        android:id="@+id/btApadrinarMascota"
+        android:id="@+id/btModificar"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

@@ -20,7 +20,7 @@
             android:src="@drawable/logo" />
 
         <TextView
-            android:id="@+id/tvTitulo"
+            android:id="@+id/tvTituloPPT"
             android:layout_width="264dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

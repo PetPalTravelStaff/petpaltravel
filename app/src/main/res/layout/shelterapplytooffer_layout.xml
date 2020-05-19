@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tvTituloIntroduceDatos"
+        android:id="@+id/tvTituloTengoUnaMascota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -198,7 +198,7 @@
         android:layout_marginEnd="24dp" >
 
         <Button
-            android:id="@+id/btOfrecete"
+            android:id="@+id/btSolicitalo"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -211,7 +211,7 @@
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/btModificar"
+            android:id="@+id/btGuardaCambios"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

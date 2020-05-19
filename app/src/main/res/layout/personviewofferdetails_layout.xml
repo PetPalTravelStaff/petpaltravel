@@ -9,13 +9,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp" >
 
         <TextView
             android:id="@+id/tvHola"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="200dp"
+            android:layout_marginStart="24dp"
             android:text="Hola"
             android:textColor="@android:color/background_dark"
             android:textSize="14sp" />
@@ -34,6 +36,8 @@
         android:id="@+id/tvTituloDescripcionOferta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="10dp"
         android:text="Descripción"
         android:textAlignment="center"
@@ -44,8 +48,9 @@
         android:id="@+id/tvAcompanyoA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="5dp"
         android:text="Acompaño a:"
         android:textColor="@android:color/background_dark" />
 
@@ -63,6 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="El día:"
         android:textColor="@android:color/background_dark" />
 
@@ -81,6 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Desde:"
         android:textColor="@android:color/background_dark" />
 
@@ -98,6 +105,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Con destino a:"
         android:textColor="@android:color/background_dark" />
 
@@ -115,6 +123,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Me traslado en:"
         android:textColor="@android:color/background_dark" />
 
@@ -132,6 +141,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Comentarios"
         android:textColor="@android:color/background_dark"
         android:textSize="14sp" />
@@ -140,21 +150,20 @@
         android:id="@+id/etComentarios"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
-        android:ems="200"
+        android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:textSize="14sp" />
 
     <Button
         android:id="@+id/btApadrinarMascota"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
         android:background="@android:drawable/toast_frame"
         android:backgroundTint="@color/holoGreenDark"
         android:text="Modificar"
@@ -164,11 +173,10 @@
 
     <Button
         android:id="@+id/btCancelarOferta"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
-        android:layout_marginRight="30dp"
         android:background="@android:drawable/toast_frame"
         android:backgroundTint="@color/holoGreenDark"
         android:text="Cancelar oferta"

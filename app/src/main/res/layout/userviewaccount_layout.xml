@@ -9,6 +9,8 @@
         android:id="@+id/tvAlta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="10dp"
         android:text="Mis datos"
         android:textAlignment="center"
@@ -20,8 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginTop="5dp"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:text="Nombre:" />
@@ -78,9 +80,9 @@
         android:id="@+id/tvPassword1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginTop="10dp"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:text="Introducir nueva contraseña:" />
@@ -100,9 +102,9 @@
         android:id="@+id/tvPassword2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginTop="5dp"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:text="Repetir nueva contraseña:" />
@@ -128,11 +130,10 @@
 
     <Button
         android:id="@+id/btModificarDatos"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
         android:background="@android:drawable/toast_frame"
         android:backgroundTint="@color/holoGreenDark"
         android:text="Modificar datos"
@@ -142,11 +143,10 @@
 
     <Button
         android:id="@+id/btCancelarCuenta"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
-        android:layout_marginRight="30dp"
         android:background="@android:drawable/toast_frame"
         android:backgroundTint="@color/holoGreenDark"
         android:text="Cancelar cuenta"

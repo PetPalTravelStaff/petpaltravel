@@ -9,13 +9,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp" >
 
         <TextView
             android:id="@+id/tvHola"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="250dp"
+            android:layout_marginStart="24dp"
             android:text="Hola"
             android:textColor="@android:color/background_dark"
             android:textSize="14sp" />
@@ -34,6 +36,8 @@
         android:id="@+id/tvTituloDescripcionDemanda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Descripción"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
@@ -52,6 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Nombre de la mascota:"
         android:textColor="@android:color/background_dark" />
 
@@ -69,6 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Tipo de mascota:"
         android:textColor="@android:color/background_dark" />
 
@@ -86,6 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Disponible desde:"
         android:textColor="@android:color/background_dark" />
 
@@ -103,6 +110,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Disponible hasta:"
         android:textColor="@android:color/background_dark" />
 
@@ -120,6 +128,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Viaja desde:"
         android:textColor="@android:color/background_dark" />
 
@@ -137,6 +146,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Con destino a:"
         android:textColor="@android:color/background_dark" />
 
@@ -154,6 +164,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Comentarios"
         android:textColor="@android:color/background_dark"
         android:textSize="14sp" />
@@ -162,8 +173,8 @@
         android:id="@+id/etComentarios"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
         android:ems="10"
         android:gravity="start|top"
@@ -171,11 +182,10 @@
 
     <Button
         android:id="@+id/btApadrinarMascota"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
-        android:layout_marginRight="30dp"
         android:background="@android:drawable/toast_frame"
         android:backgroundTint="@color/holoGreenDark"
         android:text="¡Quiero acompañarle!"

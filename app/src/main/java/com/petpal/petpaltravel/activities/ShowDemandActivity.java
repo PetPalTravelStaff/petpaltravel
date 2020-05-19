@@ -38,9 +38,9 @@ public class ShowDemandActivity extends AppCompatActivity {
         //recover urgent data
         recoverShared();
         if (isShelter){
-            setContentView(R.layout.viewdemandasshelter_layout);
+            setContentView(R.layout.shelterviewdemanddetails_layout);
         } else {
-            setContentView(R.layout.viewdemandasperson_layout);
+            setContentView(R.layout.personviewdemanddetails_layout);
         }
         //instantiate model
         myModel = new PPTModel();

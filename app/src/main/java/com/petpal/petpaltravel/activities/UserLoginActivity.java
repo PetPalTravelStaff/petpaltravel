@@ -18,7 +18,7 @@ import com.petpal.petpaltravel.R;
 import com.petpal.petpaltravel.model.PPTModel;
 import com.petpal.petpaltravel.model.User;
 
-public class LoginActivity extends AppCompatActivity {
+public class UserLoginActivity extends AppCompatActivity {
     //Atributes
     EditText mailBox, passBox;
     String mailSaved;
@@ -117,11 +117,11 @@ public class LoginActivity extends AppCompatActivity {
                         saveSharedPref();
                         //if is shelter, show search offers
                         if (client.isShelter()){
-                            Intent intent  = new Intent(LoginActivity.this, SearchOffersActivity.class);
+                            Intent intent  = new Intent(UserLoginActivity.this, UserSearchOffersActivity.class);
                             startActivity(intent);
                         //if is person, show search demands
                         } else  {
-                            Intent intent  = new Intent(LoginActivity.this, SearchDemandsActivity.class);
+                            Intent intent  = new Intent(UserLoginActivity.this, UserSearchDemandsActivity.class);
                             startActivity(intent);
                         }
                         //if not recovered an user, notify
@@ -155,15 +155,13 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void openSendPassActivity() {
         sendPass.setText ("Temporalmente fuera de servicio");
-        //Intent intent  = new Intent(LoginActivity.this, ForgotPassActivity.class);
-        //startActivity(intent);
     }
 
     /**
      * Method for opening register activity
      */
     private void openRegisterActivity() {
-        Intent intent  = new Intent(LoginActivity.this, RegisterActivity.class);
+        Intent intent  = new Intent(UserLoginActivity.this, UserRegisterActivity.class);
         startActivity(intent);
     }
 

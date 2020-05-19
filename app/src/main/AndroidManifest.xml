@@ -11,18 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ApplyForDemand"></activity>
-        <activity android:name=".activities.ApplyForOffer" />
-        <activity android:name=".activities.AddOfferActivity" />
-        <activity android:name=".activities.AddDemandActivity" />
-        <activity android:name=".activities.ViewAccountActivity" />
-        <activity android:name=".activities.ShowOfferActivity" />
-        <activity android:name=".activities.ShowDemandActivity" />
-        <activity android:name=".activities.SearchOffersActivity" />
-        <activity android:name=".activities.SearchDemandsActivity" />
-        <activity android:name=".activities.RegisterActivity" />
-        <activity android:name=".activities.ForgotPassActivity" />
-        <activity android:name=".activities.LoginActivity">
+        <activity android:name=".activities.PersonApplyForDemand"></activity>
+        <activity android:name=".activities.ShelterApplyForOffer" />
+        <activity android:name=".activities.PersonAddOfferActivity" />
+        <activity android:name=".activities.ShelterAddDemandActivity" />
+        <activity android:name=".activities.UserViewAccountActivity" />
+        <activity android:name=".activities.UserManageOfferActivity" />
+        <activity android:name=".activities.UserManageDemandActivity" />
+        <activity android:name=".activities.UserSearchOffersActivity" />
+        <activity android:name=".activities.UserSearchDemandsActivity" />
+        <activity android:name=".activities.UserRegisterActivity" />
+        <activity android:name=".activities.UserLoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

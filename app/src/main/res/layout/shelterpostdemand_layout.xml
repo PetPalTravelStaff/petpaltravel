@@ -169,11 +169,6 @@
 
 </LinearLayout>
 
-    <RadioGroup
-        android:id="@+id/radioTipo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -190,44 +185,53 @@
                 android:textColor="@android:color/background_dark"
                 android:textSize="18sp" />
 
-            <RadioButton
-                android:id="@+id/rdGato"
-                android:layout_width="100dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Gato" />
+                android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/rdPerro"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Perro" />
+                <RadioGroup
+                    android:id="@+id/radioTipo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RadioButton
+                        android:id="@+id/rdGato"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Gato" />
+
+                    <RadioButton
+                        android:id="@+id/rdPerro"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Perro" />
+
+                    <RadioButton
+                        android:id="@+id/radioOtro"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Otro:" />
 
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radioOtro"
-                android:layout_width="74dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="163dp"
-                android:text="Otro:" />
+                </RadioGroup>
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/etOtro"
-                android:layout_width="95dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="5dp"
+
                 android:layout_marginEnd="24dp"
                 android:background="@android:drawable/editbox_background"
                 android:ems="10" />
         </LinearLayout>
-    </RadioGroup>
 
     <TextView
         android:id="@+id/tvComentarios"

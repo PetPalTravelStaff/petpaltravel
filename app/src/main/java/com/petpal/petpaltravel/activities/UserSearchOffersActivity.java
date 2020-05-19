@@ -13,31 +13,31 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.petpal.petpaltravel.R;
-import com.petpal.petpaltravel.helpers.DemandAdapter;
-import com.petpal.petpaltravel.model.CompanionForPet;
+import com.petpal.petpaltravel.helpers.OfferAdapter;
+import com.petpal.petpaltravel.model.CompanionOfPet;
 import com.petpal.petpaltravel.model.PPTModel;
 
 import java.util.ArrayList;
 
-public class SearchDemandsActivity extends AppCompatActivity {
+public class UserSearchOffersActivity extends AppCompatActivity {
     //Attributes
     PPTModel myModel;
     ListView myListView;
     TextView nameLabel, notification;
-    ArrayList<CompanionForPet> listOfDemands;
+    ArrayList<CompanionOfPet> listOfOffers;
     AdapterView.OnItemClickListener listener;
     String nameUser;
     Boolean isShelter;
-    DemandAdapter myadapter;
+    OfferAdapter myadapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.usersearchdemands_layout);
+        setContentView(R.layout.usersearchoffers_layout);
         //instantiate model
         myModel = new PPTModel();
-        //recover list of all demands from model
-        listOfDemands= (ArrayList<CompanionForPet>) myModel.getAllDemands();
+        //recover list of all offers from model
+        listOfOffers= (ArrayList<CompanionOfPet>) myModel.getAllOffers();
         //Create view elements in activity
         initElements();
         //recover interesting data by Shared Preferences
@@ -69,8 +69,8 @@ public class SearchDemandsActivity extends AppCompatActivity {
      */
     private void initElements () {
         myListView = (ListView) findViewById(R.id.lvLista);
-        nameLabel= (TextView) findViewById(R.id.etNombrePersona);
-        notification= (TextView) findViewById(R.id.tverrordem);
+        nameLabel= (TextView) findViewById(R.id.etNombreProtectora);
+        notification= (TextView) findViewById(R.id.tverroroff);
     }
 
     /**
@@ -78,45 +78,46 @@ public class SearchDemandsActivity extends AppCompatActivity {
      */
     private void createListener() {
         listener = new AdapterView.OnItemClickListener() {
+            //se sobreescribe este método
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                //save details of the demand touched of the list and open new activity
-                showDemandsDetails(listOfDemands.get(position));
+                //save details of the offer touched of the list and open new activity
+                showOfferDetails(listOfOffers.get(position));
             }
         };
     }
 
     /**
-     * Method for saving demand details by bundle
+     * Method for saving offer details by bundle
      * and open a new activity
-     * @param demand with will be showed in new activity
+     * @param offer with will be showed in new activity
      */
-    public void showDemandsDetails(CompanionForPet demand) {
+    public void showOfferDetails(CompanionOfPet offer) {
         //set with new activity will be opened
-        Intent intent = new Intent(this, ShowDemandActivity.class);
+        Intent intent = new Intent(this, UserManageOfferActivity.class);
         //Create a bundle object
         Bundle bundle = new Bundle();
         //set interesting data
-        bundle.putInt("idDemand", demand.getId());
+        bundle.putInt("idOffer", offer.getId());
         intent.putExtras(bundle);
         //open new activity
         startActivity(intent);
-        }
+    }
 
     /**
      * Method fot loading data in the list view, using a personal apapter
      */
     private void loadData () {
-        //if there no list
-        if (listOfDemands == null) {
+        //if list of Offers is null
+        if (listOfOffers == null) {
             notification.setText("Problemas al cargar los datos.\n\t Intentalo más tarde");
-        //if list is empty
-        } else if (listOfDemands.size()==0){
-            notification.setText("No se han encontrado peticiones de acompañamiento... aún.");
-        //if list has lines
+        //if list of offers is empty
+        } else if (listOfOffers.size()==0) {
+            notification.setText("No se han encontrado ofertas de acompañamiento... aún.");
+        //if list of Offers has lines
         } else {
             //create adapter
-            myadapter= new DemandAdapter(this, R.layout.useradapteritemdemand_layout, listOfDemands);
+            myadapter= new OfferAdapter(this, R.layout.useradapteritemoffer_layout,listOfOffers);
             //set adapter to the listview
             myListView.setAdapter(myadapter);
             //set listener to the listview
@@ -133,8 +134,8 @@ public class SearchDemandsActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.add(0, 1, 0, "Mi perfil");
-        menu.add(0, 2, 1, "Ver mis ofertas");
-        menu.add(0, 3, 2, "Publicar oferta");
+        menu.add(0, 2, 1, "Ver mis peticiones");
+        menu.add(0, 3, 2, "Publicar petición");
         menu.add(0, 4, 3, "Salir");
         return true;
     }
@@ -145,17 +146,17 @@ public class SearchDemandsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case 1:
                 //Go to view account activity
-                Intent intent1 = new Intent(SearchDemandsActivity.this, ViewAccountActivity.class);
+                Intent intent1 = new Intent(UserSearchOffersActivity.this, UserViewAccountActivity.class);
                 startActivity(intent1);
                 break;
             case 2:
-                //Go to show my offers  activity
-                Intent intent2 = new Intent(SearchDemandsActivity.this, SearchOffersActivity.class);
+                //Go to show my demands  activity
+                Intent intent2 = new Intent(UserSearchOffersActivity.this, UserSearchDemandsActivity.class);
                 startActivity(intent2);
                 break;
             case 3:
-                //Go to add an offer activity
-                Intent intent3 = new Intent(SearchDemandsActivity.this, AddOfferActivity.class);
+                //Go to add a demand activity
+                Intent intent3 = new Intent(UserSearchOffersActivity.this, ShelterAddDemandActivity.class);
                 startActivity(intent3);
                 break;
             case 4://Exit

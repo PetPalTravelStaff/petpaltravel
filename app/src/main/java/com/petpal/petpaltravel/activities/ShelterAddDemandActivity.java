@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -20,7 +19,6 @@ import android.widget.TextView;
 
 import com.petpal.petpaltravel.R;
 import com.petpal.petpaltravel.model.CompanionForPet;
-import com.petpal.petpaltravel.model.CompanionOfPet;
 import com.petpal.petpaltravel.model.PPTModel;
 
 import java.util.Calendar;
@@ -28,7 +26,7 @@ import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AddDemandActivity extends AppCompatActivity {
+public class ShelterAddDemandActivity extends AppCompatActivity {
     //Attributes
     EditText dateAvaliable, dateDeadLine, comments, otherType, nameBox;
     TextView labOrigen, labDestino, labTipo;
@@ -44,14 +42,14 @@ public class AddDemandActivity extends AppCompatActivity {
     PPTModel myModel;
     int userId;
     String nameUser;
-    String animalType = null;
+    String animalType;
     Boolean isShelter;
     CompanionForPet myDemand;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.shelterdemand_layout);
+        setContentView(R.layout.shelterpostdemand_layout);
         //instantiate model
         myModel = new PPTModel();
         //recover needed data
@@ -97,12 +95,17 @@ public class AddDemandActivity extends AppCompatActivity {
         originCity.setAdapter(adapterCity);
         destinyCity.setAdapter(adapterCity);
         cat = (RadioButton) findViewById(R.id.rdGato);
+        cat.setChecked(true);
+        animalType= "Gato/a";
         dog = (RadioButton) findViewById(R.id.rdPerro);
         other = (RadioButton) findViewById(R.id.radioOtro);
         petType = (RadioGroup) findViewById(R.id.radioTipo);
         comments = (EditText) findViewById(R.id.etComentarios);
         nameUserLabel = (TextView) findViewById(R.id.etNombreProtectora);
         nameUserLabel.setText(nameUser);
+        labOrigen= (TextView) findViewById(R.id.tvCiudadOrigen) ;
+        labDestino= (TextView) findViewById(R.id.tvCiudadDestino);
+        labTipo= (TextView) findViewById(R.id.tvTipoMascota);
         btPostDemand = (Button) findViewById(R.id.btPublicar);
     }
 
@@ -122,7 +125,6 @@ public class AddDemandActivity extends AppCompatActivity {
                 String dateFromString = null;
                 if (dateAvaliable.getText() != null) {
                     dateFromString = dateAvaliable.getText().toString();
-                System.out.println("Date from String es... " + dateFromString);
                 }
                 String dateUntillString = null;
                 if (dateDeadLine.getText() != null) {
@@ -183,7 +185,7 @@ public class AddDemandActivity extends AppCompatActivity {
                                             myDemand.setComments(commentString);
                                             int idDemand = myModel.addDemandToBD(myDemand);
                                             if (idDemand != 0) {
-                                                Intent intent1 = new Intent(AddDemandActivity.this, ShowDemandActivity.class);
+                                                Intent intent1 = new Intent(ShelterAddDemandActivity.this, UserManageDemandActivity.class);
                                                 //Create a bundle object
                                                 Bundle bundle = new Bundle();
                                                 //set interesting data
@@ -210,13 +212,11 @@ public class AddDemandActivity extends AppCompatActivity {
                             }
 
                         } else {
-                            System.out.println("No, salta aqui");
                             dateAvaliable.setHintTextColor(Color.RED);
                             dateAvaliable.setText(null);
                         }
 
                     } else {
-                        System.out.println("Salta aqui porque no tiene fecha");
                         dateAvaliable.setHintTextColor(Color.RED);
                         dateAvaliable.setText(null);
                     }
@@ -233,10 +233,12 @@ public class AddDemandActivity extends AppCompatActivity {
                     case R.id.rdGato:
                         animalType = "Gato/a";
                         otherType.setVisibility(View.GONE);
+                        otherType.setText(null);
                         break;
                     case R.id.rdPerro:
                         animalType = "Perro/a";
                         otherType.setVisibility(View.GONE);
+                        otherType.setText(null);
                         break;
                     case R.id.radioOtro:
                         otherType.setVisibility(View.VISIBLE);
@@ -249,32 +251,38 @@ public class AddDemandActivity extends AppCompatActivity {
     }
 
     private GregorianCalendar validateDate(String dateString) {
-        GregorianCalendar result = null;
-        int yearDate = 0;
-        int monthDate = 0;
-        int dayDate = 0;
+        GregorianCalendar result= null;
+        int yearDate=0;
+        int monthDate=0;
+        int dayDate=0;
 
-        if (dateString != null) {
-            Boolean control = false;
+        if (dateString!=null){
+            Boolean control= false;
             Pattern pattern = Pattern.compile("\\d{1,2}-\\d{1,2}-\\d{4}");
             Matcher mather = pattern.matcher(dateString);
-            control = mather.find();
-            if (control) {
-                String[] datePieces = dateString.split("-");
+            control= mather.find();
+            if (control){
+                String[] datePieces= dateString.split("-");
                 try {
                     yearDate = Integer.parseInt(datePieces[2]);
-                } catch (Exception e) {
-                    yearDate = 0;
+                }catch (Exception e){
+                    yearDate=0;
                 }
-                if (yearDate >= Calendar.getInstance().get(Calendar.YEAR)) {
-                    System.out.println("El año es " +yearDate);
+                if (yearDate>= Calendar.getInstance().get(Calendar.YEAR)) {
                     try {
                         monthDate = Integer.parseInt(datePieces[1]);
                     } catch (Exception e) {
                         monthDate = 0;
                     }
-                    System.out.println("El mes es " +monthDate);
-                    int provDay;
+                    if (yearDate == Calendar.getInstance().get(Calendar.YEAR) &
+                            monthDate < Calendar.getInstance().get(Calendar.MONTH)) {
+                        dayDate = 0;
+                    } else {
+                        if (yearDate == Calendar.getInstance().get(Calendar.YEAR) &
+                                monthDate == Calendar.getInstance().get(Calendar.MONTH) &
+                                dayDate <= Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
+                            dayDate = 0;
+                        } else {
                             switch (monthDate) {
                                 case 1:
                                 case 3:
@@ -284,14 +292,12 @@ public class AddDemandActivity extends AppCompatActivity {
                                 case 10:
                                 case 12:
                                     try {
-                                        provDay = Integer.parseInt(datePieces[0]);
+                                        dayDate = Integer.parseInt(datePieces[0]);
                                     } catch (Exception e) {
-                                        System.out.println("Salta el catch del dia");
-                                        provDay = 0;
+                                        dayDate = 0;
                                     }
-                                    System.out.println("El dia provisional es" + provDay);
-                                    if (0 < provDay & provDay >= 31) {
-                                        dayDate = provDay;
+                                    if (0 < dayDate & dayDate > 31) {
+                                        dayDate = dayDate;
                                     } else {
                                         dayDate = 0;
                                     }
@@ -301,59 +307,58 @@ public class AddDemandActivity extends AppCompatActivity {
                                 case 9:
                                 case 11:
                                     try {
-                                        provDay = Integer.parseInt(datePieces[0]);
+                                        dayDate = Integer.parseInt(datePieces[0]);
                                     } catch (Exception e) {
-                                        provDay = 0;
+                                        dayDate = -0;
                                     }
-                                    if (0 < provDay & provDay >= 30) {
-                                        dayDate = provDay;
+                                    if (0 < dayDate & dayDate > 30) {
+                                        dayDate = dayDate;
                                     } else {
                                         dayDate = 0;
                                     }
                                     break;
                                 case 2:
                                     try {
-                                        provDay = Integer.parseInt(datePieces[0]);
+                                        dayDate = Integer.parseInt(datePieces[0]);
                                     } catch (Exception e) {
-                                        provDay = 0;
+                                        dayDate = 0;
                                     }
                                     //if year is bisiesto
                                     if ((yearDate % 4 == 0 && yearDate % 100 != 0) || (yearDate % 100 == 0 && yearDate % 400 == 0)) {
-                                        if (0 < provDay & provDay >= 29) {
-                                            dayDate = provDay;
+                                        if (0 < dayDate & dayDate > 29) {
+                                            dayDate = dayDate;
+                                            ;
                                         } else {
                                             dayDate = 0;
                                         }
                                     } else {
-                                        if (0 < provDay & provDay >= 28) {
-                                            dayDate = provDay;
+                                        if (0 < dayDate & dayDate > 28) {
+                                            dayDate = dayDate;
                                         } else {
                                             dayDate = 0;
                                         }
                                     }
                                     break;
                                 default:
-                                    dayDate=0;
-                                    System.out.println("Salta el default");
+                                    dayDate = 0;
                                     break;
                             }
-                    System.out.println("El dia es " +dayDate);
-
-                } else {
-                    yearDate=0;
-                }
-                if (yearDate==0 ||monthDate==0|| dayDate==0) {
-                    result=null;
-                } else {
-                    if (new GregorianCalendar(yearDate, monthDate, dayDate).after(Calendar.getInstance())){
-                        result=null;
-                    } else {
-                        result = new GregorianCalendar(yearDate, monthDate, dayDate);
+                        }
                     }
+                }else {
+                    yearDate=0;
+                    monthDate=0;
+                    dayDate=0;
                 }
             } else {
-                result=null;
+                yearDate=0;
+                monthDate=0;
+                dayDate=0;
             }
+        }
+        result= new GregorianCalendar(yearDate, monthDate, dayDate);
+        if (result.before(Calendar.getInstance())) {
+            result=null;
         }
         return result;
     }
@@ -387,15 +392,15 @@ public class AddDemandActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case 1:
                 //Go to view account activity
-                Intent intent1 = new Intent(AddDemandActivity.this, ViewAccountActivity.class);
+                Intent intent1 = new Intent(ShelterAddDemandActivity.this, UserViewAccountActivity.class);
                 startActivity(intent1);
                 break;
             case 2:
-                Intent intent2 = new Intent(AddDemandActivity.this, SearchDemandsActivity.class);
+                Intent intent2 = new Intent(ShelterAddDemandActivity.this, UserSearchDemandsActivity.class);
                 startActivity(intent2);
                 break;
             case 3:
-                Intent intent3 = new Intent(AddDemandActivity.this, SearchOffersActivity.class);
+                Intent intent3 = new Intent(ShelterAddDemandActivity.this, UserSearchOffersActivity.class);
                 startActivity(intent3);
                 break;
             case 4://Exit

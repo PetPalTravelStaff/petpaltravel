@@ -294,9 +294,9 @@ public class DataTestDAO {
     public int addDemand(CompanionForPet myDemand) {
         int result= 0;
         myDemand.setId(0);
-        int lastID= offeringsOF.get(offeringsOF.size()-1).getId();
+        int lastID= demandsFOR.get(demandsFOR.size()-1).getId();
         myDemand.setId(lastID+1);
         demandsFOR.add(myDemand);
-        return offeringsOF.get(offeringsOF.size()-1).getId();
+        return demandsFOR.get(demandsFOR.size()-1).getId();
     }
 }

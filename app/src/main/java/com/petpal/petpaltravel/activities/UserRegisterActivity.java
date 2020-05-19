@@ -18,7 +18,7 @@ import com.petpal.petpaltravel.model.User;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegisterActivity extends AppCompatActivity {
+public class UserRegisterActivity extends AppCompatActivity {
     //Atributes
     private EditText nameBox, mailBox, passBox, repePassBox;
     private CheckBox cbIsShelter;
@@ -93,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             //if everything goes right, back to login, saving mail
                                             if (result==1) {
                                                 saveOnShared();
-                                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                                Intent intent = new Intent(UserRegisterActivity.this, UserLoginActivity.class);
                                                 startActivity(intent);
                                              //if there is a problem (email already in DB), notify
                                             } else if (result==0){

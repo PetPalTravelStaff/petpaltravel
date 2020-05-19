@@ -18,7 +18,7 @@ import com.petpal.petpaltravel.model.PPTModel;
 
 import java.text.SimpleDateFormat;
 
-public class ShowDemandActivity extends AppCompatActivity {
+public class UserManageDemandActivity extends AppCompatActivity {
     //Atributes
     TextView namePet, OriginCity, Destination, typePet, dateFrom, dateUntill, comments, nameLabel;
     String nameUser;
@@ -159,14 +159,14 @@ public class ShowDemandActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //if we are the shelter that post this demand, open modify demand activity
                 if (isShelter & userId!=0 & userId==myDemand.getIdeUserShelterOffering()){
-                    //Intent intent  = new Intent(ShowDemandActivity.this, MODIFICAR_DEMANDA.class);
+                    //Intent intent  = new Intent(UserManageDemandActivity.this, MODIFICAR_DEMANDA.class);
                     //startActivity(intent);
                 //if not...
                 } else {
                     switch (situationFlag) {
                         case 0: //normal case: person wants to apply to the demand
                         case -2: //person has applied already: person wants to un-apply the demand
-                            Intent intent1  = new Intent(ShowDemandActivity.this, ApplyForDemand.class);
+                            Intent intent1  = new Intent(UserManageDemandActivity.this, PersonApplyForDemand.class);
                             //Create a bundle object
                             Bundle bundle = new Bundle();
                             //set interesting data
@@ -175,7 +175,7 @@ public class ShowDemandActivity extends AppCompatActivity {
                             startActivity(intent1);
                             break;
                         case -1: // missing phone: open activity to go to change account details
-                            Intent intent  = new Intent(ShowDemandActivity.this, ViewAccountActivity.class);
+                            Intent intent  = new Intent(UserManageDemandActivity.this, UserViewAccountActivity.class);
                             startActivity(intent);
                             break;
                     }
@@ -252,28 +252,28 @@ public class ShowDemandActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case 1:
                     //Go to view account activity
-                    Intent intent1 = new Intent(ShowDemandActivity.this, ViewAccountActivity.class);
+                    Intent intent1 = new Intent(UserManageDemandActivity.this, UserViewAccountActivity.class);
                     startActivity(intent1);
                     break;
                 case 2:
                     //If is Shelter, go to show my demands activity
                     if(isShelter) {
-                        Intent intent2 = new Intent(ShowDemandActivity.this, SearchDemandsActivity.class);
+                        Intent intent2 = new Intent(UserManageDemandActivity.this, UserSearchDemandsActivity.class);
                         startActivity(intent2);
                     //if is person, go to show my details activity
                     } else {
-                        Intent intent2 = new Intent(ShowDemandActivity.this, SearchOffersActivity.class);
+                        Intent intent2 = new Intent(UserManageDemandActivity.this, UserSearchOffersActivity.class);
                         startActivity(intent2);
                     }
                     break;
                 case 3:
                     //If is Shelter, go to add a demands activity
                     if (isShelter) {
-                        Intent intent3 = new Intent(ShowDemandActivity.this, AddDemandActivity.class);
+                        Intent intent3 = new Intent(UserManageDemandActivity.this, ShelterAddDemandActivity.class);
                         startActivity(intent3);
                     //if is person, go to add an offer activity
                     } else {
-                        Intent intent3 = new Intent(ShowDemandActivity.this, AddOfferActivity.class);
+                        Intent intent3 = new Intent(UserManageDemandActivity.this, PersonAddOfferActivity.class);
                         startActivity(intent3);
                     }
                     break;

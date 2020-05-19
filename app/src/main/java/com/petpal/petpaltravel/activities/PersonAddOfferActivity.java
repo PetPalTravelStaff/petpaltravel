@@ -25,7 +25,7 @@ import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AddOfferActivity extends AppCompatActivity {
+public class PersonAddOfferActivity extends AppCompatActivity {
     //Attributes
     EditText dateTravel, comments;
     TextView labOrigen, labDestino, labTipo, labTransp;
@@ -186,7 +186,7 @@ public class AddOfferActivity extends AppCompatActivity {
                                             int idOffer = myModel.addOfferToBD(myOffer);
                                             System.out.println("Id offer es: "+ idOffer);
                                             if (idOffer != 0) {
-                                                Intent intent1 = new Intent(AddOfferActivity.this, ShowOfferActivity.class);
+                                                Intent intent1 = new Intent(PersonAddOfferActivity.this, UserManageOfferActivity.class);
                                                 //Create a bundle object
                                                 Bundle bundle = new Bundle();
                                                 //set interesting data
@@ -335,7 +335,10 @@ public class AddOfferActivity extends AppCompatActivity {
             }
         }
         result= new GregorianCalendar(yearDate, monthDate, dayDate);
-       return result;
+        if (result.before(Calendar.getInstance())) {
+            result=null;
+        }
+        return result;
     }
 
     /**
@@ -366,15 +369,15 @@ public class AddOfferActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case 1:
                 //Go to view account activity
-                Intent intent1 = new Intent(AddOfferActivity.this, ViewAccountActivity.class);
+                Intent intent1 = new Intent(PersonAddOfferActivity.this, UserViewAccountActivity.class);
                 startActivity(intent1);
                 break;
             case 2:
-                Intent intent2 = new Intent(AddOfferActivity.this, SearchOffersActivity.class);
+                Intent intent2 = new Intent(PersonAddOfferActivity.this, UserSearchOffersActivity.class);
                 startActivity(intent2);
                 break;
             case 3:
-                Intent intent3 = new Intent(AddOfferActivity.this, SearchDemandsActivity.class);
+                Intent intent3 = new Intent(PersonAddOfferActivity.this, UserSearchDemandsActivity.class);
                 startActivity(intent3);
                 break;
             case 4://Exit

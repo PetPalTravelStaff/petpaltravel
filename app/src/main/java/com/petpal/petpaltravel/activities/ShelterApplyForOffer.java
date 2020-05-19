@@ -19,7 +19,7 @@ import com.petpal.petpaltravel.R;
 import com.petpal.petpaltravel.model.CompanionOfPet;
 import com.petpal.petpaltravel.model.PPTModel;
 
-public class ApplyForOffer extends AppCompatActivity {
+public class ShelterApplyForOffer extends AppCompatActivity {
     TextView nameBox, phoneBox, mailBox;
     EditText commentsBox;
     Button apply;
@@ -85,7 +85,7 @@ public class ApplyForOffer extends AppCompatActivity {
 
     private void initElements() {
         //mySpinner = (Spinner) findViewById(R.id.etCiudadOrigenMascota);
-        ArrayAdapter<String> questionsAdapter = new ArrayAdapter<String>(ApplyForOffer.this, android.R.layout.simple_spinner_item, transport);
+        ArrayAdapter<String> questionsAdapter = new ArrayAdapter<String>(ShelterApplyForOffer.this, android.R.layout.simple_spinner_item, transport);
         questionsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(questionsAdapter);
 
@@ -282,28 +282,28 @@ public class ApplyForOffer extends AppCompatActivity {
         switch (item.getItemId()) {
             case 1:
                 //Go to view account activity
-                Intent intent1 = new Intent(ApplyForOffer.this, ViewAccountActivity.class);
+                Intent intent1 = new Intent(ShelterApplyForOffer.this, UserViewAccountActivity.class);
                 startActivity(intent1);
                 break;
             case 2:
                 //If is Shelter, go to show my demands activity
                 if (isShelter) {
-                    Intent intent2 = new Intent(ApplyForOffer.this, SearchDemandsActivity.class);
+                    Intent intent2 = new Intent(ShelterApplyForOffer.this, UserSearchDemandsActivity.class);
                     startActivity(intent2);
                     //if is person, go to show my details activity
                 } else {
-                    Intent intent2 = new Intent(ApplyForOffer.this, SearchOffersActivity.class);
+                    Intent intent2 = new Intent(ShelterApplyForOffer.this, UserSearchOffersActivity.class);
                     startActivity(intent2);
                 }
                 break;
             case 3:
                 //If is Shelter, go to add a demands activity
                 if (isShelter) {
-                    Intent intent3 = new Intent(ApplyForOffer.this, AddDemandActivity.class);
+                    Intent intent3 = new Intent(ShelterApplyForOffer.this, ShelterAddDemandActivity.class);
                     startActivity(intent3);
                     //if is person, go to add an offer activity
                 } else {
-                    Intent intent3 = new Intent(ApplyForOffer.this, AddOfferActivity.class);
+                    Intent intent3 = new Intent(ShelterApplyForOffer.this, PersonAddOfferActivity.class);
                     startActivity(intent3);
                 }
                 break;

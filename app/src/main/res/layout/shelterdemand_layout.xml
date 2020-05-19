@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="24dp"
-            android:text="Nombre:"
+            android:text="Se llama:"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp" />
 
@@ -170,6 +170,7 @@
 </LinearLayout>
 
     <RadioGroup
+        android:id="@+id/radioTipo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -212,7 +213,7 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton5"
+                android:id="@+id/radioOtro"
                 android:layout_width="74dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="163dp"
@@ -253,7 +254,7 @@
     <Button
         android:id="@+id/btPublicar"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="80dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="80dp"

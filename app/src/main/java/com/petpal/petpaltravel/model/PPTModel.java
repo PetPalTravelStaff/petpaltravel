@@ -98,10 +98,18 @@ public class PPTModel {
     }
 
     //return 0 if not added
-    //return 1 if added
+    //return id number offer if added
     public int addOfferToBD(CompanionOfPet myOffer) {
         int result= 0;
         result= myDAO.addOffer(myOffer);
+        return result;
+    }
+
+    //return 0 if not added
+    //return id number demand if added
+    public int addDemandToBD(CompanionForPet myDemand) {
+        int result= 0;
+        result= myDAO.addDemand(myDemand);
         return result;
     }
 }

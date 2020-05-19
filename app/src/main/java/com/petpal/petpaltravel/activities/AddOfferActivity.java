@@ -118,7 +118,10 @@ public class AddOfferActivity extends AppCompatActivity {
         listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String dateString= dateTravel.getText().toString();
+                String dateString= null;
+                if (dateTravel.getText()!=null) {
+                    dateString=dateTravel.getText().toString();
+                };
                 GregorianCalendar dateCal= null;
                 String cityOrigin= originCity.getSelectedItem().toString();
                 String cityDestiny= destinyCity.getSelectedItem().toString();

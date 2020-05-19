@@ -37,6 +37,9 @@ public class CompanionForPet {
         this.namePSelected = namePSelected;
     }
 
+    public CompanionForPet() {
+    }
+
     public int getId() {
         return id;
     }

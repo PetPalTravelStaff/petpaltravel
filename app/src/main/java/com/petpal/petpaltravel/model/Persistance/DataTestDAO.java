@@ -279,13 +279,24 @@ public class DataTestDAO {
     }
 
     //return 0 if not added
-    //return 1 if added
+    //return numer of offer if added
     public int addOffer(CompanionOfPet myOffer) {
         int result= 0;
         myOffer.setId(0);
         int lastID= offeringsOF.get(offeringsOF.size()-1).getId();
         myOffer.setId(lastID+1);
         offeringsOF.add(myOffer);
+        return offeringsOF.get(offeringsOF.size()-1).getId();
+    }
+
+    //return 0 if not added
+    //return numer of demand if added
+    public int addDemand(CompanionForPet myDemand) {
+        int result= 0;
+        myDemand.setId(0);
+        int lastID= offeringsOF.get(offeringsOF.size()-1).getId();
+        myDemand.setId(lastID+1);
+        demandsFOR.add(myDemand);
         return offeringsOF.get(offeringsOF.size()-1).getId();
     }
 }

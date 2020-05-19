@@ -34,13 +34,16 @@ public class DataTestDAO {
     private void addCompanionForPet() {
         demandsFOR.add(new CompanionForPet(1, 1, "Protectora Can", "Drako", new GregorianCalendar(2020,5,27),
                 null, "Ibiza", "Sta. Cruz Tenerife", "Perro/a", "FoxTerrier pequeño (se puede llevar en cabina)",
-                0, null, 0, null, 0, null, 0, null));
+                0, null));
         demandsFOR.add(new CompanionForPet(2, 2, "Protectora Kitty", "Sibil",
                 new GregorianCalendar(2020,6,10), new GregorianCalendar(2020,8,31), "Sta. Cruz de Tenerife", "Hospitalet de Llobregat",
-                "Gato/a", "Gatita pequeña muy buena", 0, null, 0, null, 0, null,0,null));
-        demandsFOR.add(new CompanionForPet(3, 2, "Protectora Kitty", "Dina",
+                "Gato/a", "Gatita pequeña muy buena", 0, null));
+        CompanionForPet test1= new CompanionForPet(3, 2, "Protectora Kitty", "Dina",
                 new GregorianCalendar(2020,6,28), new GregorianCalendar(2020,8,31), "Sta. Cruz de Tenerife", "Madrid", "Gato/a",
-                "Gato mayor, pesa bastante", 0, null, 4, "Anna", 0, null, 0, null));
+                "Gato mayor, pesa bastante", 0, null);
+        test1.setNamePersonsIntPosition("Anna",0);
+        test1.setIdPersonsIntPosition(4,0);
+        demandsFOR.add(test1);
     }
 
     private void addCompanionOfPet() {
@@ -153,17 +156,17 @@ public class DataTestDAO {
         Boolean result= false;
         for (CompanionForPet demand : demandsFOR) {
             if (demandId == demand.getId()) {
-                if (demand.getIdUserPersonInterested1() == 0) {
-                    demand.setIdUserPersonInterested1(userId);
-                    demand.setNamePInterested1(nameUser);
+                if (demand.getIdPersonInterestePosition(0) == 0) {
+                    demand.setIdPersonsIntPosition(userId,0);
+                    demand.setNamePersonsIntPosition(nameUser,0);
                     result = true;
-                } else if ((demand.getIdUserPersonInterested2() == 0)) {
-                    demand.setIdUserPersonInterested2(userId);
-                    demand.setNamePInterested2(nameUser);
+                } else if (demand.getIdPersonInterestePosition(1) == 0) {
+                    demand.setIdPersonsIntPosition(userId,1);
+                    demand.setNamePersonsIntPosition(nameUser,1);
                     result = true;
-                } else if ((demand.getIdUserPersonInterested3() == 0)) {
-                    demand.setIdUserPersonInterested3(userId);
-                    demand.setNamePInterested3(nameUser);
+                } else if (demand.getIdPersonInterestePosition(2) == 0) {
+                    demand.setIdPersonsIntPosition(userId,2);
+                    demand.setNamePersonsIntPosition(nameUser,2);
                     result = true;
                 }
             }
@@ -185,17 +188,17 @@ public class DataTestDAO {
         Boolean result= false;
         for (CompanionOfPet offer : offeringsOF) {
             if (idOffer == offer.getId()) {
-                if (offer.getIdUserShelterInterested1() == 0) {
-                    offer.setIdUserShelterInterested1(userId);
-                    offer.setNameSInterested1(nameUser);
+                if (offer.getIdShelterIntPosition(0) == 0) {
+                    offer.setIdShelterIntPosition(userId,0);
+                    offer.setNamesShelterIntPosition(nameUser,0);
                     result = true;
-                } else if ((offer.getIdUserShelterInterested2() == 0)) {
-                    offer.setIdUserShelterInterested2(userId);
-                    offer.setNameSInterested2(nameUser);
+                } else if (offer.getIdShelterIntPosition(1) == 0) {
+                    offer.setIdShelterIntPosition(userId,1);
+                    offer.setNamesShelterIntPosition(nameUser,1);
                     result = true;
-                } else if ((offer.getIdUserShelterInterested3() == 0)) {
-                    offer.setIdUserShelterInterested3(userId);
-                    offer.setNameSInterested3(nameUser);
+                } else if (offer.getIdShelterIntPosition(2) == 0) {
+                    offer.setIdShelterIntPosition(userId,2);
+                    offer.setNamesShelterIntPosition(nameUser,2);
                     result = true;
                 }
             }

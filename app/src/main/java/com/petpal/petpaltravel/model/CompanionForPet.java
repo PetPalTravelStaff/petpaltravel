@@ -16,19 +16,13 @@ public class CompanionForPet {
     private String comments;
     private int idUserPersonSeleted;
     private String namePSelected;
-    private int idUserPersonInterested1;
-    private String namePInterested1;
-    private int idUserPersonInterested2;
-    private String namePInterested2;
-    private int idUserPersonInterested3;
-    private String namePInterested3;
+    private int[] idPersonsInterested={0,0,0};
+    private String[] namesPersonsInterested={null,null,null};
 
     public CompanionForPet(int id, int ideUserShelterOffering, String nameShelter, String namePet,
                            GregorianCalendar availableFrom, GregorianCalendar deadline, String originCity,
                            String destinyCity, String typePet, String comments, int idUserPersonSeleted,
-                           String namePSelected, int idUserPersonInterested1, String namePInterested1,
-                           int idUserPersonInterested2, String namePInterested2,
-                           int idUserPersonInterested3, String namePInterested3) {
+                           String namePSelected) {
         this.id = id;
         this.ideUserShelterOffering = ideUserShelterOffering;
         this.nameShelter = nameShelter;
@@ -41,12 +35,6 @@ public class CompanionForPet {
         this.comments = comments;
         this.idUserPersonSeleted = idUserPersonSeleted;
         this.namePSelected = namePSelected;
-        this.idUserPersonInterested1 = idUserPersonInterested1;
-        this.namePInterested1 = namePInterested1;
-        this.idUserPersonInterested2 = idUserPersonInterested2;
-        this.namePInterested2 = namePInterested2;
-        this.idUserPersonInterested3 = idUserPersonInterested3;
-        this.namePInterested3 = namePInterested3;
     }
 
     public int getId() {
@@ -145,51 +133,36 @@ public class CompanionForPet {
         this.namePSelected = namePSelected;
     }
 
-    public int getIdUserPersonInterested1() {
-        return idUserPersonInterested1;
+    public int[] getIdPersonsInterested() {
+        return idPersonsInterested;
     }
 
-    public void setIdUserPersonInterested1(int idUserPersonInterested1) {
-        this.idUserPersonInterested1 = idUserPersonInterested1;
+    public void setIdPersonsInterested(int[] idPersonsInterested) {
+        this.idPersonsInterested = idPersonsInterested;
     }
 
-    public String getNamePInterested1() {
-        return namePInterested1;
+    public String[] getNamesPersonsInterested() {
+        return namesPersonsInterested;
     }
 
-    public void setNamePInterested1(String namePInterested1) {
-        this.namePInterested1 = namePInterested1;
+    public void setNamesPersonsInterested(String[] namesPersonsInterested) {
+        this.namesPersonsInterested = namesPersonsInterested;
     }
 
-    public int getIdUserPersonInterested2() {
-        return idUserPersonInterested2;
+    public int getIdPersonInterestePosition(int position) {
+        return idPersonsInterested[position];
     }
 
-    public void setIdUserPersonInterested2(int idUserPersonInterested2) {
-        this.idUserPersonInterested2 = idUserPersonInterested2;
+    public String getNamePersonInterestedPosition(int position) {
+        return namesPersonsInterested[position];
     }
 
-    public String getNamePInterested2() {
-        return namePInterested2;
+    public void setNamePersonsIntPosition(String name, int position) {
+        this.namesPersonsInterested[position]= name;
     }
 
-    public void setNamePInterested2(String namePInterested2) {
-        this.namePInterested2 = namePInterested2;
+    public void setIdPersonsIntPosition(int idPerson, int position) {
+        this.idPersonsInterested[position] = idPerson;
     }
 
-    public int getIdUserPersonInterested3() {
-        return idUserPersonInterested3;
-    }
-
-    public void setIdUserPersonInterested3(int idUserPersonInterested3) {
-        this.idUserPersonInterested3 = idUserPersonInterested3;
-    }
-
-    public String getNamePInterested3() {
-        return namePInterested3;
-    }
-
-    public void setNamePInterested3(String namePInterested3) {
-        this.namePInterested3 = namePInterested3;
-    }
 }

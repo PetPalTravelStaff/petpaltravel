@@ -101,8 +101,8 @@ public class ApplyForDemand extends AppCompatActivity {
         modify= (Button) findViewById(R.id.btCancelar);
 
         //set situation flag depending on the case
-        if (myDemand.getIdUserPersonInterested1()==idUser | myDemand.getIdUserPersonInterested2()==idUser |
-                myDemand.getIdUserPersonInterested3()==idUser){
+        if (myDemand.getIdPersonInterestePosition(1)==idUser | myDemand.getIdPersonInterestePosition(2)==idUser |
+                myDemand.getIdPersonInterestePosition(3)==idUser){
             situationFlag=1;
             situationUpdateFlag=0;
         } else  {

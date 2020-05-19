@@ -84,7 +84,7 @@ public class ApplyForOffer extends AppCompatActivity {
     }
 
     private void initElements() {
-        mySpinner = (Spinner) findViewById(R.id.etCiudadOrigenMascota);
+        //mySpinner = (Spinner) findViewById(R.id.etCiudadOrigenMascota);
         ArrayAdapter<String> questionsAdapter = new ArrayAdapter<String>(ApplyForOffer.this, android.R.layout.simple_spinner_item, transport);
         questionsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(questionsAdapter);
@@ -101,8 +101,8 @@ public class ApplyForOffer extends AppCompatActivity {
         modify = (Button) findViewById(R.id.btCancelar);
 
         //set situation flag depending on the case
-        if (myOffer.getIdUserShelterInterested1() == idUser | myOffer.getIdUserShelterInterested2() == idUser |
-                myOffer.getIdUserShelterInterested3() == idUser) {
+        if (myOffer.getIdShelterIntPosition(0) == idUser | myOffer.getIdShelterIntPosition(1) == idUser |
+                myOffer.getIdShelterIntPosition(2) == idUser) {
             situationFlag = 1;
             situationUpdateFlag = 0;
         } else {

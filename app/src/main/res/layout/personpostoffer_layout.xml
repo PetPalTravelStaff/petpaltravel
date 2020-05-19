@@ -206,7 +206,6 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginStart="24dp"
-    android:layout_marginEnd="24dp" >
 
         <TextView
             android:id="@+id/tvTipoTransporte"

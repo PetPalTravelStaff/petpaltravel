@@ -1,5 +1,7 @@
 package com.petpal.petpaltravel.model.Persistance;
 
+import com.petpal.petpaltravel.model.ApplicationForDemand;
+import com.petpal.petpaltravel.model.ApplicationForOffer;
 import com.petpal.petpaltravel.model.CompanionForPet;
 import com.petpal.petpaltravel.model.CompanionOfPet;
 import com.petpal.petpaltravel.model.Location;
@@ -14,6 +16,8 @@ public class DataTestDAO {
     List<CompanionOfPet> offeringsOF = new ArrayList<CompanionOfPet>();
     List<Location> myLocations = new ArrayList<Location>();;
     List<User> myUsers=  new ArrayList<User>();
+    List<ApplicationForDemand> myApplicationsForDemands =  new ArrayList<ApplicationForDemand>();
+    List<ApplicationForOffer> myApplicationsForOffers = new ArrayList<ApplicationForOffer>();
     User myUser;
     static DataTestDAO instanceDAO= null;
 
@@ -67,7 +71,7 @@ public class DataTestDAO {
 
     private void addUsersTest() {
         myUsers.add(new User( 1, "Protectora Can", "can@gmail.com", "passcan", "645859626", true, -1));
-        myUsers.add(new User(2, "Protectora Kitty", "gatos@gmail.com", "passckitty", "655963626", true, -1));
+        myUsers.add(new User(2, "Protectora Kitty", "gatos@gmail.com", "passkitty", "655963626", true, -1));
         myUsers.add(new User( 3, "Marta", "marta@gmail.com", "passmarta", "636261646", false, -1));
         myUsers.add(new User(4, "Roser", "roser@gmail.com", "passroser", "625451245", false, -1));
         myUsers.add(new User(5, "Anna", "anna@gmail.com", "passanna", null, false, -1));
@@ -152,21 +156,24 @@ public class DataTestDAO {
         return result;
     }
 
-    public Boolean addPersonToDemand(int userId, String nameUser, int demandId) {
+    public Boolean addPersonToDemand(ApplicationForDemand myApplication) {
         Boolean result= false;
         for (CompanionForPet demand : demandsFOR) {
-            if (demandId == demand.getId()) {
+            if (myApplication.getIdDemand() == demand.getId()) {
                 if (demand.getIdPersonInterestePosition(0) == 0) {
-                    demand.setIdPersonsIntPosition(userId,0);
-                    demand.setNamePersonsIntPosition(nameUser,0);
+                    demand.setIdPersonsIntPosition(myApplication.getIdPersonApplying(),0);
+                    demand.setNamePersonsIntPosition(myApplication.getNamePerson(),0);
+                    myApplicationsForDemands.add(myApplication);
                     result = true;
                 } else if (demand.getIdPersonInterestePosition(1) == 0) {
-                    demand.setIdPersonsIntPosition(userId,1);
-                    demand.setNamePersonsIntPosition(nameUser,1);
+                    demand.setIdPersonsIntPosition(myApplication.getIdPersonApplying(),1);
+                    demand.setNamePersonsIntPosition(myApplication.getNamePerson(),1);
+                    myApplicationsForDemands.add(myApplication);
                     result = true;
                 } else if (demand.getIdPersonInterestePosition(2) == 0) {
-                    demand.setIdPersonsIntPosition(userId,2);
-                    demand.setNamePersonsIntPosition(nameUser,2);
+                    demand.setIdPersonsIntPosition(myApplication.getIdPersonApplying(),2);
+                    demand.setNamePersonsIntPosition(myApplication.getNamePerson(),2);
+                    myApplicationsForDemands.add(myApplication);
                     result = true;
                 }
             }
@@ -184,21 +191,24 @@ public class DataTestDAO {
         return result;
     }
 
-    public Boolean addShelterToOffer(int userId, String nameUser, int idOffer) {
+    public Boolean addShelterToOffer(ApplicationForOffer myApplication) {
         Boolean result= false;
         for (CompanionOfPet offer : offeringsOF) {
-            if (idOffer == offer.getId()) {
+            if (myApplication.getIdOffer() == offer.getId()) {
                 if (offer.getIdShelterIntPosition(0) == 0) {
-                    offer.setIdShelterIntPosition(userId,0);
-                    offer.setNamesShelterIntPosition(nameUser,0);
+                    offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(),0);
+                    offer.setNamesShelterIntPosition(myApplication.getNameShelter(),0);
+                    myApplicationsForOffers.add(myApplication);
                     result = true;
                 } else if (offer.getIdShelterIntPosition(1) == 0) {
-                    offer.setIdShelterIntPosition(userId,1);
-                    offer.setNamesShelterIntPosition(nameUser,1);
+                    offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(),1);
+                    offer.setNamesShelterIntPosition(myApplication.getNameShelter(),1);
+                    myApplicationsForOffers.add(myApplication);
                     result = true;
                 } else if (offer.getIdShelterIntPosition(2) == 0) {
-                    offer.setIdShelterIntPosition(userId,2);
-                    offer.setNamesShelterIntPosition(nameUser,2);
+                    offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(),2);
+                    offer.setNamesShelterIntPosition(myApplication.getNameShelter(),2);
+                    myApplicationsForOffers.add(myApplication);
                     result = true;
                 }
             }
@@ -279,7 +289,7 @@ public class DataTestDAO {
     }
 
     //return 0 if not added
-    //return 1 if added
+    //return numer of offer if added
     public int addOffer(CompanionOfPet myOffer) {
         int result= 0;
         myOffer.setId(0);
@@ -287,5 +297,56 @@ public class DataTestDAO {
         myOffer.setId(lastID+1);
         offeringsOF.add(myOffer);
         return offeringsOF.get(offeringsOF.size()-1).getId();
+    }
+
+    //return 0 if not added
+    //return numer of demand if added
+    public int addDemand(CompanionForPet myDemand) {
+        int result= 0;
+        myDemand.setId(0);
+        int lastID= demandsFOR.get(demandsFOR.size()-1).getId();
+        myDemand.setId(lastID+1);
+        demandsFOR.add(myDemand);
+        return demandsFOR.get(demandsFOR.size()-1).getId();
+    }
+
+    public List<CompanionOfPet> recoverOffersOfPerson(int iduser) {
+        List<CompanionOfPet> result= new ArrayList<CompanionOfPet>();
+        for (CompanionOfPet of : offeringsOF) {
+            if (iduser == of.getIdeUserPersonOffering()) {
+                result.add(of);
+            }
+        }
+        return result;
+    }
+
+    public List<CompanionForPet> recoverOffersOfShelter(int iduser) {
+        List<CompanionForPet> result= new ArrayList<CompanionForPet>();
+        for (CompanionForPet dem : demandsFOR) {
+            if (iduser == dem.getIdeUserShelterOffering()) {
+                result.add(dem);
+            }
+        }
+        return result;
+    }
+
+    public ApplicationForOffer recoverApplicationForOffer(int offerId, int idUser) {
+        ApplicationForOffer result= null;
+        for (ApplicationForOffer apliForOf: myApplicationsForOffers) {
+            if (apliForOf.getIdOffer()==offerId & apliForOf.getIdShelterApplying()==idUser) {
+                result= apliForOf;
+            }
+        }
+        return result;
+    }
+
+    public ApplicationForDemand recoverApplicationForDemand(int demandId, int idUser) {
+        ApplicationForDemand result= null;
+        for (ApplicationForDemand apliForDe: myApplicationsForDemands) {
+            if (apliForDe.getIdDemand()==demandId & apliForDe.getIdPersonApplying()==idUser) {
+                result= apliForDe;
+            }
+        }
+        return result;
     }
 }

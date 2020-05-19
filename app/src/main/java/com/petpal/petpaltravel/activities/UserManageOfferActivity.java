@@ -18,7 +18,7 @@ import com.petpal.petpaltravel.model.PPTModel;
 
 import java.text.SimpleDateFormat;
 
-public class ShowOfferActivity extends AppCompatActivity {
+public class UserManageOfferActivity extends AppCompatActivity {
     //Atributes
     TextView namePerson, OriginCity, Destination, typePet, date, transport, comments, userLabel;
     String nameUser;
@@ -162,7 +162,7 @@ public class ShowOfferActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //if we are the person that post this offer, open modify offer activity
                 if (!isShelter & userId!=0 & userId==myOffer.getIdeUserPersonOffering()){
-                    //Intent intent  = new Intent(ShowOfferActivity.this, MODIFICAR_OFERTA.class);
+                    //Intent intent  = new Intent(UserManageOfferActivity.this, MODIFICAR_OFERTA.class);
                     //startActivity(intent);
                 //if not...
                 } else {
@@ -170,7 +170,7 @@ public class ShowOfferActivity extends AppCompatActivity {
                         case 0: //normal case: shelter apply to the offer
                         case -2: //shelter has applied already: shelter un-apply the offer
                             //Open applicationActivity
-                            Intent intent1  = new Intent(ShowOfferActivity.this, ApplyForOffer.class);
+                            Intent intent1  = new Intent(UserManageOfferActivity.this, ShelterApplyForOffer.class);
                             //Create a bundle object
                             Bundle bundle = new Bundle();
                             //set interesting data
@@ -180,7 +180,7 @@ public class ShowOfferActivity extends AppCompatActivity {
 
                             break;
                         case -1: // missing phone: open activity to go to change account details
-                            Intent intent  = new Intent(ShowOfferActivity.this, ViewAccountActivity.class);
+                            Intent intent  = new Intent(UserManageOfferActivity.this, UserViewAccountActivity.class);
                             startActivity(intent);
                             break;
                     }
@@ -253,28 +253,28 @@ public class ShowOfferActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case 1:
                 //Go to view account activity
-                Intent intent1 = new Intent(ShowOfferActivity.this, ViewAccountActivity.class);
+                Intent intent1 = new Intent(UserManageOfferActivity.this, UserViewAccountActivity.class);
                 startActivity(intent1);
                 break;
             case 2:
                 //If is Shelter, go to show my demands activity
                 if(isShelter) {
-                    Intent intent2 = new Intent(ShowOfferActivity.this, SearchDemandsActivity.class);
+                    Intent intent2 = new Intent(UserManageOfferActivity.this, UserSearchDemandsActivity.class);
                     startActivity(intent2);
                 //if is person, go to show my offers activity
                 } else {
-                    Intent intent2 = new Intent(ShowOfferActivity.this, SearchOffersActivity.class);
+                    Intent intent2 = new Intent(UserManageOfferActivity.this, UserSearchOffersActivity.class);
                     startActivity(intent2);
                 }
                 break;
             case 3:
                 //If is Shelter, go to add a demands activity
                 if (isShelter) {
-                    Intent intent3 = new Intent(ShowOfferActivity.this, AddDemandActivity.class);
+                    Intent intent3 = new Intent(UserManageOfferActivity.this, ShelterPostDemandActivity.class);
                     startActivity(intent3);
                     //if is person, go to add an offer activity
                 } else {
-                    Intent intent3 = new Intent(ShowOfferActivity.this, AddOfferActivity.class);
+                    Intent intent3 = new Intent(UserManageOfferActivity.this, PersonPostOfferActivity.class);
                     startActivity(intent3);
                 }
                 break;

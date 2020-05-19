@@ -16,10 +16,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.petpal.petpaltravel.R;
+import com.petpal.petpaltravel.model.ApplicationForDemand;
 import com.petpal.petpaltravel.model.CompanionForPet;
 import com.petpal.petpaltravel.model.PPTModel;
 
-public class ApplyForDemand extends AppCompatActivity {
+public class PersonApplyForDemand extends AppCompatActivity {
     TextView nameBox, phoneBox, mailBox;
     EditText commentsBox;
     Button apply;
@@ -29,7 +30,8 @@ public class ApplyForDemand extends AppCompatActivity {
     int situationFlag= -1; //0= user can apply , 1= user already has applied,
     int situationUpdateFlag=-1; //0= user can update data, 1= user has already updated data, -1= user can not update data,
     View.OnClickListener listener;
-
+    ApplicationForDemand apliRecovered;
+    ApplicationForDemand apliToSend;
     int demandId, idUser;
     private String nameUser, mailUser, phoneUser;
     Boolean isShelter;
@@ -51,12 +53,14 @@ public class ApplyForDemand extends AppCompatActivity {
         myDemand= myModel.recoverDemandById(demandId);
         //Create view elements in activity
         initElements();
+        loadData();
         //create a listener
         createListener();
         //load data in view
         addElementsToListener();
 
     }
+
 
     /**
      * Method for recovering data needed by bundle
@@ -85,7 +89,7 @@ public class ApplyForDemand extends AppCompatActivity {
 
     private void initElements() {
         mySpinner = (Spinner)findViewById(R.id.spinner);
-        ArrayAdapter<String> questionsAdapter = new ArrayAdapter<String>(ApplyForDemand.this,android.R.layout.simple_spinner_item, transport);
+        ArrayAdapter<String> questionsAdapter = new ArrayAdapter<String>(PersonApplyForDemand.this,android.R.layout.simple_spinner_item, transport);
         questionsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(questionsAdapter);
 
@@ -98,11 +102,31 @@ public class ApplyForDemand extends AppCompatActivity {
         commentsBox= (EditText) findViewById(R.id.etComentarios);
 
         apply= (Button) findViewById(R.id.btOfrecete);
-        modify= (Button) findViewById(R.id.btCancelar);
+        modify= (Button) findViewById(R.id.btGuardaCambios);
+    }
 
+
+    private void loadData() {
         //set situation flag depending on the case
-        if (myDemand.getIdPersonInterestePosition(1)==idUser | myDemand.getIdPersonInterestePosition(2)==idUser |
-                myDemand.getIdPersonInterestePosition(3)==idUser){
+        if (myDemand.getIdPersonInterestePosition(0)==idUser | myDemand.getIdPersonInterestePosition(1)==idUser |
+                myDemand.getIdPersonInterestePosition(2)==idUser){
+            apliRecovered= myModel.searchApplicationForDemand(demandId, idUser);
+            commentsBox.setText(apliRecovered.getComments());
+            String transport= apliRecovered.getTransport();
+            switch (transport) {
+                case "Avión":
+                    mySpinner.setSelection(0);
+                    break;
+                case "Barco":
+                    mySpinner.setSelection(1);
+                    break;
+                case "Coche":
+                    mySpinner.setSelection(2);
+                    break;
+                case "Tren":
+                    mySpinner.setSelection(3);
+                    break;
+            }
             situationFlag=1;
             situationUpdateFlag=0;
         } else  {
@@ -111,17 +135,19 @@ public class ApplyForDemand extends AppCompatActivity {
 
         //set values of text in buttons
         setButtonsValues();
+
     }
+
 
     private void setButtonsValues() {
         switch (situationFlag) {
             case 0: //normal case
-                apply.setText("Ofrécete");
+                apply.setText("¡Me ofrezco!");
                 apply.setEnabled(true);
                 apply.setTextColor(Color.WHITE);
                 break;
             case 1: //person has applied already
-                apply.setText("Ya no quiero");
+                apply.setText("Lo cancelo");
                 apply.setEnabled(true);
                 apply.setTextColor(Color.RED);
                 break;
@@ -139,7 +165,7 @@ public class ApplyForDemand extends AppCompatActivity {
                 modify.setVisibility(View.VISIBLE);
                 break;
             case 1: //person has updated data
-                modify.setText("Propuesta actualizada");
+                modify.setText("¡Actualizada!");
                 modify.setEnabled(false);
                 modify.setTextColor(Color.WHITE);
                 modify.setVisibility(View.VISIBLE);
@@ -169,7 +195,23 @@ public class ApplyForDemand extends AppCompatActivity {
                 if (view.getId() == R.id.btOfrecete) {
                     switch (situationFlag) {
                         case 0: //normal case: person apply to the demand
-                            Boolean control = offerPersonToDemand();
+                            Boolean control;
+                            if (apliRecovered==null) {
+                                apliToSend= new ApplicationForDemand();
+                            } else {
+                                apliToSend= apliRecovered;
+                            }
+                            apliToSend.setIdDemand(demandId);
+                            apliToSend.setIdPersonApplying(idUser);
+                            apliToSend.setNamePerson(nameUser);
+                            apliToSend.setMail(mailUser);
+                            apliToSend.setPhone(phoneUser);
+                            String transport = mySpinner.getSelectedItem().toString();
+                            apliToSend.setTransport(transport);
+                            String comments = commentsBox.getText().toString();
+                            apliToSend.setComments(comments);
+
+                            control= myModel.addPersonToDemand(apliToSend);
                             if (control) {
                                 //if can apply suscessfully
                                 situationFlag = 1;
@@ -197,7 +239,7 @@ public class ApplyForDemand extends AppCompatActivity {
                             setButtonsValues();
                             break;
                     }
-                } else if (view.getId() == R.id.btCancelar) {
+                } else if (view.getId() == R.id.btGuardaCambios) {
                             Boolean control = modifyPersonToDemand();
                             if (control) {
                                 //if can update suscessfully
@@ -211,18 +253,6 @@ public class ApplyForDemand extends AppCompatActivity {
                 }
             }
         };
-    }
-
-
-
-    /**
-     * Method for apply for a demand
-     * @return true if applied is done, false otherwise
-     */
-    private Boolean offerPersonToDemand() {
-        Boolean result= false;
-        result= myModel.addPersonToDemand(idUser, nameUser, myDemand.getId());
-        return result;
     }
 
     /**
@@ -258,17 +288,11 @@ public class ApplyForDemand extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        if (isShelter) {
-            menu.add(0, 1, 0, "Mi perfil");
-            menu.add(0, 2, 1, "Ver mis peticiones");
-            menu.add(0, 3, 2, "Publicar petición");
-            menu.add(0, 4, 3, "Salir");
-        } else {
-            menu.add(0, 1, 0, "Mi perfil");
-            menu.add(0, 2, 1, "Ver mis ofertas");
-            menu.add(0, 3, 2, "Publicar oferta");
-            menu.add(0, 4, 3, "Salir");
-        }
+        menu.add(0, 1, 0, "Mi perfil");
+        menu.add(0, 2, 1, "Ver mis ofertas");
+        menu.add(0, 3, 2, "Publicar oferta");
+        menu.add(0, 4, 3, "Buscar peticiones");
+        menu.add(0, 5, 4, "Salir");
         return true;
     }
 
@@ -278,32 +302,22 @@ public class ApplyForDemand extends AppCompatActivity {
         switch (item.getItemId()) {
             case 1:
                 //Go to view account activity
-                Intent intent1 = new Intent(ApplyForDemand.this, ViewAccountActivity.class);
+                Intent intent1 = new Intent(PersonApplyForDemand.this, UserViewAccountActivity.class);
                 startActivity(intent1);
                 break;
             case 2:
-                //If is Shelter, go to show my demands activity
-                if(isShelter) {
-                    Intent intent2 = new Intent(ApplyForDemand.this, SearchDemandsActivity.class);
+                    Intent intent2 = new Intent(PersonApplyForDemand.this, UserSearchOffersActivity.class);
                     startActivity(intent2);
-                    //if is person, go to show my details activity
-                } else {
-                    Intent intent2 = new Intent(ApplyForDemand.this, SearchOffersActivity.class);
-                    startActivity(intent2);
-                }
                 break;
             case 3:
-                //If is Shelter, go to add a demands activity
-                if (isShelter) {
-                    Intent intent3 = new Intent(ApplyForDemand.this, AddDemandActivity.class);
+                    Intent intent3 = new Intent(PersonApplyForDemand.this, PersonPostOfferActivity.class);
                     startActivity(intent3);
-                    //if is person, go to add an offer activity
-                } else {
-                    Intent intent3 = new Intent(ApplyForDemand.this, AddOfferActivity.class);
-                    startActivity(intent3);
-                }
                 break;
-            case 4://Exit
+            case 4:
+                Intent intent4 = new Intent(PersonApplyForDemand.this, UserSearchDemandsActivity.class);
+                startActivity(intent4);
+                break;
+            case 5://Exit
                 finish();
                 break;
         }

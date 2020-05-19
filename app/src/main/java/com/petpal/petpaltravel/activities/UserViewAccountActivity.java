@@ -20,7 +20,7 @@ import com.petpal.petpaltravel.model.User;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ViewAccountActivity extends AppCompatActivity {
+public class UserViewAccountActivity extends AppCompatActivity {
     //Attributes
     private EditText nameBox, mailBox, phoneBox, passBox, repePassBox;
     private CheckBox cbIsShelter;
@@ -296,39 +296,39 @@ public class ViewAccountActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case 1:
                 //Go to view account activity
-                Intent intent1 = new Intent(ViewAccountActivity.this, ViewAccountActivity.class);
+                Intent intent1 = new Intent(UserViewAccountActivity.this, UserViewAccountActivity.class);
                 startActivity(intent1);
                 break;
             case 2:
                 //If is Shelter, go to show my demands activity
                 if(myUser.isShelter()) {
-                    Intent intent2 = new Intent(ViewAccountActivity.this, SearchDemandsActivity.class);
+                    Intent intent2 = new Intent(UserViewAccountActivity.this, UserSearchDemandsActivity.class);
                     startActivity(intent2);
                     //if is person, go to show my offers activity
                 } else {
-                    Intent intent2 = new Intent(ViewAccountActivity.this, SearchOffersActivity.class);
+                    Intent intent2 = new Intent(UserViewAccountActivity.this, UserSearchOffersActivity.class);
                     startActivity(intent2);
                 }
                 break;
             case 3:
                 //If is Shelter, go to add a demands activity
                 if (myUser.isShelter()) {
-                    Intent intent3 = new Intent(ViewAccountActivity.this, AddDemandActivity.class);
+                    Intent intent3 = new Intent(UserViewAccountActivity.this, ShelterPostDemandActivity.class);
                     startActivity(intent3);
                     //if is person, go to add an offer activity
                 } else {
-                    Intent intent3 = new Intent(ViewAccountActivity.this, AddOfferActivity.class);
+                    Intent intent3 = new Intent(UserViewAccountActivity.this, PersonPostOfferActivity.class);
                     startActivity(intent3);
                 }
                 break;
             case 4:
                 //If is Shelter, go to view offers activity
                 if (myUser.isShelter()) {
-                    Intent intent4 = new Intent(ViewAccountActivity.this, SearchOffersActivity.class);
+                    Intent intent4 = new Intent(UserViewAccountActivity.this, UserSearchOffersActivity.class);
                     startActivity(intent4);
                     //if is person, go to view demands activity
                 } else {
-                    Intent intent4 = new Intent(ViewAccountActivity.this, SearchDemandsActivity.class);
+                    Intent intent4 = new Intent(UserViewAccountActivity.this, UserSearchDemandsActivity.class);
                     startActivity(intent4);
                 }
                 break;

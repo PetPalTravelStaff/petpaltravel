@@ -19,14 +19,15 @@ import com.petpal.petpaltravel.model.PPTModel;
 
 import java.util.ArrayList;
 
-public class SearchOffersActivity extends AppCompatActivity {
+public class UserSearchOffersActivity extends AppCompatActivity {
     //Attributes
     PPTModel myModel;
     ListView myListView;
-    TextView nameLabel, notification;
+    TextView nameLabel, notification, titulo;
     ArrayList<CompanionOfPet> listOfOffers;
     AdapterView.OnItemClickListener listener;
     String nameUser;
+    int idUser;
     Boolean isShelter;
     OfferAdapter myadapter;
 
@@ -36,12 +37,17 @@ public class SearchOffersActivity extends AppCompatActivity {
         setContentView(R.layout.usersearchoffers_layout);
         //instantiate model
         myModel = new PPTModel();
-        //recover list of all offers from model
-        listOfOffers= (ArrayList<CompanionOfPet>) myModel.getAllOffers();
-        //Create view elements in activity
-        initElements();
         //recover interesting data by Shared Preferences
         recoverShared();
+        //recover list of all offers from model
+        if (isShelter) {
+            listOfOffers = (ArrayList<CompanionOfPet>) myModel.getAllOffers();
+        } else {
+            listOfOffers= (ArrayList<CompanionOfPet>) myModel.getOffersPostedByPerson(idUser);
+        }
+        //Create view elements in activity
+        initElements();
+
         //Set the name of the user in the view
         nameLabel.setText(nameUser);
         //create a listener
@@ -60,6 +66,7 @@ public class SearchOffersActivity extends AppCompatActivity {
         if (shared!=null) {
             //Use the editor to catch the couples of dates
             nameUser = shared.getString("userName", "");
+            idUser= shared.getInt("id", 0);
             isShelter = shared.getBoolean("isShelter", false);
         }
     }
@@ -71,6 +78,10 @@ public class SearchOffersActivity extends AppCompatActivity {
         myListView = (ListView) findViewById(R.id.lvLista);
         nameLabel= (TextView) findViewById(R.id.etNombreProtectora);
         notification= (TextView) findViewById(R.id.tverroroff);
+        titulo= (TextView)findViewById(R.id.tvTituloPersonasAcompa);
+        if (!isShelter) {
+            titulo.setText("Estas son tus ofertas publicadas");
+        }
     }
 
     /**
@@ -94,7 +105,7 @@ public class SearchOffersActivity extends AppCompatActivity {
      */
     public void showOfferDetails(CompanionOfPet offer) {
         //set with new activity will be opened
-        Intent intent = new Intent(this, ShowOfferActivity.class);
+        Intent intent = new Intent(this, UserManageOfferActivity.class);
         //Create a bundle object
         Bundle bundle = new Bundle();
         //set interesting data
@@ -113,7 +124,11 @@ public class SearchOffersActivity extends AppCompatActivity {
             notification.setText("Problemas al cargar los datos.\n\t Intentalo más tarde");
         //if list of offers is empty
         } else if (listOfOffers.size()==0) {
-            notification.setText("No se han encontrado ofertas de acompañamiento... aún.");
+            if (isShelter) {
+                notification.setText("No se han encontrado ofertas de acompañamiento... aún.");
+            } else {
+                notification.setText("No has ofrecido tu grata compañía.");
+            }
         //if list of Offers has lines
         } else {
             //create adapter
@@ -132,11 +147,21 @@ public class SearchOffersActivity extends AppCompatActivity {
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        menu.add(0, 1, 0, "Mi perfil");
-        menu.add(0, 2, 1, "Ver mis peticiones");
-        menu.add(0, 3, 2, "Publicar petición");
-        menu.add(0, 4, 3, "Salir");
+        if (isShelter) {
+            super.onCreateOptionsMenu(menu);
+            menu.add(0, 1, 0, "Mi perfil");
+            menu.add(0, 2, 1, "Ver mis peticiones");
+            menu.add(0, 3, 2, "Publicar petición");
+            //menu.add(0, 4, 3, "Buscar ofertas");
+            menu.add(0, 5, 4, "Salir");
+        } else {
+            menu.add(0, 1, 0, "Mi perfil");
+            //menu.add(0, 2, 1, "Ver mis ofertas");
+            menu.add(0, 3, 2, "Publicar oferta");
+            menu.add(0, 4, 3, "Buscar peticiones");
+            menu.add(0, 5, 4, "Salir");
+        }
+
         return true;
     }
 
@@ -146,20 +171,27 @@ public class SearchOffersActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case 1:
                 //Go to view account activity
-                Intent intent1 = new Intent(SearchOffersActivity.this, ViewAccountActivity.class);
+                Intent intent1 = new Intent(UserSearchOffersActivity.this, UserViewAccountActivity.class);
                 startActivity(intent1);
                 break;
             case 2:
-                //Go to show my demands  activity
-                Intent intent2 = new Intent(SearchOffersActivity.this, SearchDemandsActivity.class);
+                Intent intent2 = new Intent(UserSearchOffersActivity.this, UserSearchDemandsActivity.class);
                 startActivity(intent2);
                 break;
             case 3:
-                //Go to add a demand activity
-                Intent intent3 = new Intent(SearchOffersActivity.this, AddDemandActivity.class);
-                startActivity(intent3);
+                if (isShelter) {//Go to add an offer activity
+                    Intent intent3 = new Intent(UserSearchOffersActivity.this, ShelterPostDemandActivity.class);
+                    startActivity(intent3);
+                } else {//Go to add an offer activity
+                    Intent intent3 = new Intent(UserSearchOffersActivity.this, PersonPostOfferActivity.class);
+                    startActivity(intent3);
+                }
                 break;
-            case 4://Exit
+            case 4:
+                Intent intent4 = new Intent(UserSearchOffersActivity.this, UserSearchDemandsActivity.class);
+                startActivity(intent4);
+                break;
+            case 5://Exit
                 finish();
                 break;
         }

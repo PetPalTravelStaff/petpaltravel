@@ -41,7 +41,7 @@ public class ApplyForDemand extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.personapplybeingcompanion_layout);
+        setContentView(R.layout.personapplytodemand_layout);
         //instantiate model
         myModel = new PPTModel();
         //Recover needed data

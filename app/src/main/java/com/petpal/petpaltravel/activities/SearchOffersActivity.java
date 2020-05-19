@@ -33,7 +33,7 @@ public class SearchOffersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.searchingoffers_layout);
+        setContentView(R.layout.usersearchoffers_layout);
         //instantiate model
         myModel = new PPTModel();
         //recover list of all offers from model
@@ -117,7 +117,7 @@ public class SearchOffersActivity extends AppCompatActivity {
         //if list of Offers has lines
         } else {
             //create adapter
-            myadapter= new OfferAdapter(this, R.layout.offeritem_layout,listOfOffers);
+            myadapter= new OfferAdapter(this, R.layout.useradapteritemoffer_layout,listOfOffers);
             //set adapter to the listview
             myListView.setAdapter(myadapter);
             //set listener to the listview

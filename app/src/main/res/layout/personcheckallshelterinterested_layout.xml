@@ -8,13 +8,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp" >
 
         <TextView
             android:id="@+id/tvHola"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="250dp"
+            android:layout_marginStart="24dp"
             android:text="Hola"
             android:textColor="@android:color/background_dark"
             android:textSize="14sp" />
@@ -31,12 +33,12 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvVerOfertas"
+        android:id="@+id/tvTituloProtecInteresadas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginTop="5dp"
         android:text="Estas son las protectoras interesadas en esta oferta..."
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"

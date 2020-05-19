@@ -8,13 +8,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp" >
 
         <TextView
             android:id="@+id/tvHola"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="250dp"
+            android:layout_marginStart="24dp"
             android:text="Hola"
             android:textColor="@android:color/background_dark"
             android:textSize="14sp" />
@@ -30,9 +32,11 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvAcompanya"
+        android:id="@+id/tvTituloOfreceAcompa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="10dp"
         android:text="Ofrece tu acompañamiento"
         android:textAlignment="center"
@@ -42,14 +46,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp">
 
         <TextView
             android:id="@+id/tvMiNombreEs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
             android:text="Mi nombre es:"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp" />
@@ -68,7 +74,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp" >
 
         <TextView
             android:id="@+id/tvFechaViajePersona"
@@ -95,14 +103,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp" >
 
         <TextView
             android:id="@+id/tvCiudadOrigen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="5dp"
             android:text="Ciudad origen:"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp" />
@@ -119,14 +129,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp" >
 
         <TextView
             android:id="@+id/tvCiudadDestino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
             android:text="Ciudad destino:"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp" />
@@ -143,7 +155,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp" >
 
         <TextView
             android:id="@+id/tvAcompanyoA"
@@ -174,7 +188,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp" >
 
         <CheckBox
             android:id="@+id/cbOtros"
@@ -188,7 +204,9 @@
     <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="24dp" >
 
         <TextView
             android:id="@+id/tvTipoTransporte"
@@ -219,6 +237,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="10dp"
         android:text="Comentarios"
         android:textColor="@android:color/background_dark"
@@ -228,9 +247,9 @@
         android:id="@+id/etComentarios"
         android:layout_width="match_parent"
         android:layout_height="65dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginRight="28dp"
         android:background="@android:drawable/editbox_background"
         android:ems="10"
         android:gravity="start|top"
@@ -239,11 +258,10 @@
 
     <Button
         android:id="@+id/btPublicar"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="80dp"
         android:background="@android:drawable/toast_frame"
         android:backgroundTint="@color/holoGreenDark"
         android:text="Publicar"

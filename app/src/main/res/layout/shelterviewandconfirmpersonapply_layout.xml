@@ -7,9 +7,11 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tvTituloIntroduceDatos"
+        android:id="@+id/tvTituloPersonaOfrecido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="20dp"
         android:text="Esta persona se ha ofrecido..."
         android:textAlignment="center"
@@ -29,8 +31,9 @@
         android:id="@+id/tvNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="10dp"
         android:text="Nombre:"
         android:textColor="@android:color/background_dark" />
 
@@ -39,8 +42,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginTop="5dp"
         android:background="@android:drawable/editbox_background"
         android:ems="10" />
 
@@ -48,8 +51,9 @@
         android:id="@+id/tvViajaEn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="5dp"
         android:text="Viaja en:"
         android:textColor="@android:color/background_dark" />
 
@@ -59,16 +63,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginTop="5dp"
         android:background="@android:drawable/editbox_background"
         android:ems="10" />
     <TextView
         android:id="@+id/tvMiEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="5dp"
         android:text="E-mail:"
         android:textColor="@android:color/background_dark" />
 
@@ -77,8 +82,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginTop="5dp"
         android:background="@android:drawable/editbox_background"
         android:ems="10" />
 
@@ -86,8 +91,9 @@
         android:id="@+id/tvMiTelefono"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="5dp"
         android:text="Teléfono:"
         android:textColor="@android:color/background_dark" />
 
@@ -96,8 +102,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginTop="5dp"
         android:background="@android:drawable/editbox_background"
         android:ems="10" />
 
@@ -106,6 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="5dp"
         android:text="Comentarios"
         android:textColor="@android:color/background_dark"
@@ -115,10 +122,10 @@
         android:id="@+id/etComentarios"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:background="@android:drawable/editbox_background"
-        android:ems="200"
+        android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:textSize="14sp" />
@@ -126,16 +133,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp" >
 
         <Button
             android:id="@+id/btLoElijo"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="30dp"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="30dp"
             android:background="@android:drawable/toast_frame"
             android:backgroundTint="@color/holoGreenDark"
             android:text="¡Lo elijo!"

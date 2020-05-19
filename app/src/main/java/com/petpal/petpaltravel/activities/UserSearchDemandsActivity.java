@@ -78,7 +78,7 @@ public class UserSearchDemandsActivity extends AppCompatActivity {
         myListView = (ListView) findViewById(R.id.lvLista);
         nameLabel= (TextView) findViewById(R.id.etNombrePersona);
         notification= (TextView) findViewById(R.id.tverrordem);
-        titulo= (TextView) findViewById(R.id.tvVerDemandas);
+        titulo= (TextView) findViewById(R.id.tvTituloVerQuienAcompa);
         if (isShelter) {
             titulo.setText("Estas son tus peticiones publicadas");
         }

@@ -78,7 +78,7 @@ public class UserSearchOffersActivity extends AppCompatActivity {
         myListView = (ListView) findViewById(R.id.lvLista);
         nameLabel= (TextView) findViewById(R.id.etNombreProtectora);
         notification= (TextView) findViewById(R.id.tverroroff);
-        titulo= (TextView)findViewById(R.id.tvVerDemandas);
+        titulo= (TextView)findViewById(R.id.tvTituloPersonasAcompa);
         if (!isShelter) {
             titulo.setText("Estas son tus ofertas publicadas");
         }

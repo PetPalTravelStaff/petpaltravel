@@ -34,7 +34,7 @@ public class ViewAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.viewaccount_layout);
+        setContentView(R.layout.userviewaccount_layout);
         //instantiate model
         myModel= new PPTModel();
         //recover interesting data from Shared Preferences

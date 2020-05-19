@@ -20,10 +20,7 @@ import com.petpal.petpaltravel.R;
 import com.petpal.petpaltravel.model.CompanionOfPet;
 import com.petpal.petpaltravel.model.PPTModel;
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,7 +45,7 @@ public class AddOfferActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.personoffer_layout);
+        setContentView(R.layout.personpostoffer_layout);
         //instantiate model
         myModel = new PPTModel();
         //recover needed data

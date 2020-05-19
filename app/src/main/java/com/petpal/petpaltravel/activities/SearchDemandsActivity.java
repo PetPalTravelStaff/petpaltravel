@@ -33,7 +33,7 @@ public class SearchDemandsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.searchingdemands_layout);
+        setContentView(R.layout.usersearchdemands_layout);
         //instantiate model
         myModel = new PPTModel();
         //recover list of all demands from model
@@ -116,7 +116,7 @@ public class SearchDemandsActivity extends AppCompatActivity {
         //if list has lines
         } else {
             //create adapter
-            myadapter= new DemandAdapter(this, R.layout.demanditem_layout, listOfDemands);
+            myadapter= new DemandAdapter(this, R.layout.useradapteritemdemand_layout, listOfDemands);
             //set adapter to the listview
             myListView.setAdapter(myadapter);
             //set listener to the listview

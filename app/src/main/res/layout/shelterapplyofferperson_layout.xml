@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvTituloIntroduceDatos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Puede acompañar a una mascota"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/ivFotoMascota"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="150dp"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/tvNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="24dp"
+        android:text="Nombre:"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/etNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="24dp"
+        android:background="@android:drawable/editbox_background"
+        android:ems="10" />
+
+
+
+    <TextView
+        android:id="@+id/tvViajoEn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="24dp"
+        android:text="Viaja en:"
+        android:textColor="@android:color/background_dark" />
+
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvMiEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="24dp"
+        android:text="E-mail:"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/etMiEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="24dp"
+        android:background="@android:drawable/editbox_background"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/tvMiTelefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="24dp"
+        android:text="Teléfono:"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/etMiTelefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="24dp"
+        android:background="@android:drawable/editbox_background"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/tvComentarios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="5dp"
+        android:text="Comentarios"
+        android:textColor="@android:color/background_dark"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/etComentarios"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@android:drawable/editbox_background"
+        android:ems="200"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btOfrecete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="30dp"
+            android:background="@android:drawable/toast_frame"
+            android:backgroundTint="@color/holoGreenDark"
+            android:text="Te elijo como acompañante"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

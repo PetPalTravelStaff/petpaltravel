@@ -10,7 +10,7 @@ public class ApplicationForDemand {
     private String comments;
     private String mail;
     private String phone;
-    private Boolean choosed;
+    private Boolean choosed=false;
 
     public ApplicationForDemand(int idApplForDem, int idDemand, int idPersonApplying, String namePerson, String transport, String comments, String mail, String phone, Boolean choosed) {
         this.idApplForDem = idApplForDem;

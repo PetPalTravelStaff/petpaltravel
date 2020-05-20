@@ -42,7 +42,7 @@ public class DataTestDAO {
     private void addCompanionForPet() {
         demandsFOR.add(new CompanionForPet(1, 1, "Protectora Can", "Drako", new GregorianCalendar(2020,5,27),
                 null, "Ibiza", "Sta. Cruz de Tenerife", "Perro/a", "FoxTerrier pequeño (se puede llevar en cabina)",
-                0, null));
+                4, "Roser"));
         demandsFOR.add(new CompanionForPet(2, 2, "Protectora Kitty", "Sibil",
                 new GregorianCalendar(2020,6,10), new GregorianCalendar(2020,8,31), "Sta. Cruz de Tenerife", "Hospitalet de Llobregat",
                 "Gato/a", "Gatita pequeña muy buena", 0, null));
@@ -89,7 +89,9 @@ public class DataTestDAO {
 
     private void addApplicationDemand() {
         myApplicationsForDemands.add(new ApplicationForDemand(1, 1,4,"Roser",
-                "Barco", null, "roser@gmail.com","625451245", false ));
+                "Barco", null, "roser@gmail.com","625451245", true ));
+        myApplicationsForDemands.add(new ApplicationForDemand(2, 3,4,"Roser",
+                "Avión", null, "roser@gmail.com","625451245", false ));
     }
 
     private void addApplicationOffer() {
@@ -395,6 +397,33 @@ public class DataTestDAO {
         for (ApplicationForOffer apli : myApplicationsForOffers) {
             if (idOffer == apli.getIdOffer()) {
                 result.add(apli);
+            }
+        }
+        return result;
+    }
+
+    public ApplicationForDemand recoverDemandApplyById(int applyId) {
+        ApplicationForDemand result= null;
+        for (ApplicationForDemand apliForDe: myApplicationsForDemands) {
+            if (apliForDe.getIdApplForDem()==applyId) {
+                result= apliForDe;
+            }
+        }
+        return result;
+    }
+
+    public Boolean setSeletedPersonInDemand(ApplicationForDemand myApplication) {
+        Boolean result= false;
+        for (ApplicationForDemand app: myApplicationsForDemands) {
+            if (app.getIdApplForDem()==myApplication.getIdApplForDem()) {
+                app.setChoosed(true);
+                for (CompanionForPet dem: demandsFOR) {
+                    if (dem.getId()==myApplication.getIdDemand()){
+                        dem.setIdUserPersonSeleted(myApplication.getIdPersonApplying());
+                        dem.setNamePSelected(myApplication.getNamePerson());
+                        result=true;
+                    }
+                }
             }
         }
         return result;

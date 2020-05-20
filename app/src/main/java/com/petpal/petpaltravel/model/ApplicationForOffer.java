@@ -11,7 +11,7 @@ public class ApplicationForOffer {
     private String comments;
     private String mail;
     private String phone;
-    private Boolean choosed;
+    private Boolean choosed=false;
 
     public ApplicationForOffer(int idAppliForOf, int idOffer, int idShelterApplying, String nameShelter, String typePet, String namePet, String comments, String mail, String phone, Boolean choosed) {
         this.idAppliForOf = idAppliForOf;

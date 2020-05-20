@@ -43,19 +43,22 @@ public class ViewSheltersAdapter extends BaseAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        ApplicationForOffer item2= (ApplicationForOffer) getItem(position);
+        convertView= LayoutInflater.from(myContext).inflate(R.layout.personadapterintershelters_layout, null);
 
-        ApplicationForOffer item= (ApplicationForOffer) getItem(position);
-        convertView= LayoutInflater.from(myContext).inflate(R.layout.personadapterintershelters_layout,null);
 
-        TextView shelterName= (TextView) convertView.findViewById(R.id.tvshelter);
+        TextView shelterName= (TextView) convertView.findViewById(R.id.tvsheltername);
         TextView petName= (TextView) convertView.findViewById(R.id.tvmascota);
-        TextView petType= (TextView) convertView.findViewById(R.id.tvtipo);
+        TextView petType= (TextView) convertView.findViewById(R.id.tvtipomas);
+
+
+
         ImageView selected= (ImageView) convertView.findViewById(R.id.imagenseleccion);
 
-        shelterName.setText(item.getNameShelter());
-        petName.setText("Nombre: "+item.getNamePet());
-        petType.setText("Tipo: "+ item.getTypePet());
-        if (item.getChoosed()){
+        shelterName.setText(item2.getNameShelter());
+        petName.setText("Nombre: "+item2.getNamePet());
+        petType.setText("Tipo: "+ item2.getTypePet());
+        if (item2.getChoosed()){
             selected.setImageResource(R.drawable.pequever);
         } else {
             selected.setImageResource(R.drawable.pequegris);

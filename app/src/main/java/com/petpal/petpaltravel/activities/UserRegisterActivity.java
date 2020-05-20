@@ -74,17 +74,13 @@ public class UserRegisterActivity extends AppCompatActivity {
                     User provUser= new User();
                     //Verify each field, if its right add to the user, and if doesn't notify user
                     if (!"".equals(userName)) {//not empty
-                        nameBox.setBackgroundColor(Color.TRANSPARENT);
                         provUser.setName(userName);
                         if (!"".equals(userMail)) {//not empty
                             if(validaMail(userMail)) {//valid mail format
-                                mailBox.setBackgroundColor(Color.TRANSPARENT);
                                 provUser.setEmail(userMail);
                                 if (!"".equals(userPass)) {//not empty
-                                    passBox.setBackgroundColor(Color.TRANSPARENT);
                                     if (!"".equals(userPass2)) {//not empty
                                         if (userPass.equals(userPass2)) { //pass and repeat pass matches
-                                            repePassBox.setBackgroundColor(Color.TRANSPARENT);
                                             provUser.setPassword(userPass);
                                             provUser.setShelter(userShelter);
                                             int result=0;

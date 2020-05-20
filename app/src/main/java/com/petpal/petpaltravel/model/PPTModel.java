@@ -153,5 +153,18 @@ public class PPTModel {
         result= myDAO.recoverApplicationForOneDemand(idDemand);
         return result;
     }
+
+    public ApplicationForDemand searchDemandApplyById(int applyId) {
+        ApplicationForDemand result= null;
+        result= myDAO.recoverDemandApplyById(applyId);
+        return result;
+    }
+
+    public Boolean confirmSelectedPerson(ApplicationForDemand myApplication) {
+        Boolean result= false;
+        result= myDAO.setSeletedPersonInDemand(myApplication);
+        return result;
+    }
 }
+
 

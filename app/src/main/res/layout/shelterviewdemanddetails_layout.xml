@@ -93,19 +93,45 @@
 
         <TextView
             android:id="@+id/tvTipoMascota"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:text="Tipo de mascota:"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="Tipo:"
             android:textColor="@android:color/background_dark" />
 
-        <EditText
-            android:id="@+id/etTipoMascota"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:background="@android:drawable/editbox_background"
-            android:ems="10" />
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/radioTipo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rdGato"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gato" />
+
+                <RadioButton
+                    android:id="@+id/rdPerro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Perro" />
+
+                <RadioButton
+                    android:id="@+id/radioOtro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Otro:" />
+
+            </RadioGroup>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -127,10 +153,10 @@
             android:id="@+id/etDisponibleDesde"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginEnd="24dp"
             android:background="@android:drawable/editbox_background"
-            android:ems="10" />
+            android:ems="10"
+            android:hint="dd-mm-aaaa" />
     </LinearLayout>
 
     <LinearLayout
@@ -154,7 +180,18 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:background="@android:drawable/editbox_background"
-            android:ems="10" />
+            android:ems="10"
+            android:hint="dd-mm-aaaa" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp">
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -172,15 +209,13 @@
             android:text="Viaja desde:"
             android:textColor="@android:color/background_dark" />
 
-        <EditText
-            android:id="@+id/etCiudadOrigenMascota"
+        <Spinner
+            android:id="@+id/spViajaDesde"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:background="@android:drawable/editbox_background"
-            android:ems="10" />
-    </LinearLayout>
+            android:layout_marginEnd="24dp" />
 
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -197,13 +232,12 @@
             android:text="Con destino a:"
             android:textColor="@android:color/background_dark" />
 
-        <EditText
-            android:id="@+id/etCiudadDestinoMascota"
+        <Spinner
+            android:id="@+id/spViajeDestino"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:background="@android:drawable/editbox_background"
-            android:ems="10" />
+            android:layout_marginEnd="24dp" />
+
     </LinearLayout>
 
     <TextView
@@ -230,7 +264,7 @@
 
     <Button
         android:id="@+id/btModificar"
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
@@ -243,20 +277,20 @@
 
     <Button
         android:id="@+id/btVerPersonasInteresadas"
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
         android:background="@android:drawable/toast_frame"
         android:backgroundTint="@color/holoGreenDark"
-        android:text="Ver solicitantes"
+        android:text="Ver interesados"
         android:textAllCaps="false"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />
 
     <Button
         android:id="@+id/btCancelarPeticion"
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"

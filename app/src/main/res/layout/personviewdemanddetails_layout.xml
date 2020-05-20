@@ -17,7 +17,6 @@
             android:id="@+id/tvHola"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:text="Hola"
             android:textColor="@android:color/background_dark"
             android:textSize="14sp" />

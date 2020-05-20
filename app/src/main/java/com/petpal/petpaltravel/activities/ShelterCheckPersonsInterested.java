@@ -19,6 +19,7 @@ import com.petpal.petpaltravel.model.ApplicationForDemand;
 import com.petpal.petpaltravel.model.CompanionForPet;
 import com.petpal.petpaltravel.model.PPTModel;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class ShelterCheckPersonsInterested extends AppCompatActivity {
     private PPTModel myModel;
     private ListView myListView;
     private TextView nameLabel, notification;
-    private List<ApplicationForDemand> listOfInterestedPerson;
+    private ArrayList<ApplicationForDemand> listOfInterestedPerson;
     private AdapterView.OnItemClickListener listener;
     private String nameUser;
     private Boolean isShelter;
@@ -37,18 +38,16 @@ public class ShelterCheckPersonsInterested extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.usersearchdemands_layout);
+        setContentView(R.layout.sheltercheckallpersoninterested_layout);
         //instantiate model
         myModel = new PPTModel();
         //recover interesting data by Shared Preferences
         recoverShared();
         recoverDemandId();
         //recover list of all demands from model
-        listOfInterestedPerson= myModel.listPersonInterestedByDemand(idDemand);
+        listOfInterestedPerson= (ArrayList<ApplicationForDemand>) myModel.listPersonInterestedByDemand(idDemand);
         //Create view elements in activity
         initElements();
-        //Set the name of the user in the view
-        nameLabel.setText(nameUser);
         //create a listener
         createListener();
         //load data in view
@@ -121,6 +120,8 @@ public class ShelterCheckPersonsInterested extends AppCompatActivity {
      * Method fot loading data in the list view, using a personal apapter
      */
     private void loadData () {
+        //Set the name of the user in the view
+        nameLabel.setText(nameUser);
         //if there no list
         if (listOfInterestedPerson == null) {
             notification.setText("Problemas al cargar los datos.\n\t Intentalo más tarde");
@@ -130,7 +131,8 @@ public class ShelterCheckPersonsInterested extends AppCompatActivity {
             //if list has lines
         } else {
             //create adapter
-            myadapter= new ViewPersonAdapter(this, R.layout.shelteradapterinterpersons_layout, listOfInterestedPerson);
+            //myadapter= new ViewPersonAdapter(this, R.layout.shelteradapterinterpersons_layout, listOfInterestedPerson);
+            myadapter= new ViewPersonAdapter(this, listOfInterestedPerson);
             //set adapter to the listview
             myListView.setAdapter(myadapter);
             //set listener to the listview

@@ -7,8 +7,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,20 +22,27 @@ import com.petpal.petpaltravel.model.CompanionForPet;
 import com.petpal.petpaltravel.model.PPTModel;
 
 import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 public class ShelterManageDemandActivity extends AppCompatActivity {
     //Atributes
-    TextView namePet, OriginCity, Destination, typePet, dateFrom, dateUntill, comments, nameLabel;
-    String nameUser;
-    String phoneUser;
+    TextView nameLabel;
+    EditText namePet, comments, otherType, dateFrom, dateUntill;
+    String nameUser, phoneUser, animalType;
+    RadioGroup typePet;
+    RadioButton cat,dog, other;
+    Spinner originCity, destination;
+    String[]locations;
     Button btModify;
+    Button btSeeInterested;
+    Button btDelete;
     PPTModel myModel;
     CompanionForPet myDemand;
     int idDemand;
     Boolean isShelter;
     int userId;
     View.OnClickListener listener;
-    int situationFlag=0; // 0= normal, -1= missing phone, -2= applied -3=no more application accepted
+    private RadioGroup.OnCheckedChangeListener listener2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +55,7 @@ public class ShelterManageDemandActivity extends AppCompatActivity {
         //recover needed data
         recoverDemandId();
         myDemand= myModel.recoverDemandById(idDemand);
+        locations= myModel.getCities();
         //Create view elements in activity
         initElements();
         //create a listener
@@ -66,17 +78,26 @@ public class ShelterManageDemandActivity extends AppCompatActivity {
      * Method for create elements of activity
      */
     private void initElements() {
-        namePet= (EditText) findViewById(R.id.etNombreMascota);
-        OriginCity= (TextView) findViewById(R.id.etCiudadOrigenMascota);
-        Destination= (TextView) findViewById(R.id.etCiudadDestinoMascota);
-        typePet= (TextView) findViewById(R.id.etTipoMascota);
-        dateFrom= (TextView) findViewById(R.id.etDisponibleDesde);
-        dateUntill= (TextView) findViewById(R.id.etDisponibleHasta);
-        comments= (TextView) findViewById(R.id.etComentarios);
         nameLabel= (TextView) findViewById(R.id.etNombrePersona);
-        //set value to name of the user field
-        nameLabel.setText(nameUser);
+        namePet= (EditText) findViewById(R.id.etNombreMascota);
+        typePet= (RadioGroup) findViewById(R.id.radioTipo);
+        cat= (RadioButton)findViewById(R.id.rdGato);
+        dog= (RadioButton)findViewById(R.id.rdPerro);
+        other= (RadioButton)findViewById(R.id.radioOtro);
+        otherType= (EditText)findViewById(R.id.etQueTipo);
+        originCity = (Spinner) findViewById(R.id.spViajaDesde);
+        destination = (Spinner) findViewById(R.id.spViajeDestino);
+        ArrayAdapter<String> questionsAdapter = new ArrayAdapter<String>(ShelterManageDemandActivity.this,android.R.layout.simple_spinner_item, locations);
+        questionsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        originCity.setAdapter(questionsAdapter);
+        destination.setAdapter(questionsAdapter);
+        dateFrom= (EditText) findViewById(R.id.etDisponibleDesde);
+        dateUntill= (EditText) findViewById(R.id.etDisponibleHasta);
+        comments= (EditText) findViewById(R.id.etComentarios);
+
         btModify = (Button) findViewById(R.id.btModificar);
+        btSeeInterested= (Button) findViewById(R.id.btVerPersonasInteresadas);
+        btDelete= (Button) findViewById(R.id.btCancelarPeticion);
     }
 
     /**
@@ -102,10 +123,148 @@ public class ShelterManageDemandActivity extends AppCompatActivity {
         listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    //BOTON MODIFICAR --> MODIFICAR
-                    //BOTON VER PERSONAS
-                    //BOTON CANCELAR OFERTA
+                if (view.getId() == R.id.btVerPersonasInteresadas) {
+                    Intent intent1 = new Intent(ShelterManageDemandActivity.this, ShelterCheckPersonsInterested.class);
+                    //Create a bundle object
+                    Bundle bundle = new Bundle();
+                    //set interesting data
+                    bundle.putInt("idDemand", idDemand);
+                    intent1.putExtras(bundle);
+                    startActivity(intent1);
+                } else if (view.getId() == R.id.btModificar) {
+//                //recover data from form and save it in variables
+//                String namePet = null;
+//                if (nameBox.getText() != null) {
+//                    namePet = nameBox.getText().toString();
+//                }
+//                String dateFromString = null;
+//                if (dateAvaliable.getText() != null) {
+//                    dateFromString = dateAvaliable.getText().toString();
+//                }
+//                String dateUntillString = null;
+//                if (dateDeadLine.getText() != null) {
+//                    dateUntillString = dateDeadLine.getText().toString();
+//                }
+//                GregorianCalendar dateCalFrom = null;
+//                GregorianCalendar dateCalUntil = null;
+//                String cityOrigin = originCity.getSelectedItem().toString();
+//                String cityDestiny = destinyCity.getSelectedItem().toString();
+//                int typeSelected = petType.getCheckedRadioButtonId();
+//                String commentString = comments.getText().toString();
+//                myDemand = new CompanionForPet();
+//                myDemand.setIdeUserShelterOffering(userId);
+//                myDemand.setNameShelter(nameUser);
+//                if (!"".equals(namePet)) {
+//                    nameBox.setHintTextColor(Color.BLACK);
+//                    myDemand.setNamePet(namePet);
+//                    if (!"".equals(dateFromString)) {//check empty date avaliable
+//                        dateAvaliable.setHintTextColor(Color.BLACK);
+//                        dateCalFrom = validateDate(dateFromString);
+//                        if (dateCalFrom != null) { //check valid date avaliable
+//                            dateAvaliable.setHintTextColor(Color.BLACK);
+//                            myDemand.setAvailableFrom(dateCalFrom);
+//                            if (!"".equals(dateUntillString)) { //if deadline is written: check valid date
+//                                dateCalUntil = validateDate(dateUntillString);
+//                                if (dateCalUntil != null) {
+//                                    myDemand.setDeadline(dateCalUntil);
+//                                }
+//                            } else { //if not writen save null.
+//                                myDemand.setDeadline(null);
+//                            }
+//                            if (cityOrigin != null) {
+//                                labOrigen.setTextColor(Color.BLACK);
+//                                myDemand.setOriginCity(cityOrigin);
+//                                if (cityDestiny != null) {
+//                                    labDestino.setTextColor(Color.BLACK);
+//                                    if (!cityDestiny.equals(cityOrigin)) {
+//                                        labOrigen.setTextColor(Color.BLACK);
+//                                        labDestino.setTextColor(Color.BLACK);
+//                                        myDemand.setDestinyCity(cityDestiny);
+//                                        Boolean noChooseType = false;
+//                                        if (!cat.isChecked() & !dog.isChecked() & !other.isChecked()) {
+//                                            noChooseType = true;
+//                                        } else {
+//                                            if (other.isChecked()) {
+//                                                if (otherType.getText() == null & "".equals(otherType.getText().toString())) {
+//                                                    noChooseType = true;
+//                                                } else {
+//                                                    animalType = otherType.getText().toString();
+//                                                    noChooseType = false;
+//                                                }
+//                                            }
+//                                        }
+//                                        if (!noChooseType) {
+//                                            labTipo.setTextColor(Color.BLACK);
+//                                            otherType.setHintTextColor(Color.BLACK);
+//                                            myDemand.setTypePet(animalType);
+//                                            myDemand.setComments(commentString);
+//                                            int idDemand = myModel.addDemandToBD(myDemand);
+//                                            if (idDemand != 0) {
+//                                                Intent intent1 = new Intent(ShelterPostDemandActivity.this, UserSearchDemandsActivity.class);
+//                                                //Create a bundle object
+//                                                Bundle bundle = new Bundle();
+//                                                //set interesting data
+//                                                bundle.putInt("idDemand", idDemand);
+//                                                intent1.putExtras(bundle);
+//                                                startActivity(intent1);
+//                                            } else {
+//                                                btPostDemand.setText("Error. Prueba más tarde");
+//                                                btPostDemand.setTextColor(Color.RED);
+//                                            }
+//                                        } else {
+//                                            labTipo.setTextColor(Color.RED);
+//                                            otherType.setHintTextColor(Color.RED);
+//                                        }
+//                                    } else {
+//                                        labOrigen.setTextColor(Color.RED);
+//                                        labDestino.setTextColor(Color.RED);
+//                                    }
+//                                } else {
+//                                    labDestino.setTextColor(Color.RED);
+//                                }
+//                            } else {
+//                                labOrigen.setTextColor(Color.RED);
+//                            }
+//
+//                        } else {
+//                            dateAvaliable.setHintTextColor(Color.RED);
+//                            dateAvaliable.setText(null);
+//                        }
+//
+//                    } else {
+//                        dateAvaliable.setHintTextColor(Color.RED);
+//                        dateAvaliable.setText(null);
+//                    }
+//                } else {
+//                    nameBox.setHintTextColor(Color.RED);
+//                    nameBox.setText(null);
+//                }
+                } else if (view.getId() == R.id.btCancelarPeticion) {
+                    //TODO
                 }
+            }
+        };
+        listener2 = new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rdGato:
+                        animalType = "Gato/a";
+                        otherType.setVisibility(View.GONE);
+                        otherType.setText(null);
+                        break;
+                    case R.id.rdPerro:
+                        animalType = "Perro/a";
+                        otherType.setVisibility(View.GONE);
+                        otherType.setText(null);
+                        break;
+                    case R.id.radioOtro:
+                        otherType.setVisibility(View.VISIBLE);
+                        otherType.setHint("¿Cuál?");
+                        break;
+                }
+            }
+
         };
     }
 
@@ -113,40 +272,52 @@ public class ShelterManageDemandActivity extends AppCompatActivity {
      * Method for adding listener to the elements
      */
     private void addElementsToListener() {
-        btModify.setOnClickListener (listener);
+        btModify.setOnClickListener(listener);
+        btSeeInterested.setOnClickListener (listener);
+        btDelete.setOnClickListener (listener);
+        typePet.setOnCheckedChangeListener(listener2);
     }
-
 
 
     /**
      * Method for loading demand data in the view
      */
     private void loadData() {
-        //if the demand is null (does not arrived to this activity), notify
-        if(myDemand==null){
-            namePet.setText("No encontrado");
-            OriginCity.setText("No encontrado");
-            Destination.setText("No encontrado");
-            typePet.setText("No encontrado");
-            dateFrom.setText("No encontrado");
-            dateUntill.setText("No encontrado");
-            comments.setText("No encontrado");
-            btModify.setText("No se ha encontrado");
-            btModify.setEnabled(false);
-        //if there is a demand
-        } else {
-            namePet.setText(myDemand.getNamePet());
-            OriginCity.setText(myDemand.getOriginCity());
-            Destination.setText(myDemand.getDestinyCity());
-            typePet.setText(myDemand.getTypePet());
-            dateFrom.setText(new SimpleDateFormat("dd-MM-yyyy").format(myDemand.getAvailableFrom().getTime()));
-            if (myDemand.getDeadline()!=null) {
-                dateUntill.setText(new SimpleDateFormat("dd-MM-yyyy").format(myDemand.getDeadline().getTime()));
-            } else {
-                dateUntill.setText("Sin fecha límite");
-            }
-            comments.setText(myDemand.getComments());
+        //set value to name of the user field
+        nameLabel.setText(nameUser);
+        namePet.setText(myDemand.getNamePet());
+        animalType= myDemand.getTypePet();
+        if (animalType.equals("Gato/a")) {
+            cat.setChecked(true);
+            otherType.setVisibility(View.GONE);
+        } else if (animalType.equals("Perro/a")) {
+            dog.setChecked(true);
+            otherType.setVisibility(View.GONE);
+        }else {
+            other.setChecked(true);
+            otherType.setVisibility(View.VISIBLE);
+            otherType.setText(animalType);
         }
+        dateFrom.setText(new SimpleDateFormat("dd-MM-yyyy").format(myDemand.getAvailableFrom().getTime()));
+        if (myDemand.getDeadline()!=null) {
+            dateUntill.setText(new SimpleDateFormat("dd-MM-yyyy").format(myDemand.getDeadline().getTime()));
+        } else {
+            dateUntill.setText("Sin límite");
+        }
+
+         String orcity= myDemand.getOriginCity();
+         for (int i=0; i<locations.length; i++){
+             if (locations[i].equals(orcity)) {
+                 originCity.setSelection(i);
+             }
+         }
+        String descity= myDemand.getDestinyCity();
+        for (int i=0; i<locations.length; i++){
+            if (locations[i].equals(descity)) {
+                destination.setSelection(i);
+            }
+        }
+        comments.setText(myDemand.getComments());
     }
 
     /**

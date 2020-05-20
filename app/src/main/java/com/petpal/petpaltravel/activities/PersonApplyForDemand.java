@@ -111,20 +111,15 @@ public class PersonApplyForDemand extends AppCompatActivity {
                 myDemand.getIdPersonInterestePosition(2)==idUser){
             apliRecovered= myModel.searchApplicationForDemand(demandId, idUser);
             commentsBox.setText(apliRecovered.getComments());
-            String transport= apliRecovered.getTransport();
-            switch (transport) {
-                case "Avión":
-                    mySpinner.setSelection(0);
-                    break;
-                case "Barco":
-                    mySpinner.setSelection(1);
-                    break;
-                case "Coche":
-                    mySpinner.setSelection(2);
-                    break;
-                case "Tren":
-                    mySpinner.setSelection(3);
-                    break;
+            String transportRecovered= apliRecovered.getTransport();
+            if (transportRecovered.equals(transport[0])) {
+                mySpinner.setSelection(0);
+            } else if (transportRecovered.equals(transport[1])) {
+                mySpinner.setSelection(1);
+            }else if (transportRecovered.equals(transport[2])) {
+                mySpinner.setSelection(2);
+            }else if (transportRecovered.equals(transport[2])) {
+                mySpinner.setSelection(2);
             }
             situationFlag=1;
             situationUpdateFlag=0;

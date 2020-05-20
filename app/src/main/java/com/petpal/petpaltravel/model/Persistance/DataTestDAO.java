@@ -40,7 +40,7 @@ public class DataTestDAO {
 
     private void addCompanionForPet() {
         demandsFOR.add(new CompanionForPet(1, 1, "Protectora Can", "Drako", new GregorianCalendar(2020,5,27),
-                null, "Ibiza", "Sta. Cruz Tenerife", "Perro/a", "FoxTerrier pequeño (se puede llevar en cabina)",
+                null, "Ibiza", "Sta. Cruz de Tenerife", "Perro/a", "FoxTerrier pequeño (se puede llevar en cabina)",
                 0, null));
         demandsFOR.add(new CompanionForPet(2, 2, "Protectora Kitty", "Sibil",
                 new GregorianCalendar(2020,6,10), new GregorianCalendar(2020,8,31), "Sta. Cruz de Tenerife", "Hospitalet de Llobregat",
@@ -51,20 +51,23 @@ public class DataTestDAO {
         test1.setNamePersonsIntPosition("Roser",0);
         test1.setIdPersonsIntPosition(4,0);
         demandsFOR.add(test1);
+        demandsFOR.add(new CompanionForPet(4, 1, "Protectora Can", "Lucy",
+                new GregorianCalendar(2020,7,10), new GregorianCalendar(2020,9,12), "Ibiza", "Hospitalet de Llobregat",
+                "Cobaya", "Cobaya super mona", 0, null));
     }
 
     private void addCompanionOfPet() {
         CompanionOfPet test1= new CompanionOfPet(1, 3,  "Marta", new GregorianCalendar(2020,6,10),
-                "Hospitalet de Llobregat", "Ibiza","Vuelo", "Perro/a", "Soy adiestradora canina, así que tengo mucha experiencia con perros",
+                "Hospitalet de Llobregat", "Ibiza","Avión", "Perro/a", "Soy adiestradora canina, así que tengo mucha experiencia con perros",
                 0, null);
         test1.setIdShelterIntPosition(2,0);
         test1.setNamesShelterIntPosition("Protectora Kitty",0);
         offeringsOF.add(test1);
         offeringsOF.add(new CompanionOfPet(2, 4,  "Roser", new GregorianCalendar(2020,6,20),
-                "Madrid", "Sta. Cruz de Tenerife","Vuelo", "Perro/a, Gato/a, Otros", null,
+                "Madrid", "Sta. Cruz de Tenerife","Avión", "Perro/a, Gato/a, Otros", null,
                 0, null));
         offeringsOF.add(new CompanionOfPet(3, 3,  "Marta", new GregorianCalendar(2020,7,26),
-                "Ibiza", "Hospitalet de Llobregat","Vuelo", "Perro/a", "Soy adiestradora canina, así que tengo mucha experiencia con perros",
+                "Ibiza", "Hospitalet de Llobregat","Avión", "Perro/a", "Soy adiestradora canina, así que tengo mucha experiencia con perros",
                 0, null));
     }
 
@@ -84,8 +87,8 @@ public class DataTestDAO {
     }
 
     private void addApplicationDemand() {
-        myApplicationsForDemands.add(new ApplicationForDemand(1, 3,4,"Roser",
-                "Tren", null, "roser@gmail.com","625451245", false ));
+        myApplicationsForDemands.add(new ApplicationForDemand(1, 1,4,"Roser",
+                "Barco", null, "roser@gmail.com","625451245", false ));
     }
 
     private void addApplicationOffer() {

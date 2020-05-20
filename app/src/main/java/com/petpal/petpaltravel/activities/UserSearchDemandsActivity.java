@@ -44,7 +44,6 @@ public class UserSearchDemandsActivity extends AppCompatActivity {
             listOfDemands= (ArrayList<CompanionForPet>) myModel.getAllDemands();
         } else {
             listOfDemands= (ArrayList<CompanionForPet>) myModel.getDemandsPostedByShelter(idUser);
-            System.out.println("List of ");
         }
         //Create view elements in activity
         initElements();

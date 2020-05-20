@@ -2,6 +2,7 @@ package com.petpal.petpaltravel.model;
 
 import com.petpal.petpaltravel.model.Persistance.DataTestDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PPTModel {
@@ -130,6 +131,12 @@ public class PPTModel {
     public ApplicationForDemand searchApplicationForDemand(int demandId, int idUser) {
         ApplicationForDemand result= null;
         result= myDAO.recoverApplicationForDemand(demandId, idUser);
+        return result;
+    }
+
+    public List<ApplicationForDemand> listPersonInterestedByDemand(int idDemand) {
+        List<ApplicationForDemand> result= null;
+        result= myDAO.recoverApplicationForOneDemand(idDemand);
         return result;
     }
 }

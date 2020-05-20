@@ -58,7 +58,6 @@ public class PersonApplyForDemand extends AppCompatActivity {
         createListener();
         //load data in view
         addElementsToListener();
-
     }
 
 

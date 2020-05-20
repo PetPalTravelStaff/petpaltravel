@@ -349,4 +349,14 @@ public class DataTestDAO {
         }
         return result;
     }
+
+    public List<ApplicationForDemand> recoverApplicationForOneDemand(int idDemand) {
+        List<ApplicationForDemand> result= new ArrayList<ApplicationForDemand>();
+        for (ApplicationForDemand apli : myApplicationsForDemands) {
+            if (idDemand == apli.getIdDemand()) {
+                result.add(apli);
+            }
+        }
+        return result;
+    }
 }

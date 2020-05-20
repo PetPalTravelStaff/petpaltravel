@@ -2,7 +2,7 @@ package com.petpal.petpaltravel.model;
 
 public class ApplicationForOffer {
     //Attributes
-    //Attributes
+    private int idAppliForOf;
     private int idOffer;
     private int idShelterApplying;
     private String nameShelter;
@@ -12,7 +12,8 @@ public class ApplicationForOffer {
     private String mail;
     private String phone;
 
-    public ApplicationForOffer(int idOffer, int idShelterApplying, String nameShelter, String typePet, String namePet, String comments, String mail, String phone) {
+    public ApplicationForOffer(int idAppliForOf, int idOffer, int idShelterApplying, String nameShelter, String typePet, String namePet, String comments, String mail, String phone) {
+        this.idAppliForOf = idAppliForOf;
         this.idOffer = idOffer;
         this.idShelterApplying = idShelterApplying;
         this.nameShelter = nameShelter;
@@ -24,6 +25,15 @@ public class ApplicationForOffer {
     }
 
     public ApplicationForOffer() {
+    }
+
+
+    public int getIdAppliForOf() {
+        return idAppliForOf;
+    }
+
+    public void setIdAppliForOf(int idAppliForOf) {
+        this.idAppliForOf = idAppliForOf;
     }
 
     public int getIdOffer() {

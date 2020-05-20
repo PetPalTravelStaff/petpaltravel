@@ -105,8 +105,8 @@ public class ShelterApplyForOffer extends AppCompatActivity {
         phoneBox = (TextView) findViewById(R.id.etMiTelefono);
         mailBox = (TextView) findViewById(R.id.etMiEmail);
         commentsBox = (EditText) findViewById(R.id.etComentarios);
-        apply = (Button) findViewById(R.id.btOfrecete);
-        modify = (Button) findViewById(R.id.btModificar);
+        apply = (Button) findViewById(R.id.btSolicitalo);
+        modify = (Button) findViewById(R.id.btGuardaCambios);
     }
 
     private void loadData() {
@@ -201,7 +201,7 @@ public class ShelterApplyForOffer extends AppCompatActivity {
         listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (view.getId() == R.id.btOfrecete) {
+                if (view.getId() == R.id.btSolicitalo) {
                     switch (situationFlag) {
                         case 0: //normal case: shelter apply to the offer
                             Boolean control= false;
@@ -275,7 +275,7 @@ public class ShelterApplyForOffer extends AppCompatActivity {
                             setButtonsValues();
                             break;
                     }
-                } else if (view.getId() == R.id.btModificar) {
+                } else if (view.getId() == R.id.btGuardaCambios) {
                     Boolean control = modifyShelterToOffer();
                     if (control) {
                         //if can update suscessfully
@@ -352,17 +352,11 @@ public class ShelterApplyForOffer extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        if (isShelter) {
             menu.add(0, 1, 0, "Mi perfil");
             menu.add(0, 2, 1, "Ver mis peticiones");
             menu.add(0, 3, 2, "Publicar petición");
-            menu.add(0, 4, 3, "Salir");
-        } else {
-            menu.add(0, 1, 0, "Mi perfil");
-            menu.add(0, 2, 1, "Ver mis ofertas");
-            menu.add(0, 3, 2, "Publicar oferta");
-            menu.add(0, 4, 3, "Salir");
-        }
+            menu.add(0, 4, 3, "Buscar ofertas");
+            menu.add(0, 5, 4, "Salir");
         return true;
     }
 
@@ -376,28 +370,18 @@ public class ShelterApplyForOffer extends AppCompatActivity {
                 startActivity(intent1);
                 break;
             case 2:
-                //If is Shelter, go to show my demands activity
-                if (isShelter) {
                     Intent intent2 = new Intent(ShelterApplyForOffer.this, UserSearchDemandsActivity.class);
                     startActivity(intent2);
-                    //if is person, go to show my details activity
-                } else {
-                    Intent intent2 = new Intent(ShelterApplyForOffer.this, UserSearchOffersActivity.class);
-                    startActivity(intent2);
-                }
                 break;
             case 3:
-                //If is Shelter, go to add a demands activity
-                if (isShelter) {
                     Intent intent3 = new Intent(ShelterApplyForOffer.this, ShelterPostDemandActivity.class);
                     startActivity(intent3);
-                    //if is person, go to add an offer activity
-                } else {
-                    Intent intent3 = new Intent(ShelterApplyForOffer.this, PersonPostOfferActivity.class);
-                    startActivity(intent3);
-                }
                 break;
-            case 4://Exit
+            case 4:
+                Intent intent4 = new Intent(ShelterApplyForOffer.this, UserSearchOffersActivity.class);
+                startActivity(intent4);
+                break;
+            case 5://Exit
                 finish();
                 break;
         }

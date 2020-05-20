@@ -50,7 +50,7 @@ public class UserRegisterActivity extends AppCompatActivity {
         repePassBox = (EditText) findViewById(R.id.etpassword2);
         btSave = (Button) findViewById(R.id.btDameAlta);
         btSave.setText(null);
-        btSave.setTextColor(Color.BLACK);
+        btSave.setTextColor(Color.WHITE);
         btSave.setEnabled(true);
         cbIsShelter = (CheckBox) findViewById(R.id.cbSoyProtectora);
     }

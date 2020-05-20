@@ -186,7 +186,7 @@ public class PersonPostOfferActivity extends AppCompatActivity {
                                             int idOffer = myModel.addOfferToBD(myOffer);
                                             System.out.println("Id offer es: "+ idOffer);
                                             if (idOffer != 0) {
-                                                Intent intent1 = new Intent(PersonPostOfferActivity.this, UserManageOfferActivity.class);
+                                                Intent intent1 = new Intent(PersonPostOfferActivity.this, UserSearchOffersActivity.class);
                                                 //Create a bundle object
                                                 Bundle bundle = new Bundle();
                                                 //set interesting data

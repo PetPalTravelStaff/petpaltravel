@@ -18,7 +18,7 @@ import com.petpal.petpaltravel.model.PPTModel;
 
 import java.text.SimpleDateFormat;
 
-public class UserManageOfferActivity extends AppCompatActivity {
+public class ShelterManageOfferActivity extends AppCompatActivity {
     //Atributes
     TextView namePerson, OriginCity, Destination, typePet, date, transport, comments, userLabel;
     String nameUser;
@@ -37,11 +37,7 @@ public class UserManageOfferActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //recover urgent data
         recoverShared();
-        if (isShelter){
-            setContentView(R.layout.shelterviewofferdetails_layout);
-        } else {
-            setContentView(R.layout.personviewofferdetails_layout);
-        }
+        setContentView(R.layout.shelterviewofferdetails_layout);
         //instantiate model
         myModel = new PPTModel();
         //recover needed data
@@ -82,7 +78,7 @@ public class UserManageOfferActivity extends AppCompatActivity {
         userLabel= (TextView) findViewById(R.id.etNombreProtectora);
         //set value to name of the user field
         userLabel.setText(nameUser);
-        acceptOffer= (Button) findViewById(R.id.btApadrinarMascota);
+        acceptOffer= (Button) findViewById(R.id.btQuieroMeAcompa);
         //set situation flag depending on the case
         if (myOffer.getIdShelterIntPosition(0)==userId | myOffer.getIdShelterIntPosition(1)==userId |
                 myOffer.getIdShelterIntPosition(2)==userId){
@@ -102,12 +98,6 @@ public class UserManageOfferActivity extends AppCompatActivity {
      * depending on the situation flag value
      */
     private void setButtonAcceptOffer() {
-        //if we are the shelter that post this demand...
-        if (isShelter & userId!=0 & userId==myOffer.getIdeUserPersonOffering()) {
-            acceptOffer.setText("Modificar oferta");
-            //if not...
-        } else {
-            //depending on the situation flag
             switch (situationFlag) {
                 case 0: //normal case
                     acceptOffer.setText("¡Quiero pedirle que acompañe!");
@@ -122,7 +112,7 @@ public class UserManageOfferActivity extends AppCompatActivity {
                 case -2: //person has applied already
                     acceptOffer.setText("Ya lo has solicitado");
                     acceptOffer.setEnabled(true);
-                    acceptOffer.setTextColor(Color.RED);
+                    acceptOffer.setTextColor(Color.WHITE);
                     break;
                 case -3: //no more application accepted
                     acceptOffer.setText("Ya no acepta más solicitudes");
@@ -134,7 +124,6 @@ public class UserManageOfferActivity extends AppCompatActivity {
                     acceptOffer.setEnabled(true);
                     break;
             }
-        }
     }
 
     /**
@@ -160,17 +149,11 @@ public class UserManageOfferActivity extends AppCompatActivity {
         listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //if we are the person that post this offer, open modify offer activity
-                if (!isShelter & userId!=0 & userId==myOffer.getIdeUserPersonOffering()){
-                    //Intent intent  = new Intent(UserManageOfferActivity.this, MODIFICAR_OFERTA.class);
-                    //startActivity(intent);
-                //if not...
-                } else {
                     switch (situationFlag) {
                         case 0: //normal case: shelter apply to the offer
                         case -2: //shelter has applied already: shelter un-apply the offer
                             //Open applicationActivity
-                            Intent intent1  = new Intent(UserManageOfferActivity.this, ShelterApplyForOffer.class);
+                            Intent intent1  = new Intent(ShelterManageOfferActivity.this, ShelterApplyForOffer.class);
                             //Create a bundle object
                             Bundle bundle = new Bundle();
                             //set interesting data
@@ -180,12 +163,11 @@ public class UserManageOfferActivity extends AppCompatActivity {
 
                             break;
                         case -1: // missing phone: open activity to go to change account details
-                            Intent intent  = new Intent(UserManageOfferActivity.this, UserViewAccountActivity.class);
+                            Intent intent  = new Intent(ShelterManageOfferActivity.this, UserViewAccountActivity.class);
                             startActivity(intent);
                             break;
                     }
                 }
-            }
         };
     }
 
@@ -232,18 +214,10 @@ public class UserManageOfferActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        if (isShelter) {
             menu.add(0, 1, 0, "Mi perfil");
             menu.add(0, 2, 1, "Ver mis peticiones");
             menu.add(0, 3, 2, "Publicar petición");
             menu.add(0, 4, 3, "Salir");
-        } else {
-            menu.add(0, 1, 0, "Mi perfil");
-            menu.add(0, 2, 1, "Ver mis ofertas");
-            menu.add(0, 3, 2, "Publicar oferta");
-            menu.add(0, 4, 3, "Salir");
-        }
-
         return true;
     }
 
@@ -253,30 +227,16 @@ public class UserManageOfferActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case 1:
                 //Go to view account activity
-                Intent intent1 = new Intent(UserManageOfferActivity.this, UserViewAccountActivity.class);
+                Intent intent1 = new Intent(ShelterManageOfferActivity.this, UserViewAccountActivity.class);
                 startActivity(intent1);
                 break;
             case 2:
-                //If is Shelter, go to show my demands activity
-                if(isShelter) {
-                    Intent intent2 = new Intent(UserManageOfferActivity.this, UserSearchDemandsActivity.class);
+                    Intent intent2 = new Intent(ShelterManageOfferActivity.this, UserSearchDemandsActivity.class);
                     startActivity(intent2);
-                //if is person, go to show my offers activity
-                } else {
-                    Intent intent2 = new Intent(UserManageOfferActivity.this, UserSearchOffersActivity.class);
-                    startActivity(intent2);
-                }
                 break;
             case 3:
-                //If is Shelter, go to add a demands activity
-                if (isShelter) {
-                    Intent intent3 = new Intent(UserManageOfferActivity.this, ShelterPostDemandActivity.class);
+                    Intent intent3 = new Intent(ShelterManageOfferActivity.this, ShelterPostDemandActivity.class);
                     startActivity(intent3);
-                    //if is person, go to add an offer activity
-                } else {
-                    Intent intent3 = new Intent(UserManageOfferActivity.this, PersonPostOfferActivity.class);
-                    startActivity(intent3);
-                }
                 break;
             case 4://Exit
                 finish();

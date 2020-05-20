@@ -76,7 +76,7 @@ public class ShelterManageDemandActivity extends AppCompatActivity {
         nameLabel= (TextView) findViewById(R.id.etNombrePersona);
         //set value to name of the user field
         nameLabel.setText(nameUser);
-        offerMe= (Button) findViewById(R.id.btApadrinarMascota);
+        offerMe= (Button) findViewById(R.id.btModificar);
         //set situation flag depending on the case
         if (myDemand.getIdPersonInterestePosition(0)==userId | myDemand.getIdPersonInterestePosition(1)==userId |
                 myDemand.getIdPersonInterestePosition(2)==userId){

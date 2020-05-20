@@ -24,7 +24,7 @@ public class ShelterManageDemandActivity extends AppCompatActivity {
     TextView namePet, OriginCity, Destination, typePet, dateFrom, dateUntill, comments, nameLabel;
     String nameUser;
     String phoneUser;
-    Button offerMe;
+    Button btModify;
     PPTModel myModel;
     CompanionForPet myDemand;
     int idDemand;
@@ -76,52 +76,7 @@ public class ShelterManageDemandActivity extends AppCompatActivity {
         nameLabel= (TextView) findViewById(R.id.etNombrePersona);
         //set value to name of the user field
         nameLabel.setText(nameUser);
-        offerMe= (Button) findViewById(R.id.btModificar);
-        //set situation flag depending on the case
-        if (myDemand.getIdPersonInterestePosition(0)==userId | myDemand.getIdPersonInterestePosition(1)==userId |
-                myDemand.getIdPersonInterestePosition(2)==userId){
-            situationFlag=-2;
-        } else if (myDemand.getIdPersonInterestePosition(0)!=0 & myDemand.getIdPersonInterestePosition(1)!=0 &
-                myDemand.getIdPersonInterestePosition(2)!=0){
-            situationFlag=-3;
-        } else if (phoneUser==null) {
-            situationFlag=-1;
-        }
-        //set value of text of offerme button
-        setButtonOfferMe();
-    }
-
-    /**
-     * Method for setting the value of text in offerme button
-     * depending on the situation flag value
-     */
-    private void setButtonOfferMe() {
-            switch (situationFlag) {
-                case 0: //normal case
-                    offerMe.setText("¡Quiero que acompañe!");
-                    offerMe.setEnabled(true);
-                    offerMe.setTextColor(Color.WHITE);
-                    break;
-                case -1: // missing phone
-                    offerMe.setText("Falta tu teléfono para ofrecerte");
-                    offerMe.setEnabled(true);
-                    offerMe.setTextColor(Color.RED);
-                    break;
-                case -2: //person has applied already
-                    offerMe.setText("Cancelar tu interés");
-                    offerMe.setEnabled(true);
-                    offerMe.setTextColor(Color.WHITE);
-                    break;
-                case -3: //no more application accepted
-                    offerMe.setText("No se aceptan más");
-                    offerMe.setEnabled(false);
-                    break;
-                case -4: //there is some trouble
-                    offerMe.setText("Prueba más tarde");
-                    offerMe.setTextColor(Color.RED);
-                    offerMe.setEnabled(true);
-                    break;
-        }
+        btModify = (Button) findViewById(R.id.btModificar);
     }
 
     /**
@@ -147,22 +102,9 @@ public class ShelterManageDemandActivity extends AppCompatActivity {
         listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    switch (situationFlag) {
-                        case 0: //normal case: person wants to apply to the demand
-                        case -2: //person has applied already: person wants to un-apply the demand
-                            Intent intent1  = new Intent(ShelterManageDemandActivity.this, PersonApplyForDemand.class);
-                            //Create a bundle object
-                            Bundle bundle = new Bundle();
-                            //set interesting data
-                            bundle.putInt("idDemand", idDemand);
-                            intent1.putExtras(bundle);
-                            startActivity(intent1);
-                            break;
-                        case -1: // missing phone: open activity to go to change account details
-                            Intent intent  = new Intent(ShelterManageDemandActivity.this, UserViewAccountActivity.class);
-                            startActivity(intent);
-                            break;
-                    }
+                    //BOTON MODIFICAR --> MODIFICAR
+                    //BOTON VER PERSONAS
+                    //BOTON CANCELAR OFERTA
                 }
         };
     }
@@ -171,7 +113,7 @@ public class ShelterManageDemandActivity extends AppCompatActivity {
      * Method for adding listener to the elements
      */
     private void addElementsToListener() {
-        offerMe.setOnClickListener (listener);
+        btModify.setOnClickListener (listener);
     }
 
 
@@ -189,8 +131,8 @@ public class ShelterManageDemandActivity extends AppCompatActivity {
             dateFrom.setText("No encontrado");
             dateUntill.setText("No encontrado");
             comments.setText("No encontrado");
-            offerMe.setText("No se ha encontrado");
-            offerMe.setEnabled(false);
+            btModify.setText("No se ha encontrado");
+            btModify.setEnabled(false);
         //if there is a demand
         } else {
             namePet.setText(myDemand.getNamePet());
@@ -215,17 +157,10 @@ public class ShelterManageDemandActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        if (isShelter) {
             menu.add(0, 1, 0, "Mi perfil");
             menu.add(0, 2, 1, "Ver mis peticiones");
             menu.add(0, 3, 2, "Publicar petición");
             menu.add(0, 4, 3, "Salir");
-        } else {
-            menu.add(0, 1, 0, "Mi perfil");
-            menu.add(0, 2, 1, "Ver mis ofertas");
-            menu.add(0, 3, 2, "Publicar oferta");
-            menu.add(0, 4, 3, "Salir");
-        }
         return true;
     }
 
@@ -239,26 +174,12 @@ public class ShelterManageDemandActivity extends AppCompatActivity {
                     startActivity(intent1);
                     break;
                 case 2:
-                    //If is Shelter, go to show my demands activity
-                    if(isShelter) {
                         Intent intent2 = new Intent(ShelterManageDemandActivity.this, UserSearchDemandsActivity.class);
                         startActivity(intent2);
-                    //if is person, go to show my details activity
-                    } else {
-                        Intent intent2 = new Intent(ShelterManageDemandActivity.this, UserSearchOffersActivity.class);
-                        startActivity(intent2);
-                    }
                     break;
                 case 3:
-                    //If is Shelter, go to add a demands activity
-                    if (isShelter) {
                         Intent intent3 = new Intent(ShelterManageDemandActivity.this, ShelterPostDemandActivity.class);
                         startActivity(intent3);
-                    //if is person, go to add an offer activity
-                    } else {
-                        Intent intent3 = new Intent(ShelterManageDemandActivity.this, PersonPostOfferActivity.class);
-                        startActivity(intent3);
-                    }
                     break;
                 case 4://Exit
                     finish();

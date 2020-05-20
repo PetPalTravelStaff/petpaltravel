@@ -27,6 +27,7 @@ public class DataTestDAO {
         addCompanionOfPet();
         addCompanionForPet();
         addApplicationDemand();
+        addApplicationOffer();
     }
 
 
@@ -92,7 +93,7 @@ public class DataTestDAO {
     }
 
     private void addApplicationOffer() {
-        myApplicationsForOffers.add(new ApplicationForOffer(1, 1,2,"Protectora Kitty", "Gato/a",
+        myApplicationsForOffers.add(new ApplicationForOffer(1, 2,2,"Protectora Kitty", "Gato/a",
                 "Blanquita", null, "gatos@gmail.com","655963626", false ));
     }
 

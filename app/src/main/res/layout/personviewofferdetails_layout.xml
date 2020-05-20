@@ -111,7 +111,7 @@
         android:textColor="@android:color/background_dark" />
 
     <Spinner
-        android:id="@+id/spMeTrasladoEn"
+        android:id="@+id/spDesde"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -128,7 +128,7 @@
         android:textColor="@android:color/background_dark" />
 
     <Spinner
-        android:id="@+id/spMeTrasladoEn"
+        android:id="@+id/spHasta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"

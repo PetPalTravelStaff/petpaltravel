@@ -131,7 +131,10 @@ public class ShelterManageDemandActivity extends AppCompatActivity {
                     bundle.putInt("idDemand", idDemand);
                     intent1.putExtras(bundle);
                     startActivity(intent1);
-                } else if (view.getId() == R.id.btModificar) {
+                } else if (view.getId() == R.id.btCancelarPeticion) {
+                    //TODO
+                }
+                else if (view.getId() == R.id.btModificar) {
 //                //recover data from form and save it in variables
 //                String namePet = null;
 //                if (nameBox.getText() != null) {
@@ -239,8 +242,6 @@ public class ShelterManageDemandActivity extends AppCompatActivity {
 //                    nameBox.setHintTextColor(Color.RED);
 //                    nameBox.setText(null);
 //                }
-                } else if (view.getId() == R.id.btCancelarPeticion) {
-                    //TODO
                 }
             }
         };

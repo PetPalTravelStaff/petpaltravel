@@ -185,7 +185,7 @@ public class ShelterPostDemandActivity extends AppCompatActivity {
                                             myDemand.setComments(commentString);
                                             int idDemand = myModel.addDemandToBD(myDemand);
                                             if (idDemand != 0) {
-                                                Intent intent1 = new Intent(ShelterPostDemandActivity.this, ShelterManageDemandActivity.class);
+                                                Intent intent1 = new Intent(ShelterPostDemandActivity.this, UserSearchDemandsActivity.class);
                                                 //Create a bundle object
                                                 Bundle bundle = new Bundle();
                                                 //set interesting data

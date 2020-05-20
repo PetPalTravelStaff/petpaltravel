@@ -11,12 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.PersonApplyForDemand"></activity>
+        <activity android:name=".activities.PersonManageOfferActivity"></activity>
+        <activity android:name=".activities.PersonApplyForDemand" />
         <activity android:name=".activities.ShelterApplyForOffer" />
         <activity android:name=".activities.PersonPostOfferActivity" />
         <activity android:name=".activities.ShelterPostDemandActivity" />
         <activity android:name=".activities.UserViewAccountActivity" />
-        <activity android:name=".activities.UserManageOfferActivity" />
+        <activity android:name=".activities.ShelterManageOfferActivity" />
+        <activity android:name=".activities.ShelterManageDemandActivity" />
         <activity android:name=".activities.PersonManageDemandActivity" />
         <activity android:name=".activities.UserSearchOffersActivity" />
         <activity android:name=".activities.UserSearchDemandsActivity" />

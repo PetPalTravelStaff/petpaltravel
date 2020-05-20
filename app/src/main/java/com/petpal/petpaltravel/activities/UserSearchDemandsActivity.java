@@ -44,6 +44,7 @@ public class UserSearchDemandsActivity extends AppCompatActivity {
             listOfDemands= (ArrayList<CompanionForPet>) myModel.getAllDemands();
         } else {
             listOfDemands= (ArrayList<CompanionForPet>) myModel.getDemandsPostedByShelter(idUser);
+            System.out.println("List of ");
         }
         //Create view elements in activity
         initElements();
@@ -103,8 +104,14 @@ public class UserSearchDemandsActivity extends AppCompatActivity {
      * @param demand with will be showed in new activity
      */
     public void showDemandsDetails(CompanionForPet demand) {
-        //set with new activity will be opened
-        Intent intent = new Intent(this, PersonManageDemandActivity.class);
+        Intent intent;
+        if (isShelter){
+            //set with new activity will be opened
+            intent = new Intent(UserSearchDemandsActivity.this, ShelterManageDemandActivity.class);
+        } else {
+            //set with new activity will be opened
+            intent = new Intent(UserSearchDemandsActivity.this, PersonManageDemandActivity.class);
+        }
         //Create a bundle object
         Bundle bundle = new Bundle();
         //set interesting data

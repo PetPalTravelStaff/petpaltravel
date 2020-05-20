@@ -104,8 +104,15 @@ public class UserSearchOffersActivity extends AppCompatActivity {
      * @param offer with will be showed in new activity
      */
     public void showOfferDetails(CompanionOfPet offer) {
-        //set with new activity will be opened
-        Intent intent = new Intent(this, UserManageOfferActivity.class);
+        Intent intent;
+        if (isShelter) {
+            //set with new activity will be opened
+            intent = new Intent(this, ShelterManageOfferActivity.class);
+        } else {
+            //set with new activity will be opened
+            intent = new Intent(this, PersonManageOfferActivity.class);
+        }
+
         //Create a bundle object
         Bundle bundle = new Bundle();
         //set interesting data

@@ -20,13 +20,14 @@ import com.petpal.petpaltravel.model.CompanionForPet;
 import com.petpal.petpaltravel.model.PPTModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ShelterCheckPersonsInterested extends AppCompatActivity {
     //Attributes
     private PPTModel myModel;
     private ListView myListView;
     private TextView nameLabel, notification;
-    private ArrayList<ApplicationForDemand> listOfInterestedPerson;
+    private List<ApplicationForDemand> listOfInterestedPerson;
     private AdapterView.OnItemClickListener listener;
     private String nameUser;
     private Boolean isShelter;
@@ -43,7 +44,7 @@ public class ShelterCheckPersonsInterested extends AppCompatActivity {
         recoverShared();
         recoverDemandId();
         //recover list of all demands from model
-        listOfInterestedPerson= (ArrayList<ApplicationForDemand>) myModel.listPersonInterestedByDemand(idDemand);
+        listOfInterestedPerson= myModel.listPersonInterestedByDemand(idDemand);
         //Create view elements in activity
         initElements();
         //Set the name of the user in the view
@@ -129,7 +130,7 @@ public class ShelterCheckPersonsInterested extends AppCompatActivity {
             //if list has lines
         } else {
             //create adapter
-            myadapter= new ViewPersonAdapter(this, R.layout.useradapteritemdemand_layout, listOfInterestedPerson);
+            myadapter= new ViewPersonAdapter(this, R.layout.shelteradapterinterpersons_layout, listOfInterestedPerson);
             //set adapter to the listview
             myListView.setAdapter(myadapter);
             //set listener to the listview

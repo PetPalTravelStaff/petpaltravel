@@ -10,8 +10,9 @@ public class ApplicationForDemand {
     private String comments;
     private String mail;
     private String phone;
+    private Boolean choosed;
 
-    public ApplicationForDemand(int idApplForDem, int idDemand, int idPersonApplying, String namePerson, String transport, String comments, String mail, String phone) {
+    public ApplicationForDemand(int idApplForDem, int idDemand, int idPersonApplying, String namePerson, String transport, String comments, String mail, String phone, Boolean choosed) {
         this.idApplForDem = idApplForDem;
         this.idDemand = idDemand;
         this.idPersonApplying = idPersonApplying;
@@ -20,6 +21,7 @@ public class ApplicationForDemand {
         this.comments = comments;
         this.mail = mail;
         this.phone = phone;
+        this.choosed = choosed;
     }
 
     public ApplicationForDemand() {
@@ -88,5 +90,13 @@ public class ApplicationForDemand {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Boolean getChoosed() {
+        return choosed;
+    }
+
+    public void setChoosed(Boolean choosed) {
+        this.choosed = choosed;
     }
 }

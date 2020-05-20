@@ -11,8 +11,9 @@ public class ApplicationForOffer {
     private String comments;
     private String mail;
     private String phone;
+    private Boolean choosed;
 
-    public ApplicationForOffer(int idAppliForOf, int idOffer, int idShelterApplying, String nameShelter, String typePet, String namePet, String comments, String mail, String phone) {
+    public ApplicationForOffer(int idAppliForOf, int idOffer, int idShelterApplying, String nameShelter, String typePet, String namePet, String comments, String mail, String phone, Boolean choosed) {
         this.idAppliForOf = idAppliForOf;
         this.idOffer = idOffer;
         this.idShelterApplying = idShelterApplying;
@@ -22,6 +23,7 @@ public class ApplicationForOffer {
         this.comments = comments;
         this.mail = mail;
         this.phone = phone;
+        this.choosed = choosed;
     }
 
     public ApplicationForOffer() {
@@ -98,5 +100,13 @@ public class ApplicationForOffer {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Boolean getChoosed() {
+        return choosed;
+    }
+
+    public void setChoosed(Boolean choosed) {
+        this.choosed = choosed;
     }
 }

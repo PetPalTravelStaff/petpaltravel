@@ -25,13 +25,13 @@
                 android:id="@+id/tvdesde"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text= "Persona"
+                android:text= "Desde"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/tvhasta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text= "Persona"
+                android:text= "Hasta"
                 android:layout_weight="1"/>
         </LinearLayout>
         <TextView

@@ -210,7 +210,7 @@ public class PersonApplyForDemand extends AppCompatActivity {
                             String comments = commentsBox.getText().toString();
                             apliToSend.setComments(comments);
 
-                            control= myModel.addPersonToDemand(apliToSend);
+                            control= myModel.addApplicationToDemand(apliToSend);
                             if (control) {
                                 //if can apply suscessfully
                                 situationFlag = 1;

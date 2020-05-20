@@ -330,6 +330,8 @@ public class DataTestDAO {
         return result;
     }
 
+
+
     public ApplicationForOffer recoverApplicationForOffer(int offerId, int idUser) {
         ApplicationForOffer result= null;
         for (ApplicationForOffer apliForOf: myApplicationsForOffers) {
@@ -354,6 +356,16 @@ public class DataTestDAO {
         List<ApplicationForDemand> result= new ArrayList<ApplicationForDemand>();
         for (ApplicationForDemand apli : myApplicationsForDemands) {
             if (idDemand == apli.getIdDemand()) {
+                result.add(apli);
+            }
+        }
+        return result;
+    }
+
+    public List<ApplicationForOffer> recoverApplicationForOneOffer(int idOffer) {
+        List<ApplicationForOffer> result= new ArrayList<ApplicationForOffer>();
+        for (ApplicationForOffer apli : myApplicationsForOffers) {
+            if (idOffer == apli.getIdOffer()) {
                 result.add(apli);
             }
         }

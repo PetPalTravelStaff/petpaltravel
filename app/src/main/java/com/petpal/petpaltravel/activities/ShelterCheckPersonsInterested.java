@@ -144,21 +144,12 @@ public class ShelterCheckPersonsInterested extends AppCompatActivity {
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (isShelter) {
             super.onCreateOptionsMenu(menu);
             menu.add(0, 1, 0, "Mi perfil");
-            //menu.add(0, 2, 1, "Ver mis peticiones");
+            menu.add(0, 2, 1, "Ver mis peticiones");
             menu.add(0, 3, 2, "Publicar petición");
             menu.add(0, 4, 3, "Buscar ofertas");
             menu.add(0, 5, 4, "Salir");
-        } else {
-            menu.add(0, 1, 0, "Mi perfil");
-            menu.add(0, 2, 1, "Ver mis ofertas");
-            menu.add(0, 3, 2, "Publicar oferta");
-            //menu.add(0, 4, 3, "Buscar peticiones");
-            menu.add(0, 5, 4, "Salir");
-        }
-
         return true;
     }
 
@@ -168,24 +159,19 @@ public class ShelterCheckPersonsInterested extends AppCompatActivity {
         switch (item.getItemId()) {
             case 1:
                 //Go to view account activity
-                Intent intent1 = new Intent(UserSearchDemandsActivity.this, UserViewAccountActivity.class);
+                Intent intent1 = new Intent(ShelterCheckPersonsInterested.this, UserViewAccountActivity.class);
                 startActivity(intent1);
                 break;
             case 2:
-                Intent intent2 = new Intent(UserSearchDemandsActivity.this, UserSearchOffersActivity.class);
+                Intent intent2 = new Intent(ShelterCheckPersonsInterested.this, ShelterManageDemandActivity.class);
                 startActivity(intent2);
                 break;
             case 3:
-                if (isShelter) {//Go to add an offer activity
-                    Intent intent3 = new Intent(UserSearchDemandsActivity.this, ShelterPostDemandActivity.class);
-                    startActivity(intent3);
-                } else {//Go to add an offer activity
-                    Intent intent3 = new Intent(UserSearchDemandsActivity.this, PersonPostOfferActivity.class);
-                    startActivity(intent3);
-                }
+                 Intent intent3 = new Intent(ShelterCheckPersonsInterested.this, ShelterPostDemandActivity.class);
+                 startActivity(intent3);
                 break;
             case 4:
-                Intent intent4 = new Intent(UserSearchDemandsActivity.this, UserSearchOffersActivity.class);
+                Intent intent4 = new Intent(ShelterCheckPersonsInterested.this, UserSearchOffersActivity.class);
                 startActivity(intent4);
                 break;
             case 5://Exit

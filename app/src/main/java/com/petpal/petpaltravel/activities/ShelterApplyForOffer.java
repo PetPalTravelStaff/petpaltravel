@@ -9,20 +9,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.petpal.petpaltravel.R;
 import com.petpal.petpaltravel.model.ApplicationForOffer;
 import com.petpal.petpaltravel.model.CompanionOfPet;
 import com.petpal.petpaltravel.model.PPTModel;
-
-import org.w3c.dom.Text;
 
 public class ShelterApplyForOffer extends AppCompatActivity {
     private TextView phoneBox, mailBox, labType;
@@ -238,7 +234,7 @@ public class ShelterApplyForOffer extends AppCompatActivity {
                                     myApplicationToSend.setTypePet(animalType);
                                     String comments = commentsBox.getText().toString();
                                     myApplicationToSend.setComments(comments);
-                                    control = myModel.addShelterToOffer(myApplicationToSend);
+                                    control = myModel.addApplicationToOffer(myApplicationToSend);
                                     if (control) {
                                         //if can apply suscessfully
                                         situationFlag = 1;

@@ -240,11 +240,11 @@ public class PersonManageDemandActivity extends AppCompatActivity {
                         Intent intent3 = new Intent(PersonManageDemandActivity.this, PersonPostOfferActivity.class);
                         startActivity(intent3);
                     break;
-                case 5://Exit
+                case 4://Exit
                     Intent intent4 = new Intent(PersonManageDemandActivity.this, UserSearchDemandsActivity.class);
                     startActivity(intent4);
                     break;
-                case 4://Exit
+                case 5://Exit
                     finishAffinity();
                     break;
             }

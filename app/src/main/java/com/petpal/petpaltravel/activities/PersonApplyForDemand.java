@@ -20,21 +20,23 @@ import com.petpal.petpaltravel.model.ApplicationForDemand;
 import com.petpal.petpaltravel.model.CompanionForPet;
 import com.petpal.petpaltravel.model.PPTModel;
 
+import java.sql.SQLOutput;
+
 public class PersonApplyForDemand extends AppCompatActivity {
     TextView nameBox, phoneBox, mailBox;
     EditText commentsBox;
     Button apply;
-    Button modify;
+    Button btcancel;
     Spinner mySpinner;
     String[] transport;
-    //int situationFlag= -1; //0= user can apply , 1= user already has applied,
-    //int situationUpdateFlag=-1; //0= user can update data, 1= user has already updated data, -1= user can not update data,
-    int situationFlag= 0; //0= user can apply , 1= user already has applieds, so can modify, -1= user can not apply or modify
-    int situationUpdateFlag=0; //0= user can delete apply, -1= user can not delete apply,
+     //0= user can apply , 1= user already has applies, so can modify or delete,
+     // 2= updated data, -1= user can not apply or modify -2= user can not delete apply
+     int situationFlag= 0;
     View.OnClickListener listener;
     ApplicationForDemand apliRecovered;
-    ApplicationForDemand apliToSend;
-    int demandId, idUser;
+    ApplicationForDemand newApply;
+    ApplicationForDemand applyModify;
+    int demandId, idUser, provIdApli;
     private String nameUser, mailUser, phoneUser;
     Boolean isShelter;
 
@@ -103,7 +105,7 @@ public class PersonApplyForDemand extends AppCompatActivity {
         commentsBox= (EditText) findViewById(R.id.etComentarios);
 
         apply= (Button) findViewById(R.id.btOfrecete);
-        modify= (Button) findViewById(R.id.btGuardaCambios);
+        btcancel = (Button) findViewById(R.id.btBorrar);
     }
 
 
@@ -124,7 +126,6 @@ public class PersonApplyForDemand extends AppCompatActivity {
                 mySpinner.setSelection(2);
             }
             situationFlag=1;
-            situationUpdateFlag=0;
         } else  {
             situationFlag=0;
         }
@@ -141,44 +142,41 @@ public class PersonApplyForDemand extends AppCompatActivity {
                 apply.setText("¡Me ofrezco!");
                 apply.setEnabled(true);
                 apply.setTextColor(Color.WHITE);
+                apply.setVisibility(View.VISIBLE);
+                btcancel.setVisibility(View.GONE);
                 break;
             case 1: //person has applied already
-                apply.setText("Lo cancelo");
+                apply.setText("Guarda cambios");
                 apply.setEnabled(true);
-                apply.setTextColor(Color.RED);
-                situationUpdateFlag=0; //
+                apply.setTextColor(Color.WHITE);
+                apply.setVisibility(View.VISIBLE);
+                btcancel.setText("Cancelo");
+                btcancel.setEnabled(true);
+                btcancel.setTextColor(Color.WHITE);
+                btcancel.setVisibility(View.VISIBLE);
                 break;
-
-            case -1: //there is some trouble
+            case 2: //person has update data
+                apply.setText("¡Guardados!");
+                apply.setEnabled(false);
+                apply.setTextColor(Color.BLACK);
+                apply.setVisibility(View.VISIBLE);
+                btcancel.setText("Cancelo");
+                btcancel.setTextColor(Color.WHITE);
+                btcancel.setVisibility(View.VISIBLE);
+                break;
+            case -1: //there is some trouble in appling or updating
                 apply.setText("Prueba más tarde");
                 apply.setTextColor(Color.RED);
-                apply.setEnabled(false);
+                apply.setVisibility(View.VISIBLE);
+                btcancel.setVisibility(View.GONE);
                 break;
-        }
-        switch (situationUpdateFlag){
-            case 0: //normal can update data
-                modify.setText("Guarda cambios");
-                modify.setEnabled(true);
-                modify.setTextColor(Color.WHITE);
-                modify.setVisibility(View.VISIBLE);
-                break;
-            case 1: //person has updated data
-                modify.setText("¡Actualizada!");
-                modify.setEnabled(false);
-                modify.setTextColor(Color.WHITE);
-                modify.setVisibility(View.VISIBLE);
-                break;
-            case -1: //person can not update data
-                modify.setText("");
-                modify.setEnabled(false);
-                modify.setTextColor(Color.WHITE);
-                modify.setVisibility(View.GONE);
-                break;
-            case -2: //there is some trouble
-                modify.setText("Prueba más tarde");
-                modify.setTextColor(Color.RED);
-                modify.setEnabled(false);
-                modify.setVisibility(View.VISIBLE);
+            case -2: //there is some trouble in cancelling
+                btcancel.setText("Prueba más tarde");
+                btcancel.setTextColor(Color.RED);
+                btcancel.setVisibility(View.VISIBLE);
+                apply.setText("Prueba más tarde");
+                apply.setTextColor(Color.RED);
+                apply.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -194,83 +192,79 @@ public class PersonApplyForDemand extends AppCompatActivity {
                     switch (situationFlag) {
                         case 0: //normal case: person apply to the demand
                             Boolean control;
-                            if (apliRecovered==null) {
-                                apliToSend= new ApplicationForDemand();
-                            } else {
-                                apliToSend= apliRecovered;
-                            }
-                            apliToSend.setIdDemand(demandId);
-                            apliToSend.setIdPersonApplying(idUser);
-                            apliToSend.setNamePerson(nameUser);
-                            apliToSend.setMail(mailUser);
-                            apliToSend.setPhone(phoneUser);
+                            newApply = new ApplicationForDemand();
+                            newApply.setIdDemand(demandId);
+                            newApply.setIdPersonApplying(idUser);
+                            newApply.setNamePerson(nameUser);
+                            newApply.setMail(mailUser);
+                            newApply.setPhone(phoneUser);
                             String transport = mySpinner.getSelectedItem().toString();
-                            apliToSend.setTransport(transport);
+                            newApply.setTransport(transport);
                             String comments = commentsBox.getText().toString();
-                            apliToSend.setComments(comments);
-
-                            control= myModel.addApplicationToDemand(apliToSend);
-                            if (control) {
+                            newApply.setComments(comments);
+                            provIdApli = myModel.addApplicationToDemand(newApply);
+                            if (provIdApli !=0) {
                                 //if can apply suscessfully
                                 situationFlag = 1;
-                                situationUpdateFlag=0;
-                                if(apliRecovered==null){
-                                    situationFlag = 1;
-                                    situationUpdateFlag=0;
-                                }
                             } else {
                                 //if not
                                 situationFlag = -1;
-                                situationUpdateFlag=-1;
                             }
                             //set text to apply button
                             setButtonsValues();
                             break;
-                        case 1: //person has applied already: person un-apply the demand
-                            Boolean control2 = unOfferPersonToDemand();
-                            if (control2) {
-                                //if unapply suscesfully
-                                situationFlag = 0;
-                                situationUpdateFlag=-1;
+                        case 1: //person has applied already: person modify data
+                            Boolean control2;
+                            if (apliRecovered!=null) {
+                                applyModify = apliRecovered;
+                            } else {
+                                applyModify = newApply;
+                                applyModify.setIdDemand(provIdApli);
+                            }
+                            applyModify.setIdPersonApplying(idUser);
+                            applyModify.setNamePerson(nameUser);
+                            applyModify.setMail(mailUser);
+                            applyModify.setPhone(phoneUser);
+                            String transport2 = mySpinner.getSelectedItem().toString();
+                            applyModify.setTransport(transport2);
+                            String comments2 = commentsBox.getText().toString();
+                            applyModify.setComments(comments2);
+                            control= myModel.modifyApplicationToDemand(applyModify);
+                            if (control){
+                                situationFlag = 2;
                             } else {
                                 //if not
                                 situationFlag = -1;
-                                situationUpdateFlag=0;
                             }
                             //set text to apply button
                             setButtonsValues();
                             break;
                     }
-                } else if (view.getId() == R.id.btGuardaCambios) {
-                            Boolean control = modifyPersonToDemand();
-                            if (control) {
-                                //if can update suscessfully
-                                situationUpdateFlag = 1;
-                            } else {
-                                //if not
-                                situationUpdateFlag = -2;
-                            }
-                            //set text to apply button
-                            setButtonsValues();
+                } else if (view.getId() == R.id.btBorrar) {
+                    Boolean control2= false;
+                    if (situationFlag==1){
+                        if (apliRecovered!=null) {
+                            control2= myModel.unOfferPersonToDemand(apliRecovered);
+                        } else {
+                            newApply.setIdApplForDem(provIdApli);
+                            control2 = myModel.unOfferPersonToDemand(newApply);
+                        }
+                    } else if (situationFlag==2){
+                        applyModify= myModel.searchDemandApplyById(provIdApli);
+                        control2 = myModel.unOfferPersonToDemand(applyModify);
+                    }
+                    if (control2) {
+                        //if unapply suscesfully
+                        situationFlag = 0;
+                    } else {
+                        //if not
+                        situationFlag = -2;
+                    }
+                    //set text to apply button
+                    setButtonsValues();
                 }
             }
         };
-    }
-
-    /**
-     * Method for un-apply for a demand
-     * @return true if un-applied is done, false otherwise
-     */
-    private Boolean unOfferPersonToDemand() {
-        return false;
-    }
-
-    /**
-     * Method for modifying data of application for demand
-     * @return true if update is done, false otherwise
-     */
-    private Boolean modifyPersonToDemand() {
-        return false;
     }
 
     /**
@@ -278,7 +272,7 @@ public class PersonApplyForDemand extends AppCompatActivity {
      */
     private void addElementsToListener() {
         apply.setOnClickListener (listener);
-        modify.setOnClickListener(listener);
+        btcancel.setOnClickListener(listener);
     }
 
 

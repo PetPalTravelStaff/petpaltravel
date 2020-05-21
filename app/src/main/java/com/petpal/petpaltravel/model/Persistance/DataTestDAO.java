@@ -7,7 +7,6 @@ import com.petpal.petpaltravel.model.CompanionOfPet;
 import com.petpal.petpaltravel.model.Location;
 import com.petpal.petpaltravel.model.User;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -376,8 +375,8 @@ public class DataTestDAO {
 
 
         //-------- APPLICATION FOR ASKING A COMPANION FOR PET (APPLICATION FOR DEMAND) -------------
-        public Boolean addPersonToDemand (ApplicationForDemand myApplication){
-            Boolean result = false;
+        public int addPersonToDemand (ApplicationForDemand myApplication){
+            int result = 0;
             int lastIndex = myApplicationsForDemands.size();
             for (CompanionForPet demand : demandsFOR) {
                 if (myApplication.getIdDemand() == demand.getId()) {
@@ -386,19 +385,19 @@ public class DataTestDAO {
                         demand.setNamePersonsIntPosition(myApplication.getNamePerson(), 0);
                         myApplication.setIdApplForDem(lastIndex + 1);
                         myApplicationsForDemands.add(myApplication);
-                        result = true;
+                        result = myApplicationsForDemands.size();
                     } else if (demand.getIdPersonInterestePosition(1) == 0) {
                         demand.setIdPersonsIntPosition(myApplication.getIdPersonApplying(), 1);
                         demand.setNamePersonsIntPosition(myApplication.getNamePerson(), 1);
                         myApplication.setIdApplForDem(lastIndex + 1);
                         myApplicationsForDemands.add(myApplication);
-                        result = true;
+                        result = myApplicationsForDemands.size();
                     } else if (demand.getIdPersonInterestePosition(2) == 0) {
                         demand.setIdPersonsIntPosition(myApplication.getIdPersonApplying(), 2);
                         demand.setNamePersonsIntPosition(myApplication.getNamePerson(), 2);
                         myApplication.setIdApplForDem(lastIndex + 1);
                         myApplicationsForDemands.add(myApplication);
-                        result = true;
+                        result = myApplicationsForDemands.size();
                     }
                 }
             }
@@ -453,35 +452,73 @@ public class DataTestDAO {
         }
 
 
-        //-------- APPLICATION FOR BEING A COMPANION OF PET (APPLICATION FOR OFFER) -------------
-        public Boolean addShelterToOffer (ApplicationForOffer myApplication){
-            Boolean result = false;
-            int lastIndex = myApplicationsForOffers.size();
-            for (CompanionOfPet offer : offeringsOF) {
-                if (myApplication.getIdOffer() == offer.getId()) {
-                    if (offer.getIdShelterIntPosition(0) == 0) {
-                        offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(), 0);
-                        offer.setNamesShelterIntPosition(myApplication.getNameShelter(), 0);
-                        myApplication.setIdAppliForOf(lastIndex + 1);
-                        myApplicationsForOffers.add(myApplication);
-                        result = true;
-                    } else if (offer.getIdShelterIntPosition(1) == 0) {
-                        offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(), 1);
-                        offer.setNamesShelterIntPosition(myApplication.getNameShelter(), 1);
-                        myApplication.setIdAppliForOf(lastIndex + 1);
-                        myApplicationsForOffers.add(myApplication);
-                        result = true;
-                    } else if (offer.getIdShelterIntPosition(2) == 0) {
-                        offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(), 2);
-                        offer.setNamesShelterIntPosition(myApplication.getNameShelter(), 2);
-                        myApplication.setIdAppliForOf(lastIndex + 1);
-                        myApplicationsForOffers.add(myApplication);
-                        result = true;
-                    }
+    public Boolean modifyApplyForDemand(ApplicationForDemand myApplication) {
+        Boolean result = false;
+        for (ApplicationForDemand app : myApplicationsForDemands) {
+            if (app.getIdApplForDem() == myApplication.getIdApplForDem()) {
+                app = myApplication;
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    public Boolean deleteApplyForDemand(ApplicationForDemand myApplication) {
+        Boolean result = false;
+        for (CompanionForPet demand : demandsFOR) {
+            if (myApplication.getIdDemand() == demand.getId()) {
+                if (demand.getIdPersonInterestePosition(0) == myApplication.getIdPersonApplying()) {
+                    demand.setIdPersonsIntPosition(0, 0);
+                    demand.setNamePersonsIntPosition(null, 0);
+                    myApplicationsForDemands.remove(myApplication);
+                    result = true;
+                } else if (demand.getIdPersonInterestePosition(1) == myApplication.getIdPersonApplying()) {
+                    demand.setIdPersonsIntPosition(0, 1);
+                    demand.setNamePersonsIntPosition(null, 1);
+                    myApplicationsForDemands.remove(myApplication);
+                    result = true;
+                } else if (demand.getIdPersonInterestePosition(2) == myApplication.getIdPersonApplying()) {
+                    demand.setIdPersonsIntPosition(0, 2);
+                    demand.setNamePersonsIntPosition(null, 2);
+                    myApplicationsForDemands.remove(myApplication);
+                    result = true;
                 }
             }
-            return result;
         }
+        return result;
+
+    }
+
+
+        //-------- APPLICATION FOR BEING A COMPANION OF PET (APPLICATION FOR OFFER) -------------
+        public int addShelterToOffer (ApplicationForOffer myApplication){
+        int result = 0;
+        int lastIndex = myApplicationsForOffers.size();
+        for (CompanionOfPet offer : offeringsOF) {
+            if (myApplication.getIdOffer() == offer.getId()) {
+                if (offer.getIdShelterIntPosition(0) == 0) {
+                    offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(), 0);
+                    offer.setNamesShelterIntPosition(myApplication.getNameShelter(), 0);
+                    myApplication.setIdAppliForOf(lastIndex + 1);
+                    myApplicationsForOffers.add(myApplication);
+                    result = myApplicationsForOffers.size();
+                } else if (offer.getIdShelterIntPosition(1) == 0) {
+                    offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(), 1);
+                    offer.setNamesShelterIntPosition(myApplication.getNameShelter(), 1);
+                    myApplication.setIdAppliForOf(lastIndex + 1);
+                    myApplicationsForOffers.add(myApplication);
+                    result = myApplicationsForOffers.size();
+                } else if (offer.getIdShelterIntPosition(2) == 0) {
+                    offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(), 2);
+                    offer.setNamesShelterIntPosition(myApplication.getNameShelter(), 2);
+                    myApplication.setIdAppliForOf(lastIndex + 1);
+                    myApplicationsForOffers.add(myApplication);
+                    result = myApplicationsForOffers.size();
+                }
+            }
+        }
+        return result;
+    }
 
 
         public ApplicationForOffer recoverApplicationForOffer ( int offerId, int idUser){
@@ -534,4 +571,40 @@ public class DataTestDAO {
         }
 
 
+    public boolean deleteShelterFromOffer (ApplicationForOffer myApplication){
+        boolean result = false;
+        for (CompanionOfPet offer : offeringsOF) {
+            if (myApplication.getIdOffer() == offer.getId()) {
+                if (offer.getIdShelterIntPosition(0) == myApplication.getIdShelterApplying()) {
+                    offer.setIdShelterIntPosition(0, 0);
+                    offer.setNamesShelterIntPosition(null, 0);
+                    myApplicationsForOffers.remove(myApplication);
+                    result = true;
+                } else if (offer.getIdShelterIntPosition(1) == myApplication.getIdShelterApplying()) {
+                    offer.setIdShelterIntPosition(0, 1);
+                    offer.setNamesShelterIntPosition(null, 1);
+                    myApplicationsForOffers.remove(myApplication);
+                    result = true;
+                } else if (offer.getIdShelterIntPosition(2) == myApplication.getIdShelterApplying()) {
+                    offer.setIdShelterIntPosition(0, 2);
+                    offer.setNamesShelterIntPosition(null, 2);
+                    myApplicationsForOffers.remove(myApplication);
+                    result = true;
+                }
+            }
+        }
+        return result;
+    }
+
+
+    public Boolean modifyApplyForOffer(ApplicationForOffer myApplication) {
+        Boolean result = false;
+        for (ApplicationForOffer app : myApplicationsForOffers) {
+            if (app.getIdAppliForOf() == myApplication.getIdAppliForOf()) {
+                app = myApplication;
+                result = true;
+            }
+        }
+        return result;
+    }
 }

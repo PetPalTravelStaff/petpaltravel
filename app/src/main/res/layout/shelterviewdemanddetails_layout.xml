@@ -26,7 +26,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginEnd="24dp"
             android:hint="Protectora Kitty"
             android:textSize="14sp" />
     </LinearLayout>
@@ -36,15 +35,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp">
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/tvTituloDescripcionDemanda"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="20dp"
             android:text="Descripción"
+            android:layout_marginStart="80dp"
             android:textAlignment="center"
             android:textColor="@android:color/background_dark"
             android:textSize="24sp" />
@@ -53,7 +52,6 @@
             android:id="@+id/ivFotoMascota"
             android:layout_width="38dp"
             android:layout_height="39dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="150dp"
             app:srcCompat="@drawable/logo" />
     </LinearLayout>
@@ -61,7 +59,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp">
@@ -70,7 +68,6 @@
             android:id="@+id/tvNombreMascota"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:text="Nombre de la mascota:"
             android:textColor="@android:color/background_dark" />
 
@@ -78,7 +75,6 @@
             android:id="@+id/etNombreMascota"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
             android:background="@android:drawable/editbox_background"
             android:ems="10" />
     </LinearLayout>
@@ -95,7 +91,6 @@
             android:id="@+id/tvTipoMascota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:layout_marginEnd="5dp"
             android:text="Tipo:"
             android:textColor="@android:color/background_dark"
@@ -138,7 +133,6 @@
             android:id="@+id/etQueTipo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
             android:background="@android:drawable/editbox_background"
             android:ems="10"
             android:hint="¿Cuál?" />
@@ -155,7 +149,6 @@
             android:id="@+id/tvDisponibleDesde"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:text="Disponible desde:"
             android:textColor="@android:color/background_dark" />
 
@@ -163,7 +156,6 @@
             android:id="@+id/etDisponibleDesde"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
             android:background="@android:drawable/editbox_background"
             android:ems="10"
             android:hint="dd-mm-aaaa" />
@@ -180,7 +172,6 @@
             android:id="@+id/tvDisponibleHasta"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:text="Disponible hasta:"
             android:textColor="@android:color/background_dark" />
 
@@ -188,7 +179,6 @@
             android:id="@+id/etDisponibleHasta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
             android:background="@android:drawable/editbox_background"
             android:ems="10"
             android:hint="dd-mm-aaaa" />
@@ -215,15 +205,13 @@
             android:id="@+id/tvViajaDesde"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:text="Viaja desde:"
             android:textColor="@android:color/background_dark" />
 
         <Spinner
             android:id="@+id/spViajaDesde"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -238,15 +226,13 @@
             android:id="@+id/tvViajeDestino"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:text="Con destino a:"
             android:textColor="@android:color/background_dark" />
 
         <Spinner
             android:id="@+id/spViajeDestino"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -255,8 +241,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:text="Comentarios"
         android:textColor="@android:color/background_dark"
         android:textSize="14sp" />

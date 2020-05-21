@@ -112,7 +112,8 @@
             android:layout_marginStart="42dp"
             android:background="@android:drawable/editbox_background"
             android:ems="10"
-            android:hint="dd-mm-aaaa" />
+            android:hint="dd-mm-aaaa"
+            android:maxLength="10" />
 
     </LinearLayout>
 

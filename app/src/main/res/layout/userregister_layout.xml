@@ -96,9 +96,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:background="@android:drawable/editbox_background"
         android:ems="10"
-        android:hint="Tu contraseña"
+        android:background="@android:drawable/editbox_background"
+        android:hint="Tu contraseña (máx. 10 caracteres)"
+        android:maxLength="10"
         android:inputType="textPassword" />
 
     <TextView
@@ -117,9 +118,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:background="@android:drawable/editbox_background"
         android:ems="10"
+        android:background="@android:drawable/editbox_background"
         android:hint="Repite tu contraseña"
+        android:maxLength="10"
         android:inputType="textPassword" />
 
     <CheckBox

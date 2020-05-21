@@ -133,6 +133,18 @@ public class PPTModel {
         return result;
     }
 
+    public ApplicationForOffer searchOfferApplyById(int applyId) {
+        ApplicationForOffer result= null;
+        result= myDAO.recoverOfferApplyById(applyId);
+        return result;
+    }
+
+    public Boolean confirmSelectedShelter(ApplicationForOffer myApplication) {
+        Boolean result= false;
+        result= myDAO.setSeletedShelterInOffer(myApplication);
+        return result;
+    }
+
 
 
     //---- APPLICATION FOR DEMAND ------
@@ -160,7 +172,7 @@ public class PPTModel {
         return result;
     }
 
-    public Boolean confirmSelectedPerson(ApplicationForDemand myApplication) {
+    public Boolean confirmSelectedShelter(ApplicationForDemand myApplication) {
         Boolean result= false;
         result= myDAO.setSeletedPersonInDemand(myApplication);
         return result;

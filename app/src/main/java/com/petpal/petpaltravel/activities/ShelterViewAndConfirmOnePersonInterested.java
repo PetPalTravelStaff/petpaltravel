@@ -1,11 +1,13 @@
 package com.petpal.petpaltravel.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.Menu;
@@ -20,9 +22,9 @@ import com.petpal.petpaltravel.model.CompanionForPet;
 import com.petpal.petpaltravel.model.PPTModel;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
 public class ShelterViewAndConfirmOnePersonInterested extends AppCompatActivity {
+    private static int idNotification= 2222;
     //Attributes
     TextView nameBox, transportBox, mailBox, phoneBox, commentBox, nameLabel;
     Button btChoose;
@@ -30,9 +32,10 @@ public class ShelterViewAndConfirmOnePersonInterested extends AppCompatActivity 
     String nameUser, userPhone;
     int idUser, idDemand, idApplication;
     PPTModel myModel;
-    private Boolean isShelter, isSelected;
     View.OnClickListener listener;
+    private Boolean isShelter, isSelected;
     private CompanionForPet myDemand;
+    private NotificationCompat.Builder notification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +97,8 @@ public class ShelterViewAndConfirmOnePersonInterested extends AppCompatActivity 
         commentBox = (TextView) findViewById(R.id.etComentarios);
         //nameLabel= (TextView) findViewById(R.id.etNombrePersona);
         btChoose = (Button) findViewById(R.id.btLoElijo);
+        notification= new NotificationCompat.Builder(this);
+        notification.setAutoCancel(false);
     }
 
     /**
@@ -103,24 +108,41 @@ public class ShelterViewAndConfirmOnePersonInterested extends AppCompatActivity 
         listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("Ha clicado al botón");
-                Boolean control= myModel.confirmSelectedPerson(myApplication);
-                if (control) {
-                    btChoose.setText("La dejo en espera");
-                    btChoose.setTextColor(Color.BLACK);
-                    String text = "PetPatTravel te informa: la protectora " + myDemand.getNameShelter()+" te ha elegido para acompañar a " + myDemand.getNamePet() +
-                            "(" + myDemand.getTypePet()+ ") desde " + myDemand.getOriginCity() + " hasta " + myDemand.getDestinyCity() +
-                            ". Se pondrán en contacto contigo para ultimas detalles. Gracias y... ¡buen viaje!";
-                    SmsManager sms = SmsManager.getDefault();
-                    sms.sendTextMessage(myApplication.getPhone(), null, text , null, null);
-                    String text2 = "PetPatTravel te informa: has escogido a " + myApplication.getNamePerson()+" para acompañar a " + myDemand.getNamePet() +
-                            "(" + myDemand.getTypePet()+ ") desde " + myDemand.getOriginCity() + " hasta " + myDemand.getDestinyCity() +
-                            ". Acuerdate de ponerte en contacto con esta persona para concretar los detalles. Gracias y... ¡buen viaje!";
-                    SmsManager sms2 = SmsManager.getDefault();
-                    sms2.sendTextMessage(userPhone, null, text2 , null, null);
-                } else {
-                    btChoose.setText("Prueba más tarde");
-                    btChoose.setTextColor(Color.RED);
+                if (view.getId() == R.id.btLoElijo) {
+                    if (!isSelected) {
+                        Boolean control = myModel.confirmSelectedShelter(myApplication);
+                        if (control) {
+                            isSelected=true;
+                            btChoose.setText("La dejo en espera");
+                            btChoose.setTextColor(Color.BLACK);
+                            notification.setSmallIcon(R.drawable.logo);
+                            //notification.setTicker("Aviso");
+                            notification.setWhen((System.currentTimeMillis()));
+                            notification.setContentTitle("¡Has escogido!");
+                            notification.setContentText("Contacta con la persona voluntaria");
+                            String text = "Has escogido a " + myApplication.getNamePerson() + " para acompañar a "
+                                    + myDemand.getNamePet() + " a " + myDemand.getDestinyCity() +
+                                    ". Contacta con la persona para ultimar detalles. Gracias y... ¡buen viaje!";
+                            notification.setStyle(new NotificationCompat.BigTextStyle()
+                                    .bigText(text));
+                            Intent intent = new Intent(ShelterViewAndConfirmOnePersonInterested.this, ShelterViewAndConfirmOnePersonInterested.class);
+                            Bundle bundle = new Bundle();
+                            //set interesting data
+                            bundle.putInt("idDemand", idDemand);
+                            bundle.putInt("idApplyDem", myApplication.getIdApplForDem());
+                            intent.putExtras(bundle);
+                            PendingIntent pendingIntent = PendingIntent.getActivity(ShelterViewAndConfirmOnePersonInterested.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                            notification.setContentIntent(pendingIntent);
+                            NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                            nm.notify(idNotification, notification.build());
+                            isSelected = true;
+                        } else {
+                            btChoose.setText("Prueba más tarde");
+                            btChoose.setTextColor(Color.RED);
+                        }
+                    } else {
+                        //TODO deseleccionar
+                    }
                 }
             }
         };
@@ -144,8 +166,8 @@ public class ShelterViewAndConfirmOnePersonInterested extends AppCompatActivity 
         phoneBox.setText(myApplication.getPhone());
         commentBox.setText(myApplication.getComments());
         if (isSelected) {
-            btChoose.setText("Ya no lo elijo");
-            btChoose.setTextColor(Color.RED);
+            btChoose.setText("Lo dejo en espera");
+            btChoose.setTextColor(Color.BLACK);
         } else {
             btChoose.setText("¡La elijo!");
             btChoose.setTextColor(Color.WHITE);

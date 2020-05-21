@@ -7,6 +7,7 @@ import com.petpal.petpaltravel.model.CompanionOfPet;
 import com.petpal.petpaltravel.model.Location;
 import com.petpal.petpaltravel.model.User;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -180,7 +181,7 @@ public class DataTestDAO {
 
     public Boolean addPersonToDemand(ApplicationForDemand myApplication) {
         Boolean result= false;
-        int lastIndex= myApplicationsForDemands.size()-1;
+        int lastIndex= myApplicationsForDemands.size();
         for (CompanionForPet demand : demandsFOR) {
             if (myApplication.getIdDemand() == demand.getId()) {
                 if (demand.getIdPersonInterestePosition(0) == 0) {
@@ -219,7 +220,7 @@ public class DataTestDAO {
 
     public Boolean addShelterToOffer(ApplicationForOffer myApplication) {
         Boolean result= false;
-        int lastIndex= myApplicationsForOffers.size()-1;
+        int lastIndex= myApplicationsForOffers.size();
         for (CompanionOfPet offer : offeringsOF) {
             if (myApplication.getIdOffer() == offer.getId()) {
                 if (offer.getIdShelterIntPosition(0) == 0) {
@@ -421,6 +422,33 @@ public class DataTestDAO {
                     if (dem.getId()==myApplication.getIdDemand()){
                         dem.setIdUserPersonSeleted(myApplication.getIdPersonApplying());
                         dem.setNamePSelected(myApplication.getNamePerson());
+                        result=true;
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    public ApplicationForOffer recoverOfferApplyById(int applyId) {
+        ApplicationForOffer result= null;
+        for (ApplicationForOffer apliForOf: myApplicationsForOffers) {
+            if (apliForOf.getIdAppliForOf()==applyId) {
+                result= apliForOf;
+            }
+        }
+        return result;
+    }
+
+    public Boolean setSeletedShelterInOffer(ApplicationForOffer myApplication) {
+        Boolean result= false;
+        for (ApplicationForOffer app: myApplicationsForOffers) {
+            if (app.getIdAppliForOf()==myApplication.getIdAppliForOf()) {
+                app.setChoosed(true);
+                for (CompanionOfPet offe: offeringsOF) {
+                    if (offe.getId()==myApplication.getIdOffer()){
+                        offe.setIdUserShelterSeleted(myApplication.getIdShelterApplying());
+                        offe.setNameSSelected(myApplication.getNameShelter());
                         result=true;
                     }
                 }

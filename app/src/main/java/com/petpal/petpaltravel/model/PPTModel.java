@@ -84,6 +84,20 @@ public class PPTModel {
         return result;
     }
 
+    public Boolean modifyOffer(CompanionOfPet newDataOffer) {
+        boolean result= false;
+        result= myDAO.modifyOffer(newDataOffer);
+        return result;
+    }
+
+    public boolean cancelOffer(CompanionOfPet myOffer) {
+        boolean result;
+        result= myDAO.deleteOffer(myOffer);
+        return result;
+    }
+
+
+
 
     //---- COMPANION FOR PET (DEMANDS) ------
     public List<CompanionForPet> getAllDemands() {
@@ -112,8 +126,22 @@ public class PPTModel {
         return result;
     }
 
+    public Boolean modifyDemand(CompanionForPet myDemand) {
+        Boolean result= false;
+        result= myDAO.modifyDemand(myDemand);
+        return result;
+    }
 
-    //---- APPLICATION FOR OFFER ------
+
+    public boolean cancelDemand(CompanionForPet myDemand) {
+        boolean result;
+        result= myDAO.deleteDemand(myDemand);
+        return result;
+    }
+
+
+
+        //---- APPLICATION FOR OFFER ------
 
     public Boolean addApplicationToOffer(ApplicationForOffer myApplication) {
         Boolean result= false;
@@ -177,6 +205,8 @@ public class PPTModel {
         result= myDAO.setSeletedPersonInDemand(myApplication);
         return result;
     }
+
+
 }
 
 

@@ -34,7 +34,7 @@ public class PersonManageOfferActivity extends AppCompatActivity {
     String nameUser;
     Spinner transportType, origin, destination;
     EditText comments, dateTravel;
-    TextView typePet, nameLabel;
+    TextView typePet, nameLabel, lborigin, lbdestination, lbtransport;
     Button btModify, btInterested, btDelete;
     PPTModel myModel;
     String[] locations;
@@ -97,16 +97,20 @@ public class PersonManageOfferActivity extends AppCompatActivity {
      */
     private void initElements() {
         nameLabel = (TextView) findViewById(R.id.etNombreProtectora);
+        typePet= (TextView) findViewById(R.id.tvAcompanyoA);
         cat = (CheckBox) findViewById(R.id.cbGatos);
         dog = (CheckBox) findViewById(R.id.cbPerros);
         other = (CheckBox) findViewById(R.id.cbOtros);
         dateTravel = (EditText) findViewById(R.id.etDiaViaje);
         origin = (Spinner) findViewById(R.id.spDesde);
+        lborigin= (TextView) findViewById(R.id.tvViajoDesde);
         destination = (Spinner) findViewById(R.id.spHasta);
+        lbdestination= (TextView) findViewById(R.id.tvViajeDestino);
         ArrayAdapter<String> questionsAdapter = new ArrayAdapter<String>(PersonManageOfferActivity.this, android.R.layout.simple_spinner_item, locations);
         questionsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         origin.setAdapter(questionsAdapter);
         destination.setAdapter(questionsAdapter);
+        lbtransport= (TextView) findViewById(R.id.tvMeTrasladoEn);
         transportType = (Spinner) findViewById(R.id.spMeTrasladoEn);
         ArrayAdapter<String> questionsAdapter2 = new ArrayAdapter<String>(PersonManageOfferActivity.this, android.R.layout.simple_spinner_item, transportOptions);
         questionsAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -134,15 +138,228 @@ public class PersonManageOfferActivity extends AppCompatActivity {
                     intent1.putExtras(bundle);
                     startActivity(intent1);
                 } else if (view.getId() == R.id.btCancelarOferta) {
-                    //TODO
+                    boolean result= myModel.cancelOffer(myOffer);
+                    if (result) {
+                        Intent intent1 = new Intent(PersonManageOfferActivity.this, UserSearchOffersActivity.class);
+                        startActivity(intent1);
+                    } else {
+                        btDelete.setText("Error. Prueba más tarde");
+                        btDelete.setTextColor(Color.RED);
+                    }
                 } else if (view.getId() == R.id.btModificar) {
-                    //TODO
+                    String dateString= null;
+                    if (dateTravel.getText()!=null) {
+                        dateString=dateTravel.getText().toString();
+                    };
+                    GregorianCalendar dateCal= null;
+                    String cityOrigin= origin.getSelectedItem().toString();
+                    String cityDestiny= destination.getSelectedItem().toString();
+                    Boolean catChoosed= cat.isChecked();
+                    Boolean dogChoosed= dog.isChecked();
+                    Boolean otherChoosed= other.isChecked();
+                    String transportation= transportType.getSelectedItem().toString();
+                    String commentString= comments.getText().toString();
+                    CompanionOfPet newDataOffer= myOffer;
+                    if (!"".equals(dateString)){//check empty date
+                        dateTravel.setHintTextColor(Color.BLACK);
+                        dateCal= validateDate(dateString);
+                        if (dateCal!=null) {
+                            dateTravel.setHintTextColor(Color.BLACK);
+                            newDataOffer.setDateTravel(dateCal);
+                            if (cityOrigin!=null){
+                                lborigin.setTextColor(Color.BLACK);
+                                newDataOffer.setOriginCity(cityOrigin);
+                                if (cityDestiny!=null){
+                                    lbdestination.setTextColor(Color.BLACK);
+                                    if (!cityDestiny.equals(cityOrigin)) {
+                                        lborigin.setTextColor(Color.BLACK);
+                                        lbdestination.setTextColor(Color.BLACK);
+                                        newDataOffer.setDestinyCity(cityDestiny);
+                                        Boolean noChooseType= false;
+                                        if (catChoosed == false & dogChoosed == false & otherChoosed == false){
+                                            noChooseType=true;
+                                        } else{
+                                            noChooseType=false;
+                                        }
+                                        if (!noChooseType) {
+                                            typePet.setTextColor(Color.BLACK);
+                                            Boolean coma1 = false;
+                                            Boolean coma2 = false;
+                                            if (catChoosed == true & dogChoosed == true) {
+                                                coma1 = true;
+                                            }
+                                            if (dogChoosed == true & otherChoosed == true) {
+                                                coma2 = true;
+                                            }
+                                            StringBuilder type = new StringBuilder();
+                                            if (catChoosed) {
+                                                type.append("Gato/a");
+                                                if (coma1) {
+                                                    type.append(", ");
+                                                }
+                                            }
+                                            if (dogChoosed) {
+                                                type.append("Perro/a");
+                                                if (coma2) {
+                                                    type.append(", ");
+                                                }
+                                            }
+                                            if (otherChoosed) {
+                                                type.append("Otros");
+                                            }
+                                            newDataOffer.setPetType(type.toString());
+
+                                            if (transportation != null) {
+                                                lbtransport.setTextColor(Color.BLACK);
+                                                newDataOffer.setTransport(transportation);
+                                                newDataOffer.setComments(commentString);
+                                                Boolean control = myModel.modifyOffer(newDataOffer);
+                                                if (control) {
+                                                    Intent intent1 = new Intent(PersonManageOfferActivity.this, UserSearchOffersActivity.class);
+                                                    //Create a bundle object
+                                                    Bundle bundle = new Bundle();
+                                                    //set interesting data
+                                                    bundle.putInt("idOffer", idOffer);
+                                                    intent1.putExtras(bundle);
+                                                    startActivity(intent1);
+                                                } else {
+                                                    btModify.setText("Error. Prueba más tarde");
+                                                    btModify.setTextColor(Color.RED);
+                                                }
+                                            } else {
+                                                lbtransport.setTextColor(Color.RED);
+                                            }
+                                        } else {
+                                            typePet.setTextColor(Color.RED);
+                                        }
+                                    }else {
+                                        lborigin.setTextColor(Color.RED);
+                                        lbdestination.setTextColor(Color.RED);
+                                    }
+                                }else {
+                                    lbdestination.setTextColor(Color.RED);
+                                }
+                            }else {
+                                lborigin.setTextColor(Color.RED);
+                            }
+
+                        } else {
+                            dateTravel.setHintTextColor(Color.RED);
+                            dateTravel.setText(null);
+                        }
+
+                    } else {
+                        dateTravel.setHintTextColor(Color.RED);
+                        dateTravel.setText(null);
+                    }
                 }
             }
         };
     }
 
+    private GregorianCalendar validateDate(String dateString) {
+        GregorianCalendar result= null;
+        int yearDate=0;
+        int monthDate=0;
+        int dayDate=0;
 
+        if (dateString!=null){
+            Boolean control= false;
+            Pattern pattern = Pattern.compile("\\d{1,2}-\\d{1,2}-\\d{4}");
+            Matcher mather = pattern.matcher(dateString);
+            control= mather.find();
+            if (control){
+                String[] datePieces= dateString.split("-");
+                try {
+                    yearDate = Integer.parseInt(datePieces[2]);
+                }catch (Exception e){
+                    yearDate=0;
+                }
+                if (yearDate>= Calendar.getInstance().get(Calendar.YEAR)) {
+                    try {
+                        monthDate = Integer.parseInt(datePieces[1]);
+                    } catch (Exception e) {
+                        monthDate = 0;
+                    }
+                    if (yearDate == Calendar.getInstance().get(Calendar.YEAR) &
+                            monthDate < Calendar.getInstance().get(Calendar.MONTH)) {
+                        dayDate = 0;
+                    } else {
+                        try {
+                            dayDate = Integer.parseInt(datePieces[0]);
+                        } catch (Exception e) {
+                            dayDate = 0;
+                        }
+                        if (yearDate == Calendar.getInstance().get(Calendar.YEAR) &
+                                monthDate == Calendar.getInstance().get(Calendar.MONTH) &
+                                dayDate <= Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
+                            dayDate = 0;
+                        } else {
+                            switch (monthDate) {
+                                case 1:
+                                case 3:
+                                case 5:
+                                case 7:
+                                case 8:
+                                case 10:
+                                case 12:
+
+                                    if (0 < dayDate & dayDate <=31) {
+                                        dayDate = dayDate;
+                                    } else {
+                                        dayDate = 0;
+                                    }
+                                    break;
+                                case 4:
+                                case 6:
+                                case 9:
+                                case 11:
+                                    if (0 < dayDate & dayDate <= 30) {
+                                        dayDate = dayDate;
+                                    } else {
+                                        dayDate = 0;
+                                    }
+                                    break;
+                                case 2:
+                                    //if year is bisiesto
+                                    if ((yearDate % 4 == 0 && yearDate % 100 != 0) || (yearDate % 100 == 0 && yearDate % 400 == 0)) {
+                                        if (0 < dayDate & dayDate <= 29) {
+                                            dayDate = dayDate;
+                                            ;
+                                        } else {
+                                            dayDate = 0;
+                                        }
+                                    } else {
+                                        if (0 < dayDate & dayDate <= 28) {
+                                            dayDate = dayDate;
+                                        } else {
+                                            dayDate = 0;
+                                        }
+                                    }
+                                    break;
+                                default:
+                                    dayDate = 0;
+                                    break;
+                            }
+                        }
+                    }
+                }else {
+                    yearDate=0;
+                    monthDate=0;
+                    dayDate=0;
+                }
+            } else {
+                yearDate=0;
+                monthDate=0;
+                dayDate=0;
+            }
+        }
+        result= new GregorianCalendar(yearDate, monthDate, dayDate);
+        if (result.before(Calendar.getInstance())) {
+            result=null;
+        }
+        return result;
+    }
 
 
     /**

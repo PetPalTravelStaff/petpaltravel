@@ -101,7 +101,7 @@ public class PersonApplyForDemand extends AppCompatActivity {
         commentsBox= (EditText) findViewById(R.id.etComentarios);
 
         apply= (Button) findViewById(R.id.btOfrecete);
-        modify= (Button) findViewById(R.id.btGuardaCambios);
+        modify= (Button) findViewById(R.id.btBorrar);
     }
 
 
@@ -233,7 +233,7 @@ public class PersonApplyForDemand extends AppCompatActivity {
                             setButtonsValues();
                             break;
                     }
-                } else if (view.getId() == R.id.btGuardaCambios) {
+                } else if (view.getId() == R.id.btBorrar) {
                             Boolean control = modifyPersonToDemand();
                             if (control) {
                                 //if can update suscessfully

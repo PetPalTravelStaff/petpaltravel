@@ -220,7 +220,7 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
                 startActivity(intent4);
                 break;
             case 4://Exit
-                finish();
+                finishAffinity();
                 break;
         }
         return true;

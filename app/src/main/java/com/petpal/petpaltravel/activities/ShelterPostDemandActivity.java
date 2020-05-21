@@ -278,6 +278,11 @@ public class ShelterPostDemandActivity extends AppCompatActivity {
                             monthDate < Calendar.getInstance().get(Calendar.MONTH)) {
                         dayDate = 0;
                     } else {
+                        try {
+                            dayDate = Integer.parseInt(datePieces[0]);
+                        } catch (Exception e) {
+                            dayDate = 0;
+                        }
                         if (yearDate == Calendar.getInstance().get(Calendar.YEAR) &
                                 monthDate == Calendar.getInstance().get(Calendar.MONTH) &
                                 dayDate <= Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
@@ -291,12 +296,8 @@ public class ShelterPostDemandActivity extends AppCompatActivity {
                                 case 8:
                                 case 10:
                                 case 12:
-                                    try {
-                                        dayDate = Integer.parseInt(datePieces[0]);
-                                    } catch (Exception e) {
-                                        dayDate = 0;
-                                    }
-                                    if (0 < dayDate & dayDate > 31) {
+
+                                    if (0 < dayDate & dayDate <=31) {
                                         dayDate = dayDate;
                                     } else {
                                         dayDate = 0;
@@ -306,33 +307,23 @@ public class ShelterPostDemandActivity extends AppCompatActivity {
                                 case 6:
                                 case 9:
                                 case 11:
-                                    try {
-                                        dayDate = Integer.parseInt(datePieces[0]);
-                                    } catch (Exception e) {
-                                        dayDate = -0;
-                                    }
-                                    if (0 < dayDate & dayDate > 30) {
+                                    if (0 < dayDate & dayDate <= 30) {
                                         dayDate = dayDate;
                                     } else {
                                         dayDate = 0;
                                     }
                                     break;
                                 case 2:
-                                    try {
-                                        dayDate = Integer.parseInt(datePieces[0]);
-                                    } catch (Exception e) {
-                                        dayDate = 0;
-                                    }
                                     //if year is bisiesto
                                     if ((yearDate % 4 == 0 && yearDate % 100 != 0) || (yearDate % 100 == 0 && yearDate % 400 == 0)) {
-                                        if (0 < dayDate & dayDate > 29) {
+                                        if (0 < dayDate & dayDate <= 29) {
                                             dayDate = dayDate;
                                             ;
                                         } else {
                                             dayDate = 0;
                                         }
                                     } else {
-                                        if (0 < dayDate & dayDate > 28) {
+                                        if (0 < dayDate & dayDate <= 28) {
                                             dayDate = dayDate;
                                         } else {
                                             dayDate = 0;
@@ -404,7 +395,7 @@ public class ShelterPostDemandActivity extends AppCompatActivity {
                 startActivity(intent3);
                 break;
             case 4://Exit
-                finish();
+                finishAffinity();
                 break;
         }
         return true;

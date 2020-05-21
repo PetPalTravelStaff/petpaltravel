@@ -238,7 +238,7 @@ public class ShelterManageOfferActivity extends AppCompatActivity {
                     startActivity(intent3);
                 break;
             case 4://Exit
-                finish();
+                finishAffinity();
                 break;
         }
         return true;

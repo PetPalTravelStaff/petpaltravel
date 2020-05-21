@@ -329,7 +329,7 @@ public class UserViewAccountActivity extends AppCompatActivity {
                 }
                 break;
             case 5://Exit
-                finish();
+                finishAffinity();
                 break;
         }
         return true;

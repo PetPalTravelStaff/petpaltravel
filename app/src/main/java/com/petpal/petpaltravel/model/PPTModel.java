@@ -184,6 +184,18 @@ public class PPTModel {
         return result;
     }
 
+    public Boolean unConfirmSelectedShelter(ApplicationForOffer myApplication) {
+        Boolean result= false;
+        result= myDAO.unSetSeletedShelterInOffer(myApplication);
+        return result;
+    }
+
+    public boolean rejectAplicationForOffer(ApplicationForOffer myApplication) {
+        Boolean result= false;
+        result= myDAO.deleteShelterFromOffer(myApplication);
+        return result;
+    }
+
 
 
     //---- APPLICATION FOR DEMAND ------

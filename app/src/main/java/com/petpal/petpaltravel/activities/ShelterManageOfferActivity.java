@@ -109,7 +109,7 @@ public class ShelterManageOfferActivity extends AppCompatActivity {
                     acceptOffer.setTextColor(Color.RED);
                     break;
                 case -2: //person has applied already
-                    acceptOffer.setText("Ya lo has solicitado");
+                    acceptOffer.setText("Cancelar interés");
                     acceptOffer.setEnabled(true);
                     acceptOffer.setTextColor(Color.WHITE);
                     break;

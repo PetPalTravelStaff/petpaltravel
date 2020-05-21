@@ -31,7 +31,7 @@ import java.text.SimpleDateFormat;
 public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity {
     //Attributes
     TextView nameBox, namePetBox, typeBox, mailBox, phoneBox, commentBox, nameLabel;
-    Button btChoose;
+    Button btChoose, btReject;
     ApplicationForOffer myApplication;
     String nameUser, userPhone;
     int idUser, idOffer, idApplication;
@@ -107,6 +107,7 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
         btChoose = (Button) findViewById(R.id.btLeAcompa);
         notification= new NotificationCompat.Builder(this);
         notification.setAutoCancel(false);
+        btReject= (Button) findViewById(R.id.btRechazarSolicitud);
     }
 
     /**
@@ -141,14 +142,37 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
                             NotificationManager nm= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                             nm.notify(idNotification, notification.build());
                             isSelected=true;
-                            btChoose.setText("La dejo en espera");
+                            btChoose.setText("¡Elejido!");
                             btChoose.setTextColor(Color.BLACK);
                         } else {
                             btChoose.setText("Prueba más tarde");
                             btChoose.setTextColor(Color.RED);
                         }
                     } else {
-                        //TODO deseleccionar
+                        Boolean control2= false;
+                        control2= myModel.unConfirmSelectedShelter(myApplication);
+                        if (control2) {
+                            btChoose.setText("Lo elijo");
+                            btChoose.setTextColor(Color.WHITE);
+                            btChoose.setEnabled(false);
+                            btReject.setVisibility(View.GONE);
+                        } else {
+                            btReject.setText("Prueba más tarde");
+                            btReject.setEnabled(false);
+                            btReject.setTextColor(Color.RED);
+                        }
+                    }
+                } else if (view.getId() == R.id.btRechazarSolicitud){
+                    Boolean control3= false;
+                    control3= myModel.rejectAplicationForOffer(myApplication);
+                    if (control3) {
+                        btChoose.setText("Solicitud rechazada");
+                        btChoose.setEnabled(false);
+                        btReject.setVisibility(View.GONE);
+                    } else {
+                        btReject.setText("Prueba más tarde");
+                        btReject.setEnabled(false);
+                        btReject.setTextColor(Color.RED);
                     }
                 }
             }
@@ -160,6 +184,7 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
      */
     private void addElementsToListener() {
         btChoose.setOnClickListener(listener);
+        btReject.setOnClickListener(listener);
     }
 
     /**

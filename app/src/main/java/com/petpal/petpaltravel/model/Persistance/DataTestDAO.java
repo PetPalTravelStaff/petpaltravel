@@ -607,4 +607,21 @@ public class DataTestDAO {
         }
         return result;
     }
+
+    public Boolean unSetSeletedShelterInOffer(ApplicationForOffer myApplication) {
+        Boolean result = false;
+        for (ApplicationForOffer app : myApplicationsForOffers) {
+            if (app.getIdAppliForOf() == myApplication.getIdAppliForOf()) {
+                app.setChoosed(false);
+                for (CompanionOfPet offe : offeringsOF) {
+                    if (offe.getId() == myApplication.getIdOffer()) {
+                        offe.setIdUserShelterSeleted(0);
+                        offe.setNameSSelected(null);
+                        result = true;
+                    }
+                }
+            }
+        }
+        return result;
+    }
 }

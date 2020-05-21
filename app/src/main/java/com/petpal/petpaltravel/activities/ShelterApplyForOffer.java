@@ -102,7 +102,7 @@ public class ShelterApplyForOffer extends AppCompatActivity {
         mailBox = (TextView) findViewById(R.id.etMiEmail);
         commentsBox = (EditText) findViewById(R.id.etComentarios);
         apply = (Button) findViewById(R.id.btSolicitalo);
-        modify = (Button) findViewById(R.id.btGuardaCambios);
+        modify = (Button) findViewById(R.id.btBorrar);
     }
 
     private void loadData() {
@@ -271,7 +271,7 @@ public class ShelterApplyForOffer extends AppCompatActivity {
                             setButtonsValues();
                             break;
                     }
-                } else if (view.getId() == R.id.btGuardaCambios) {
+                } else if (view.getId() == R.id.btBorrar) {
                     Boolean control = modifyShelterToOffer();
                     if (control) {
                         //if can update suscessfully

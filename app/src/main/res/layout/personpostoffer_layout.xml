@@ -16,7 +16,6 @@
             android:id="@+id/tvHola"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:text="Hola"
             android:textColor="@android:color/background_dark"
             android:textSize="14sp" />
@@ -54,19 +53,17 @@
             android:id="@+id/tvMiNombreEs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="Mi nombre es:"
             android:textColor="@android:color/background_dark"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/etMiNombreEs"
-            android:layout_width="168dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
             android:background="@android:drawable/editbox_background"
             android:hint="Nombre y apellido" />
     </LinearLayout>
@@ -82,19 +79,15 @@
             android:id="@+id/tvFechaViajePersona"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="24dp"
             android:text="Viajo el día:"
             android:textColor="@android:color/background_dark"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/etFechaViajePersona"
-            android:layout_width="165dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginStart="32dp"
             android:background="@android:drawable/editbox_background"
             android:hint="dd-mm-aaaa"
             android:maxLength="10" />
@@ -111,17 +104,16 @@
             android:id="@+id/tvCiudadOrigen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:layout_marginTop="5dp"
             android:text="Ciudad origen:"
             android:textColor="@android:color/background_dark"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <Spinner
             android:id="@+id/spCiudadOrigen"
-            android:layout_width="170dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="5dp" />
 
     </LinearLayout>
@@ -137,18 +129,16 @@
             android:id="@+id/tvCiudadDestino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="2dp"
             android:text="Ciudad destino:"
             android:textColor="@android:color/background_dark"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <Spinner
             android:id="@+id/spCiudadDestino"
-            android:layout_width="170dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="2dp" />
 
     </LinearLayout>
 
@@ -163,24 +153,21 @@
             android:id="@+id/tvAcompanyoA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginTop="5dp"
             android:text="Acompaño a:"
             android:textColor="@android:color/background_dark"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <CheckBox
             android:id="@+id/cbGatos"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:text="Gatos" />
 
         <CheckBox
             android:id="@+id/cbPerros"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:text="Perros" />
 
     </LinearLayout>
@@ -194,9 +181,9 @@
 
         <CheckBox
             android:id="@+id/cbOtros"
-            android:layout_width="170dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="159dp"
+            android:layout_marginStart="115dp"
             android:text="Otros" />
 
     </LinearLayout>
@@ -205,23 +192,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:layout_marginStart="24dp">
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="24dp" >
 
         <TextView
             android:id="@+id/tvTipoTransporte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:text="Viajaré en:"
             android:textColor="@android:color/background_dark"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <Spinner
             android:id="@+id/spViajareEn"
-            android:layout_width="170dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginEnd="100dp"
+            android:layout_marginStart="40dp"
             android:textColor="@android:color/background_dark" />
 
     </LinearLayout>
@@ -237,10 +223,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginTop="10dp"
         android:text="Comentarios"
         android:textColor="@android:color/background_dark"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/etComentarios"
@@ -248,7 +233,6 @@
         android:layout_height="65dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginTop="5dp"
         android:background="@android:drawable/editbox_background"
         android:ems="10"
         android:gravity="start|top"

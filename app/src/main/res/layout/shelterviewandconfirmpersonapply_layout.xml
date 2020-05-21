@@ -158,7 +158,9 @@
             android:layout_marginTop="5dp"
             android:background="@android:drawable/toast_frame"
             android:backgroundTint="@color/holoGreenDark"
-            android:text="Rechazo solicitud"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:text="Descarto solicitud"></Button>
 
 
     </LinearLayout>

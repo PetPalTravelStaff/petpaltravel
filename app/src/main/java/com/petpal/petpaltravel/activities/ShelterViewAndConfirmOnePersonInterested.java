@@ -106,7 +106,7 @@ public class ShelterViewAndConfirmOnePersonInterested extends AppCompatActivity 
                 System.out.println("Ha clicado al botón");
                 Boolean control= myModel.confirmSelectedPerson(myApplication);
                 if (control) {
-                    btChoose.setText("Ya no lo elijo");
+                    btChoose.setText("La dejo en espera");
                     btChoose.setTextColor(Color.BLACK);
                     String text = "PetPatTravel te informa: la protectora " + myDemand.getNameShelter()+" te ha elegido para acompañar a " + myDemand.getNamePet() +
                             "(" + myDemand.getTypePet()+ ") desde " + myDemand.getOriginCity() + " hasta " + myDemand.getDestinyCity() +

@@ -27,8 +27,10 @@ public class PersonApplyForDemand extends AppCompatActivity {
     Button modify;
     Spinner mySpinner;
     String[] transport;
-    int situationFlag= -1; //0= user can apply , 1= user already has applied,
-    int situationUpdateFlag=-1; //0= user can update data, 1= user has already updated data, -1= user can not update data,
+    //int situationFlag= -1; //0= user can apply , 1= user already has applied,
+    //int situationUpdateFlag=-1; //0= user can update data, 1= user has already updated data, -1= user can not update data,
+    int situationFlag= 0; //0= user can apply , 1= user already has applieds, so can modify, -1= user can not apply or modify
+    int situationUpdateFlag=0; //0= user can delete apply, -1= user can not delete apply,
     View.OnClickListener listener;
     ApplicationForDemand apliRecovered;
     ApplicationForDemand apliToSend;
@@ -144,7 +146,9 @@ public class PersonApplyForDemand extends AppCompatActivity {
                 apply.setText("Lo cancelo");
                 apply.setEnabled(true);
                 apply.setTextColor(Color.RED);
+                situationUpdateFlag=0; //
                 break;
+
             case -1: //there is some trouble
                 apply.setText("Prueba más tarde");
                 apply.setTextColor(Color.RED);
@@ -210,6 +214,10 @@ public class PersonApplyForDemand extends AppCompatActivity {
                                 //if can apply suscessfully
                                 situationFlag = 1;
                                 situationUpdateFlag=0;
+                                if(apliRecovered==null){
+                                    situationFlag = 1;
+                                    situationUpdateFlag=0;
+                                }
                             } else {
                                 //if not
                                 situationFlag = -1;

@@ -148,7 +148,7 @@ public class ShelterPostDemandActivity extends AppCompatActivity {
                         if (dateCalFrom != null) { //check valid date avaliable
                             dateAvaliable.setHintTextColor(Color.BLACK);
                             myDemand.setAvailableFrom(dateCalFrom);
-                            if (!"".equals(dateUntillString)) { //if deadline is written: check valid date
+                            if (!"".equals(dateUntillString) ) { //if deadline is written: check valid date
                                 dateCalUntil = validateDate(dateUntillString);
                                 if (dateCalUntil != null) {
                                     myDemand.setDeadline(dateCalUntil);

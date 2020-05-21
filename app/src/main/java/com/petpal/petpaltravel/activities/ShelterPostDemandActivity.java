@@ -148,69 +148,133 @@ public class ShelterPostDemandActivity extends AppCompatActivity {
                         if (dateCalFrom != null) { //check valid date avaliable
                             dateAvaliable.setHintTextColor(Color.BLACK);
                             myDemand.setAvailableFrom(dateCalFrom);
-                            if (!"".equals(dateUntillString)) { //if deadline is written: check valid date
+                            if (!"".equals(dateUntillString) ) { //if deadline is written: check valid date
                                 dateCalUntil = validateDate(dateUntillString);
                                 if (dateCalUntil != null) {
                                     myDemand.setDeadline(dateCalUntil);
+                                    if (dateCalUntil.after(dateCalFrom)) {
+                                        if (cityOrigin != null) {
+                                            labOrigen.setTextColor(Color.BLACK);
+                                            myDemand.setOriginCity(cityOrigin);
+                                            if (cityDestiny != null) {
+                                                labDestino.setTextColor(Color.BLACK);
+                                                if (!cityDestiny.equals(cityOrigin)) {
+                                                    labOrigen.setTextColor(Color.BLACK);
+                                                    labDestino.setTextColor(Color.BLACK);
+                                                    myDemand.setDestinyCity(cityDestiny);
+                                                    Boolean noChooseType = false;
+                                                    if (!cat.isChecked() & !dog.isChecked() & !other.isChecked()) {
+                                                        noChooseType = true;
+                                                    } else {
+                                                        if (other.isChecked()) {
+                                                            if (otherType.getText() == null & "".equals(otherType.getText().toString())) {
+                                                                noChooseType = true;
+                                                            } else {
+                                                                animalType = otherType.getText().toString();
+                                                                noChooseType = false;
+                                                            }
+                                                        }
+                                                    }
+                                                    if (!noChooseType) {
+                                                        labTipo.setTextColor(Color.BLACK);
+                                                        otherType.setHintTextColor(Color.BLACK);
+                                                        myDemand.setTypePet(animalType);
+                                                        myDemand.setComments(commentString);
+                                                        int idDemand = myModel.addDemandToBD(myDemand);
+                                                        if (idDemand != 0) {
+                                                            Intent intent1 = new Intent(ShelterPostDemandActivity.this, UserSearchDemandsActivity.class);
+                                                            //Create a bundle object
+                                                            Bundle bundle = new Bundle();
+                                                            //set interesting data
+                                                            bundle.putInt("idDemand", idDemand);
+                                                            intent1.putExtras(bundle);
+                                                            startActivity(intent1);
+                                                        } else {
+                                                            btPostDemand.setText("Error. Prueba más tarde");
+                                                            btPostDemand.setTextColor(Color.RED);
+                                                        }
+                                                    } else {
+                                                        labTipo.setTextColor(Color.RED);
+                                                        otherType.setHintTextColor(Color.RED);
+                                                    }
+                                                } else {
+                                                    labOrigen.setTextColor(Color.RED);
+                                                    labDestino.setTextColor(Color.RED);
+                                                }
+                                            } else {
+                                                labDestino.setTextColor(Color.RED);
+                                            }
+                                        } else {
+                                            labOrigen.setTextColor(Color.RED);
+                                        }
+                                    } else {
+                                        dateDeadLine.setHintTextColor(Color.RED);
+                                        dateDeadLine.setText(null);
+                                        dateAvaliable.setHintTextColor(Color.RED);
+                                        dateAvaliable.setText(null);
+                                    }
+                                } else {
+                                    dateDeadLine.setHintTextColor(Color.RED);
+                                    dateDeadLine.setHint("No es obligadoria (dd-mm-aaaa)");
+                                    dateDeadLine.setText(null);
                                 }
                             } else { //if not writen save null.
                                 myDemand.setDeadline(null);
-                            }
-                            if (cityOrigin != null) {
-                                labOrigen.setTextColor(Color.BLACK);
-                                myDemand.setOriginCity(cityOrigin);
-                                if (cityDestiny != null) {
-                                    labDestino.setTextColor(Color.BLACK);
-                                    if (!cityDestiny.equals(cityOrigin)) {
-                                        labOrigen.setTextColor(Color.BLACK);
+                                if (cityOrigin != null) {
+                                    labOrigen.setTextColor(Color.BLACK);
+                                    myDemand.setOriginCity(cityOrigin);
+                                    if (cityDestiny != null) {
                                         labDestino.setTextColor(Color.BLACK);
-                                        myDemand.setDestinyCity(cityDestiny);
-                                        Boolean noChooseType = false;
-                                        if (!cat.isChecked() & !dog.isChecked() & !other.isChecked()) {
-                                            noChooseType = true;
-                                        } else {
-                                            if (other.isChecked()) {
-                                                if (otherType.getText() == null & "".equals(otherType.getText().toString())) {
-                                                    noChooseType = true;
-                                                } else {
-                                                    animalType = otherType.getText().toString();
-                                                    noChooseType = false;
+                                        if (!cityDestiny.equals(cityOrigin)) {
+                                            labOrigen.setTextColor(Color.BLACK);
+                                            labDestino.setTextColor(Color.BLACK);
+                                            myDemand.setDestinyCity(cityDestiny);
+                                            Boolean noChooseType = false;
+                                            if (!cat.isChecked() & !dog.isChecked() & !other.isChecked()) {
+                                                noChooseType = true;
+                                            } else {
+                                                if (other.isChecked()) {
+                                                    if (otherType.getText() == null & "".equals(otherType.getText().toString())) {
+                                                        noChooseType = true;
+                                                    } else {
+                                                        animalType = otherType.getText().toString();
+                                                        noChooseType = false;
+                                                    }
                                                 }
                                             }
-                                        }
-                                        if (!noChooseType) {
-                                            labTipo.setTextColor(Color.BLACK);
-                                            otherType.setHintTextColor(Color.BLACK);
-                                            myDemand.setTypePet(animalType);
-                                            myDemand.setComments(commentString);
-                                            int idDemand = myModel.addDemandToBD(myDemand);
-                                            if (idDemand != 0) {
-                                                Intent intent1 = new Intent(ShelterPostDemandActivity.this, UserSearchDemandsActivity.class);
-                                                //Create a bundle object
-                                                Bundle bundle = new Bundle();
-                                                //set interesting data
-                                                bundle.putInt("idDemand", idDemand);
-                                                intent1.putExtras(bundle);
-                                                startActivity(intent1);
+                                            if (!noChooseType) {
+                                                labTipo.setTextColor(Color.BLACK);
+                                                otherType.setHintTextColor(Color.BLACK);
+                                                myDemand.setTypePet(animalType);
+                                                myDemand.setComments(commentString);
+                                                int idDemand = myModel.addDemandToBD(myDemand);
+                                                if (idDemand != 0) {
+                                                    Intent intent1 = new Intent(ShelterPostDemandActivity.this, UserSearchDemandsActivity.class);
+                                                    //Create a bundle object
+                                                    Bundle bundle = new Bundle();
+                                                    //set interesting data
+                                                    bundle.putInt("idDemand", idDemand);
+                                                    intent1.putExtras(bundle);
+                                                    startActivity(intent1);
+                                                } else {
+                                                    btPostDemand.setText("Error. Prueba más tarde");
+                                                    btPostDemand.setTextColor(Color.RED);
+                                                }
                                             } else {
-                                                btPostDemand.setText("Error. Prueba más tarde");
-                                                btPostDemand.setTextColor(Color.RED);
+                                                labTipo.setTextColor(Color.RED);
+                                                otherType.setHintTextColor(Color.RED);
                                             }
                                         } else {
-                                            labTipo.setTextColor(Color.RED);
-                                            otherType.setHintTextColor(Color.RED);
+                                            labOrigen.setTextColor(Color.RED);
+                                            labDestino.setTextColor(Color.RED);
                                         }
                                     } else {
-                                        labOrigen.setTextColor(Color.RED);
                                         labDestino.setTextColor(Color.RED);
                                     }
                                 } else {
-                                    labDestino.setTextColor(Color.RED);
+                                    labOrigen.setTextColor(Color.RED);
                                 }
-                            } else {
-                                labOrigen.setTextColor(Color.RED);
                             }
-
                         } else {
                             dateAvaliable.setHintTextColor(Color.RED);
                             dateAvaliable.setText(null);
@@ -278,6 +342,11 @@ public class ShelterPostDemandActivity extends AppCompatActivity {
                             monthDate < Calendar.getInstance().get(Calendar.MONTH)) {
                         dayDate = 0;
                     } else {
+                        try {
+                            dayDate = Integer.parseInt(datePieces[0]);
+                        } catch (Exception e) {
+                            dayDate = 0;
+                        }
                         if (yearDate == Calendar.getInstance().get(Calendar.YEAR) &
                                 monthDate == Calendar.getInstance().get(Calendar.MONTH) &
                                 dayDate <= Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
@@ -291,12 +360,8 @@ public class ShelterPostDemandActivity extends AppCompatActivity {
                                 case 8:
                                 case 10:
                                 case 12:
-                                    try {
-                                        dayDate = Integer.parseInt(datePieces[0]);
-                                    } catch (Exception e) {
-                                        dayDate = 0;
-                                    }
-                                    if (0 < dayDate & dayDate > 31) {
+
+                                    if (0 < dayDate & dayDate <=31) {
                                         dayDate = dayDate;
                                     } else {
                                         dayDate = 0;
@@ -306,33 +371,23 @@ public class ShelterPostDemandActivity extends AppCompatActivity {
                                 case 6:
                                 case 9:
                                 case 11:
-                                    try {
-                                        dayDate = Integer.parseInt(datePieces[0]);
-                                    } catch (Exception e) {
-                                        dayDate = -0;
-                                    }
-                                    if (0 < dayDate & dayDate > 30) {
+                                    if (0 < dayDate & dayDate <= 30) {
                                         dayDate = dayDate;
                                     } else {
                                         dayDate = 0;
                                     }
                                     break;
                                 case 2:
-                                    try {
-                                        dayDate = Integer.parseInt(datePieces[0]);
-                                    } catch (Exception e) {
-                                        dayDate = 0;
-                                    }
                                     //if year is bisiesto
                                     if ((yearDate % 4 == 0 && yearDate % 100 != 0) || (yearDate % 100 == 0 && yearDate % 400 == 0)) {
-                                        if (0 < dayDate & dayDate > 29) {
+                                        if (0 < dayDate & dayDate <= 29) {
                                             dayDate = dayDate;
                                             ;
                                         } else {
                                             dayDate = 0;
                                         }
                                     } else {
-                                        if (0 < dayDate & dayDate > 28) {
+                                        if (0 < dayDate & dayDate <= 28) {
                                             dayDate = dayDate;
                                         } else {
                                             dayDate = 0;
@@ -404,7 +459,7 @@ public class ShelterPostDemandActivity extends AppCompatActivity {
                 startActivity(intent3);
                 break;
             case 4://Exit
-                finish();
+                finishAffinity();
                 break;
         }
         return true;

@@ -24,17 +24,19 @@ public class ShelterApplyForOffer extends AppCompatActivity {
     private TextView phoneBox, mailBox, labType;
     private EditText commentsBox, namePetBox, otherType;
     private Button apply;
-    private Button modify;
+    private Button btcancelar;
     private RadioGroup petType;
     private RadioButton cat, dog, other;
-    private int offerId, idUser;
+    private int offerId, idUser, provIdApply;
     private ApplicationForOffer myApplicationRecovered;
     private ApplicationForOffer myApplicationToSend;
+    private ApplicationForOffer myApplicationModified;
     private String animalType;
     private String nameUser, mailUser, phoneUser;
     private Boolean isShelter;
-    private int situationFlag = -1; //0= shelter can apply , 1= shelter already has applied,
-    private int situationUpdateFlag = -1; //0= shelter can update data, 1= shelter has already updated data, -1= shelter can not update data,
+    //0= user can apply , 1= user already has applies, so can modify or delete,
+    // 2= updated data, -1= user can not apply or modify -2= user can not delete apply
+    int situationFlag= 0;
     private PPTModel myModel;
     private CompanionOfPet myOffer;
     private View.OnClickListener listener;
@@ -102,7 +104,7 @@ public class ShelterApplyForOffer extends AppCompatActivity {
         mailBox = (TextView) findViewById(R.id.etMiEmail);
         commentsBox = (EditText) findViewById(R.id.etComentarios);
         apply = (Button) findViewById(R.id.btSolicitalo);
-        modify = (Button) findViewById(R.id.btBorrar);
+        btcancelar = (Button) findViewById(R.id.btBorrar);
     }
 
     private void loadData() {
@@ -111,7 +113,6 @@ public class ShelterApplyForOffer extends AppCompatActivity {
                 myOffer.getIdShelterIntPosition(2) == idUser) {
             myApplicationRecovered= myModel.searchApplicationForOffer(offerId, idUser);
             situationFlag = 1;
-            situationUpdateFlag = 0;
         } else {
             situationFlag = 0;
         }
@@ -150,42 +151,41 @@ public class ShelterApplyForOffer extends AppCompatActivity {
                 apply.setText("¡Nos interesa!");
                 apply.setEnabled(true);
                 apply.setTextColor(Color.WHITE);
+                apply.setVisibility(View.VISIBLE);
+                btcancelar.setVisibility(View.GONE);
                 break;
-            case 1: //shelter has applied already
-                apply.setText("Cancelamos");
+            case 1: //person has applied already
+                apply.setText("Guarda cambios");
                 apply.setEnabled(true);
-                apply.setTextColor(Color.RED);
+                apply.setTextColor(Color.WHITE);
+                apply.setVisibility(View.VISIBLE);
+                btcancelar.setText("Cancelamos");
+                btcancelar.setEnabled(true);
+                btcancelar.setTextColor(Color.WHITE);
+                btcancelar.setVisibility(View.VISIBLE);
                 break;
-            case -1: //there is some trouble
+            case 2: //person has update data
+                apply.setText("¡Guardados!");
+                apply.setEnabled(false);
+                apply.setTextColor(Color.BLACK);
+                apply.setVisibility(View.VISIBLE);
+                btcancelar.setText("Cancelamos");
+                btcancelar.setTextColor(Color.WHITE);
+                btcancelar.setVisibility(View.VISIBLE);
+                break;
+            case -1: //there is some trouble in appling or updating
                 apply.setText("Prueba más tarde");
                 apply.setTextColor(Color.RED);
-                apply.setEnabled(false);
+                apply.setVisibility(View.VISIBLE);
+                btcancelar.setVisibility(View.GONE);
                 break;
-        }
-        switch (situationUpdateFlag) {
-            case 0: //normal can update data
-                modify.setText("Guarda cambios");
-                modify.setEnabled(true);
-                modify.setTextColor(Color.WHITE);
-                modify.setVisibility(View.VISIBLE);
-                break;
-            case 1: //shelter has updated data
-                modify.setText("¡Actualizada!");
-                modify.setEnabled(false);
-                modify.setTextColor(Color.WHITE);
-                modify.setVisibility(View.VISIBLE);
-                break;
-            case -1: //shelter can not update data
-                modify.setText("");
-                modify.setEnabled(false);
-                modify.setTextColor(Color.WHITE);
-                modify.setVisibility(View.GONE);
-                break;
-            case -2: //there is some trouble
-                modify.setText("Prueba más tarde");
-                modify.setTextColor(Color.RED);
-                modify.setEnabled(false);
-                modify.setVisibility(View.VISIBLE);
+            case -2: //there is some trouble in cancelling
+                btcancelar.setText("Prueba más tarde");
+                btcancelar.setTextColor(Color.RED);
+                btcancelar.setVisibility(View.VISIBLE);
+                apply.setText("Prueba más tarde");
+                apply.setTextColor(Color.RED);
+                apply.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -200,12 +200,7 @@ public class ShelterApplyForOffer extends AppCompatActivity {
                 if (view.getId() == R.id.btSolicitalo) {
                     switch (situationFlag) {
                         case 0: //normal case: shelter apply to the offer
-                            Boolean control= false;
-                            if (myApplicationRecovered==null) {
-                                myApplicationToSend = new ApplicationForOffer();
-                            }else{
-                                myApplicationToSend= myApplicationRecovered;
-                            }
+                            myApplicationToSend = new ApplicationForOffer();
                             myApplicationToSend.setIdOffer(offerId);
                             myApplicationToSend.setIdShelterApplying(idUser);
                             myApplicationToSend.setNameShelter(nameUser);
@@ -234,15 +229,13 @@ public class ShelterApplyForOffer extends AppCompatActivity {
                                     myApplicationToSend.setTypePet(animalType);
                                     String comments = commentsBox.getText().toString();
                                     myApplicationToSend.setComments(comments);
-                                    control = myModel.addApplicationToOffer(myApplicationToSend);
-                                    if (control) {
+                                    provIdApply = myModel.addApplicationToOffer(myApplicationToSend);
+                                    if (provIdApply!=0) {
                                         //if can apply suscessfully
                                         situationFlag = 1;
-                                        situationUpdateFlag = 0;
                                     } else {
                                         //if not
                                         situationFlag = -1;
-                                        situationUpdateFlag = -1;
                                     }
                                     //set text to apply button
                                     setButtonsValues();
@@ -254,31 +247,81 @@ public class ShelterApplyForOffer extends AppCompatActivity {
                                 namePetBox.setHintTextColor(Color.RED);
                                 namePetBox.setText(null);
                             }
-
                             break;
-                        case 1: //shelter has applied already: person un-apply the demand
-                            Boolean control2 = unApplyShelterToOffer();
-                            if (control2) {
-                                //if unapply suscesfully
-                                situationFlag = 0;
-                                situationUpdateFlag = -1;
-                            } else {
-                                //if not
-                                situationFlag = -1;
-                                situationUpdateFlag = 0;
+                        case 1: //shelter has applied already: person modify the demand
+                            Boolean control2= false;
+                            if (myApplicationRecovered!=null) {
+                                myApplicationModified = myApplicationRecovered;
+                            }else{
+                                myApplicationModified= myApplicationToSend;
+                                myApplicationModified.setIdOffer(provIdApply);
                             }
-                            //set text to apply button
-                            setButtonsValues();
-                            break;
+                            myApplicationToSend.setIdOffer(offerId);
+                            myApplicationToSend.setIdShelterApplying(idUser);
+                            myApplicationToSend.setNameShelter(nameUser);
+                            myApplicationToSend.setMail(mailUser);
+                            myApplicationToSend.setPhone(phoneUser);
+                            String namePet2= namePetBox.getText().toString();
+                            if (!"".equals(namePet2)) {
+                                namePetBox.setHintTextColor(Color.BLACK);
+                                myApplicationToSend.setNamePet(namePet2);
+                                Boolean noChooseType = false;
+                                if (!cat.isChecked() & !dog.isChecked() & !other.isChecked()) {
+                                    noChooseType = true;
+                                } else {
+                                    if (other.isChecked()) {
+                                        if (otherType.getText() == null & "".equals(otherType.getText().toString())) {
+                                            noChooseType = true;
+                                        } else {
+                                            animalType = otherType.getText().toString();
+                                            noChooseType = false;
+                                        }
+                                    }
+                                }
+                                if (!noChooseType) {
+                                    labType.setTextColor(Color.BLACK);
+                                    otherType.setHintTextColor(Color.BLACK);
+                                    myApplicationToSend.setTypePet(animalType);
+                                    String comments = commentsBox.getText().toString();
+                                    myApplicationToSend.setComments(comments);
+                                    control2 = myModel.modifyApplicationToOffer(myApplicationToSend);
+                                    if (control2) {
+                                        //if can apply suscessfully
+                                        situationFlag = 2;
+                                    } else {
+                                        //if not
+                                        situationFlag = -1;
+                                    }
+                                    //set text to apply button
+                                    setButtonsValues();
+                                } else {
+                                    labType.setTextColor(Color.RED);
+                                    otherType.setHintTextColor(Color.RED);
+                                }
+                            } else {
+                                namePetBox.setHintTextColor(Color.RED);
+                                namePetBox.setText(null);
+                            }
                     }
                 } else if (view.getId() == R.id.btBorrar) {
-                    Boolean control = modifyShelterToOffer();
-                    if (control) {
-                        //if can update suscessfully
-                        situationUpdateFlag = 1;
+                    Boolean control2= false;
+                    if (situationFlag==1){
+                        if (myApplicationRecovered!=null) {
+                            control2= myModel.deleteApplicationToOffer(myApplicationRecovered);
+                        } else {
+                            myApplicationToSend.setIdAppliForOf(provIdApply);
+                            control2 = myModel.deleteApplicationToOffer(myApplicationToSend);
+                        }
+                    } else if (situationFlag==2){
+                        myApplicationModified= myModel.searchOfferApplyById(provIdApply);
+                        control2 = myModel.deleteApplicationToOffer(myApplicationModified);
+                    }
+                    if (control2) {
+                        //if unapply suscesfully
+                        situationFlag = 0;
                     } else {
                         //if not
-                        situationUpdateFlag = -2;
+                        situationFlag = -2;
                     }
                     //set text to apply button
                     setButtonsValues();
@@ -310,31 +353,12 @@ public class ShelterApplyForOffer extends AppCompatActivity {
     }
 
 
-
-    /**
-     * Method for un-apply for a demand
-     *
-     * @return true if un-applied is done, false otherwise
-     */
-    private Boolean unApplyShelterToOffer() {
-        return false;
-    }
-
-    /**
-     * Method for modifying data of application for demand
-     *
-     * @return true if update is done, false otherwise
-     */
-    private Boolean modifyShelterToOffer() {
-        return false;
-    }
-
     /**
      * Method for adding listener to the elements
      */
     private void addElementsToListener() {
         apply.setOnClickListener(listener);
-        modify.setOnClickListener(listener);
+        btcancelar.setOnClickListener(listener);
         petType.setOnCheckedChangeListener(listener2);
     }
 
@@ -378,7 +402,7 @@ public class ShelterApplyForOffer extends AppCompatActivity {
                 startActivity(intent4);
                 break;
             case 5://Exit
-                finish();
+                finishAffinity();
                 break;
         }
         return true;

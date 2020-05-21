@@ -23,7 +23,7 @@ public class PersonCheckSheltersInterested extends AppCompatActivity {
     //Attributes
     private PPTModel myModel;
     private ListView myListView;
-    private TextView nameLabel, notification;
+    private TextView nameLabel, notification, selected;
     private ArrayList<ApplicationForOffer> listOfInterestedShelter;
     private AdapterView.OnItemClickListener listener;
     private String nameUser;
@@ -80,6 +80,7 @@ public class PersonCheckSheltersInterested extends AppCompatActivity {
         myListView = (ListView) findViewById(R.id.lvProtectoras);
         nameLabel= (TextView) findViewById(R.id.etNombrePersona);
         notification= (TextView) findViewById(R.id.tverroroff);
+        selected= (TextView) findViewById(R.id.textView);
     }
 
     /**
@@ -120,9 +121,11 @@ public class PersonCheckSheltersInterested extends AppCompatActivity {
         nameLabel.setText(nameUser);
         //if there no list
         if (listOfInterestedShelter == null) {
+            selected.setVisibility(View.GONE);
             notification.setText("Problemas al cargar los datos.\n\t Intentalo más tarde");
             //if list is empty
         } else if (listOfInterestedShelter.size()==0){
+            selected.setVisibility(View.GONE);
             notification.setText("Ninguna protectora te ha solicitado... aún.");
             //if list has lines
         } else {
@@ -173,7 +176,7 @@ public class PersonCheckSheltersInterested extends AppCompatActivity {
                 startActivity(intent4);
                 break;
             case 5://Exit
-                finish();
+                finishAffinity();
                 break;
         }
         return true;

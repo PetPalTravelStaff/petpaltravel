@@ -193,7 +193,7 @@ public class UserSearchDemandsActivity extends AppCompatActivity {
                     startActivity(intent4);
                 break;
             case 5://Exit
-                finish();
+                finishAffinity();
                 break;
         }
         return true;

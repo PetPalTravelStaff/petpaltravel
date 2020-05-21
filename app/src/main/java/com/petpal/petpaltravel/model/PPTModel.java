@@ -2,7 +2,6 @@ package com.petpal.petpaltravel.model;
 
 import com.petpal.petpaltravel.model.Persistance.DataTestDAO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PPTModel {
@@ -84,6 +83,20 @@ public class PPTModel {
         return result;
     }
 
+    public Boolean modifyOffer(CompanionOfPet newDataOffer) {
+        boolean result= false;
+        result= myDAO.modifyOffer(newDataOffer);
+        return result;
+    }
+
+    public boolean cancelOffer(CompanionOfPet myOffer) {
+        boolean result;
+        result= myDAO.deleteOffer(myOffer);
+        return result;
+    }
+
+
+
 
     //---- COMPANION FOR PET (DEMANDS) ------
     public List<CompanionForPet> getAllDemands() {
@@ -112,11 +125,25 @@ public class PPTModel {
         return result;
     }
 
-
-    //---- APPLICATION FOR OFFER ------
-
-    public Boolean addApplicationToOffer(ApplicationForOffer myApplication) {
+    public Boolean modifyDemand(CompanionForPet myDemand) {
         Boolean result= false;
+        result= myDAO.modifyDemand(myDemand);
+        return result;
+    }
+
+
+    public boolean cancelDemand(CompanionForPet myDemand) {
+        boolean result;
+        result= myDAO.deleteDemand(myDemand);
+        return result;
+    }
+
+
+
+        //---- APPLICATION FOR OFFER ------
+
+    public int addApplicationToOffer(ApplicationForOffer myApplication) {
+        int result= 0;
         result= myDAO.addShelterToOffer(myApplication);
         return result;
     }
@@ -145,11 +172,35 @@ public class PPTModel {
         return result;
     }
 
+    public Boolean deleteApplicationToOffer(ApplicationForOffer myApplication) {
+        Boolean result= false;
+        result= myDAO.deleteShelterFromOffer(myApplication);
+        return result;
+    }
+
+    public Boolean modifyApplicationToOffer(ApplicationForOffer myApplication) {
+        Boolean result= false;
+        result= myDAO.modifyApplyForOffer(myApplication);
+        return result;
+    }
+
+    public Boolean unConfirmSelectedShelter(ApplicationForOffer myApplication) {
+        Boolean result= false;
+        result= myDAO.unSetSeletedShelterInOffer(myApplication);
+        return result;
+    }
+
+    public boolean rejectAplicationForOffer(ApplicationForOffer myApplication) {
+        Boolean result= false;
+        result= myDAO.deleteShelterFromOffer(myApplication);
+        return result;
+    }
+
 
 
     //---- APPLICATION FOR DEMAND ------
-    public Boolean addApplicationToDemand(ApplicationForDemand myApplication) {
-        Boolean result= false;
+    public int addApplicationToDemand(ApplicationForDemand myApplication) {
+        int result= 0;
         result= myDAO.addPersonToDemand(myApplication);
         return result;
     }
@@ -177,6 +228,22 @@ public class PPTModel {
         result= myDAO.setSeletedPersonInDemand(myApplication);
         return result;
     }
+
+    public Boolean modifyApplicationToDemand(ApplicationForDemand myApplication) {
+        Boolean result= false;
+        result= myDAO.modifyApplyForDemand(myApplication);
+        return result;
+    }
+
+
+    public Boolean unOfferPersonToDemand(ApplicationForDemand myApplication) {
+        Boolean result= false;
+        result= myDAO.deleteApplyForDemand(myApplication);
+        return result;
+    }
+
+
+
 }
 
 

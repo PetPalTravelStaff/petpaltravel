@@ -7,7 +7,6 @@ import com.petpal.petpaltravel.model.CompanionOfPet;
 import com.petpal.petpaltravel.model.Location;
 import com.petpal.petpaltravel.model.User;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -31,8 +30,6 @@ public class DataTestDAO {
         addApplicationOffer();
     }
 
-
-
     static public DataTestDAO getInstance() {
         if (instanceDAO==null) {
             instanceDAO= new DataTestDAO();
@@ -40,6 +37,34 @@ public class DataTestDAO {
         return instanceDAO;
     }
 
+
+    public User getMyUser() {
+        return myUser;
+    }
+
+    public void setMyUser(User myUser) {
+        this.myUser = myUser;
+    }
+
+    public List<CompanionForPet> getDemandsFOR() {
+        return demandsFOR;
+    }
+
+    public void setDemandsFOR(List<CompanionForPet> demandsFOR) {
+        this.demandsFOR = demandsFOR;
+    }
+
+    public List<CompanionOfPet> getOfferingsOF() {
+        return offeringsOF;
+    }
+
+    public void setOfferingsOF(List<CompanionOfPet> offeringsOF) {
+        this.offeringsOF = offeringsOF;
+    }
+
+
+
+    //-------- DATA TEST-------------
     private void addCompanionForPet() {
         demandsFOR.add(new CompanionForPet(1, 1, "Protectora Can", "Drako", new GregorianCalendar(2020,5,27),
                 null, "Ibiza", "Sta. Cruz de Tenerife", "Perro/a", "FoxTerrier pequeño (se puede llevar en cabina)",
@@ -101,30 +126,17 @@ public class DataTestDAO {
     }
 
 
-    public User getMyUser() {
-        return myUser;
+    //-------- HELPERS -------------
+    public String[] recoverCities() {
+        String[] result=new String[myLocations.size()];
+        for (int i=0; i<myLocations.size();i++) {
+            result[i]= myLocations.get(i).getCity();
+        }
+        return result;
     }
 
-    public void setMyUser(User myUser) {
-        this.myUser = myUser;
-    }
 
-    public List<CompanionForPet> getDemandsFOR() {
-        return demandsFOR;
-    }
-
-    public void setDemandsFOR(List<CompanionForPet> demandsFOR) {
-        this.demandsFOR = demandsFOR;
-    }
-
-    public List<CompanionOfPet> getOfferingsOF() {
-        return offeringsOF;
-    }
-
-    public void setOfferingsOF(List<CompanionOfPet> offeringsOF) {
-        this.offeringsOF = offeringsOF;
-    }
-
+    //-------- USERS -------------
 
     public User validatePassword(String userMail, String userPass) {
         User result= null;
@@ -161,92 +173,6 @@ public class DataTestDAO {
         return result;
     }
 
-    public List<CompanionOfPet> recoverAllOffers() {
-        return offeringsOF;
-    }
-
-    public List<CompanionForPet> recoverAllDemands() {
-        return demandsFOR;
-    }
-
-    public CompanionForPet searchDemandById(int idDemand) {
-        CompanionForPet result= null;
-        for (CompanionForPet demand : demandsFOR) {
-            if (idDemand==demand.getId()){
-                result= demand;
-            }
-        }
-        return result;
-    }
-
-    public Boolean addPersonToDemand(ApplicationForDemand myApplication) {
-        Boolean result= false;
-        int lastIndex= myApplicationsForDemands.size();
-        for (CompanionForPet demand : demandsFOR) {
-            if (myApplication.getIdDemand() == demand.getId()) {
-                if (demand.getIdPersonInterestePosition(0) == 0) {
-                    demand.setIdPersonsIntPosition(myApplication.getIdPersonApplying(),0);
-                    demand.setNamePersonsIntPosition(myApplication.getNamePerson(),0);
-                    myApplication.setIdApplForDem(lastIndex+1);
-                    myApplicationsForDemands.add(myApplication);
-                    result = true;
-                } else if (demand.getIdPersonInterestePosition(1) == 0) {
-                    demand.setIdPersonsIntPosition(myApplication.getIdPersonApplying(),1);
-                    demand.setNamePersonsIntPosition(myApplication.getNamePerson(),1);
-                    myApplication.setIdApplForDem(lastIndex+1);
-                    myApplicationsForDemands.add(myApplication);
-                    result = true;
-                } else if (demand.getIdPersonInterestePosition(2) == 0) {
-                    demand.setIdPersonsIntPosition(myApplication.getIdPersonApplying(),2);
-                    demand.setNamePersonsIntPosition(myApplication.getNamePerson(),2);
-                    myApplication.setIdApplForDem(lastIndex+1);
-                    myApplicationsForDemands.add(myApplication);
-                    result = true;
-                }
-            }
-        }
-        return result;
-    }
-
-    public CompanionOfPet searchOfferById(int idOffer) {
-        CompanionOfPet result= null;
-        for (CompanionOfPet offer : offeringsOF) {
-            if (idOffer==offer.getId()){
-                result= offer;
-            }
-        }
-        return result;
-    }
-
-    public Boolean addShelterToOffer(ApplicationForOffer myApplication) {
-        Boolean result= false;
-        int lastIndex= myApplicationsForOffers.size();
-        for (CompanionOfPet offer : offeringsOF) {
-            if (myApplication.getIdOffer() == offer.getId()) {
-                if (offer.getIdShelterIntPosition(0) == 0) {
-                    offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(),0);
-                    offer.setNamesShelterIntPosition(myApplication.getNameShelter(),0);
-                    myApplication.setIdAppliForOf(lastIndex+1);
-                    myApplicationsForOffers.add(myApplication);
-                    result = true;
-                } else if (offer.getIdShelterIntPosition(1) == 0) {
-                    offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(),1);
-                    offer.setNamesShelterIntPosition(myApplication.getNameShelter(),1);
-                    myApplication.setIdAppliForOf(lastIndex+1);
-                    myApplicationsForOffers.add(myApplication);
-                    result = true;
-                } else if (offer.getIdShelterIntPosition(2) == 0) {
-                    offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(),2);
-                    offer.setNamesShelterIntPosition(myApplication.getNameShelter(),2);
-                    myApplication.setIdAppliForOf(lastIndex+1);
-                    myApplicationsForOffers.add(myApplication);
-                    result = true;
-                }
-            }
-        }
-        return result;
-    }
-
     public User recoverUserById(int idUser) {
         User result= null;
         for (User u: myUsers) {
@@ -256,7 +182,6 @@ public class DataTestDAO {
         }
         return result;
     }
-
 
     //return 0 if email already exist in other user
     //return 1 if user updated
@@ -295,15 +220,15 @@ public class DataTestDAO {
         if (recoverUserById(newDataUser.getId()).getName().equals(newDataUser.getName()) &
                 recoverUserById(newDataUser.getId()).getEmail().equals(newDataUser.getEmail()) &
                 recoverUserById(newDataUser.getId()).getPhone().equals(newDataUser.getPhone())){
-                if (null!= newDataUser.getPassword()) {
-                    if (recoverUserById(newDataUser.getId()).getPassword().equals(newDataUser.getPassword())) {
-                        result=1;
-                    } else {
-                        result=-1;
-                    }
-                } else {
+            if (null!= newDataUser.getPassword()) {
+                if (recoverUserById(newDataUser.getId()).getPassword().equals(newDataUser.getPassword())) {
                     result=1;
+                } else {
+                    result=-1;
                 }
+            } else {
+                result=1;
+            }
         } else {
             result=-1;
         }
@@ -311,11 +236,19 @@ public class DataTestDAO {
         return result;
     }
 
-    public String[] recoverCities() {
-        String[] result=new String[myLocations.size()];
-        for (int i=0; i<myLocations.size();i++) {
-            result[i]= myLocations.get(i).getCity();
+
+    //-------- COMPANION OF PET (OFFERS) -------------
+    public List<CompanionOfPet> recoverAllOffers() {
+        return offeringsOF;
+    }
+
+    public CompanionOfPet searchOfferById(int idOffer) {
+        CompanionOfPet result= null;
+        for (CompanionOfPet offer : offeringsOF) {
+            if (idOffer==offer.getId()){
+                result= offer;
             }
+        }
         return result;
     }
 
@@ -330,16 +263,6 @@ public class DataTestDAO {
         return offeringsOF.get(offeringsOF.size()-1).getId();
     }
 
-    //return 0 if not added
-    //return numer of demand if added
-    public int addDemand(CompanionForPet myDemand) {
-        int result= 0;
-        myDemand.setId(0);
-        int lastID= demandsFOR.get(demandsFOR.size()-1).getId();
-        myDemand.setId(lastID+1);
-        demandsFOR.add(myDemand);
-        return demandsFOR.get(demandsFOR.size()-1).getId();
-    }
 
     public List<CompanionOfPet> recoverOffersOfPerson(int iduser) {
         List<CompanionOfPet> result= new ArrayList<CompanionOfPet>();
@@ -351,105 +274,350 @@ public class DataTestDAO {
         return result;
     }
 
-    public List<CompanionForPet> recoverOffersOfShelter(int iduser) {
-        List<CompanionForPet> result= new ArrayList<CompanionForPet>();
-        for (CompanionForPet dem : demandsFOR) {
-            if (iduser == dem.getIdeUserShelterOffering()) {
-                result.add(dem);
+    public Boolean modifyOffer(CompanionOfPet myOffer) {
+        Boolean result = false;
+        for (CompanionOfPet offer : offeringsOF) {
+            if (myOffer.getId() == offer.getId()) {
+                offer = myOffer;
+                result = true;
             }
+        }
+        return result;
+    }
+
+    public boolean deleteOffer(CompanionOfPet myOffer) {
+        boolean result;
+        if (offeringsOF.contains(myOffer)) {
+            offeringsOF.remove(myOffer);
+            //if deleted: contains will be false, so it is true that is deleted
+            //if not deleted: contains will be true, so it is false that is deleted
+            result= !offeringsOF.contains(myOffer);
+            List<ApplicationForOffer> applyToRemove = recoverApplicationForOneOffer(myOffer.getId());
+            for (ApplicationForOffer apli: applyToRemove) {
+                myApplicationsForOffers.remove(apli);
+            }
+        } else {
+            result=false;
         }
         return result;
     }
 
 
 
-    public ApplicationForOffer recoverApplicationForOffer(int offerId, int idUser) {
-        ApplicationForOffer result= null;
-        for (ApplicationForOffer apliForOf: myApplicationsForOffers) {
-            if (apliForOf.getIdOffer()==offerId & apliForOf.getIdShelterApplying()==idUser) {
-                result= apliForOf;
-            }
+
+
+        //-------- COMPANION FOR PET (DEMANDS) -------------
+        public List<CompanionForPet> recoverAllDemands () {
+            return demandsFOR;
         }
+
+        public CompanionForPet searchDemandById ( int idDemand){
+            CompanionForPet result = null;
+            for (CompanionForPet demand : demandsFOR) {
+                if (idDemand == demand.getId()) {
+                    result = demand;
+                }
+            }
+            return result;
+        }
+
+        //return 0 if not added
+        //return numer of demand if added
+        public int addDemand (CompanionForPet myDemand){
+            int result = 0;
+            myDemand.setId(0);
+            int lastID = demandsFOR.get(demandsFOR.size() - 1).getId();
+            myDemand.setId(lastID + 1);
+            demandsFOR.add(myDemand);
+            return demandsFOR.get(demandsFOR.size() - 1).getId();
+        }
+
+        public Boolean modifyDemand (CompanionForPet myDemand){
+            Boolean result = false;
+            for (CompanionForPet dem : demandsFOR) {
+                if (myDemand.getId() == dem.getId()) {
+                    dem = myDemand;
+                    result = true;
+                }
+            }
+            return result;
+        }
+
+
+        public List<CompanionForPet> recoverOffersOfShelter ( int iduser){
+            List<CompanionForPet> result = new ArrayList<CompanionForPet>();
+            for (CompanionForPet dem : demandsFOR) {
+                if (iduser == dem.getIdeUserShelterOffering()) {
+                    result.add(dem);
+                }
+            }
+            return result;
+        }
+
+    public boolean deleteDemand(CompanionForPet myDemand) {
+        boolean result;
+        if (demandsFOR.contains(myDemand)) {
+            demandsFOR.remove(myDemand);
+            //if deleted: contains will be false, so it is true that is deleted
+            //if not deleted: contains will be true, so it is false that is deleted
+            result= !offeringsOF.contains(myDemand);
+            List<ApplicationForDemand> applyToRemove = recoverApplicationForOneDemand(myDemand.getId());
+            for (ApplicationForDemand apli: applyToRemove) {
+                myApplicationsForDemands.remove(apli);
+            }
+        } else {
+            result=false;
+        }
+
         return result;
     }
 
-    public ApplicationForDemand recoverApplicationForDemand(int demandId, int idUser) {
-        ApplicationForDemand result= null;
-        for (ApplicationForDemand apliForDe: myApplicationsForDemands) {
-            if (apliForDe.getIdDemand()==demandId & apliForDe.getIdPersonApplying()==idUser) {
-                result= apliForDe;
-            }
-        }
-        return result;
-    }
 
-    public List<ApplicationForDemand> recoverApplicationForOneDemand(int idDemand) {
-        List<ApplicationForDemand> result= new ArrayList<ApplicationForDemand>();
-        for (ApplicationForDemand apli : myApplicationsForDemands) {
-            if (idDemand == apli.getIdDemand()) {
-                result.add(apli);
-            }
-        }
-        return result;
-    }
 
-    public List<ApplicationForOffer> recoverApplicationForOneOffer(int idOffer) {
-        List<ApplicationForOffer> result= new ArrayList<ApplicationForOffer>();
-        for (ApplicationForOffer apli : myApplicationsForOffers) {
-            if (idOffer == apli.getIdOffer()) {
-                result.add(apli);
-            }
-        }
-        return result;
-    }
-
-    public ApplicationForDemand recoverDemandApplyById(int applyId) {
-        ApplicationForDemand result= null;
-        for (ApplicationForDemand apliForDe: myApplicationsForDemands) {
-            if (apliForDe.getIdApplForDem()==applyId) {
-                result= apliForDe;
-            }
-        }
-        return result;
-    }
-
-    public Boolean setSeletedPersonInDemand(ApplicationForDemand myApplication) {
-        Boolean result= false;
-        for (ApplicationForDemand app: myApplicationsForDemands) {
-            if (app.getIdApplForDem()==myApplication.getIdApplForDem()) {
-                app.setChoosed(true);
-                for (CompanionForPet dem: demandsFOR) {
-                    if (dem.getId()==myApplication.getIdDemand()){
-                        dem.setIdUserPersonSeleted(myApplication.getIdPersonApplying());
-                        dem.setNamePSelected(myApplication.getNamePerson());
-                        result=true;
+        //-------- APPLICATION FOR ASKING A COMPANION FOR PET (APPLICATION FOR DEMAND) -------------
+        public int addPersonToDemand (ApplicationForDemand myApplication){
+            int result = 0;
+            int lastIndex = myApplicationsForDemands.size();
+            for (CompanionForPet demand : demandsFOR) {
+                if (myApplication.getIdDemand() == demand.getId()) {
+                    if (demand.getIdPersonInterestePosition(0) == 0) {
+                        demand.setIdPersonsIntPosition(myApplication.getIdPersonApplying(), 0);
+                        demand.setNamePersonsIntPosition(myApplication.getNamePerson(), 0);
+                        myApplication.setIdApplForDem(lastIndex + 1);
+                        myApplicationsForDemands.add(myApplication);
+                        result = myApplicationsForDemands.size();
+                    } else if (demand.getIdPersonInterestePosition(1) == 0) {
+                        demand.setIdPersonsIntPosition(myApplication.getIdPersonApplying(), 1);
+                        demand.setNamePersonsIntPosition(myApplication.getNamePerson(), 1);
+                        myApplication.setIdApplForDem(lastIndex + 1);
+                        myApplicationsForDemands.add(myApplication);
+                        result = myApplicationsForDemands.size();
+                    } else if (demand.getIdPersonInterestePosition(2) == 0) {
+                        demand.setIdPersonsIntPosition(myApplication.getIdPersonApplying(), 2);
+                        demand.setNamePersonsIntPosition(myApplication.getNamePerson(), 2);
+                        myApplication.setIdApplForDem(lastIndex + 1);
+                        myApplicationsForDemands.add(myApplication);
+                        result = myApplicationsForDemands.size();
                     }
+                }
+            }
+            return result;
+        }
+
+        public ApplicationForDemand recoverApplicationForDemand ( int demandId, int idUser){
+            ApplicationForDemand result = null;
+            for (ApplicationForDemand apliForDe : myApplicationsForDemands) {
+                if (apliForDe.getIdDemand() == demandId & apliForDe.getIdPersonApplying() == idUser) {
+                    result = apliForDe;
+                }
+            }
+            return result;
+        }
+
+        public List<ApplicationForDemand> recoverApplicationForOneDemand ( int idDemand){
+            List<ApplicationForDemand> result = new ArrayList<ApplicationForDemand>();
+            for (ApplicationForDemand apli : myApplicationsForDemands) {
+                if (idDemand == apli.getIdDemand()) {
+                    result.add(apli);
+                }
+            }
+            return result;
+        }
+
+        public ApplicationForDemand recoverDemandApplyById ( int applyId){
+            ApplicationForDemand result = null;
+            for (ApplicationForDemand apliForDe : myApplicationsForDemands) {
+                if (apliForDe.getIdApplForDem() == applyId) {
+                    result = apliForDe;
+                }
+            }
+            return result;
+        }
+
+        public Boolean setSeletedPersonInDemand (ApplicationForDemand myApplication){
+            Boolean result = false;
+            for (ApplicationForDemand app : myApplicationsForDemands) {
+                if (app.getIdApplForDem() == myApplication.getIdApplForDem()) {
+                    app.setChoosed(true);
+                    for (CompanionForPet dem : demandsFOR) {
+                        if (dem.getId() == myApplication.getIdDemand()) {
+                            dem.setIdUserPersonSeleted(myApplication.getIdPersonApplying());
+                            dem.setNamePSelected(myApplication.getNamePerson());
+                            result = true;
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
+
+    public Boolean modifyApplyForDemand(ApplicationForDemand myApplication) {
+        Boolean result = false;
+        for (ApplicationForDemand app : myApplicationsForDemands) {
+            if (app.getIdApplForDem() == myApplication.getIdApplForDem()) {
+                app = myApplication;
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    public Boolean deleteApplyForDemand(ApplicationForDemand myApplication) {
+        Boolean result = false;
+        for (CompanionForPet demand : demandsFOR) {
+            if (myApplication.getIdDemand() == demand.getId()) {
+                if (demand.getIdPersonInterestePosition(0) == myApplication.getIdPersonApplying()) {
+                    demand.setIdPersonsIntPosition(0, 0);
+                    demand.setNamePersonsIntPosition(null, 0);
+                    myApplicationsForDemands.remove(myApplication);
+                    result = true;
+                } else if (demand.getIdPersonInterestePosition(1) == myApplication.getIdPersonApplying()) {
+                    demand.setIdPersonsIntPosition(0, 1);
+                    demand.setNamePersonsIntPosition(null, 1);
+                    myApplicationsForDemands.remove(myApplication);
+                    result = true;
+                } else if (demand.getIdPersonInterestePosition(2) == myApplication.getIdPersonApplying()) {
+                    demand.setIdPersonsIntPosition(0, 2);
+                    demand.setNamePersonsIntPosition(null, 2);
+                    myApplicationsForDemands.remove(myApplication);
+                    result = true;
+                }
+            }
+        }
+        return result;
+
+    }
+
+
+        //-------- APPLICATION FOR BEING A COMPANION OF PET (APPLICATION FOR OFFER) -------------
+        public int addShelterToOffer (ApplicationForOffer myApplication){
+        int result = 0;
+        int lastIndex = myApplicationsForOffers.size();
+        for (CompanionOfPet offer : offeringsOF) {
+            if (myApplication.getIdOffer() == offer.getId()) {
+                if (offer.getIdShelterIntPosition(0) == 0) {
+                    offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(), 0);
+                    offer.setNamesShelterIntPosition(myApplication.getNameShelter(), 0);
+                    myApplication.setIdAppliForOf(lastIndex + 1);
+                    myApplicationsForOffers.add(myApplication);
+                    result = myApplicationsForOffers.size();
+                } else if (offer.getIdShelterIntPosition(1) == 0) {
+                    offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(), 1);
+                    offer.setNamesShelterIntPosition(myApplication.getNameShelter(), 1);
+                    myApplication.setIdAppliForOf(lastIndex + 1);
+                    myApplicationsForOffers.add(myApplication);
+                    result = myApplicationsForOffers.size();
+                } else if (offer.getIdShelterIntPosition(2) == 0) {
+                    offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(), 2);
+                    offer.setNamesShelterIntPosition(myApplication.getNameShelter(), 2);
+                    myApplication.setIdAppliForOf(lastIndex + 1);
+                    myApplicationsForOffers.add(myApplication);
+                    result = myApplicationsForOffers.size();
                 }
             }
         }
         return result;
     }
 
-    public ApplicationForOffer recoverOfferApplyById(int applyId) {
-        ApplicationForOffer result= null;
-        for (ApplicationForOffer apliForOf: myApplicationsForOffers) {
-            if (apliForOf.getIdAppliForOf()==applyId) {
-                result= apliForOf;
+
+        public ApplicationForOffer recoverApplicationForOffer ( int offerId, int idUser){
+            ApplicationForOffer result = null;
+            for (ApplicationForOffer apliForOf : myApplicationsForOffers) {
+                if (apliForOf.getIdOffer() == offerId & apliForOf.getIdShelterApplying() == idUser) {
+                    result = apliForOf;
+                }
+            }
+            return result;
+        }
+
+
+        public List<ApplicationForOffer> recoverApplicationForOneOffer ( int idOffer){
+            List<ApplicationForOffer> result = new ArrayList<ApplicationForOffer>();
+            for (ApplicationForOffer apli : myApplicationsForOffers) {
+                if (idOffer == apli.getIdOffer()) {
+                    result.add(apli);
+                }
+            }
+            return result;
+        }
+
+
+        public ApplicationForOffer recoverOfferApplyById ( int applyId){
+            ApplicationForOffer result = null;
+            for (ApplicationForOffer apliForOf : myApplicationsForOffers) {
+                if (apliForOf.getIdAppliForOf() == applyId) {
+                    result = apliForOf;
+                }
+            }
+            return result;
+        }
+
+        public Boolean setSeletedShelterInOffer (ApplicationForOffer myApplication){
+            Boolean result = false;
+            for (ApplicationForOffer app : myApplicationsForOffers) {
+                if (app.getIdAppliForOf() == myApplication.getIdAppliForOf()) {
+                    app.setChoosed(true);
+                    for (CompanionOfPet offe : offeringsOF) {
+                        if (offe.getId() == myApplication.getIdOffer()) {
+                            offe.setIdUserShelterSeleted(myApplication.getIdShelterApplying());
+                            offe.setNameSSelected(myApplication.getNameShelter());
+                            result = true;
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
+
+    public boolean deleteShelterFromOffer (ApplicationForOffer myApplication){
+        boolean result = false;
+        for (CompanionOfPet offer : offeringsOF) {
+            if (myApplication.getIdOffer() == offer.getId()) {
+                if (offer.getIdShelterIntPosition(0) == myApplication.getIdShelterApplying()) {
+                    offer.setIdShelterIntPosition(0, 0);
+                    offer.setNamesShelterIntPosition(null, 0);
+                    myApplicationsForOffers.remove(myApplication);
+                    result = true;
+                } else if (offer.getIdShelterIntPosition(1) == myApplication.getIdShelterApplying()) {
+                    offer.setIdShelterIntPosition(0, 1);
+                    offer.setNamesShelterIntPosition(null, 1);
+                    myApplicationsForOffers.remove(myApplication);
+                    result = true;
+                } else if (offer.getIdShelterIntPosition(2) == myApplication.getIdShelterApplying()) {
+                    offer.setIdShelterIntPosition(0, 2);
+                    offer.setNamesShelterIntPosition(null, 2);
+                    myApplicationsForOffers.remove(myApplication);
+                    result = true;
+                }
             }
         }
         return result;
     }
 
-    public Boolean setSeletedShelterInOffer(ApplicationForOffer myApplication) {
-        Boolean result= false;
-        for (ApplicationForOffer app: myApplicationsForOffers) {
-            if (app.getIdAppliForOf()==myApplication.getIdAppliForOf()) {
-                app.setChoosed(true);
-                for (CompanionOfPet offe: offeringsOF) {
-                    if (offe.getId()==myApplication.getIdOffer()){
-                        offe.setIdUserShelterSeleted(myApplication.getIdShelterApplying());
-                        offe.setNameSSelected(myApplication.getNameShelter());
-                        result=true;
+
+    public Boolean modifyApplyForOffer(ApplicationForOffer myApplication) {
+        Boolean result = false;
+        for (ApplicationForOffer app : myApplicationsForOffers) {
+            if (app.getIdAppliForOf() == myApplication.getIdAppliForOf()) {
+                app = myApplication;
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    public Boolean unSetSeletedShelterInOffer(ApplicationForOffer myApplication) {
+        Boolean result = false;
+        for (ApplicationForOffer app : myApplicationsForOffers) {
+            if (app.getIdAppliForOf() == myApplication.getIdAppliForOf()) {
+                app.setChoosed(false);
+                for (CompanionOfPet offe : offeringsOF) {
+                    if (offe.getId() == myApplication.getIdOffer()) {
+                        offe.setIdUserShelterSeleted(0);
+                        offe.setNameSSelected(null);
+                        result = true;
                     }
                 }
             }

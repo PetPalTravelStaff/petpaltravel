@@ -13,9 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.petpal.petpaltravel.R;
-import com.petpal.petpaltravel.helpers.ViewPersonAdapter;
 import com.petpal.petpaltravel.helpers.ViewSheltersAdapter;
-import com.petpal.petpaltravel.model.ApplicationForDemand;
 import com.petpal.petpaltravel.model.ApplicationForOffer;
 import com.petpal.petpaltravel.model.PPTModel;
 
@@ -40,7 +38,7 @@ public class PersonCheckSheltersInterested extends AppCompatActivity {
         myModel = new PPTModel();
         //recover interesting data by Shared Preferences
         recoverShared();
-        recoverDemandId();
+        recoverOfferId();
         //recover list of all demands from model
         listOfInterestedShelter= (ArrayList<ApplicationForOffer>) myModel.listShelterInterestedByOffer(idOffer);
         //Create view elements in activity
@@ -55,7 +53,7 @@ public class PersonCheckSheltersInterested extends AppCompatActivity {
     /**
      * Method for recovering data needed by bundle
      */
-    private void recoverDemandId() {
+    private void recoverOfferId() {
         Bundle bun = this.getIntent().getExtras();
         idOffer= bun.getInt("idOffer",0);
     }

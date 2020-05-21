@@ -111,6 +111,37 @@ public class CompanionOfPet {
         this.comments = comments;
     }
 
+    public int getIdUserShelterSeleted() {
+        return idUserShelterSeleted;
+    }
+
+    public void setIdUserShelterSeleted(int idUserShelterSeleted) {
+        this.idUserShelterSeleted = idUserShelterSeleted;
+    }
+
+    public String getNameSSelected() {
+        return nameSSelected;
+    }
+
+    public void setNameSSelected(String nameSSelected) {
+        this.nameSSelected = nameSSelected;
+    }
+
+    public int[] getIdShelterInterested() {
+        return idShelterInterested;
+    }
+
+    public void setIdShelterInterested(int[] idShelterInterested) {
+        this.idShelterInterested = idShelterInterested;
+    }
+
+    public String[] getNamesShelterInterested() {
+        return namesShelterInterested;
+    }
+
+    public void setNamesShelterInterested(String[] namesShelterInterested) {
+        this.namesShelterInterested = namesShelterInterested;
+    }
 
     public void setIdShelterIntPosition(int idShelterInterested, int position) {
         this.idShelterInterested[position] = idShelterInterested;

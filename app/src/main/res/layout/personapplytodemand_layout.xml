@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Puedo acompañar..."
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
@@ -21,9 +21,8 @@
     <ImageView
         android:id="@+id/ivFotoMascota"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:layout_marginStart="150dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="150dp"
         app:srcCompat="@drawable/logo" />
 
@@ -33,7 +32,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginTop="10dp"
         android:text="Nombre:"
         android:textColor="@android:color/background_dark" />
 

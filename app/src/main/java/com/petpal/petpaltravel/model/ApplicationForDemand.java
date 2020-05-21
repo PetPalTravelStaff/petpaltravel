@@ -2,6 +2,7 @@ package com.petpal.petpaltravel.model;
 
 public class ApplicationForDemand {
     //Attributes
+    private int idApplForDem;
     private int idDemand;
     private int idPersonApplying;
     private String namePerson;
@@ -9,8 +10,10 @@ public class ApplicationForDemand {
     private String comments;
     private String mail;
     private String phone;
+    private Boolean choosed=false;
 
-    public ApplicationForDemand(int idDemand, int idPersonApplying, String namePerson, String transport, String comments, String mail, String phone) {
+    public ApplicationForDemand(int idApplForDem, int idDemand, int idPersonApplying, String namePerson, String transport, String comments, String mail, String phone, Boolean choosed) {
+        this.idApplForDem = idApplForDem;
         this.idDemand = idDemand;
         this.idPersonApplying = idPersonApplying;
         this.namePerson = namePerson;
@@ -18,9 +21,19 @@ public class ApplicationForDemand {
         this.comments = comments;
         this.mail = mail;
         this.phone = phone;
+        this.choosed = choosed;
     }
 
     public ApplicationForDemand() {
+    }
+
+
+    public int getIdApplForDem() {
+        return idApplForDem;
+    }
+
+    public void setIdApplForDem(int idApplForDem) {
+        this.idApplForDem = idApplForDem;
     }
 
     public int getIdDemand() {
@@ -77,5 +90,13 @@ public class ApplicationForDemand {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Boolean getChoosed() {
+        return choosed;
+    }
+
+    public void setChoosed(Boolean choosed) {
+        this.choosed = choosed;
     }
 }

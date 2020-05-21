@@ -87,7 +87,7 @@ public class UserViewAccountActivity extends AppCompatActivity {
         mailBox.setText(myUser.getEmail());
         phoneBox.setText(myUser.getPhone());
         cbIsShelter.setChecked(myUser.isShelter());
-        btUpdate.setTextColor(Color.BLACK);
+        btUpdate.setTextColor(Color.WHITE);
         btUpdate.setEnabled(true);
     }
 
@@ -139,11 +139,7 @@ public class UserViewAccountActivity extends AppCompatActivity {
                                                 myUser= provUser;
                                                 saveOnShared();
                                                 btUpdate.setText("Datos actualizados");
-                                                nameBox.setBackgroundColor(Color.TRANSPARENT);
-                                                mailBox.setBackgroundColor(Color.TRANSPARENT);
-                                                passBox.setBackgroundColor(Color.TRANSPARENT);
-                                                repePassBox.setBackgroundColor(Color.TRANSPARENT);
-                                                phoneBox.setBackgroundColor(Color.TRANSPARENT);
+                                                btUpdate.setTextColor(Color.BLACK);
                                                 //if there is a problem (email already in DB), notify
                                             } else if (result == 0) {
                                                 mailBox.setText(null);
@@ -162,7 +158,6 @@ public class UserViewAccountActivity extends AppCompatActivity {
                                 //if pass1 empty (not changing password)
                                 } else {
                                     if ("".equals(userPass2)) {// pass2 empty
-                                        repePassBox.setBackgroundColor(Color.TRANSPARENT);
                                         provUser.setShelter(userShelter);
                                         int result = 0;
                                         //try to add User to BBDD
@@ -175,6 +170,7 @@ public class UserViewAccountActivity extends AppCompatActivity {
                                             myUser.setShelter(provUser.isShelter());
                                             saveOnShared();
                                             btUpdate.setText("Datos actualizados");
+                                            btUpdate.setTextColor(Color.BLACK);
                                         //if there is a problem (email already in DB), notify
                                         } else if (result == 0) {
                                             mailBox.setText(null);

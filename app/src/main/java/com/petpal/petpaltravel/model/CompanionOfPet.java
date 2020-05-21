@@ -21,9 +21,7 @@ public class CompanionOfPet {
 
     public CompanionOfPet(int id, int ideUserPersonOffering, String namePerson, Calendar dateTravel,
                           String originCity, String destinyCity, String transport, String petType,
-                          String comments, int idUserShelterSeleted, String nameSSelected,
-                          int idUserShelterInterested1, String nameSInterested1, int idUserShelterInterested2,
-                          String nameSInterested2, int idUserShelterInterested3, String nameSInterested3) {
+                          String comments, int idUserShelterSeleted, String nameSSelected) {
         this.id = id;
         this.ideUserPersonOffering = ideUserPersonOffering;
         this.namePerson = namePerson;
@@ -113,37 +111,6 @@ public class CompanionOfPet {
         this.comments = comments;
     }
 
-    public int getIdUserShelterSeleted() {
-        return idUserShelterSeleted;
-    }
-
-    public void setIdUserShelterSeleted(int idUserShelterSeleted) {
-        this.idUserShelterSeleted = idUserShelterSeleted;
-    }
-
-    public String getNameSSelected() {
-        return nameSSelected;
-    }
-
-    public void setNameSSelected(String nameSSelected) {
-        this.nameSSelected = nameSSelected;
-    }
-
-    public int[] getIdShelterInterested() {
-        return idShelterInterested;
-    }
-
-    public void setIdShelterInterested(int[] idShelterInterested) {
-        this.idShelterInterested = idShelterInterested;
-    }
-
-    public String[] getNamesShelterInterested() {
-        return namesShelterInterested;
-    }
-
-    public void setNamesShelterInterested(String[] namesShelterInterested) {
-        this.namesShelterInterested = namesShelterInterested;
-    }
 
     public void setIdShelterIntPosition(int idShelterInterested, int position) {
         this.idShelterInterested[position] = idShelterInterested;
@@ -156,6 +123,7 @@ public class CompanionOfPet {
     public int getIdShelterIntPosition(int position) {
         return idShelterInterested[position];
     }
+
     public String getNamesShelterIntPosition(int position) {
         return namesShelterInterested[position];
     }

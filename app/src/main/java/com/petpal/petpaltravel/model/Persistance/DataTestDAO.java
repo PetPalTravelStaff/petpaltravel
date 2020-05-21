@@ -26,7 +26,11 @@ public class DataTestDAO {
         addLocationTest();
         addCompanionOfPet();
         addCompanionForPet();
+        addApplicationDemand();
+        addApplicationOffer();
     }
+
+
 
     static public DataTestDAO getInstance() {
         if (instanceDAO==null) {
@@ -37,29 +41,35 @@ public class DataTestDAO {
 
     private void addCompanionForPet() {
         demandsFOR.add(new CompanionForPet(1, 1, "Protectora Can", "Drako", new GregorianCalendar(2020,5,27),
-                null, "Ibiza", "Sta. Cruz Tenerife", "Perro/a", "FoxTerrier pequeño (se puede llevar en cabina)",
-                0, null));
+                null, "Ibiza", "Sta. Cruz de Tenerife", "Perro/a", "FoxTerrier pequeño (se puede llevar en cabina)",
+                4, "Roser"));
         demandsFOR.add(new CompanionForPet(2, 2, "Protectora Kitty", "Sibil",
                 new GregorianCalendar(2020,6,10), new GregorianCalendar(2020,8,31), "Sta. Cruz de Tenerife", "Hospitalet de Llobregat",
                 "Gato/a", "Gatita pequeña muy buena", 0, null));
         CompanionForPet test1= new CompanionForPet(3, 2, "Protectora Kitty", "Dina",
                 new GregorianCalendar(2020,6,28), new GregorianCalendar(2020,8,31), "Sta. Cruz de Tenerife", "Madrid", "Gato/a",
                 "Gato mayor, pesa bastante", 0, null);
-        test1.setNamePersonsIntPosition("Anna",0);
+        test1.setNamePersonsIntPosition("Roser",0);
         test1.setIdPersonsIntPosition(4,0);
         demandsFOR.add(test1);
+        demandsFOR.add(new CompanionForPet(4, 1, "Protectora Can", "Lucy",
+                new GregorianCalendar(2020,7,10), new GregorianCalendar(2020,9,12), "Ibiza", "Hospitalet de Llobregat",
+                "Cobaya", "Cobaya super mona", 0, null));
     }
 
     private void addCompanionOfPet() {
-        offeringsOF.add(new CompanionOfPet(1, 3,  "Marta", new GregorianCalendar(2020,6,10),
-                "Hospitalet de Llobregat", "Ibiza","Vuelo", "Perro/a", "Soy adiestradora canina, así que tengo mucha experiencia con perros",
-                0, null, 1, "Protectora Can", 0, null, 0, null));
+        CompanionOfPet test1= new CompanionOfPet(1, 3,  "Marta", new GregorianCalendar(2020,6,10),
+                "Hospitalet de Llobregat", "Ibiza","Avión", "Perro/a", "Soy adiestradora canina, así que tengo mucha experiencia con perros",
+                0, null);
+        test1.setIdShelterIntPosition(2,0);
+        test1.setNamesShelterIntPosition("Protectora Kitty",0);
+        offeringsOF.add(test1);
         offeringsOF.add(new CompanionOfPet(2, 4,  "Roser", new GregorianCalendar(2020,6,20),
-                "Madrid", "Sta. Cruz de Tenerife","Vuelo", "Perro/a, Gato/a, Otros", null,
-                0, null, 2, "Protectora Kitty", 0, null, 0, null));
+                "Madrid", "Sta. Cruz de Tenerife","Avión", "Perro/a, Gato/a, Otros", null,
+                0, null));
         offeringsOF.add(new CompanionOfPet(3, 3,  "Marta", new GregorianCalendar(2020,7,26),
-                "Ibiza", "Hospitalet de Llobregat","Vuelo", "Perro/a", "Soy adiestradora canina, así que tengo mucha experiencia con perros",
-                0, null, 1, "Protectora Can", 0, null, 0, null));
+                "Ibiza", "Hospitalet de Llobregat","Avión", "Perro/a", "Soy adiestradora canina, así que tengo mucha experiencia con perros",
+                0, null));
     }
 
     private void addLocationTest() {
@@ -75,6 +85,18 @@ public class DataTestDAO {
         myUsers.add(new User( 3, "Marta", "marta@gmail.com", "passmarta", "636261646", false, -1));
         myUsers.add(new User(4, "Roser", "roser@gmail.com", "passroser", "625451245", false, -1));
         myUsers.add(new User(5, "Anna", "anna@gmail.com", "passanna", null, false, -1));
+    }
+
+    private void addApplicationDemand() {
+        myApplicationsForDemands.add(new ApplicationForDemand(1, 1,4,"Roser",
+                "Barco", null, "roser@gmail.com","625451245", true ));
+        myApplicationsForDemands.add(new ApplicationForDemand(2, 3,4,"Roser",
+                "Avión", null, "roser@gmail.com","625451245", false ));
+    }
+
+    private void addApplicationOffer() {
+        myApplicationsForOffers.add(new ApplicationForOffer(1, 2,2,"Protectora Kitty", "Gato/a",
+                "Blanquita", null, "gatos@gmail.com","655963626", false ));
     }
 
 
@@ -158,21 +180,25 @@ public class DataTestDAO {
 
     public Boolean addPersonToDemand(ApplicationForDemand myApplication) {
         Boolean result= false;
+        int lastIndex= myApplicationsForDemands.size()-1;
         for (CompanionForPet demand : demandsFOR) {
             if (myApplication.getIdDemand() == demand.getId()) {
                 if (demand.getIdPersonInterestePosition(0) == 0) {
                     demand.setIdPersonsIntPosition(myApplication.getIdPersonApplying(),0);
                     demand.setNamePersonsIntPosition(myApplication.getNamePerson(),0);
+                    myApplication.setIdApplForDem(lastIndex+1);
                     myApplicationsForDemands.add(myApplication);
                     result = true;
                 } else if (demand.getIdPersonInterestePosition(1) == 0) {
                     demand.setIdPersonsIntPosition(myApplication.getIdPersonApplying(),1);
                     demand.setNamePersonsIntPosition(myApplication.getNamePerson(),1);
+                    myApplication.setIdApplForDem(lastIndex+1);
                     myApplicationsForDemands.add(myApplication);
                     result = true;
                 } else if (demand.getIdPersonInterestePosition(2) == 0) {
                     demand.setIdPersonsIntPosition(myApplication.getIdPersonApplying(),2);
                     demand.setNamePersonsIntPosition(myApplication.getNamePerson(),2);
+                    myApplication.setIdApplForDem(lastIndex+1);
                     myApplicationsForDemands.add(myApplication);
                     result = true;
                 }
@@ -193,21 +219,25 @@ public class DataTestDAO {
 
     public Boolean addShelterToOffer(ApplicationForOffer myApplication) {
         Boolean result= false;
+        int lastIndex= myApplicationsForOffers.size()-1;
         for (CompanionOfPet offer : offeringsOF) {
             if (myApplication.getIdOffer() == offer.getId()) {
                 if (offer.getIdShelterIntPosition(0) == 0) {
                     offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(),0);
                     offer.setNamesShelterIntPosition(myApplication.getNameShelter(),0);
+                    myApplication.setIdAppliForOf(lastIndex+1);
                     myApplicationsForOffers.add(myApplication);
                     result = true;
                 } else if (offer.getIdShelterIntPosition(1) == 0) {
                     offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(),1);
                     offer.setNamesShelterIntPosition(myApplication.getNameShelter(),1);
+                    myApplication.setIdAppliForOf(lastIndex+1);
                     myApplicationsForOffers.add(myApplication);
                     result = true;
                 } else if (offer.getIdShelterIntPosition(2) == 0) {
                     offer.setIdShelterIntPosition(myApplication.getIdShelterApplying(),2);
                     offer.setNamesShelterIntPosition(myApplication.getNameShelter(),2);
+                    myApplication.setIdAppliForOf(lastIndex+1);
                     myApplicationsForOffers.add(myApplication);
                     result = true;
                 }
@@ -330,6 +360,8 @@ public class DataTestDAO {
         return result;
     }
 
+
+
     public ApplicationForOffer recoverApplicationForOffer(int offerId, int idUser) {
         ApplicationForOffer result= null;
         for (ApplicationForOffer apliForOf: myApplicationsForOffers) {
@@ -345,6 +377,53 @@ public class DataTestDAO {
         for (ApplicationForDemand apliForDe: myApplicationsForDemands) {
             if (apliForDe.getIdDemand()==demandId & apliForDe.getIdPersonApplying()==idUser) {
                 result= apliForDe;
+            }
+        }
+        return result;
+    }
+
+    public List<ApplicationForDemand> recoverApplicationForOneDemand(int idDemand) {
+        List<ApplicationForDemand> result= new ArrayList<ApplicationForDemand>();
+        for (ApplicationForDemand apli : myApplicationsForDemands) {
+            if (idDemand == apli.getIdDemand()) {
+                result.add(apli);
+            }
+        }
+        return result;
+    }
+
+    public List<ApplicationForOffer> recoverApplicationForOneOffer(int idOffer) {
+        List<ApplicationForOffer> result= new ArrayList<ApplicationForOffer>();
+        for (ApplicationForOffer apli : myApplicationsForOffers) {
+            if (idOffer == apli.getIdOffer()) {
+                result.add(apli);
+            }
+        }
+        return result;
+    }
+
+    public ApplicationForDemand recoverDemandApplyById(int applyId) {
+        ApplicationForDemand result= null;
+        for (ApplicationForDemand apliForDe: myApplicationsForDemands) {
+            if (apliForDe.getIdApplForDem()==applyId) {
+                result= apliForDe;
+            }
+        }
+        return result;
+    }
+
+    public Boolean setSeletedPersonInDemand(ApplicationForDemand myApplication) {
+        Boolean result= false;
+        for (ApplicationForDemand app: myApplicationsForDemands) {
+            if (app.getIdApplForDem()==myApplication.getIdApplForDem()) {
+                app.setChoosed(true);
+                for (CompanionForPet dem: demandsFOR) {
+                    if (dem.getId()==myApplication.getIdDemand()){
+                        dem.setIdUserPersonSeleted(myApplication.getIdPersonApplying());
+                        dem.setNamePSelected(myApplication.getNamePerson());
+                        result=true;
+                    }
+                }
             }
         }
         return result;

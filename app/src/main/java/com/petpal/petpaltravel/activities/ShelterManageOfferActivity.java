@@ -35,15 +35,14 @@ public class ShelterManageOfferActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.shelterviewofferdetails_layout);
         //recover urgent data
         recoverShared();
-        setContentView(R.layout.shelterviewofferdetails_layout);
         //instantiate model
         myModel = new PPTModel();
         //recover needed data
         recoverOfferId();
         myOffer= myModel.recoverOfferById(idOffer);
-        recoverShared();
         //Create view elements in activity
         initElements();
         //create a listener

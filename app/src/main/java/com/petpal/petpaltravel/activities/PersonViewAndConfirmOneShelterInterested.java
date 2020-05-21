@@ -40,7 +40,8 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
     View.OnClickListener listener;
     private CompanionOfPet myOffer;
     private NotificationCompat.Builder notification;
-    private static int idNotification= 1111;
+    private static int idNotification = 1111;
+    int situationFlag = 0; //0= can choose and reject, 1= choosed, so can unchoose and reject 2= rejected
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +53,9 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
         recoverOfferId();
         recoverShared();
         //recover list of all demands from model
-        System.out.println("El id aplication es "+ idApplication);
         myApplication = myModel.searchOfferApplyById(idApplication);
-        myOffer= myModel.recoverOfferById(idOffer);
-        isSelected= myApplication.getChoosed();
+        myOffer = myModel.recoverOfferById(idOffer);
+        isSelected = myApplication.getChoosed();
 
         //Create view elements in activity
         initElements();
@@ -73,7 +73,7 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
      */
     private void recoverOfferId() {
         Bundle bun = this.getIntent().getExtras();
-        idOffer= bun.getInt("idOffer",0);
+        idOffer = bun.getInt("idOffer", 0);
         idApplication = bun.getInt("idApplyOff", 0);
     }
 
@@ -89,14 +89,14 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
             nameUser = shared.getString("userName", "");
             idUser = shared.getInt("id", 0);
             isShelter = shared.getBoolean("isShelter", false);
-            userPhone= shared.getString("userPhone", null);
+            userPhone = shared.getString("userPhone", null);
         }
     }
 
     /**
      * Method for creating the elements of the activity
      */
-    private void initElements () {
+    private void initElements() {
         nameBox = (TextView) findViewById(R.id.etNombre);
         namePetBox = (TextView) findViewById(R.id.etNombreMascota);
         typeBox = (TextView) findViewById(R.id.etTipoMascota);
@@ -105,9 +105,55 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
         commentBox = (TextView) findViewById(R.id.etComentarios);
         //nameLabel= (TextView) findViewById(R.id.etNombrePersona);
         btChoose = (Button) findViewById(R.id.btLeAcompa);
-        notification= new NotificationCompat.Builder(this);
+        notification = new NotificationCompat.Builder(this);
         notification.setAutoCancel(false);
-        btReject= (Button) findViewById(R.id.btRechazarSolicitud);
+        btReject = (Button) findViewById(R.id.btRechazarSolicitud);
+        if (isSelected) {
+            situationFlag = 1;
+        }
+        paintButtons();
+    }
+
+    /**
+     * Method for setting the value of text in offerme button
+     * depending on the situation flag value
+     */
+    private void paintButtons() {
+        //depending on the situation flag
+        switch (situationFlag) {
+            case 0: //normal case
+                btChoose.setText("¡Lo ejijo!");
+                btChoose.setEnabled(true);
+                btChoose.setTextColor(Color.WHITE);
+                btReject.setVisibility(View.VISIBLE);
+                btReject.setText("Descartar");
+                break;
+            case 1: // can unchoose
+                btChoose.setText("No elegir");
+                btChoose.setEnabled(true);
+                btChoose.setTextColor(Color.BLACK);
+                btReject.setVisibility(View.VISIBLE);
+                btReject.setText("Descartar");
+                break;
+            case -1: // can unchoose
+                btChoose.setText("Prueba más tarde");
+                btChoose.setEnabled(true);
+                btChoose.setTextColor(Color.RED);
+                btReject.setVisibility(View.GONE);
+                break;
+            case 2: //person has applied already
+                btChoose.setVisibility(View.GONE);
+                btReject.setVisibility(View.VISIBLE);
+                btReject.setText("Descartado");
+                btReject.setEnabled(false);
+                break;
+            case -2: //person has applied already
+                btChoose.setVisibility(View.GONE);
+                btReject.setVisibility(View.VISIBLE);
+                btReject.setText("Prueba más tarde");
+                btReject.setEnabled(false);
+                break;
+        }
     }
 
     /**
@@ -118,62 +164,56 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
             @Override
             public void onClick(View view) {
                 if (view.getId() == R.id.btLeAcompa) {
-                    if (!isSelected) {
+                    if (situationFlag == 0) {
                         Boolean control = myModel.confirmSelectedShelter(myApplication);
-                        String dateTravel= new SimpleDateFormat("dd-MM-yyyy").format(myOffer.getDateTravel().getTime());
+                        String dateTravel = new SimpleDateFormat("dd-MM-yyyy").format(myOffer.getDateTravel().getTime());
                         if (control) {
                             notification.setSmallIcon(R.drawable.logo);
                             //notification.setTicker("Aviso");
                             notification.setWhen((System.currentTimeMillis()));
                             notification.setContentTitle("¡Has escogido!");
                             notification.setContentText("Contacta con la protectora");
-                            String text= "Has escogido a " + myApplication.getNamePet() + " (" + myApplication.getTypePet() + ") para acompañarlo el "
-                                    + dateTravel +  ". Contacta con la protectora  para ultimar detalles. Gracias y... ¡buen viaje!";
+                            String text = "Has escogido a " + myApplication.getNamePet() + " (" + myApplication.getTypePet() + ") para acompañarlo el "
+                                    + dateTravel + ". Contacta con la protectora  para ultimar detalles. Gracias y... ¡buen viaje!";
                             notification.setStyle(new NotificationCompat.BigTextStyle()
                                     .bigText(text));
-                            Intent intent= new Intent(PersonViewAndConfirmOneShelterInterested.this, PersonViewAndConfirmOneShelterInterested.class);
+                            Intent intent = new Intent(PersonViewAndConfirmOneShelterInterested.this, PersonViewAndConfirmOneShelterInterested.class);
                             Bundle bundle = new Bundle();
                             //set interesting data
                             bundle.putInt("idOffer", idOffer);
                             bundle.putInt("idApplyOff", myApplication.getIdAppliForOf());
                             intent.putExtras(bundle);
-                            PendingIntent pendingIntent= PendingIntent.getActivity(PersonViewAndConfirmOneShelterInterested.this,0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                            PendingIntent pendingIntent = PendingIntent.getActivity(PersonViewAndConfirmOneShelterInterested.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                             notification.setContentIntent(pendingIntent);
-                            NotificationManager nm= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                            NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                             nm.notify(idNotification, notification.build());
-                            isSelected=true;
-                            btChoose.setText("¡Elejido!");
-                            btChoose.setTextColor(Color.BLACK);
+                            isSelected = true;
+                            situationFlag = 1;
                         } else {
-                            btChoose.setText("Prueba más tarde");
-                            btChoose.setTextColor(Color.RED);
+                            situationFlag = -1;
                         }
-                    } else {
-                        Boolean control2= false;
-                        control2= myModel.unConfirmSelectedShelter(myApplication);
+                        paintButtons();
+                    } else if (situationFlag == 1) {
+                        myApplication = myModel.searchOfferApplyById(myApplication.getIdAppliForOf());
+                        Boolean control2 = false;
+                        control2 = myModel.unConfirmSelectedShelter(myApplication);
                         if (control2) {
-                            btChoose.setText("Lo elijo");
-                            btChoose.setTextColor(Color.WHITE);
-                            btChoose.setEnabled(false);
-                            btReject.setVisibility(View.GONE);
+                            situationFlag = 0;
                         } else {
-                            btReject.setText("Prueba más tarde");
-                            btReject.setEnabled(false);
-                            btReject.setTextColor(Color.RED);
+                            situationFlag = -1;
                         }
+                        paintButtons();
                     }
-                } else if (view.getId() == R.id.btRechazarSolicitud){
-                    Boolean control3= false;
-                    control3= myModel.rejectAplicationForOffer(myApplication);
+                } else if (view.getId() == R.id.btRechazarSolicitud) {
+                    myApplication = myModel.searchOfferApplyById(myApplication.getIdAppliForOf());
+                    Boolean control3 = false;
+                    control3 = myModel.rejectAplicationForOffer(myApplication);
                     if (control3) {
-                        btChoose.setText("Solicitud rechazada");
-                        btChoose.setEnabled(false);
-                        btReject.setVisibility(View.GONE);
+                        situationFlag = 2;
                     } else {
-                        btReject.setText("Prueba más tarde");
-                        btReject.setEnabled(false);
-                        btReject.setTextColor(Color.RED);
+                        situationFlag = -2;
                     }
+                    paintButtons();
                 }
             }
         };
@@ -198,17 +238,11 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
         mailBox.setText(myApplication.getMail());
         phoneBox.setText(myApplication.getPhone());
         commentBox.setText(myApplication.getComments());
-        if (isSelected) {
-            btChoose.setText("Lo dejo en espera");
-            btChoose.setTextColor(Color.BLACK);
-        } else {
-            btChoose.setText("¡La elijo!");
-            btChoose.setTextColor(Color.WHITE);
-        }
     }
 
     /**
      * Method for creating items of menu
+     *
      * @param menu
      * @return
      */

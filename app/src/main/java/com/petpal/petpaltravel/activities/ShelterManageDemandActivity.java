@@ -1,5 +1,7 @@
 package com.petpal.petpaltravel.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -138,14 +140,31 @@ public class ShelterManageDemandActivity extends AppCompatActivity {
                     intent1.putExtras(bundle);
                     startActivity(intent1);
                 } else if (view.getId() == R.id.btCancelarPeticion) {
-                    boolean result= myModel.cancelDemand(myDemand);
-                    if (result) {
-                        Intent intent1 = new Intent(ShelterManageDemandActivity.this, UserSearchDemandsActivity.class);
-                        startActivity(intent1);
-                    } else {
-                        btDelete.setText("Error. Prueba más tarde");
-                        btDelete.setTextColor(Color.RED);
-                    }
+                    AlertDialog.Builder myAlert = new AlertDialog.Builder(ShelterManageDemandActivity.this);
+                    myAlert.setMessage("¿Seguro que quieres borrarla? Esta acción no se puede deshacer")
+                            .setCancelable(false)
+                            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    boolean result = myModel.cancelDemand(myDemand);
+                                    if (result) {
+                                        Intent intent1 = new Intent(ShelterManageDemandActivity.this, UserSearchDemandsActivity.class);
+                                        startActivity(intent1);
+                                    } else {
+                                        btDelete.setText("Error. Prueba más tarde");
+                                        btDelete.setTextColor(Color.RED);
+                                    }
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog title = myAlert.create();
+                    title.setTitle("Borrar petición");
+                    title.show();
                 } else if (view.getId() == R.id.btModificar) {
                     //recover data from form and save it in variables
                     String petName = null;

@@ -2,6 +2,8 @@ package com.petpal.petpaltravel.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -24,7 +26,7 @@ public class UserViewAccountActivity extends AppCompatActivity {
     //Attributes
     private EditText nameBox, mailBox, phoneBox, passBox, repePassBox;
     private CheckBox cbIsShelter;
-    private Button btUpdate;
+    private Button btUpdate, btDelete;
     int idUser;
     User myUser;
     View.OnClickListener listener;
@@ -77,6 +79,8 @@ public class UserViewAccountActivity extends AppCompatActivity {
         repePassBox = (EditText) findViewById(R.id.etPassword2);
         cbIsShelter = (CheckBox) findViewById(R.id.cbSoyProtectora);
         btUpdate = (Button) findViewById(R.id.btModificarDatos);
+        btDelete = (Button) findViewById(R.id.btCancelarCuenta);
+
     }
 
     /**
@@ -103,14 +107,14 @@ public class UserViewAccountActivity extends AppCompatActivity {
                     //recover data from EditText
                     String userName = nameBox.getText().toString();
                     String userMail = mailBox.getText().toString();
-                    String userPhone= phoneBox.getText().toString();
-                    String userPass="";
-                    if (null!=passBox.getText()) {
+                    String userPhone = phoneBox.getText().toString();
+                    String userPass = "";
+                    if (null != passBox.getText()) {
                         userPass = passBox.getText().toString();
                     }
-                    String userPass2 ="";
-                    if (null!=repePassBox.getText()) {
-                        userPass2= repePassBox.getText().toString();
+                    String userPass2 = "";
+                    if (null != repePassBox.getText()) {
+                        userPass2 = repePassBox.getText().toString();
                     }
                     Boolean userShelter = cbIsShelter.isChecked();
                     //Create an user and set his/her id
@@ -125,7 +129,6 @@ public class UserViewAccountActivity extends AppCompatActivity {
                                 //Save new phone, even it is empty,
                                 provUser.setPhone(userPhone);
                                 if (!"".equals(userPass)) {//not empty
-
                                     if (!"".equals(userPass2)) {//not empty
                                         if (userPass.equals(userPass2)) { //pass and repeat pass matches
                                             //repePassBox.setBackgroundColor(Color.TRANSPARENT);
@@ -136,7 +139,7 @@ public class UserViewAccountActivity extends AppCompatActivity {
                                             result = myModel.updateUser(provUser);
                                             //if everything goes right, back to login, saving mail
                                             if (result == 1) {
-                                                myUser= provUser;
+                                                myUser = provUser;
                                                 saveOnShared();
                                                 btUpdate.setText("Datos actualizados");
                                                 btUpdate.setTextColor(Color.BLACK);
@@ -155,7 +158,7 @@ public class UserViewAccountActivity extends AppCompatActivity {
                                         repePassBox.setHintTextColor(Color.RED);
                                         repePassBox.setHint("Repite nueva contraseña");
                                     }
-                                //if pass1 empty (not changing password)
+                                    //if pass1 empty (not changing password)
                                 } else {
                                     if ("".equals(userPass2)) {// pass2 empty
                                         provUser.setShelter(userShelter);
@@ -171,7 +174,7 @@ public class UserViewAccountActivity extends AppCompatActivity {
                                             saveOnShared();
                                             btUpdate.setText("Datos actualizados");
                                             btUpdate.setTextColor(Color.BLACK);
-                                        //if there is a problem (email already in DB), notify
+                                            //if there is a problem (email already in DB), notify
                                         } else if (result == 0) {
                                             mailBox.setText(null);
                                             mailBox.setHintTextColor(Color.RED);
@@ -182,28 +185,55 @@ public class UserViewAccountActivity extends AppCompatActivity {
                                             btUpdate.setEnabled(true);
                                         }
 
-                                    //if pass2 not empty
+                                        //if pass2 not empty
                                     } else {
                                         repePassBox.setText(null);
                                         repePassBox.setHint("Dejar en blanco");
                                         repePassBox.setHintTextColor(Color.RED);
                                     }
                                 }
+                            } else {
+                                mailBox.setText(null);
+                                mailBox.setHintTextColor(Color.RED);
+                                mailBox.setHint("Mail mal formado");
                             }
-
                         } else {
-                            mailBox.setText(null);
                             mailBox.setHintTextColor(Color.RED);
-                            mailBox.setHint("Mail mal formado");
+                            mailBox.setHint("Mail obligatorio");
                         }
                     } else {
-
-                        mailBox.setHintTextColor(Color.RED);
-                        mailBox.setHint("Mail obligatorio");
+                        nameBox.setHintTextColor(Color.RED);
+                        nameBox.setHint("Nombre obligatorio");
                     }
-                } else {
-                    nameBox.setHintTextColor(Color.RED);
-                    nameBox.setHint("Nombre obligatorio");
+                } else if (view.getId() == R.id.btCancelarCuenta) {
+                    AlertDialog.Builder myAlert= new AlertDialog.Builder(UserViewAccountActivity.this);
+                    myAlert.setMessage("¿Seguro que quieres descartarlo? Esta acción no se puede deshacer")
+                            .setCancelable(false)
+                            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Boolean control = myModel.deleteUser(idUser);
+                                    if (control) {
+                                        Intent intent = new Intent(UserViewAccountActivity.this, UserRegisterActivity.class);
+                                        //delete all data saved
+                                        SharedPreferences.Editor editor = getSharedPreferences("TrackerTrackerGPS", MODE_PRIVATE).edit();
+                                        editor.clear().apply();
+                                        startActivity(intent);
+                                    } else {
+                                        btDelete.setText("Prueba más tarde");
+                                        btDelete.setTextColor(Color.RED);
+                                    }
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog title= myAlert.create();
+                    title.setTitle("Descartar permanentemente solicitud");
+                    title.show();
                 }
             }
         };
@@ -258,7 +288,7 @@ public class UserViewAccountActivity extends AppCompatActivity {
      */
     private void addElementsToListener() {
         btUpdate.setOnClickListener(listener);
-        cbIsShelter.setOnClickListener(listener);
+        btDelete.setOnClickListener(listener);
     }
 
     /**

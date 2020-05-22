@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -176,5 +178,24 @@ public class UserRegisterActivity extends AppCompatActivity {
     private void addElementsToListener() {
         btSave.setOnClickListener(listener);
         cbIsShelter.setOnClickListener(listener);
+    }
+
+    /**
+     * Method for creating items of menu
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+            super.onCreateOptionsMenu(menu);
+            menu.add(0, 1, 0, "Salir");
+        return true;
+    }
+
+    // Handles item selections from Option MENU
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+            finishAffinity();
+        return true;
     }
 }

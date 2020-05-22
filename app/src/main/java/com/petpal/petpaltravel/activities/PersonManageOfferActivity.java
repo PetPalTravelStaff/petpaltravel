@@ -2,6 +2,8 @@ package com.petpal.petpaltravel.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -97,20 +99,20 @@ public class PersonManageOfferActivity extends AppCompatActivity {
      */
     private void initElements() {
         nameLabel = (TextView) findViewById(R.id.etNombreProtectora);
-        typePet= (TextView) findViewById(R.id.tvAcompanyoA);
+        typePet = (TextView) findViewById(R.id.tvAcompanyoA);
         cat = (CheckBox) findViewById(R.id.cbGatos);
         dog = (CheckBox) findViewById(R.id.cbPerros);
         other = (CheckBox) findViewById(R.id.cbOtros);
         dateTravel = (EditText) findViewById(R.id.etDiaViaje);
         origin = (Spinner) findViewById(R.id.spDesde);
-        lborigin= (TextView) findViewById(R.id.tvViajoDesde);
+        lborigin = (TextView) findViewById(R.id.tvViajoDesde);
         destination = (Spinner) findViewById(R.id.spHasta);
-        lbdestination= (TextView) findViewById(R.id.tvViajeDestino);
+        lbdestination = (TextView) findViewById(R.id.tvViajeDestino);
         ArrayAdapter<String> questionsAdapter = new ArrayAdapter<String>(PersonManageOfferActivity.this, android.R.layout.simple_spinner_item, locations);
         questionsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         origin.setAdapter(questionsAdapter);
         destination.setAdapter(questionsAdapter);
-        lbtransport= (TextView) findViewById(R.id.tvMeTrasladoEn);
+        lbtransport = (TextView) findViewById(R.id.tvMeTrasladoEn);
         transportType = (Spinner) findViewById(R.id.spMeTrasladoEn);
         ArrayAdapter<String> questionsAdapter2 = new ArrayAdapter<String>(PersonManageOfferActivity.this, android.R.layout.simple_spinner_item, transportOptions);
         questionsAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -138,48 +140,67 @@ public class PersonManageOfferActivity extends AppCompatActivity {
                     intent1.putExtras(bundle);
                     startActivity(intent1);
                 } else if (view.getId() == R.id.btCancelarOferta) {
-                    boolean result= myModel.cancelOffer(myOffer);
-                    if (result) {
-                        Intent intent1 = new Intent(PersonManageOfferActivity.this, UserSearchOffersActivity.class);
-                        startActivity(intent1);
-                    } else {
-                        btDelete.setText("Error. Prueba más tarde");
-                        btDelete.setTextColor(Color.RED);
-                    }
+                    AlertDialog.Builder myAlert = new AlertDialog.Builder(PersonManageOfferActivity.this);
+                    myAlert.setMessage("¿Seguro que quieres borrarla? Esta acción no se puede deshacer")
+                            .setCancelable(false)
+                            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    boolean result = myModel.cancelOffer(myOffer);
+                                    if (result) {
+                                        Intent intent1 = new Intent(PersonManageOfferActivity.this, UserSearchOffersActivity.class);
+                                        startActivity(intent1);
+                                    } else {
+                                        btDelete.setText("Error. Prueba más tarde");
+                                        btDelete.setTextColor(Color.RED);
+                                    }
+                                }
+                            })
+
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog title = myAlert.create();
+                    title.setTitle("Borrar oferta");
+                    title.show();
                 } else if (view.getId() == R.id.btModificar) {
-                    String dateString= null;
-                    if (dateTravel.getText()!=null) {
-                        dateString=dateTravel.getText().toString();
-                    };
-                    GregorianCalendar dateCal= null;
-                    String cityOrigin= origin.getSelectedItem().toString();
-                    String cityDestiny= destination.getSelectedItem().toString();
-                    Boolean catChoosed= cat.isChecked();
-                    Boolean dogChoosed= dog.isChecked();
-                    Boolean otherChoosed= other.isChecked();
-                    String transportation= transportType.getSelectedItem().toString();
-                    String commentString= comments.getText().toString();
-                    CompanionOfPet newDataOffer= myOffer;
-                    if (!"".equals(dateString)){//check empty date
+                    String dateString = null;
+                    if (dateTravel.getText() != null) {
+                        dateString = dateTravel.getText().toString();
+                    }
+                    ;
+                    GregorianCalendar dateCal = null;
+                    String cityOrigin = origin.getSelectedItem().toString();
+                    String cityDestiny = destination.getSelectedItem().toString();
+                    Boolean catChoosed = cat.isChecked();
+                    Boolean dogChoosed = dog.isChecked();
+                    Boolean otherChoosed = other.isChecked();
+                    String transportation = transportType.getSelectedItem().toString();
+                    String commentString = comments.getText().toString();
+                    CompanionOfPet newDataOffer = myOffer;
+                    if (!"".equals(dateString)) {//check empty date
                         dateTravel.setHintTextColor(Color.BLACK);
-                        dateCal= validateDate(dateString);
-                        if (dateCal!=null) {
+                        dateCal = validateDate(dateString);
+                        if (dateCal != null) {
                             dateTravel.setHintTextColor(Color.BLACK);
                             newDataOffer.setDateTravel(dateCal);
-                            if (cityOrigin!=null){
+                            if (cityOrigin != null) {
                                 lborigin.setTextColor(Color.BLACK);
                                 newDataOffer.setOriginCity(cityOrigin);
-                                if (cityDestiny!=null){
+                                if (cityDestiny != null) {
                                     lbdestination.setTextColor(Color.BLACK);
                                     if (!cityDestiny.equals(cityOrigin)) {
                                         lborigin.setTextColor(Color.BLACK);
                                         lbdestination.setTextColor(Color.BLACK);
                                         newDataOffer.setDestinyCity(cityDestiny);
-                                        Boolean noChooseType= false;
-                                        if (catChoosed == false & dogChoosed == false & otherChoosed == false){
-                                            noChooseType=true;
-                                        } else{
-                                            noChooseType=false;
+                                        Boolean noChooseType = false;
+                                        if (catChoosed == false & dogChoosed == false & otherChoosed == false) {
+                                            noChooseType = true;
+                                        } else {
+                                            noChooseType = false;
                                         }
                                         if (!noChooseType) {
                                             typePet.setTextColor(Color.BLACK);
@@ -232,14 +253,14 @@ public class PersonManageOfferActivity extends AppCompatActivity {
                                         } else {
                                             typePet.setTextColor(Color.RED);
                                         }
-                                    }else {
+                                    } else {
                                         lborigin.setTextColor(Color.RED);
                                         lbdestination.setTextColor(Color.RED);
                                     }
-                                }else {
+                                } else {
                                     lbdestination.setTextColor(Color.RED);
                                 }
-                            }else {
+                            } else {
                                 lborigin.setTextColor(Color.RED);
                             }
 
@@ -258,24 +279,24 @@ public class PersonManageOfferActivity extends AppCompatActivity {
     }
 
     private GregorianCalendar validateDate(String dateString) {
-        GregorianCalendar result= null;
-        int yearDate=0;
-        int monthDate=0;
-        int dayDate=0;
+        GregorianCalendar result = null;
+        int yearDate = 0;
+        int monthDate = 0;
+        int dayDate = 0;
 
-        if (dateString!=null){
-            Boolean control= false;
+        if (dateString != null) {
+            Boolean control = false;
             Pattern pattern = Pattern.compile("\\d{1,2}-\\d{1,2}-\\d{4}");
             Matcher mather = pattern.matcher(dateString);
-            control= mather.find();
-            if (control){
-                String[] datePieces= dateString.split("-");
+            control = mather.find();
+            if (control) {
+                String[] datePieces = dateString.split("-");
                 try {
                     yearDate = Integer.parseInt(datePieces[2]);
-                }catch (Exception e){
-                    yearDate=0;
+                } catch (Exception e) {
+                    yearDate = 0;
                 }
-                if (yearDate>= Calendar.getInstance().get(Calendar.YEAR)) {
+                if (yearDate >= Calendar.getInstance().get(Calendar.YEAR)) {
                     try {
                         monthDate = Integer.parseInt(datePieces[1]);
                     } catch (Exception e) {
@@ -304,7 +325,7 @@ public class PersonManageOfferActivity extends AppCompatActivity {
                                 case 10:
                                 case 12:
 
-                                    if (0 < dayDate & dayDate <=31) {
+                                    if (0 < dayDate & dayDate <= 31) {
                                         dayDate = dayDate;
                                     } else {
                                         dayDate = 0;
@@ -343,20 +364,20 @@ public class PersonManageOfferActivity extends AppCompatActivity {
                             }
                         }
                     }
-                }else {
-                    yearDate=0;
-                    monthDate=0;
-                    dayDate=0;
+                } else {
+                    yearDate = 0;
+                    monthDate = 0;
+                    dayDate = 0;
                 }
             } else {
-                yearDate=0;
-                monthDate=0;
-                dayDate=0;
+                yearDate = 0;
+                monthDate = 0;
+                dayDate = 0;
             }
         }
-        result= new GregorianCalendar(yearDate, monthDate, dayDate);
+        result = new GregorianCalendar(yearDate, monthDate, dayDate);
         if (result.before(Calendar.getInstance())) {
-            result=null;
+            result = null;
         }
         return result;
     }
@@ -379,7 +400,7 @@ public class PersonManageOfferActivity extends AppCompatActivity {
         nameLabel.setText(nameUser);
         String animalType = myOffer.getPetType();
         String[] typePieces = animalType.split(",");
-        for (int i=0; i<typePieces.length;i++) {
+        for (int i = 0; i < typePieces.length; i++) {
             if (typePieces[i].trim().equals("Perro/a")) {
                 dog.setChecked(true);
             }
@@ -416,47 +437,48 @@ public class PersonManageOfferActivity extends AppCompatActivity {
         }
     }
 
-        /**
-         * Method for creating items of menu
-         * @param menu
-         * @return
-         */
-        @Override
-        public boolean onCreateOptionsMenu (Menu menu){
-            super.onCreateOptionsMenu(menu);
-            menu.add(0, 1, 0, "Mi perfil");
-            menu.add(0, 2, 1, "Ver mis ofertas");
-            menu.add(0, 3, 2, "Buscar peticiones");
-            menu.add(0, 4, 3, "Publicar una oferta");
-            menu.add(0, 5, 4, "Salir");
-            return true;
-        }
-
-        // Handles item selections from Option MENU
-        @Override
-        public boolean onOptionsItemSelected (MenuItem item){
-            switch (item.getItemId()) {
-                case 1:
-                    //Go to view account activity
-                    Intent intent1 = new Intent(PersonManageOfferActivity.this, UserViewAccountActivity.class);
-                    startActivity(intent1);
-                    break;
-                case 2:
-                    Intent intent2 = new Intent(PersonManageOfferActivity.this, UserSearchOffersActivity.class);
-                    startActivity(intent2);
-                    break;
-                case 3:
-                    Intent intent3 = new Intent(PersonManageOfferActivity.this, UserSearchDemandsActivity.class);
-                    startActivity(intent3);
-                    break;
-                case 4:
-                    Intent intent4 = new Intent(PersonManageOfferActivity.this, PersonPostOfferActivity.class);
-                    startActivity(intent4);
-                    break;
-                case 5://Exit
-                    finishAffinity();
-                    break;
-            }
-            return true;
-        }
+    /**
+     * Method for creating items of menu
+     *
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        menu.add(0, 1, 0, "Mi perfil");
+        menu.add(0, 2, 1, "Ver mis ofertas");
+        menu.add(0, 3, 2, "Buscar peticiones");
+        menu.add(0, 4, 3, "Publicar una oferta");
+        menu.add(0, 5, 4, "Salir");
+        return true;
     }
+
+    // Handles item selections from Option MENU
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case 1:
+                //Go to view account activity
+                Intent intent1 = new Intent(PersonManageOfferActivity.this, UserViewAccountActivity.class);
+                startActivity(intent1);
+                break;
+            case 2:
+                Intent intent2 = new Intent(PersonManageOfferActivity.this, UserSearchOffersActivity.class);
+                startActivity(intent2);
+                break;
+            case 3:
+                Intent intent3 = new Intent(PersonManageOfferActivity.this, UserSearchDemandsActivity.class);
+                startActivity(intent3);
+                break;
+            case 4:
+                Intent intent4 = new Intent(PersonManageOfferActivity.this, PersonPostOfferActivity.class);
+                startActivity(intent4);
+                break;
+            case 5://Exit
+                finishAffinity();
+                break;
+        }
+        return true;
+    }
+}

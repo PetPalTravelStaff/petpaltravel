@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -41,8 +43,9 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
     private CompanionOfPet myOffer;
     private NotificationCompat.Builder notification;
     private static int idNotification = 1111;
-    int situationFlag = 0; //0= can choose and reject, 1= choosed, so can unchoose and reject 2= rejected
-
+    //0= can choose and reject, 1= choosed, so can unchoose and reject
+    // 2= rejected, -1= problems in choose/unchoose -2= problems in reject
+    int situationFlag = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +118,7 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
     }
 
     /**
-     * Method for setting the value of text in offerme button
+     * Method for setting the value of buttons
      * depending on the situation flag value
      */
     private void paintButtons() {
@@ -135,19 +138,19 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
                 btReject.setVisibility(View.VISIBLE);
                 btReject.setText("Descartar");
                 break;
-            case -1: // can unchoose
+            case -1: // problems unselect or select
                 btChoose.setText("Prueba más tarde");
                 btChoose.setEnabled(true);
                 btChoose.setTextColor(Color.RED);
                 btReject.setVisibility(View.GONE);
                 break;
-            case 2: //person has applied already
+            case 2: //discard apply
                 btChoose.setVisibility(View.GONE);
                 btReject.setVisibility(View.VISIBLE);
                 btReject.setText("Descartado");
                 btReject.setEnabled(false);
                 break;
-            case -2: //person has applied already
+            case -2: //problems with discard
                 btChoose.setVisibility(View.GONE);
                 btReject.setVisibility(View.VISIBLE);
                 btReject.setText("Prueba más tarde");
@@ -205,15 +208,38 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
                         paintButtons();
                     }
                 } else if (view.getId() == R.id.btRechazarSolicitud) {
-                    myApplication = myModel.searchOfferApplyById(myApplication.getIdAppliForOf());
-                    Boolean control3 = false;
-                    control3 = myModel.rejectAplicationForOffer(myApplication);
-                    if (control3) {
-                        situationFlag = 2;
-                    } else {
-                        situationFlag = -2;
-                    }
-                    paintButtons();
+                    AlertDialog.Builder myAlert= new AlertDialog.Builder(PersonViewAndConfirmOneShelterInterested.this);
+                    myAlert.setMessage("¿Seguro que quieres descartarlo? Esta acción no se puede deshacer")
+                            .setCancelable(false)
+                            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            myApplication = myModel.searchOfferApplyById(myApplication.getIdAppliForOf());
+                                            Boolean control3 = false;
+                                            control3 = myModel.rejectAplicationForOffer(myApplication);
+                                            if (control3) {
+                                                Intent intent1 = new Intent(PersonViewAndConfirmOneShelterInterested.this, PersonCheckSheltersInterested.class);
+                                                //Create a bundle object
+                                                Bundle bundle = new Bundle();
+                                                //set interesting data
+                                                bundle.putInt("idOffer", idOffer);
+                                                intent1.putExtras(bundle);
+                                                startActivity(intent1);
+                                            } else {
+                                                situationFlag = -2;
+                                            }
+                                            paintButtons();
+                                        }
+                                    })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog title= myAlert.create();
+                    title.setTitle("Descartar permanentemente solicitud");
+                    title.show();
                 }
             }
         };

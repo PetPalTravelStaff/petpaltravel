@@ -192,7 +192,7 @@ public class PPTModel {
 
     public boolean rejectAplicationForOffer(ApplicationForOffer myApplication) {
         Boolean result= false;
-        result= myDAO.deleteShelterFromOffer(myApplication);
+        result= myDAO.rejectApplyForOffer(myApplication);
         return result;
     }
 
@@ -243,7 +243,26 @@ public class PPTModel {
     }
 
 
+    public Boolean rejectAplicationForDemand(ApplicationForDemand myApplication) {
+        Boolean result= false;
+        result= myDAO.rejectApplyForDemand(myApplication);
+        return result;
+    }
 
+    public Boolean unConfirmSelectedPerson(ApplicationForDemand myApplication) {
+        Boolean result= false;
+        result= myDAO.unSetSeletedPersonInDemand(myApplication);
+        return result;
+    }
+
+
+    public Boolean deleteUser(int idUser) {
+        boolean result;
+        User myUser= myDAO.recoverUserById(idUser);
+        result= myDAO.deleteUser(myUser);
+        return result;
+
+    }
 }
 
 

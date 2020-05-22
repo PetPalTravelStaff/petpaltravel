@@ -698,4 +698,93 @@ public class DataTestDAO {
 
     }
 
+    public boolean deleteUser(User myUser) {
+        boolean result= false;
+        if (myUser.isShelter()){ //If is shelter
+            //DELETE ALL PLACES WHERE HIS/HER DATA CAN BE
+            //demand posted
+            List<CompanionForPet> prov=new ArrayList<>();
+            for (CompanionForPet dem: demandsFOR){
+                if (dem.getIdeUserShelterOffering()==myUser.getId()) {
+                    prov.add(dem);
+                }
+            }
+            for (CompanionForPet dem: prov){
+                 demandsFOR.remove(dem);
+            }
+
+            //data in offers that has applied
+            for (CompanionOfPet off: offeringsOF) {
+                //selected
+                if (off.getIdUserShelterSeleted()==myUser.getId()){
+                    off.setNameSSelected("null");
+                    off.setIdUserShelterSeleted(0);
+                }
+                //just application
+                if (off.getIdShelterIntPosition(0) ==myUser.getId()) {
+                    off.setIdShelterIntPosition(0, 0);
+                    off.setNamesShelterIntPosition(null, 0);
+                } else if (off.getIdShelterIntPosition(1) == myUser.getId()) {
+                    off.setIdShelterIntPosition(0, 1);
+                    off.setNamesShelterIntPosition(null, 1);
+                } else if (off.getIdShelterIntPosition(2) == myUser.getId()) {
+                    off.setIdShelterIntPosition(0, 2);
+                    off.setNamesShelterIntPosition(null, 2);
+                }
+            }
+            //application to offers posted
+            List<ApplicationForOffer> prov2=new ArrayList<>();
+            for (ApplicationForOffer apply: myApplicationsForOffers){
+                if (apply.getIdShelterApplying()==myUser.getId()){
+                    prov2.add(apply);
+                }
+            }
+            for (ApplicationForOffer apply: prov2){
+                myApplicationsForOffers.remove(apply);
+            }
+        } else { //if is person
+            //DELETE ALL PLACES WHERE HIS/HER DATA CAN BE
+            //offer posted
+            List<CompanionOfPet> prov= new ArrayList<>();
+            for (CompanionOfPet off: offeringsOF){
+                if (off.getIdeUserPersonOffering()==myUser.getId()) {
+                    prov.add(off);
+                }
+            }
+            for (CompanionOfPet off: prov){
+                offeringsOF.remove(off);
+            }
+            //data in demands that has applied
+            for (CompanionForPet dem: demandsFOR) {
+                //selected
+                if (dem.getIdUserPersonSeleted()==myUser.getId()){
+                    dem.setNamePSelected("null");
+                    dem.setIdUserPersonSeleted(0);
+                }
+                //just application
+                if (dem.getIdPersonInterestePosition(0) ==myUser.getId()) {
+                    dem.setIdPersonsIntPosition(0, 0);
+                    dem.setNamePersonsIntPosition(null, 0);
+                } else if (dem.getIdPersonInterestePosition(1) == myUser.getId()) {
+                    dem.setIdPersonsIntPosition(0, 1);
+                    dem.setNamePersonsIntPosition(null, 1);
+                } else if (dem.getIdPersonInterestePosition(2) == myUser.getId()) {
+                    dem.setIdPersonsIntPosition(0, 2);
+                    dem.setNamePersonsIntPosition(null, 2);
+                }
+            }
+            //application to dem posted
+            List<ApplicationForDemand> prov2= new ArrayList<>();
+            for (ApplicationForDemand apply: myApplicationsForDemands){
+                if (apply.getIdPersonApplying()==myUser.getId()){
+                    prov2.add(apply);
+                }
+            }
+            for (ApplicationForDemand apply: prov2){
+                myApplicationsForDemands.remove(apply);
+            }
+        }
+        result= myUsers.remove(myUser);
+        return result;
+    }
 }

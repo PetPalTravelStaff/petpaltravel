@@ -254,6 +254,15 @@ public class PPTModel {
         result= myDAO.unSetSeletedPersonInDemand(myApplication);
         return result;
     }
+
+
+    public Boolean deleteUser(int idUser) {
+        boolean result;
+        User myUser= myDAO.recoverUserById(idUser);
+        result= myDAO.deleteUser(myUser);
+        return result;
+
+    }
 }
 
 

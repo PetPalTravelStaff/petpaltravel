@@ -45,7 +45,6 @@ public class UserLoginActivity extends AppCompatActivity {
         createListener();
         //add elements to listener
         addElementsToListener();
-
     }
 
     /**
@@ -95,6 +94,8 @@ public class UserLoginActivity extends AppCompatActivity {
         login= (Button) findViewById(R.id.btEntrar);
         register= (Button) findViewById(R.id.btAlta);
         sendPass= (Button) findViewById(R.id.btRecuerdaPassword);
+        //PROVISIONAL
+        sendPass.setVisibility(View.GONE);
     }
 
     /**

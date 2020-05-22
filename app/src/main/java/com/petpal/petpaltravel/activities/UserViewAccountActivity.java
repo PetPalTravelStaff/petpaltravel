@@ -207,7 +207,7 @@ public class UserViewAccountActivity extends AppCompatActivity {
                     }
                 } else if (view.getId() == R.id.btCancelarCuenta) {
                     AlertDialog.Builder myAlert= new AlertDialog.Builder(UserViewAccountActivity.this);
-                    myAlert.setMessage("¿Seguro que quieres descartarlo? Esta acción no se puede deshacer")
+                    myAlert.setMessage("¿Seguro que quieres darte de baja? Esta acción hará que pierdas todos tus datos en la app")
                             .setCancelable(false)
                             .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                                 @Override
@@ -232,7 +232,7 @@ public class UserViewAccountActivity extends AppCompatActivity {
                                 }
                             });
                     AlertDialog title= myAlert.create();
-                    title.setTitle("Descartar permanentemente solicitud");
+                    title.setTitle("Darte de baja");
                     title.show();
                 }
             }

@@ -15,7 +15,6 @@ public class DataTestDAO {
     List<CompanionForPet> demandsFOR = new ArrayList<CompanionForPet>();
     List<CompanionOfPet> offeringsOF = new ArrayList<CompanionOfPet>();
     List<Location> myLocations = new ArrayList<Location>();
-    ;
     List<User> myUsers = new ArrayList<User>();
     List<ApplicationForDemand> myApplicationsForDemands = new ArrayList<ApplicationForDemand>();
     List<ApplicationForOffer> myApplicationsForOffers = new ArrayList<ApplicationForOffer>();
@@ -87,12 +86,15 @@ public class DataTestDAO {
         CompanionOfPet test1 = new CompanionOfPet(1, 3, "Marta", new GregorianCalendar(2020, 6, 10),
                 "Hospitalet de Llobregat", "Ibiza", "Avión", "Perro/a", "Soy adiestradora canina, así que tengo mucha experiencia con perros",
                 0, null);
-        test1.setIdShelterIntPosition(2, 0);
-        test1.setNamesShelterIntPosition("Protectora Kitty", 0);
+        test1.setIdShelterIntPosition(1, 0);
+        test1.setNamesShelterIntPosition("Protectora Can", 0);
         offeringsOF.add(test1);
-        offeringsOF.add(new CompanionOfPet(2, 4, "Roser", new GregorianCalendar(2020, 6, 20),
+        CompanionOfPet test2 =new CompanionOfPet(2, 4, "Roser", new GregorianCalendar(2020, 6, 20),
                 "Madrid", "Sta. Cruz de Tenerife", "Avión", "Perro/a, Gato/a, Otros", null,
-                0, null));
+                0, null);
+        test2.setIdShelterIntPosition(2, 0);
+        test2.setNamesShelterIntPosition("Protectora Kitty", 0);
+        offeringsOF.add(test2);
         offeringsOF.add(new CompanionOfPet(3, 3, "Marta", new GregorianCalendar(2020, 7, 26),
                 "Ibiza", "Hospitalet de Llobregat", "Avión", "Perro/a", "Soy adiestradora canina, así que tengo mucha experiencia con perros",
                 0, null));
@@ -123,6 +125,8 @@ public class DataTestDAO {
     private void addApplicationOffer() {
         myApplicationsForOffers.add(new ApplicationForOffer(1, 2, 2, "Protectora Kitty", "Gato/a",
                 "Blanquita", null, "gatos@gmail.com", "655963626", false));
+        myApplicationsForOffers.add(new ApplicationForOffer(2, 3, 1, "Protectora Can", "Perro/a",
+                "Blake", null, "can@gmail.com", "645859626", false));
     }
 
 

@@ -12,8 +12,6 @@ public class User {
     private String phone;
     private boolean isShelter;
     private int ranking;
-    private List<CompanionOfPet> listOfOfferings;
-    private List<CompanionForPet> listOfDemands;
 
     //Constructors
     public User(int id, String name, String email, String password, String phone, boolean isShelter, int ranking) {
@@ -89,5 +87,4 @@ public class User {
     }
 
 
-    //methods
 }

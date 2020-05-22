@@ -109,28 +109,42 @@ public class UserLoginActivity extends AppCompatActivity {
                 if (view.getId() == R.id.btEntrar) {
                     //recover data from EditText
                         String userMail = mailBox.getText().toString();
-                        String userPass = passBox.getText().toString();
-                        //try to recover User from servlet with this data
-                        client = myModel.validatePassword(userMail, userPass);
-                    //if a user is recovered
-                    if (client!=null){
-                        //save interesting data
-                        saveSharedPref();
-                        //if is shelter, show search offers
-                        if (client.isShelter()){
-                            Intent intent  = new Intent(UserLoginActivity.this, UserSearchOffersActivity.class);
-                            startActivity(intent);
-                        //if is person, show search demands
-                        } else  {
-                            Intent intent  = new Intent(UserLoginActivity.this, UserSearchDemandsActivity.class);
-                            startActivity(intent);
+                        if(userMail!=null & !"".equals(userMail)) {
+                            String userPass = passBox.getText().toString();
+                            if (userPass!= null & !"".equals((userPass))) {
+                                //try to recover User from servlet with this data
+                                client = myModel.validatePassword(userMail, userPass);
+                                //if a user is recovered
+                                if (client != null) {
+                                    //save interesting data
+                                    saveSharedPref();
+                                    //if is shelter, show search offers
+                                    if (client.isShelter()) {
+                                        Intent intent = new Intent(UserLoginActivity.this, UserSearchOffersActivity.class);
+                                        startActivity(intent);
+                                        //if is person, show search demands
+                                    } else {
+                                        Intent intent = new Intent(UserLoginActivity.this, UserSearchDemandsActivity.class);
+                                        startActivity(intent);
+                                    }
+                                    //if not recovered an user, notify
+                                } else {
+                                    passBox.setHintTextColor(Color.RED);
+                                    passBox.setHint("Datos incorrectos");
+                                    passBox.setText(null);
+                                    mailBox.setHintTextColor(Color.RED);
+                                    mailBox.setHint("Datos incorrectos");
+                                    mailBox.setText(null);
+
+                                }
+                            } else {
+                                passBox.setHintTextColor(Color.RED);
+                                passBox.setHint("Falta password");
+                            }
+                        } else {
+                            mailBox.setHintTextColor(Color.RED);
+                            mailBox.setHint("Falta email");
                         }
-                        //if not recovered an user, notify
-                    } else {
-                        passBox.setHintTextColor(Color.RED);
-                        passBox.setHint("Password incorrecto");
-                        passBox.setText(null);
-                    }
                 //if button register is pressed
                 } else if (view.getId() == R.id.btAlta) {
                     openRegisterActivity();

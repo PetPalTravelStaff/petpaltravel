@@ -3,8 +3,10 @@ package com.petpal.petpaltravel.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -27,7 +29,7 @@ public class ShelterViewAndConfirmOnePersonInterested extends AppCompatActivity 
     private static int idNotification= 2222;
     //Attributes
     TextView nameBox, transportBox, mailBox, phoneBox, commentBox, nameLabel;
-    Button btChoose;
+    Button btChoose, btReject;
     ApplicationForDemand myApplication;
     String nameUser, userPhone;
     int idUser, idDemand, idApplication;
@@ -36,6 +38,9 @@ public class ShelterViewAndConfirmOnePersonInterested extends AppCompatActivity 
     private Boolean isShelter, isSelected;
     private CompanionForPet myDemand;
     private NotificationCompat.Builder notification;
+    //0= can choose and reject, 1= choosed, so can unchoose and reject
+    // 2= rejected, -1= problems in choose/unchoose -2= problems in reject
+    int situationFlag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +104,55 @@ public class ShelterViewAndConfirmOnePersonInterested extends AppCompatActivity 
         btChoose = (Button) findViewById(R.id.btLoElijo);
         notification= new NotificationCompat.Builder(this);
         notification.setAutoCancel(false);
+        btReject = (Button) findViewById(R.id.btRechazarSolicitud);
+        if (isSelected) {
+            situationFlag = 1;
+        } else {
+            situationFlag=0;
+        }
+        paintButtons();
+    }
+
+    /**
+     * Method for setting the value of buttons
+     * depending on the situation flag value
+     */
+    private void paintButtons() {
+        //depending on the situation flag
+        switch (situationFlag) {
+            case 0: //normal case
+                btChoose.setText("¡Lo ejijo!");
+                btChoose.setEnabled(true);
+                btChoose.setTextColor(Color.WHITE);
+                btReject.setVisibility(View.VISIBLE);
+                btReject.setText("Descartar");
+                break;
+            case 1: // can unchoose
+                btChoose.setText("No elegir");
+                btChoose.setEnabled(true);
+                btChoose.setTextColor(Color.BLACK);
+                btReject.setVisibility(View.VISIBLE);
+                btReject.setText("Descartar");
+                break;
+            case -1: // problems unselect or select
+                btChoose.setText("Prueba más tarde");
+                btChoose.setEnabled(true);
+                btChoose.setTextColor(Color.RED);
+                btReject.setVisibility(View.GONE);
+                break;
+            case 2: //discard apply
+                btChoose.setVisibility(View.GONE);
+                btReject.setVisibility(View.VISIBLE);
+                btReject.setText("Descartado");
+                btReject.setEnabled(false);
+                break;
+            case -2: //problems with discard
+                btChoose.setVisibility(View.GONE);
+                btReject.setVisibility(View.VISIBLE);
+                btReject.setText("Prueba más tarde");
+                btReject.setEnabled(false);
+                break;
+        }
     }
 
     /**
@@ -109,12 +163,9 @@ public class ShelterViewAndConfirmOnePersonInterested extends AppCompatActivity 
             @Override
             public void onClick(View view) {
                 if (view.getId() == R.id.btLoElijo) {
-                    if (!isSelected) {
+                    if (situationFlag == 0) {
                         Boolean control = myModel.confirmSelectedShelter(myApplication);
                         if (control) {
-                            isSelected=true;
-                            btChoose.setText("La dejo en espera");
-                            btChoose.setTextColor(Color.BLACK);
                             notification.setSmallIcon(R.drawable.logo);
                             //notification.setTicker("Aviso");
                             notification.setWhen((System.currentTimeMillis()));
@@ -136,13 +187,55 @@ public class ShelterViewAndConfirmOnePersonInterested extends AppCompatActivity 
                             NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                             nm.notify(idNotification, notification.build());
                             isSelected = true;
+                            situationFlag = 1;
                         } else {
-                            btChoose.setText("Prueba más tarde");
-                            btChoose.setTextColor(Color.RED);
+                            situationFlag = -1;
                         }
-                    } else {
-                        //TODO deseleccionar
+                        paintButtons();
+                    } else if (situationFlag == 1) {
+                        myApplication = myModel.searchDemandApplyById(myApplication.getIdApplForDem());
+                        Boolean control2 = false;
+                        control2 = myModel.unConfirmSelectedPerson(myApplication);
+                        if (control2) {
+                            situationFlag = 0;
+                        } else {
+                            situationFlag = -1;
+                        }
+                        paintButtons();
                     }
+                } else if (view.getId() == R.id.btRechazarSolicitud) {
+                    AlertDialog.Builder myAlert= new AlertDialog.Builder(ShelterViewAndConfirmOnePersonInterested.this);
+                    myAlert.setMessage("¿Seguro que quieres descartarlo? Esta acción no se puede deshacer")
+                            .setCancelable(false)
+                            .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    myApplication = myModel.searchDemandApplyById(myApplication.getIdApplForDem());
+                                    Boolean control3 = false;
+                                    control3 = myModel.rejectAplicationForDemand(myApplication);
+                                    if (control3) {
+                                        Intent intent1 = new Intent(ShelterViewAndConfirmOnePersonInterested.this, ShelterCheckPersonsInterested.class);
+                                        //Create a bundle object
+                                        Bundle bundle = new Bundle();
+                                        //set interesting data
+                                        bundle.putInt("idDemand", idDemand);
+                                        intent1.putExtras(bundle);
+                                        startActivity(intent1);
+                                    } else {
+                                        situationFlag = -2;
+                                    }
+                                    paintButtons();
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog title= myAlert.create();
+                    title.setTitle("Descartar permanentemente solicitud");
+                    title.show();
                 }
             }
         };
@@ -153,6 +246,7 @@ public class ShelterViewAndConfirmOnePersonInterested extends AppCompatActivity 
      */
     private void addElementsToListener() {
         btChoose.setOnClickListener(listener);
+        btReject.setOnClickListener(listener);
     }
 
     /**
@@ -165,13 +259,6 @@ public class ShelterViewAndConfirmOnePersonInterested extends AppCompatActivity 
         mailBox.setText(myApplication.getMail());
         phoneBox.setText(myApplication.getPhone());
         commentBox.setText(myApplication.getComments());
-        if (isSelected) {
-            btChoose.setText("Lo dejo en espera");
-            btChoose.setTextColor(Color.BLACK);
-        } else {
-            btChoose.setText("¡La elijo!");
-            btChoose.setTextColor(Color.WHITE);
-        }
     }
 
     /**

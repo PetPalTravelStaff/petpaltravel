@@ -276,17 +276,16 @@ public class ShelterPostDemandActivity extends AppCompatActivity {
                                 }
                             }
                         } else {
-                            dateAvaliable.setHintTextColor(Color.RED);
                             dateAvaliable.setText(null);
+                            dateAvaliable.setHintTextColor(Color.RED);
                         }
 
                     } else {
-                        dateAvaliable.setHintTextColor(Color.RED);
                         dateAvaliable.setText(null);
+                        dateAvaliable.setHintTextColor(Color.RED);
                     }
                 } else {
                     nameBox.setHintTextColor(Color.RED);
-                    nameBox.setText(null);
                 }
             }
         };

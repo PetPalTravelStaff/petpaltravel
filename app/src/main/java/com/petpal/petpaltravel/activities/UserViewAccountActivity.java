@@ -303,13 +303,13 @@ public class UserViewAccountActivity extends AppCompatActivity {
             menu.add(0, 1, 0, "Mi perfil");
             menu.add(0, 2, 1, "Ver mis peticiones");
             menu.add(0, 3, 2, "Publicar petición");
-            menu.add(0, 4, 3, "Ver las ofertas");
+            menu.add(0, 4, 3, "Buscar ofertas");
             menu.add(0, 5, 4, "Salir");
         } else {
             menu.add(0, 1, 0, "Mi perfil");
             menu.add(0, 2, 1, "Ver mis ofertas");
             menu.add(0, 3, 2, "Publicar oferta");
-            menu.add(0, 4, 3, "Ver las peticiones");
+            menu.add(0, 4, 3, "Buscar peticiones");
             menu.add(0, 5, 4, "Salir");
         }
 

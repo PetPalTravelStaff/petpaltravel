@@ -130,7 +130,7 @@ public class ShelterCheckPersonsInterested extends AppCompatActivity {
             //if list is empty
         } else if (listOfInterestedPerson.size()==0){
             selected.setVisibility(View.GONE);
-            notification.setText("No se hay personas voluntarias apuntadas... aún.");
+            notification.setText("No hay personas voluntarias apuntadas... aún.");
             //if list has lines
         } else {
             //create adapter

@@ -50,7 +50,7 @@ public class PersonPostOfferActivity extends AppCompatActivity {
         myModel = new PPTModel();
         //recover needed data
         recoverShared();
-        allTransports= myModel.getTransport();
+        allTransports = myModel.getTransport();
         allCities = myModel.getCities();
         //Create view elements in activity
         initElements();
@@ -68,10 +68,10 @@ public class PersonPostOfferActivity extends AppCompatActivity {
         //Create shared prefereces object of a Shared preferences created
         SharedPreferences shared = getSharedPreferences("dades", MODE_PRIVATE);
         //if exist
-        if (shared!=null) {
+        if (shared != null) {
             //Use the editor to catch the couples of dates
             nameUser = shared.getString("userName", "");
-            userId= shared.getInt("id", 0);
+            userId = shared.getInt("id", 0);
             isShelter = shared.getBoolean("isShelter", false);
         }
     }
@@ -80,32 +80,32 @@ public class PersonPostOfferActivity extends AppCompatActivity {
      * Method for create elements of activity
      */
     private void initElements() {
-        nameBox= (TextView) findViewById(R.id.etMiNombreEs);
+        nameBox = (TextView) findViewById(R.id.etMiNombreEs);
         nameBox.setText(nameUser);
-        dateTravel= (EditText) findViewById(R.id.etFechaViajePersona);
-        originCity= (Spinner) findViewById(R.id.spCiudadOrigen);
-        destinyCity= (Spinner) findViewById(R.id.spCiudadDestino);
+        dateTravel = (EditText) findViewById(R.id.etFechaViajePersona);
+        originCity = (Spinner) findViewById(R.id.spCiudadOrigen);
+        destinyCity = (Spinner) findViewById(R.id.spCiudadDestino);
         //Create adapter for cities
         ArrayAdapter<String> adapterCity = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, allCities);
         //set the spinners adapter to the previously created one.
         originCity.setAdapter(adapterCity);
         destinyCity.setAdapter(adapterCity);
-        cat= (CheckBox) findViewById(R.id.cbGatos);
-        dog= (CheckBox) findViewById(R.id.cbPerros);
-        others= (CheckBox) findViewById(R.id.cbOtros);
-        transport= (Spinner) findViewById(R.id.spViajareEn);
+        cat = (CheckBox) findViewById(R.id.cbGatos);
+        dog = (CheckBox) findViewById(R.id.cbPerros);
+        others = (CheckBox) findViewById(R.id.cbOtros);
+        transport = (Spinner) findViewById(R.id.spViajareEn);
         //Create adapter for transport
         ArrayAdapter<String> adapterTrans = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, allTransports);
         //set the spinners adapter to the previously created one.
         transport.setAdapter(adapterTrans);
-        comments= (EditText) findViewById(R.id.etComentarios);
-        nameUserLabel= (TextView) findViewById(R.id.etNombrePersona);
+        comments = (EditText) findViewById(R.id.etComentarios);
+        nameUserLabel = (TextView) findViewById(R.id.etNombrePersona);
         nameUserLabel.setText(nameUser);
-        btPostOffer= (Button) findViewById(R.id.btPublicar);
-        labOrigen= (TextView) findViewById(R.id.tvCiudadOrigen) ;
-        labDestino= (TextView) findViewById(R.id.tvCiudadDestino);
-        labTipo= (TextView) findViewById(R.id.tvAcompanyoA);
-        labTransp= (TextView) findViewById(R.id.tvTipoTransporte);
+        btPostOffer = (Button) findViewById(R.id.btPublicar);
+        labOrigen = (TextView) findViewById(R.id.tvCiudadOrigen);
+        labDestino = (TextView) findViewById(R.id.tvCiudadDestino);
+        labTipo = (TextView) findViewById(R.id.tvAcompanyoA);
+        labTransp = (TextView) findViewById(R.id.tvTipoTransporte);
     }
 
     /**
@@ -115,41 +115,42 @@ public class PersonPostOfferActivity extends AppCompatActivity {
         listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String dateString= null;
-                if (dateTravel.getText()!=null) {
-                    dateString=dateTravel.getText().toString();
-                };
-                GregorianCalendar dateCal= null;
-                String cityOrigin= originCity.getSelectedItem().toString();
-                String cityDestiny= destinyCity.getSelectedItem().toString();
-                Boolean catChoosed= cat.isChecked();
-                Boolean dogChoosed= dog.isChecked();
-                Boolean otherChoosed= others.isChecked();
-                String transportation= transport.getSelectedItem().toString();
-                String commentString= comments.getText().toString();
-                myOffer= new CompanionOfPet();
+                String dateString = null;
+                if (dateTravel.getText() != null) {
+                    dateString = dateTravel.getText().toString();
+                }
+                ;
+                GregorianCalendar dateCal = null;
+                String cityOrigin = originCity.getSelectedItem().toString();
+                String cityDestiny = destinyCity.getSelectedItem().toString();
+                Boolean catChoosed = cat.isChecked();
+                Boolean dogChoosed = dog.isChecked();
+                Boolean otherChoosed = others.isChecked();
+                String transportation = transport.getSelectedItem().toString();
+                String commentString = comments.getText().toString();
+                myOffer = new CompanionOfPet();
                 myOffer.setIdeUserPersonOffering(userId);
                 myOffer.setNamePerson(nameUser);
-                if (!"".equals(dateString)){//check empty date
+                if (!"".equals(dateString)) {//check empty date
                     dateTravel.setHintTextColor(Color.BLACK);
-                    dateCal= validateDate(dateString);
-                    if (dateCal!=null) {
+                    dateCal = validateDate(dateString);
+                    if (dateCal != null) {
                         dateTravel.setHintTextColor(Color.BLACK);
                         myOffer.setDateTravel(dateCal);
-                        if (cityOrigin!=null){
+                        if (cityOrigin != null) {
                             labOrigen.setTextColor(Color.BLACK);
                             myOffer.setOriginCity(cityOrigin);
-                            if (cityDestiny!=null){
+                            if (cityDestiny != null) {
                                 labDestino.setTextColor(Color.BLACK);
                                 if (!cityDestiny.equals(cityOrigin)) {
                                     labOrigen.setTextColor(Color.BLACK);
                                     labDestino.setTextColor(Color.BLACK);
                                     myOffer.setDestinyCity(cityDestiny);
-                                    Boolean noChooseType= false;
-                                    if (catChoosed == false & dogChoosed == false & otherChoosed == false){
-                                        noChooseType=true;
-                                    } else{
-                                        noChooseType=false;
+                                    Boolean noChooseType = false;
+                                    if (catChoosed == false & dogChoosed == false & otherChoosed == false) {
+                                        noChooseType = true;
+                                    } else {
+                                        noChooseType = false;
                                     }
                                     if (!noChooseType) {
                                         labTipo.setTextColor(Color.BLACK);
@@ -202,25 +203,23 @@ public class PersonPostOfferActivity extends AppCompatActivity {
                                     } else {
                                         labTipo.setTextColor(Color.RED);
                                     }
-                                }else {
+                                } else {
                                     labOrigen.setTextColor(Color.RED);
                                     labDestino.setTextColor(Color.RED);
                                 }
-                            }else {
+                            } else {
                                 labDestino.setTextColor(Color.RED);
                             }
-                        }else {
+                        } else {
                             labOrigen.setTextColor(Color.RED);
                         }
 
                     } else {
-                        dateTravel.setHintTextColor(Color.RED);
                         dateTravel.setText(null);
+                        dateTravel.setHintTextColor(Color.RED);
                     }
-
                 } else {
                     dateTravel.setHintTextColor(Color.RED);
-                    dateTravel.setText(null);
                 }
             }
         };
@@ -228,105 +227,93 @@ public class PersonPostOfferActivity extends AppCompatActivity {
 
 
     private GregorianCalendar validateDate(String dateString) {
-        GregorianCalendar result= null;
-        int yearDate=0;
-        int monthDate=0;
-        int dayDate=0;
+        GregorianCalendar result = null;
+        int yearDate = -1;
+        int monthDate = -1;
+        int dayDate = -1;
 
-        if (dateString!=null){
-            Boolean control= false;
+        if (dateString != null) {
+            Boolean control = false;
             Pattern pattern = Pattern.compile("\\d{1,2}-\\d{1,2}-\\d{4}");
             Matcher mather = pattern.matcher(dateString);
-            control= mather.find();
-            if (control){
-                String[] datePieces= dateString.split("-");
+            control = mather.find();
+            if (control) {
+                String[] datePieces = dateString.split("-");
                 try {
                     yearDate = Integer.parseInt(datePieces[2]);
-                }catch (Exception e){
-                    yearDate=0;
-                }
-                if (yearDate>= Calendar.getInstance().get(Calendar.YEAR)) {
-                    try {
-                        monthDate = Integer.parseInt(datePieces[1]);
-                    } catch (Exception e) {
-                        monthDate = 0;
-                    }
-                    if (yearDate == Calendar.getInstance().get(Calendar.YEAR) &
-                            monthDate < Calendar.getInstance().get(Calendar.MONTH)) {
-                        dayDate = 0;
-                    } else {
+                    if (yearDate >= Calendar.getInstance().get(Calendar.YEAR)) {
                         try {
-                            dayDate = Integer.parseInt(datePieces[0]);
-                        } catch (Exception e) {
-                            dayDate = 0;
+                            monthDate = Integer.parseInt(datePieces[1]);
+                                try {
+                                    dayDate = Integer.parseInt(datePieces[0]);
+                                        switch (monthDate) {
+                                            case 1:
+                                            case 3:
+                                            case 5:
+                                            case 7:
+                                            case 8:
+                                            case 10:
+                                            case 12:
+                                                if (0 < dayDate & dayDate <= 31) {
+                                                    result = new GregorianCalendar(yearDate, monthDate-1, dayDate);
+                                                } else {
+                                                    result = null;
+                                                }
+                                                break;
+                                            case 4:
+                                            case 6:
+                                            case 9:
+                                            case 11:
+                                                if (0 < dayDate & dayDate <= 30) {
+                                                    result = new GregorianCalendar(yearDate, monthDate-1, dayDate);
+                                                } else {
+                                                    result = null;
+                                                }
+                                                break;
+                                            case 2:
+                                                //if year is bisiesto
+                                                if ((yearDate % 4 == 0 && yearDate % 100 != 0) || (yearDate % 100 == 0 && yearDate % 400 == 0)) {
+                                                    if (0 < dayDate & dayDate <= 29) {
+                                                        result = new GregorianCalendar(yearDate, monthDate-1, dayDate);
+                                                        ;
+                                                    } else {
+                                                        result = null;
+                                                    }
+                                                } else {
+                                                    if (0 < dayDate & dayDate <= 28) {
+                                                        result = new GregorianCalendar(yearDate, monthDate-1, dayDate);
+                                                    } else {
+                                                        result = null;
+                                                    }
+                                                }
+                                                break;
+                                            default:
+                                                result = null;
+                                                break;
+                                        }
+                                } catch (Exception e) {
+                                    result = null;
+                                }
+                        } catch (Exception exe) {
+                            result = null;
                         }
-                        if (yearDate == Calendar.getInstance().get(Calendar.YEAR) &
-                                monthDate == Calendar.getInstance().get(Calendar.MONTH) &
-                                dayDate <= Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
-                            dayDate = 0;
-                        } else {
-                            switch (monthDate) {
-                                case 1:
-                                case 3:
-                                case 5:
-                                case 7:
-                                case 8:
-                                case 10:
-                                case 12:
 
-                                    if (0 < dayDate & dayDate <=31) {
-                                        dayDate = dayDate;
-                                    } else {
-                                        dayDate = 0;
-                                    }
-                                    break;
-                                case 4:
-                                case 6:
-                                case 9:
-                                case 11:
-                                    if (0 < dayDate & dayDate <= 30) {
-                                        dayDate = dayDate;
-                                    } else {
-                                        dayDate = 0;
-                                    }
-                                    break;
-                                case 2:
-                                    //if year is bisiesto
-                                    if ((yearDate % 4 == 0 && yearDate % 100 != 0) || (yearDate % 100 == 0 && yearDate % 400 == 0)) {
-                                        if (0 < dayDate & dayDate <= 29) {
-                                            dayDate = dayDate;
-                                            ;
-                                        } else {
-                                            dayDate = 0;
-                                        }
-                                    } else {
-                                        if (0 < dayDate & dayDate <= 28) {
-                                            dayDate = dayDate;
-                                        } else {
-                                            dayDate = 0;
-                                        }
-                                    }
-                                    break;
-                                default:
-                                    dayDate = 0;
-                                    break;
-                            }
-                        }
+                    } else {
+                        result = null;
                     }
-                }else {
-                    yearDate=0;
-                    monthDate=0;
-                    dayDate=0;
+                } catch (Exception exem) {
+                    result= null;
+                }
+                } else {
+                    result=null;
                 }
             } else {
-                yearDate=0;
-                monthDate=0;
-                dayDate=0;
+                result=null;
             }
-        }
-        result= new GregorianCalendar(yearDate, monthDate, dayDate);
-        if (result.before(Calendar.getInstance())) {
-            result=null;
+        if (result != null) {
+            if (result.before(Calendar.getInstance())) {
+                result = null;
+            }
         }
         return result;
     }
@@ -340,16 +327,17 @@ public class PersonPostOfferActivity extends AppCompatActivity {
 
     /**
      * Method for creating items of menu
+     *
      * @param menu
      * @return
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-            menu.add(0, 1, 0, "Mi perfil");
-            menu.add(0, 2, 1, "Ver mis ofertas");
-            menu.add(0, 3, 2, "Buscar peticiones");
-            menu.add(0, 4, 3, "Salir");
+        menu.add(0, 1, 0, "Mi perfil");
+        menu.add(0, 2, 1, "Ver mis ofertas");
+        menu.add(0, 3, 2, "Buscar peticiones");
+        menu.add(0, 4, 3, "Salir");
         return true;
     }
 

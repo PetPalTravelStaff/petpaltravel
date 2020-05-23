@@ -280,9 +280,9 @@ public class PersonManageOfferActivity extends AppCompatActivity {
 
     private GregorianCalendar validateDate(String dateString) {
         GregorianCalendar result = null;
-        int yearDate = 0;
-        int monthDate = 0;
-        int dayDate = 0;
+        int yearDate = -1;
+        int monthDate = -1;
+        int dayDate = -1;
 
         if (dateString != null) {
             Boolean control = false;
@@ -293,91 +293,79 @@ public class PersonManageOfferActivity extends AppCompatActivity {
                 String[] datePieces = dateString.split("-");
                 try {
                     yearDate = Integer.parseInt(datePieces[2]);
-                } catch (Exception e) {
-                    yearDate = 0;
-                }
-                if (yearDate >= Calendar.getInstance().get(Calendar.YEAR)) {
-                    try {
-                        monthDate = Integer.parseInt(datePieces[1]);
-                    } catch (Exception e) {
-                        monthDate = 0;
-                    }
-                    if (yearDate == Calendar.getInstance().get(Calendar.YEAR) &
-                            monthDate < Calendar.getInstance().get(Calendar.MONTH)) {
-                        dayDate = 0;
-                    } else {
+                    if (yearDate >= Calendar.getInstance().get(Calendar.YEAR)) {
                         try {
-                            dayDate = Integer.parseInt(datePieces[0]);
-                        } catch (Exception e) {
-                            dayDate = 0;
-                        }
-                        if (yearDate == Calendar.getInstance().get(Calendar.YEAR) &
-                                monthDate == Calendar.getInstance().get(Calendar.MONTH) &
-                                dayDate <= Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
-                            dayDate = 0;
-                        } else {
-                            switch (monthDate) {
-                                case 1:
-                                case 3:
-                                case 5:
-                                case 7:
-                                case 8:
-                                case 10:
-                                case 12:
-
-                                    if (0 < dayDate & dayDate <= 31) {
-                                        dayDate = dayDate;
-                                    } else {
-                                        dayDate = 0;
-                                    }
-                                    break;
-                                case 4:
-                                case 6:
-                                case 9:
-                                case 11:
-                                    if (0 < dayDate & dayDate <= 30) {
-                                        dayDate = dayDate;
-                                    } else {
-                                        dayDate = 0;
-                                    }
-                                    break;
-                                case 2:
-                                    //if year is bisiesto
-                                    if ((yearDate % 4 == 0 && yearDate % 100 != 0) || (yearDate % 100 == 0 && yearDate % 400 == 0)) {
-                                        if (0 < dayDate & dayDate <= 29) {
-                                            dayDate = dayDate;
-                                            ;
+                            monthDate = Integer.parseInt(datePieces[1]);
+                            try {
+                                dayDate = Integer.parseInt(datePieces[0]);
+                                switch (monthDate) {
+                                    case 1:
+                                    case 3:
+                                    case 5:
+                                    case 7:
+                                    case 8:
+                                    case 10:
+                                    case 12:
+                                        if (0 < dayDate & dayDate <= 31) {
+                                            result = new GregorianCalendar(yearDate, monthDate-1, dayDate);
                                         } else {
-                                            dayDate = 0;
+                                            result = null;
                                         }
-                                    } else {
-                                        if (0 < dayDate & dayDate <= 28) {
-                                            dayDate = dayDate;
+                                        break;
+                                    case 4:
+                                    case 6:
+                                    case 9:
+                                    case 11:
+                                        if (0 < dayDate & dayDate <= 30) {
+                                            result = new GregorianCalendar(yearDate, monthDate-1, dayDate);
                                         } else {
-                                            dayDate = 0;
+                                            result = null;
                                         }
-                                    }
-                                    break;
-                                default:
-                                    dayDate = 0;
-                                    break;
+                                        break;
+                                    case 2:
+                                        //if year is bisiesto
+                                        if ((yearDate % 4 == 0 && yearDate % 100 != 0) || (yearDate % 100 == 0 && yearDate % 400 == 0)) {
+                                            if (0 < dayDate & dayDate <= 29) {
+                                                result = new GregorianCalendar(yearDate, monthDate-1, dayDate);
+                                                ;
+                                            } else {
+                                                result = null;
+                                            }
+                                        } else {
+                                            if (0 < dayDate & dayDate <= 28) {
+                                                result = new GregorianCalendar(yearDate, monthDate-1, dayDate);
+                                            } else {
+                                                result = null;
+                                            }
+                                        }
+                                        break;
+                                    default:
+                                        result = null;
+                                        break;
+                                }
+                            } catch (Exception e) {
+                                result = null;
                             }
+                        } catch (Exception exe) {
+                            result = null;
                         }
+
+                    } else {
+                        result = null;
                     }
-                } else {
-                    yearDate = 0;
-                    monthDate = 0;
-                    dayDate = 0;
+                } catch (Exception exem) {
+                    result= null;
                 }
             } else {
-                yearDate = 0;
-                monthDate = 0;
-                dayDate = 0;
+                result=null;
             }
+        } else {
+            result=null;
         }
-        result = new GregorianCalendar(yearDate, monthDate, dayDate);
-        if (result.before(Calendar.getInstance())) {
-            result = null;
+        if (result != null) {
+            if (result.before(Calendar.getInstance())) {
+                result = null;
+            }
         }
         return result;
     }

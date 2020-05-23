@@ -129,12 +129,13 @@ public class UserLoginActivity extends AppCompatActivity {
                                     }
                                     //if not recovered an user, notify
                                 } else {
+                                    passBox.setText(null);
                                     passBox.setHintTextColor(Color.RED);
                                     passBox.setHint("Datos incorrectos");
-                                    passBox.setText(null);
+                                    mailBox.setText(null);
                                     mailBox.setHintTextColor(Color.RED);
                                     mailBox.setHint("Datos incorrectos");
-                                    mailBox.setText(null);
+
 
                                 }
                             } else {

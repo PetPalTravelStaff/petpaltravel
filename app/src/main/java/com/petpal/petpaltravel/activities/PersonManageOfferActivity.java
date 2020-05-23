@@ -265,13 +265,12 @@ public class PersonManageOfferActivity extends AppCompatActivity {
                             }
 
                         } else {
-                            dateTravel.setHintTextColor(Color.RED);
                             dateTravel.setText(null);
+                            dateTravel.setHintTextColor(Color.RED);
                         }
 
                     } else {
                         dateTravel.setHintTextColor(Color.RED);
-                        dateTravel.setText(null);
                     }
                 }
             }

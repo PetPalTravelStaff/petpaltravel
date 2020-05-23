@@ -300,7 +300,6 @@ public class ShelterApplyForOffer extends AppCompatActivity {
                                 }
                             } else {
                                 namePetBox.setHintTextColor(Color.RED);
-                                namePetBox.setText(null);
                             }
                     }
                 } else if (view.getId() == R.id.btBorrar) {

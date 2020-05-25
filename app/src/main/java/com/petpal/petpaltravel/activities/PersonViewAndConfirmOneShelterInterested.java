@@ -5,6 +5,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
@@ -14,6 +15,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.Menu;
@@ -42,6 +44,7 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
     View.OnClickListener listener;
     private CompanionOfPet myOffer;
     private NotificationCompat.Builder notification;
+    String channel_Id= "my_channel_01";
     private static int idNotification = 1111;
     //0= can choose and reject, 1= choosed, so can unchoose and reject
     // 2= rejected, -1= problems in choose/unchoose -2= problems in reject
@@ -108,8 +111,7 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
         commentBox = (TextView) findViewById(R.id.etComentarios);
         //nameLabel= (TextView) findViewById(R.id.etNombrePersona);
         btChoose = (Button) findViewById(R.id.btLeAcompa);
-        notification = new NotificationCompat.Builder(this);
-        notification.setAutoCancel(false);
+
         btReject = (Button) findViewById(R.id.btRechazarSolicitud);
         if (isSelected) {
             situationFlag = 1;
@@ -171,6 +173,18 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
                         Boolean control = myModel.confirmSelectedShelter(myApplication);
                         String dateTravel = new SimpleDateFormat("dd-MM-yyyy").format(myOffer.getDateTravel().getTime());
                         if (control) {
+                            notification = new NotificationCompat.Builder(PersonViewAndConfirmOneShelterInterested.this, null);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                CharSequence name = "Avisos";
+                                String description ="Aviso de recordatorio de contacto con protectora seleccionada";
+                                int importance = NotificationManager.IMPORTANCE_HIGH;
+                                NotificationChannel channel = new NotificationChannel(channel_Id, name, importance);
+                                channel.setDescription(description);
+                                NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                                notificationManager.createNotificationChannel(channel);
+                                notification = new NotificationCompat.Builder(PersonViewAndConfirmOneShelterInterested.this, channel_Id);
+                            }
+                            notification.setAutoCancel(false);
                             notification.setSmallIcon(R.drawable.logo);
                             //notification.setTicker("Aviso");
                             notification.setWhen((System.currentTimeMillis()));

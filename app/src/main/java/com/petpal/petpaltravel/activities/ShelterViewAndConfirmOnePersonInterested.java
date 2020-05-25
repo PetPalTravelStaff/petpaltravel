@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.Menu;
@@ -38,6 +40,7 @@ public class ShelterViewAndConfirmOnePersonInterested extends AppCompatActivity 
     private Boolean isShelter, isSelected;
     private CompanionForPet myDemand;
     private NotificationCompat.Builder notification;
+    String channel_Id= "my_channel_01";
     //0= can choose and reject, 1= choosed, so can unchoose and reject
     // 2= rejected, -1= problems in choose/unchoose -2= problems in reject
     int situationFlag = 0;
@@ -166,6 +169,18 @@ public class ShelterViewAndConfirmOnePersonInterested extends AppCompatActivity 
                     if (situationFlag == 0) {
                         Boolean control = myModel.confirmSelectedShelter(myApplication);
                         if (control) {
+
+                            notification = new NotificationCompat.Builder(ShelterViewAndConfirmOnePersonInterested.this, null);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                CharSequence name = "Avisos";
+                                String description ="Aviso de recordatorio de contacto con persona seleccionada";
+                                int importance = NotificationManager.IMPORTANCE_HIGH;
+                                NotificationChannel channel = new NotificationChannel(channel_Id, name, importance);
+                                channel.setDescription(description);
+                                NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                                notificationManager.createNotificationChannel(channel);
+                                notification = new NotificationCompat.Builder(ShelterViewAndConfirmOnePersonInterested.this, channel_Id);
+                            }
                             notification.setSmallIcon(R.drawable.logo);
                             //notification.setTicker("Aviso");
                             notification.setWhen((System.currentTimeMillis()));

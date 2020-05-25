@@ -99,25 +99,25 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btRecuerdaPassword"
+        android:id="@+id/btAlta"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="140dp"
         android:layout_marginTop="50dp"
-        android:backgroundTint="@color/colorDarkGrey"
-        android:text="Olvidé mi contraseña"
+        android:backgroundTint="@color/colorGreenLight"
+        android:text="Darme de alta"
         android:textAllCaps="false"
         android:textColor="@color/cardview_light_background"
         android:textSize="15sp" />
 
     <Button
-        android:id="@+id/btAlta"
+        android:id="@+id/btInfo"
         android:layout_width="202dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="140dp"
         android:layout_marginTop="5dp"
-        android:backgroundTint="@color/colorGreenLight"
-        android:text="Darme de alta"
+        android:backgroundTint="@color/colorDarkGrey"
+        android:text="Información"
         android:textAllCaps="false"
         android:textColor="@color/cardview_light_background"
         android:textSize="15sp" />

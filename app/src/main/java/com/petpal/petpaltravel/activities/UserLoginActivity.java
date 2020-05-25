@@ -2,6 +2,8 @@ package com.petpal.petpaltravel.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -22,7 +24,7 @@ public class UserLoginActivity extends AppCompatActivity {
     //Atributes
     EditText mailBox, passBox;
     String mailSaved;
-    Button login, register, sendPass;
+    Button login, register, btInfo;
     CheckBox rememberMe;
     View.OnClickListener listener;
     User client;
@@ -35,8 +37,8 @@ public class UserLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userlogin_layout);
         //instanciate model and user
-        myModel= new PPTModel();
-        client= new User();
+        myModel = new PPTModel();
+        client = new User();
         //recover Shared Preferences
         recoverSharedPref();
         //Create view elements in activity
@@ -49,6 +51,7 @@ public class UserLoginActivity extends AppCompatActivity {
 
     /**
      * Method for creating menu options
+     *
      * @param menu
      * @return
      */
@@ -61,6 +64,7 @@ public class UserLoginActivity extends AppCompatActivity {
 
     /**
      * Method for indicate what to do when item of menu is selected
+     *
      * @param item
      * @return
      */
@@ -74,28 +78,27 @@ public class UserLoginActivity extends AppCompatActivity {
      * Method for init elements of activity (and values, if needed)
      */
     private void initElements() {
-        rememberMe= (CheckBox) findViewById(R.id.cbRecuerdame);
+        rememberMe = (CheckBox) findViewById(R.id.cbRecuerdame);
         //In case user ask to remember her/his data
         if (rememberCheked) {
             rememberMe.setChecked(true);
         } else {
             //else set empty values
-            mailSaved=null;
-            passSaved=null;
+            mailSaved = null;
+            passSaved = null;
         }
-        mailBox= (EditText) findViewById(R.id.etUsuario) ;
-        if (mailSaved!=null) {
+        mailBox = (EditText) findViewById(R.id.etUsuario);
+        if (mailSaved != null) {
             mailBox.setText(mailSaved);
         }
-        passBox= (EditText) findViewById(R.id.etPassword);
-        if (passSaved!=null) {
+        passBox = (EditText) findViewById(R.id.etPassword);
+        if (passSaved != null) {
             passBox.setText(passSaved);
         }
-        login= (Button) findViewById(R.id.btEntrar);
-        register= (Button) findViewById(R.id.btAlta);
-        sendPass= (Button) findViewById(R.id.btRecuerdaPassword);
-        //PROVISIONAL
-        sendPass.setVisibility(View.GONE);
+        login = (Button) findViewById(R.id.btEntrar);
+        register = (Button) findViewById(R.id.btAlta);
+        btInfo = (Button) findViewById(R.id.btInfo);
+
     }
 
     /**
@@ -108,50 +111,62 @@ public class UserLoginActivity extends AppCompatActivity {
                 //if press button login
                 if (view.getId() == R.id.btEntrar) {
                     //recover data from EditText
-                        String userMail = mailBox.getText().toString();
-                        if(userMail!=null & !"".equals(userMail)) {
-                            String userPass = passBox.getText().toString();
-                            if (userPass!= null & !"".equals((userPass))) {
-                                //try to recover User from servlet with this data
-                                client = myModel.validatePassword(userMail, userPass);
-                                //if a user is recovered
-                                if (client != null) {
-                                    //save interesting data
-                                    saveSharedPref();
-                                    //if is shelter, show search offers
-                                    if (client.isShelter()) {
-                                        Intent intent = new Intent(UserLoginActivity.this, UserSearchOffersActivity.class);
-                                        startActivity(intent);
-                                        //if is person, show search demands
-                                    } else {
-                                        Intent intent = new Intent(UserLoginActivity.this, UserSearchDemandsActivity.class);
-                                        startActivity(intent);
-                                    }
-                                    //if not recovered an user, notify
+                    String userMail = mailBox.getText().toString();
+                    if (userMail != null & !"".equals(userMail)) {
+                        String userPass = passBox.getText().toString();
+                        if (userPass != null & !"".equals((userPass))) {
+                            //try to recover User from servlet with this data
+                            client = myModel.validatePassword(userMail, userPass);
+                            //if a user is recovered
+                            if (client != null) {
+                                //save interesting data
+                                saveSharedPref();
+                                //if is shelter, show search offers
+                                if (client.isShelter()) {
+                                    Intent intent = new Intent(UserLoginActivity.this, UserSearchOffersActivity.class);
+                                    startActivity(intent);
+                                    //if is person, show search demands
                                 } else {
-                                    passBox.setText(null);
-                                    passBox.setHintTextColor(Color.RED);
-                                    passBox.setHint("Datos incorrectos");
-                                    mailBox.setText(null);
-                                    mailBox.setHintTextColor(Color.RED);
-                                    mailBox.setHint("Datos incorrectos");
-
-
+                                    Intent intent = new Intent(UserLoginActivity.this, UserSearchDemandsActivity.class);
+                                    startActivity(intent);
                                 }
+                                //if not recovered an user, notify
                             } else {
+                                passBox.setText(null);
                                 passBox.setHintTextColor(Color.RED);
-                                passBox.setHint("Falta password");
+                                passBox.setHint("Datos incorrectos");
+                                mailBox.setText(null);
+                                mailBox.setHintTextColor(Color.RED);
+                                mailBox.setHint("Datos incorrectos");
+
+
                             }
                         } else {
-                            mailBox.setHintTextColor(Color.RED);
-                            mailBox.setHint("Falta email");
+                            passBox.setHintTextColor(Color.RED);
+                            passBox.setHint("Falta password");
                         }
-                //if button register is pressed
+                    } else {
+                        mailBox.setHintTextColor(Color.RED);
+                        mailBox.setHint("Falta email");
+                    }
+                    //if button register is pressed
                 } else if (view.getId() == R.id.btAlta) {
                     openRegisterActivity();
-                //if button remember me passowrd is pressed
-                } else if (view.getId() == R.id.btRecuerdaPassword) {
-                    openSendPassActivity();
+                    //if button remember me passowrd is pressed
+                } else if (view.getId() == R.id.btInfo) {
+                    AlertDialog.Builder myAlert = new AlertDialog.Builder(UserLoginActivity.this);
+                    myAlert.setMessage("PetPatTravel\nVersion 1.0 2002\nCreated by:\nMarta Garcia & Roser Vargas")
+                            .setCancelable(false)
+                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent1 = new Intent(UserLoginActivity.this, UserLoginActivity.class);
+                                    startActivity(intent1);
+                                }
+                            });
+                    AlertDialog title = myAlert.create();
+                    title.setTitle("Información de la aplicación");
+                    title.show();
                 }
             }
         };
@@ -161,23 +176,23 @@ public class UserLoginActivity extends AppCompatActivity {
      * Method for adding listeners to elements
      */
     private void addElementsToListener() {
-        login.setOnClickListener (listener);
+        login.setOnClickListener(listener);
         register.setOnClickListener(listener);
-        sendPass.setOnClickListener(listener);
+        btInfo.setOnClickListener(listener);
     }
 
     /**
      * Method for opening remember password activity
      */
     private void openSendPassActivity() {
-        sendPass.setText ("Temporalmente fuera de servicio");
+        btInfo.setText("Temporalmente fuera de servicio");
     }
 
     /**
      * Method for opening register activity
      */
     private void openRegisterActivity() {
-        Intent intent  = new Intent(UserLoginActivity.this, UserRegisterActivity.class);
+        Intent intent = new Intent(UserLoginActivity.this, UserRegisterActivity.class);
         startActivity(intent);
     }
 
@@ -187,13 +202,13 @@ public class UserLoginActivity extends AppCompatActivity {
      */
     private void saveSharedPref() {
         //Get params form
-        String userName= client.getName();
-        int idUser= client.getId();
-        Boolean isShelter= client.isShelter();
+        String userName = client.getName();
+        int idUser = client.getId();
+        Boolean isShelter = client.isShelter();
         Boolean rememberCheck = rememberMe.isChecked();
-        String userMail= client.getEmail();
-        String userPass= client.getPassword();
-        String userPhone= client.getPhone();
+        String userMail = client.getEmail();
+        String userPass = client.getPassword();
+        String userPhone = client.getPhone();
 
         //Create shared prefereces object
         SharedPreferences shared = getSharedPreferences("dades", MODE_PRIVATE);
@@ -221,11 +236,11 @@ public class UserLoginActivity extends AppCompatActivity {
         //Create shared prefereces object of a Shared preferences created
         SharedPreferences shared = getSharedPreferences("dades", MODE_PRIVATE);
         //if exist
-        if (shared!=null) {
+        if (shared != null) {
             //Use the editor to catch the couples of dates
             mailSaved = shared.getString("userMail", null);
             passSaved = shared.getString("userPass", null);
-            rememberCheked= shared.getBoolean("rememberMe", false);
+            rememberCheked = shared.getBoolean("rememberMe", false);
         }
     }
 }

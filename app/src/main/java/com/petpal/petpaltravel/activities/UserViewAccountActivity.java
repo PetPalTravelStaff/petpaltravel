@@ -300,17 +300,15 @@ public class UserViewAccountActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         if (myUser.isShelter()) {
-            menu.add(0, 1, 0, "Mi perfil");
-            menu.add(0, 2, 1, "Ver mis peticiones");
-            menu.add(0, 3, 2, "Publicar petición");
-            menu.add(0, 4, 3, "Buscar ofertas");
-            menu.add(0, 5, 4, "Salir");
+            menu.add(0, 1, 0, "Ver mis peticiones");
+            menu.add(0, 2, 1, "Publicar petición");
+            menu.add(0, 3, 2, "Buscar ofertas");
+            menu.add(0, 4, 3, "Salir");
         } else {
-            menu.add(0, 1, 0, "Mi perfil");
-            menu.add(0, 2, 1, "Ver mis ofertas");
-            menu.add(0, 3, 2, "Publicar oferta");
-            menu.add(0, 4, 3, "Buscar peticiones");
-            menu.add(0, 5, 4, "Salir");
+            menu.add(0, 1, 0, "Ver mis ofertas");
+            menu.add(0, 2, 1, "Publicar oferta");
+            menu.add(0, 3, 2, "Buscar peticiones");
+            menu.add(0, 4, 3, "Salir");
         }
 
         return true;
@@ -321,11 +319,6 @@ public class UserViewAccountActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case 1:
-                //Go to view account activity
-                Intent intent1 = new Intent(UserViewAccountActivity.this, UserViewAccountActivity.class);
-                startActivity(intent1);
-                break;
-            case 2:
                 //If is Shelter, go to show my demands activity
                 if(myUser.isShelter()) {
                     Intent intent2 = new Intent(UserViewAccountActivity.this, UserSearchDemandsActivity.class);
@@ -336,7 +329,7 @@ public class UserViewAccountActivity extends AppCompatActivity {
                     startActivity(intent2);
                 }
                 break;
-            case 3:
+            case 2:
                 //If is Shelter, go to add a demands activity
                 if (myUser.isShelter()) {
                     Intent intent3 = new Intent(UserViewAccountActivity.this, ShelterPostDemandActivity.class);
@@ -347,7 +340,7 @@ public class UserViewAccountActivity extends AppCompatActivity {
                     startActivity(intent3);
                 }
                 break;
-            case 4:
+            case 3:
                 //If is Shelter, go to view offers activity
                 if (myUser.isShelter()) {
                     Intent intent4 = new Intent(UserViewAccountActivity.this, UserSearchOffersActivity.class);
@@ -358,7 +351,7 @@ public class UserViewAccountActivity extends AppCompatActivity {
                     startActivity(intent4);
                 }
                 break;
-            case 5://Exit
+            case 4://Exit
                 finishAffinity();
                 break;
         }

@@ -127,7 +127,7 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
         //depending on the situation flag
         switch (situationFlag) {
             case 0: //normal case
-                btChoose.setText("¡Lo ejijo!");
+                btChoose.setText("¡Lo elijo!");
                 btChoose.setEnabled(true);
                 btChoose.setTextColor(Color.WHITE);
                 btReject.setVisibility(View.VISIBLE);

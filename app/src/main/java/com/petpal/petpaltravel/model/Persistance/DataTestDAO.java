@@ -167,6 +167,8 @@ public class DataTestDAO {
         }
         //if not, try to add
         if (!control) {
+            int lastId= myUsers.size();
+            provUser.setId(lastId+1);
             control2 = myUsers.add(provUser);
             if (control2) {
                 result = 1;

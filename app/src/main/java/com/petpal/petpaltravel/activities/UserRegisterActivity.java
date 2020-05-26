@@ -79,45 +79,54 @@ public class UserRegisterActivity extends AppCompatActivity {
                         provUser.setName(userName);
                         if (!"".equals(userMail)) {//not empty
                             if(validaMail(userMail)) {//valid mail format
-                                provUser.setEmail(userMail);
-                                if (!"".equals(userPass)) {//not empty
-                                    if (!"".equals(userPass2)) {//not empty
-                                        if (userPass.equals(userPass2)) { //pass and repeat pass matches
-                                            provUser.setPassword(userPass);
-                                            provUser.setShelter(userShelter);
-                                            int result=0;
-                                            //try to add User to BBDD
-                                            result = myModel.insertUser(provUser);
-                                            //if everything goes right, back to login, saving mail
-                                            if (result==1) {
-                                                saveOnShared();
-                                                Intent intent = new Intent(UserRegisterActivity.this, UserLoginActivity.class);
-                                                startActivity(intent);
-                                             //if there is a problem (email already in DB), notify
-                                            } else if (result==0){
-                                                mailBox.setText(null);
-                                                mailBox.setHintTextColor(Color.RED);
-                                                mailBox.setHint("Este mail ya tiene una cuenta");
-                                            } else {
-                                                btSave.setText("Prueba más tarde");
-                                                btSave.setTextColor(Color.RED);
-                                                btSave.setEnabled(false);
-                                            }
+                                User userRecovered = myModel.searchUserByMail(userMail);
+                                if (userRecovered==null) {
+                                    provUser.setEmail(userMail);
+                                    if (!"".equals(userPass)) {//not empty
+                                        if (!"".equals(userPass2)) {//not empty
+                                            if (userPass.equals(userPass2)) { //pass and repeat pass matches
+                                                provUser.setPassword(userPass);
+                                                provUser.setShelter(userShelter);
+                                                int result = 0;
+                                                //try to add User to BBDD
+                                                result = myModel.insertUser(provUser);
+                                                //if everything goes right, back to login, saving mail
+                                                if (result == 1) {
+                                                    saveOnShared();
+                                                    Intent intent = new Intent(UserRegisterActivity.this, UserLoginActivity.class);
+                                                    SharedPreferences.Editor editor = getSharedPreferences("dades", MODE_PRIVATE).edit();
+                                                    editor.clear().apply();
+                                                    startActivity(intent);
+                                                    //if there is a problem (email already in DB), notify
+                                                } else if (result == 0) {
+                                                    mailBox.setText(null);
+                                                    mailBox.setHintTextColor(Color.RED);
+                                                    mailBox.setHint("Este mail ya tiene una cuenta");
+                                                } else {
+                                                    btSave.setText("Prueba más tarde");
+                                                    btSave.setTextColor(Color.RED);
+                                                    btSave.setEnabled(false);
+                                                }
 
+                                            } else {
+                                                repePassBox.setText(null);
+                                                repePassBox.setHint("Passwords no coinciden");
+                                                repePassBox.setHintTextColor(Color.RED);
+                                            }
                                         } else {
-                                            repePassBox.setText(null);
-                                            repePassBox.setHint("Passwords no coinciden");
                                             repePassBox.setHintTextColor(Color.RED);
+                                            repePassBox.setHint("Repite password");
                                         }
                                     } else {
-                                        repePassBox.setHintTextColor(Color.RED);
-                                        repePassBox.setHint("Repite password");
+                                        passBox.setHintTextColor(Color.RED);
+                                        passBox.setHint("Falta password");
                                     }
-                                } else {
-                                    passBox.setHintTextColor(Color.RED);
-                                    passBox.setHint("Falta password");
-                                }
+                                }else {
+                                    mailBox.setText(null);
+                                    mailBox.setHintTextColor(Color.RED);
+                                    mailBox.setHint("Mail no disponible");
 
+                                }
                             } else {
                                 mailBox.setText(null);
                                 mailBox.setHintTextColor(Color.RED);

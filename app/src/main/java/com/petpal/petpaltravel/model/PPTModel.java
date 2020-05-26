@@ -56,6 +56,20 @@ public class PPTModel {
         return result;
     }
 
+    public Boolean deleteUser(int idUser) {
+        boolean result;
+        User myUser= myDAO.recoverUserById(idUser);
+        result= myDAO.deleteUser(myUser);
+        return result;
+
+    }
+
+    public User searchUserByMail(String userMail) {
+        User result= null;
+        result= myDAO.recoverUserByMail(userMail);
+        return result;
+    }
+
     //--- COMPANION OF PET (OFFER) -----
     public List<CompanionOfPet> getAllOffers(){
         List<CompanionOfPet> result= null;
@@ -256,13 +270,7 @@ public class PPTModel {
     }
 
 
-    public Boolean deleteUser(int idUser) {
-        boolean result;
-        User myUser= myDAO.recoverUserById(idUser);
-        result= myDAO.deleteUser(myUser);
-        return result;
 
-    }
 }
 
 

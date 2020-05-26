@@ -216,7 +216,7 @@ public class UserViewAccountActivity extends AppCompatActivity {
                                     if (control) {
                                         Intent intent = new Intent(UserViewAccountActivity.this, UserRegisterActivity.class);
                                         //delete all data saved
-                                        SharedPreferences.Editor editor = getSharedPreferences("TrackerTrackerGPS", MODE_PRIVATE).edit();
+                                        SharedPreferences.Editor editor = getSharedPreferences("dades", MODE_PRIVATE).edit();
                                         editor.clear().apply();
                                         startActivity(intent);
                                     } else {

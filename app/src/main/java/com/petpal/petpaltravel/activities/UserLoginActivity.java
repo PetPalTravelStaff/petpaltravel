@@ -155,7 +155,7 @@ public class UserLoginActivity extends AppCompatActivity {
                     //if button remember me passowrd is pressed
                 } else if (view.getId() == R.id.btInfo) {
                     AlertDialog.Builder myAlert = new AlertDialog.Builder(UserLoginActivity.this);
-                    myAlert.setMessage("PetPatTravel\nVersion 1.0 2002\nCreated by:\nMarta Garcia & Roser Vargas")
+                    myAlert.setMessage("PetPatTravel\nVersion 1.0 2020\nCreated by:\nMarta Garcia & Roser Vargas")
                             .setCancelable(false)
                             .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                                 @Override

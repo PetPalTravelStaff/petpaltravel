@@ -233,6 +233,7 @@ public class UserLoginActivity extends AppCompatActivity {
      * Method for recovergin interesting data by shared preferences
      */
     private void recoverSharedPref() {
+        System.out.println("Entra aqui");
         //Create shared prefereces object of a Shared preferences created
         SharedPreferences shared = getSharedPreferences("dades", MODE_PRIVATE);
         //if exist

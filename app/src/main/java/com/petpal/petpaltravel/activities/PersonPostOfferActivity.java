@@ -31,7 +31,6 @@ public class PersonPostOfferActivity extends AppCompatActivity {
     TextView labOrigen, labDestino, labTipo, labTransp;
     TextView nameUserLabel, nameBox;
     Spinner originCity, destinyCity, transport;
-
     String[] allTransports, allCities;
     CheckBox cat, dog, others;
     private Button btPostOffer;
@@ -225,7 +224,11 @@ public class PersonPostOfferActivity extends AppCompatActivity {
         };
     }
 
-
+    /**
+     * Auxiliar Method for validating a string as a date after today as dd-mm-yyyy
+     * @param dateString String to validate
+     * @return the date in Gregorian Calendar format
+     */
     private GregorianCalendar validateDate(String dateString) {
         GregorianCalendar result = null;
         int yearDate = -1;

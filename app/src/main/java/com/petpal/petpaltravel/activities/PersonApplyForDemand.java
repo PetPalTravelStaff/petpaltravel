@@ -23,6 +23,7 @@ import com.petpal.petpaltravel.model.PPTModel;
 import java.sql.SQLOutput;
 
 public class PersonApplyForDemand extends AppCompatActivity {
+    //Attributes
     TextView nameBox, phoneBox, mailBox;
     EditText commentsBox;
     Button apply;
@@ -90,6 +91,9 @@ public class PersonApplyForDemand extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method for initiating elements related to layout
+     */
     private void initElements() {
         mySpinner = (Spinner)findViewById(R.id.spinner);
         ArrayAdapter<String> questionsAdapter = new ArrayAdapter<String>(PersonApplyForDemand.this,android.R.layout.simple_spinner_item, transport);
@@ -108,7 +112,9 @@ public class PersonApplyForDemand extends AppCompatActivity {
         btcancel = (Button) findViewById(R.id.btBorrar);
     }
 
-
+    /**
+     * Method for loading data with recovered data or depending on situation
+     */
     private void loadData() {
         //set situation flag depending on the case
         if (myDemand.getIdPersonInterestePosition(0)==idUser | myDemand.getIdPersonInterestePosition(1)==idUser |
@@ -135,7 +141,9 @@ public class PersonApplyForDemand extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Auxiliar method for setting values of the buttons depending on the situation
+     */
     private void setButtonsValues() {
         switch (situationFlag) {
             case 0: //normal case

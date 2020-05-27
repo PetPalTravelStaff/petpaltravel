@@ -21,7 +21,7 @@ import com.petpal.petpaltravel.model.PPTModel;
 import com.petpal.petpaltravel.model.User;
 
 public class UserLoginActivity extends AppCompatActivity {
-    //Atributes
+    //Attributes
     EditText mailBox, passBox;
     String mailSaved;
     Button login, register, btInfo;

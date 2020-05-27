@@ -125,21 +125,63 @@ public class UserViewAccountActivity extends AppCompatActivity {
                         provUser.setName(userName);
                         if (!"".equals(userMail)) {//not empty
                             if (validaMail(userMail)) {//valid mail format
-                                provUser.setEmail(userMail);
-                                //Save new phone, even it is empty,
-                                provUser.setPhone(userPhone);
-                                if (!"".equals(userPass)) {//not empty
-                                    if (!"".equals(userPass2)) {//not empty
-                                        if (userPass.equals(userPass2)) { //pass and repeat pass matches
-                                            //repePassBox.setBackgroundColor(Color.TRANSPARENT);
-                                            provUser.setPassword(userPass);
+                                User userRecovered = myModel.searchUserByMail(userMail);
+                                Boolean control= false;
+                                if (userRecovered==null){
+                                    control=true;
+                                }
+                                if (userRecovered!=null) {
+                                    if (userRecovered.getId() == idUser) {
+                                        control = true;
+                                    }
+                                }
+                                if (control) {
+                                    provUser.setEmail(userMail);
+                                    //Save new phone, even it is empty,
+                                    provUser.setPhone(userPhone);
+                                    if (!"".equals(userPass)) {//not empty
+                                        if (!"".equals(userPass2)) {//not empty
+                                            if (userPass.equals(userPass2)) { //pass and repeat pass matches
+                                                //repePassBox.setBackgroundColor(Color.TRANSPARENT);
+                                                provUser.setPassword(userPass);
+                                                provUser.setShelter(userShelter);
+                                                int result = 0;
+                                                //try to add User to BBDD
+                                                result = myModel.updateUser(provUser);
+                                                //if everything goes right, back to login, saving mail
+                                                if (result == 1) {
+                                                    myUser = provUser;
+                                                    saveOnShared();
+                                                    btUpdate.setText("Datos actualizados");
+                                                    btUpdate.setTextColor(Color.BLACK);
+                                                    //if there is a problem (email already in DB), notify
+                                                } else if (result == 0) {
+                                                    mailBox.setText(null);
+                                                    mailBox.setHintTextColor(Color.RED);
+                                                    mailBox.setHint("Este mail ya tiene una cuenta");
+                                                }
+                                            } else {
+                                                repePassBox.setText(null);
+                                                repePassBox.setHint("Contraseñas no coinciden.");
+                                                repePassBox.setHintTextColor(Color.RED);
+                                            }
+                                        } else {
+                                            repePassBox.setHintTextColor(Color.RED);
+                                            repePassBox.setHint("Repite nueva contraseña");
+                                        }
+                                        //if pass1 empty (not changing password)
+                                    } else {
+                                        if ("".equals(userPass2)) {// pass2 empty
                                             provUser.setShelter(userShelter);
                                             int result = 0;
                                             //try to add User to BBDD
                                             result = myModel.updateUser(provUser);
-                                            //if everything goes right, back to login, saving mail
+                                            //if everything goes right, saving new information and notify
                                             if (result == 1) {
-                                                myUser = provUser;
+                                                myUser.setName(provUser.getName());
+                                                myUser.setEmail(provUser.getEmail());
+                                                myUser.setPhone(provUser.getPhone());
+                                                myUser.setShelter(provUser.isShelter());
                                                 saveOnShared();
                                                 btUpdate.setText("Datos actualizados");
                                                 btUpdate.setTextColor(Color.BLACK);
@@ -148,49 +190,23 @@ public class UserViewAccountActivity extends AppCompatActivity {
                                                 mailBox.setText(null);
                                                 mailBox.setHintTextColor(Color.RED);
                                                 mailBox.setHint("Este mail ya tiene una cuenta");
+                                            } else {
+                                                btUpdate.setText("Prueba más tarde");
+                                                btUpdate.setTextColor(Color.RED);
+                                                btUpdate.setEnabled(true);
                                             }
+
+                                            //if pass2 not empty
                                         } else {
                                             repePassBox.setText(null);
-                                            repePassBox.setHint("Contraseñas no coinciden.");
+                                            repePassBox.setHint("Dejar en blanco");
                                             repePassBox.setHintTextColor(Color.RED);
                                         }
-                                    } else {
-                                        repePassBox.setHintTextColor(Color.RED);
-                                        repePassBox.setHint("Repite nueva contraseña");
                                     }
-                                    //if pass1 empty (not changing password)
                                 } else {
-                                    if ("".equals(userPass2)) {// pass2 empty
-                                        provUser.setShelter(userShelter);
-                                        int result = 0;
-                                        //try to add User to BBDD
-                                        result = myModel.updateUser(provUser);
-                                        //if everything goes right, saving new information and notify
-                                        if (result == 1) {
-                                            myUser.setName(provUser.getName());
-                                            myUser.setEmail(provUser.getEmail());
-                                            myUser.setPhone(provUser.getPhone());
-                                            myUser.setShelter(provUser.isShelter());
-                                            saveOnShared();
-                                            btUpdate.setText("Datos actualizados");
-                                            btUpdate.setTextColor(Color.BLACK);
-                                            //if there is a problem (email already in DB), notify
-                                        } else if (result == 0) {
-                                            mailBox.setText(null);
-                                            mailBox.setHintTextColor(Color.RED);
-                                            mailBox.setHint("Este mail ya tiene una cuenta");
-                                        } else {
-                                            btUpdate.setText("Prueba más tarde");
-                                            btUpdate.setTextColor(Color.RED);
-                                            btUpdate.setEnabled(true);
-                                        }
-
-                                        //if pass2 not empty
-                                    } else {
-                                        repePassBox.setText(null);
-                                        repePassBox.setHint("Dejar en blanco");
-                                        repePassBox.setHintTextColor(Color.RED);
-                                    }
+                                    mailBox.setText(null);
+                                    mailBox.setHintTextColor(Color.RED);
+                                    mailBox.setHint("Mail ya en uso");
                                 }
                             } else {
                                 mailBox.setText(null);
@@ -238,6 +254,7 @@ public class UserViewAccountActivity extends AppCompatActivity {
             }
         };
     }
+
 
     /**
      * Method for saving interesting data by Shared Preferences

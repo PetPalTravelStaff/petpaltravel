@@ -1,9 +1,8 @@
-package com.petpal.petpaltravel.activities;
+package com.petpal.petpaltravel.helpers;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.widget.DatePicker;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;

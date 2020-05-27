@@ -20,6 +20,7 @@ public class DataTestDAO {
     List<ApplicationForOffer> myApplicationsForOffers = new ArrayList<ApplicationForOffer>();
     User myUser;
     static DataTestDAO instanceDAO = null;
+    final String[] transport= {"Avión", "Barco", "Coche", "Tren"};
 
     private DataTestDAO() {
         addUsersTest();
@@ -139,6 +140,9 @@ public class DataTestDAO {
         return result;
     }
 
+    public String[] getTransport() {
+        return transport;
+    }
 
     //-------- USERS -------------
 

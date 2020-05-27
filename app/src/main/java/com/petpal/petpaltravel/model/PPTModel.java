@@ -6,7 +6,6 @@ import java.util.List;
 
 public class PPTModel {
     DataTestDAO myDAO;
-    final String[] transport= {"Avión", "Barco", "Coche", "Tren"};
 
     //Constructor
     public PPTModel() {
@@ -15,7 +14,7 @@ public class PPTModel {
 
     //Getters
     public String[] getTransport() {
-        return transport;
+        return myDAO.getTransport();
     }
 
     //-- HELPERS---

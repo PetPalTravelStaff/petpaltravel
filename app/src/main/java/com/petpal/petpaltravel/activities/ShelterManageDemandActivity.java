@@ -298,6 +298,11 @@ public class ShelterManageDemandActivity extends AppCompatActivity {
         };
     }
 
+    /**
+     * Auxiliar Method for validating a string as a date after today as dd-mm-yyyy
+     * @param dateString String to validate
+     * @return the date in Gregorian Calendar format
+     */
     private GregorianCalendar validateDate(String dateString) {
         GregorianCalendar result = null;
         int yearDate = -1;

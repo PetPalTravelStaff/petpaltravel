@@ -21,6 +21,7 @@ import com.petpal.petpaltravel.model.CompanionOfPet;
 import com.petpal.petpaltravel.model.PPTModel;
 
 public class ShelterApplyForOffer extends AppCompatActivity {
+    //Attributes
     private TextView phoneBox, mailBox, labType;
     private EditText commentsBox, namePetBox, otherType;
     private Button apply;
@@ -91,6 +92,9 @@ public class ShelterApplyForOffer extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method for creating the elements in activity related to layout
+     */
     private void initElements() {
         namePetBox= (EditText) findViewById(R.id.etNombreMascota);
         labType= (TextView)findViewById(R.id.tvTipoMascota);
@@ -107,6 +111,9 @@ public class ShelterApplyForOffer extends AppCompatActivity {
         btcancelar = (Button) findViewById(R.id.btBorrar);
     }
 
+    /**
+     * Method for loading data from recovered or depending on the situation
+     */
     private void loadData() {
         //set situation flag depending on the case
         if (myOffer.getIdShelterIntPosition(0) == idUser | myOffer.getIdShelterIntPosition(1) == idUser |
@@ -145,6 +152,9 @@ public class ShelterApplyForOffer extends AppCompatActivity {
         }
     }
 
+    /**
+     * Auxiliar method
+     */
     private void setButtonsValues() {
         switch (situationFlag) {
             case 0: //normal case

@@ -19,7 +19,7 @@ import com.petpal.petpaltravel.model.PPTModel;
 import java.text.SimpleDateFormat;
 
 public class PersonManageDemandActivity extends AppCompatActivity {
-    //Atributes
+    //Attributes
     TextView namePet, OriginCity, Destination, typePet, dateFrom, dateUntill, comments, nameLabel;
     String nameUser;
     String phoneUser;

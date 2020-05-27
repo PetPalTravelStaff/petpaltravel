@@ -49,6 +49,7 @@ public class PersonViewAndConfirmOneShelterInterested extends AppCompatActivity 
     //0= can choose and reject, 1= choosed, so can unchoose and reject
     // 2= rejected, -1= problems in choose/unchoose -2= problems in reject
     int situationFlag = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
